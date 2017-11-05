@@ -1,0 +1,2693 @@
+ARM GAS  /tmp/ccq4QFNj.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"motor_L.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.mL_HallSensor_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	mL_HallSensor_init
+  22              		.thumb
+  23              		.thumb_func
+  25              	mL_HallSensor_init:
+  26              	.LFB69:
+  27              		.file 1 "./Src/motor_L.c"
+   1:./Src/motor_L.c **** #include "motor_L.h"
+   2:./Src/motor_L.c **** #include "stm32f1xx_hal.h"
+   3:./Src/motor_L.c **** #include "ADC_L.h"
+   4:./Src/motor_L.c **** 
+   5:./Src/motor_L.c **** TIM_HandleTypeDef htim8;
+   6:./Src/motor_L.c **** 
+   7:./Src/motor_L.c **** #define PWL_MOTOR_LEFT 25000                    //PWM
+   8:./Src/motor_L.c **** volatile __IO struct MOTOR_Ldati motorL;
+   9:./Src/motor_L.c **** 
+  10:./Src/motor_L.c **** // PULBLIC
+  11:./Src/motor_L.c **** void MotorL_init(void){
+  12:./Src/motor_L.c ****   MX_TIM8_Init();
+  13:./Src/motor_L.c ****   mL_HallSensor_init();
+  14:./Src/motor_L.c ****   
+  15:./Src/motor_L.c ****   motorL.BLDCMotorL_count= 0;
+  16:./Src/motor_L.c ****   motorL.BLDCMotorL_flag = 0; 
+  17:./Src/motor_L.c ****   motorL.BLDCMotorL_velRAW = 0;
+  18:./Src/motor_L.c ****   motorL.BLDCMotorL_deltavel = 0;
+  19:./Src/motor_L.c ****   
+  20:./Src/motor_L.c ****   MotorL_stop();
+  21:./Src/motor_L.c **** }
+  22:./Src/motor_L.c **** 
+  23:./Src/motor_L.c **** void MotorL_start(void){
+  24:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
+  25:./Src/motor_L.c ****   motorL.BLDCMotorL_deltavel = 0;
+  26:./Src/motor_L.c ****   motorL.BLDCMotorL_velRAW = 0;
+  27:./Src/motor_L.c ****   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  28:./Src/motor_L.c ****   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  
+  29:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
+  30:./Src/motor_L.c ****   motorL.stop = 0;  
+  31:./Src/motor_L.c ****   mL_BLDCMotor();
+ARM GAS  /tmp/ccq4QFNj.s 			page 2
+
+
+  32:./Src/motor_L.c **** }
+  33:./Src/motor_L.c **** 
+  34:./Src/motor_L.c **** void MotorL_pwm(int16_t value_percent){
+  35:./Src/motor_L.c ****   static uint8_t last_motorL=0;
+  36:./Src/motor_L.c ****   static uint8_t last_motorLStop=0;
+  37:./Src/motor_L.c ****  
+  38:./Src/motor_L.c ****   if(value_percent > 1000){
+  39:./Src/motor_L.c ****     value_percent = 1000;
+  40:./Src/motor_L.c ****   }
+  41:./Src/motor_L.c ****   if(value_percent < -1000){
+  42:./Src/motor_L.c ****     value_percent = -1000;
+  43:./Src/motor_L.c ****   }
+  44:./Src/motor_L.c ****   if(value_percent < 0){
+  45:./Src/motor_L.c ****     value_percent = value_percent * -1;
+  46:./Src/motor_L.c **** 
+  47:./Src/motor_L.c ****     if(last_motorL==0){
+  48:./Src/motor_L.c ****       mL_PWM_Set_ChALL(value_percent);
+  49:./Src/motor_L.c ****     }
+  50:./Src/motor_L.c ****     motorL.reverse = 1;
+  51:./Src/motor_L.c ****     last_motorL = 1;
+  52:./Src/motor_L.c ****   }else{
+  53:./Src/motor_L.c ****     if(last_motorL==1){
+  54:./Src/motor_L.c ****       mL_PWM_Set_ChALL(value_percent);
+  55:./Src/motor_L.c ****     }
+  56:./Src/motor_L.c ****      motorL.reverse = 0;
+  57:./Src/motor_L.c ****      last_motorL = 0;
+  58:./Src/motor_L.c ****   }
+  59:./Src/motor_L.c ****   
+  60:./Src/motor_L.c **** if((value_percent >= -5)&&(value_percent <= 5)){ //da fare > e < soglie !!
+  61:./Src/motor_L.c ****     motorL.stop = 1;    //ferma motore
+  62:./Src/motor_L.c ****     last_motorLStop = 1;    
+  63:./Src/motor_L.c ****   }else{
+  64:./Src/motor_L.c ****     motorL.stop = 0;
+  65:./Src/motor_L.c ****     if(last_motorLStop){
+  66:./Src/motor_L.c ****         //riattiva
+  67:./Src/motor_L.c ****         mL_BLDCMotor();
+  68:./Src/motor_L.c ****     }
+  69:./Src/motor_L.c ****     last_motorLStop = 0;    
+  70:./Src/motor_L.c ****   }
+  71:./Src/motor_L.c ****   
+  72:./Src/motor_L.c ****   mL_PWM_Set_ChALL(value_percent);
+  73:./Src/motor_L.c **** }
+  74:./Src/motor_L.c **** 
+  75:./Src/motor_L.c **** void MotorL_stop(void){
+  76:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
+  77:./Src/motor_L.c ****   motorL.stop = 1;
+  78:./Src/motor_L.c ****   mL_Low_CH1_OFF();
+  79:./Src/motor_L.c ****   mL_Low_CH2_OFF();
+  80:./Src/motor_L.c ****   mL_Low_CH3_OFF();
+  81:./Src/motor_L.c ****   mL_AHigh__OFF();
+  82:./Src/motor_L.c ****   mL_BHigh__OFF();
+  83:./Src/motor_L.c ****   mL_CHigh__OFF();
+  84:./Src/motor_L.c **** 
+  85:./Src/motor_L.c ****   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  86:./Src/motor_L.c ****   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+  87:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_5);
+  88:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_6);
+ARM GAS  /tmp/ccq4QFNj.s 			page 3
+
+
+  89:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_7);  
+  90:./Src/motor_L.c ****     motorL.BLDCMotorL_count= 0;
+  91:./Src/motor_L.c ****     motorL.BLDCMotorL_flag = 0;
+  92:./Src/motor_L.c **** }
+  93:./Src/motor_L.c ****     
+  94:./Src/motor_L.c **** // PRIVATE
+  95:./Src/motor_L.c **** /* TIM8 init function */
+  96:./Src/motor_L.c **** void MX_TIM8_Init(void)
+  97:./Src/motor_L.c **** {
+  98:./Src/motor_L.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+  99:./Src/motor_L.c ****   //TIM_MasterConfigTypeDef sMasterConfig;
+ 100:./Src/motor_L.c ****   TIM_OC_InitTypeDef sConfigOC;
+ 101:./Src/motor_L.c ****   TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig;
+ 102:./Src/motor_L.c **** 
+ 103:./Src/motor_L.c ****    __HAL_RCC_TIM8_CLK_ENABLE();
+ 104:./Src/motor_L.c ****    
+ 105:./Src/motor_L.c ****   motorL.uwPeriodValue = (uint32_t) ((SystemCoreClock  / PWL_MOTOR_LEFT) - 1); //18000
+ 106:./Src/motor_L.c ****   
+ 107:./Src/motor_L.c ****   /*
+ 108:./Src/motor_L.c ****   htim8.Instance = TIM8;
+ 109:./Src/motor_L.c ****   htim8.Init.Prescaler = 0;
+ 110:./Src/motor_L.c ****   htim8.Init.CounterMode = TIM_COUNTERMODE_UP; //TIM_COUNTERMODE_UP;
+ 111:./Src/motor_L.c ****   htim8.Init.Period = motorL.uwPeriodValue;
+ 112:./Src/motor_L.c ****   htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 113:./Src/motor_L.c ****   htim8.Init.RepetitionCounter = 0;
+ 114:./Src/motor_L.c ****   if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+ 115:./Src/motor_L.c ****   {
+ 116:./Src/motor_L.c ****     Error_Handler();
+ 117:./Src/motor_L.c ****   }
+ 118:./Src/motor_L.c **** 
+ 119:./Src/motor_L.c ****   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET; //TIM_TRGO_RESET;
+ 120:./Src/motor_L.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 121:./Src/motor_L.c ****   if (HAL_TIMEx_MasterConfigSynchronization(&htim8, &sMasterConfig) != HAL_OK)
+ 122:./Src/motor_L.c ****   {
+ 123:./Src/motor_L.c ****     Error_Handler();
+ 124:./Src/motor_L.c ****   }
+ 125:./Src/motor_L.c **** 
+ 126:./Src/motor_L.c ****   sConfigOC.OCMode = TIM_OCMODE_PWM1;
+ 127:./Src/motor_L.c ****   sConfigOC.Pulse = 0;
+ 128:./Src/motor_L.c ****   sConfigOC.OCPolarity = TIM_OCNPOLARITY_HIGH; //TIM_OCPOLARITY_LOW;
+ 129:./Src/motor_L.c ****   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+ 130:./Src/motor_L.c ****   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+ 131:./Src/motor_L.c ****   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+ 132:./Src/motor_L.c ****   sConfigOC.OCNIdleState = TIM_OCIDLESTATE_RESET; //TIM_OCNIDLESTATE_SET;
+ 133:./Src/motor_L.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+ 134:./Src/motor_L.c ****   {
+ 135:./Src/motor_L.c ****     Error_Handler();
+ 136:./Src/motor_L.c ****   }
+ 137:./Src/motor_L.c **** 
+ 138:./Src/motor_L.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+ 139:./Src/motor_L.c ****   {
+ 140:./Src/motor_L.c ****     Error_Handler();
+ 141:./Src/motor_L.c ****   }
+ 142:./Src/motor_L.c **** 
+ 143:./Src/motor_L.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+ 144:./Src/motor_L.c ****   {
+ 145:./Src/motor_L.c ****     Error_Handler();
+ARM GAS  /tmp/ccq4QFNj.s 			page 4
+
+
+ 146:./Src/motor_L.c ****   }
+ 147:./Src/motor_L.c ****     sConfigOC.Pulse = 0;
+ 148:./Src/motor_L.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+ 149:./Src/motor_L.c ****   {
+ 150:./Src/motor_L.c ****     Error_Handler();
+ 151:./Src/motor_L.c ****   }
+ 152:./Src/motor_L.c ****     
+ 153:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_ENABLE;
+ 154:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_ENABLE;
+ 155:./Src/motor_L.c ****   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+ 156:./Src/motor_L.c ****   sBreakDeadTimeConfig.DeadTime = 80;
+ 157:./Src/motor_L.c ****   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+ 158:./Src/motor_L.c ****   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_LOW;
+ 159:./Src/motor_L.c ****   sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+ 160:./Src/motor_L.c ****   if (HAL_TIMEx_ConfigBreakDeadTime(&htim8, &sBreakDeadTimeConfig) != HAL_OK)
+ 161:./Src/motor_L.c ****   {
+ 162:./Src/motor_L.c ****     Error_Handler();
+ 163:./Src/motor_L.c ****   }
+ 164:./Src/motor_L.c ****   
+ 165:./Src/motor_L.c ****   //CH1
+ 166:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER | 0x0008; //CC1NP = 1;
+ 167:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER & 0xFFFD; //cc1p = 0
+ 168:./Src/motor_L.c ****   //CH2   
+ 169:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER | 0x0080; //CC2NP = 1;
+ 170:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER & 0xFFDF; //cc2p = 0
+ 171:./Src/motor_L.c ****   //CH3     
+ 172:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER | 0x0800; //CC3NP = 1;
+ 173:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER & 0xFDFF; //cc3p = 0
+ 174:./Src/motor_L.c ****   
+ 175:./Src/motor_L.c **** 
+ 176:./Src/motor_L.c ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 177:./Src/motor_L.c ****     __HAL_RCC_GPIOB_CLK_ENABLE();  
+ 178:./Src/motor_L.c ****     __HAL_RCC_GPIOC_CLK_ENABLE();
+ 179:./Src/motor_L.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 180:./Src/motor_L.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ 181:./Src/motor_L.c ****     GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+ 182:./Src/motor_L.c **** 
+ 183:./Src/motor_L.c ****     GPIO_InitStruct.Pin = GPIO_PIN_7;
+ 184:./Src/motor_L.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 185:./Src/motor_L.c **** 
+ 186:./Src/motor_L.c ****     GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+ 187:./Src/motor_L.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 188:./Src/motor_L.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ 189:./Src/motor_L.c ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 190:./Src/motor_L.c **** 
+ 191:./Src/motor_L.c ****     GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8;
+ 192:./Src/motor_L.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 193:./Src/motor_L.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ 194:./Src/motor_L.c ****     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 195:./Src/motor_L.c ****  
+ 196:./Src/motor_L.c ****     //Start PWM signals
+ 197:./Src/motor_L.c ****     HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_1);      //CH1N   
+ 198:./Src/motor_L.c ****     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);      //CH1
+ 199:./Src/motor_L.c ****     mL_A__OFF();
+ 200:./Src/motor_L.c **** 
+ 201:./Src/motor_L.c ****     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);         //CH2
+ 202:./Src/motor_L.c ****     HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_2);      //CH2N
+ARM GAS  /tmp/ccq4QFNj.s 			page 5
+
+
+ 203:./Src/motor_L.c ****     mL_B__OFF();
+ 204:./Src/motor_L.c **** 
+ 205:./Src/motor_L.c ****     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_3);         //CH3
+ 206:./Src/motor_L.c ****     HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_3);      //CH3N
+ 207:./Src/motor_L.c ****     mL_C__OFF();  
+ 208:./Src/motor_L.c **** 
+ 209:./Src/motor_L.c ****     HAL_TIM_PWM_Start_IT(&htim8, TIM_CHANNEL_4);      //x interrupt
+ 210:./Src/motor_L.c ****    */
+ 211:./Src/motor_L.c ****   
+ 212:./Src/motor_L.c **** __HAL_RCC_TIM8_CLK_ENABLE();
+ 213:./Src/motor_L.c **** __HAL_RCC_GPIOA_CLK_ENABLE();
+ 214:./Src/motor_L.c **** __HAL_RCC_GPIOB_CLK_ENABLE();
+ 215:./Src/motor_L.c **** __HAL_RCC_GPIOC_CLK_ENABLE();
+ 216:./Src/motor_L.c ****   mL_Low_CH1_OFF();
+ 217:./Src/motor_L.c ****   mL_Low_CH2_OFF();
+ 218:./Src/motor_L.c ****   mL_Low_CH3_OFF();
+ 219:./Src/motor_L.c ****   //CH1N,CH2N,CH3N -- MANUAL mode -- 
+ 220:./Src/motor_L.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 221:./Src/motor_L.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ 222:./Src/motor_L.c ****   GPIO_InitStruct.Pull = GPIO_PULLUP;  
+ 223:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_7;
+ 224:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 225:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_0;
+ 226:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 227:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_1;
+ 228:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 229:./Src/motor_L.c ****    
+ 230:./Src/motor_L.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 231:./Src/motor_L.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ 232:./Src/motor_L.c ****   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+ 233:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8;
+ 234:./Src/motor_L.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 235:./Src/motor_L.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ 236:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct); 
+ 237:./Src/motor_L.c **** 
+ 238:./Src/motor_L.c ****   htim8.Instance = TIM8;
+ 239:./Src/motor_L.c ****   htim8.Init.Prescaler         = 0;
+ 240:./Src/motor_L.c ****   htim8.Init.Period            = motorL.uwPeriodValue;
+ 241:./Src/motor_L.c ****   htim8.Init.ClockDivision     = 0;
+ 242:./Src/motor_L.c ****   htim8.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 243:./Src/motor_L.c ****   htim8.Init.RepetitionCounter = 0;
+ 244:./Src/motor_L.c ****   HAL_TIM_PWM_Init(&htim8); 
+ 245:./Src/motor_L.c **** 
+ 246:./Src/motor_L.c ****   sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE; //TIM_AUTOMATICOUTPUT_ENABLE;
+ 247:./Src/motor_L.c ****   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_LOW; // TIM_BREAKPOLARITY_HIGH; //
+ 248:./Src/motor_L.c ****   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+ 249:./Src/motor_L.c ****   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+ 250:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_ENABLE; //TIM_OSSI_DISABLE;
+ 251:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_ENABLE; //TIM_OSSR_DISABLE;  
+ 252:./Src/motor_L.c ****   sBreakDeadTimeConfig.DeadTime = 40;   //10;  
+ 253:./Src/motor_L.c ****   HAL_TIMEx_ConfigBreakDeadTime(&htim8,&sBreakDeadTimeConfig);
+ 254:./Src/motor_L.c ****   
+ 255:./Src/motor_L.c ****                                 
+ 256:./Src/motor_L.c ****   //##-2- Configure the PWM channels #########################################
+ 257:./Src/motor_L.c ****   // Common configuration for all channels 
+ 258:./Src/motor_L.c ****   sConfigOC.OCMode      = TIM_OCMODE_PWM1; // TIM_OCMODE_PWM2;
+ 259:./Src/motor_L.c ****   sConfigOC.OCFastMode  = TIM_OCFAST_DISABLE; // TIM_OCFAST_DISABLE;
+ARM GAS  /tmp/ccq4QFNj.s 			page 6
+
+
+ 260:./Src/motor_L.c ****   sConfigOC.OCPolarity  = TIM_OCPOLARITY_HIGH; //TIM_OCPOLARITY_LOW;//TIM_OCPOLARITY_HIGH; //TIM_OC
+ 261:./Src/motor_L.c ****   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_LOW; //TIM_OCNPOLARITY_HIGH; //TIM_OCNPOLARITY_HIGH;
+ 262:./Src/motor_L.c ****   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET; //TIM_OCIDLESTATE_SET; //TIM_OCNIDLESTATE_RESET; /
+ 263:./Src/motor_L.c ****   sConfigOC.OCNIdleState= TIM_OCNIDLESTATE_RESET; //TIM_OCNIDLESTATE_SET ; //TIM_OCIDLESTATE_SET; /
+ 264:./Src/motor_L.c ****   
+ 265:./Src/motor_L.c ****   //Set the pulse value
+ 266:./Src/motor_L.c ****   sConfigOC.Pulse = 0;
+ 267:./Src/motor_L.c ****   HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_1); 
+ 268:./Src/motor_L.c ****   sConfigOC.Pulse = 0;
+ 269:./Src/motor_L.c ****   HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_2);
+ 270:./Src/motor_L.c ****   sConfigOC.Pulse = 0;
+ 271:./Src/motor_L.c ****   HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_3);
+ 272:./Src/motor_L.c **** 
+ 273:./Src/motor_L.c ****   //Start PWM signals
+ 274:./Src/motor_L.c ****   HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);         //CH1
+ 275:./Src/motor_L.c ****   HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);         //CH2
+ 276:./Src/motor_L.c ****   HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_3);         //CH3
+ 277:./Src/motor_L.c ****   HAL_TIM_PWM_Start_IT(&htim8, TIM_CHANNEL_4);         //CH4  
+ 278:./Src/motor_L.c ****   
+ 279:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
+ 280:./Src/motor_L.c ****   
+ 281:./Src/motor_L.c ****   mL_Low_CH1_OFF();
+ 282:./Src/motor_L.c ****   mL_Low_CH2_OFF();
+ 283:./Src/motor_L.c ****   mL_Low_CH3_OFF();
+ 284:./Src/motor_L.c ****   mL_AHigh__OFF();
+ 285:./Src/motor_L.c ****   mL_BHigh__OFF();
+ 286:./Src/motor_L.c ****   mL_CHigh__OFF();
+ 287:./Src/motor_L.c ****     
+ 288:./Src/motor_L.c ****   motorL.stop = 1;
+ 289:./Src/motor_L.c ****  /* Peripheral interrupt init */
+ 290:./Src/motor_L.c ****   HAL_NVIC_SetPriority(TIM8_CC_IRQn, 0, 1);
+ 291:./Src/motor_L.c ****   HAL_NVIC_EnableIRQ(TIM8_CC_IRQn);
+ 292:./Src/motor_L.c **** }
+ 293:./Src/motor_L.c **** 
+ 294:./Src/motor_L.c **** void mL_HallSensor_init(void){
+  28              		.loc 1 294 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  37 0002 86B0     		sub	sp, sp, #24
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40              	.LBB6:
+ 295:./Src/motor_L.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 296:./Src/motor_L.c **** 
+ 297:./Src/motor_L.c ****   /* GPIO Ports Clock Enable */
+ 298:./Src/motor_L.c ****   __HAL_RCC_GPIOB_CLK_ENABLE();
+  41              		.loc 1 298 0
+  42 0004 0F4B     		ldr	r3, .L3
+  43 0006 9A69     		ldr	r2, [r3, #24]
+  44 0008 42F00802 		orr	r2, r2, #8
+  45 000c 9A61     		str	r2, [r3, #24]
+ARM GAS  /tmp/ccq4QFNj.s 			page 7
+
+
+  46 000e 9B69     		ldr	r3, [r3, #24]
+  47 0010 03F00803 		and	r3, r3, #8
+  48 0014 0193     		str	r3, [sp, #4]
+  49 0016 019B     		ldr	r3, [sp, #4]
+  50              	.LBE6:
+ 299:./Src/motor_L.c **** 
+ 300:./Src/motor_L.c ****   /*Configure GPIO pins : HALL_LEFT_A_Pin HALL_LEFT_B_Pin HALL_LEFT_C_Pin */
+ 301:./Src/motor_L.c ****   GPIO_InitStruct.Pin = HALL_LEFT_A_Pin|HALL_LEFT_B_Pin|HALL_LEFT_C_Pin;
+  51              		.loc 1 301 0
+  52 0018 E023     		movs	r3, #224
+  53 001a 0293     		str	r3, [sp, #8]
+ 302:./Src/motor_L.c ****   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  54              		.loc 1 302 0
+  55 001c 0A4B     		ldr	r3, .L3+4
+  56 001e 0393     		str	r3, [sp, #12]
+ 303:./Src/motor_L.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;  
+  57              		.loc 1 303 0
+  58 0020 0323     		movs	r3, #3
+  59 0022 0593     		str	r3, [sp, #20]
+ 304:./Src/motor_L.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  60              		.loc 1 304 0
+  61 0024 0024     		movs	r4, #0
+  62 0026 0494     		str	r4, [sp, #16]
+ 305:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  63              		.loc 1 305 0
+  64 0028 02A9     		add	r1, sp, #8
+  65 002a 0848     		ldr	r0, .L3+8
+  66 002c FFF7FEFF 		bl	HAL_GPIO_Init
+  67              	.LVL0:
+ 306:./Src/motor_L.c **** 
+ 307:./Src/motor_L.c ****   /* EXTI interrupt init*/
+ 308:./Src/motor_L.c ****   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  68              		.loc 1 308 0
+  69 0030 2246     		mov	r2, r4
+  70 0032 2146     		mov	r1, r4
+  71 0034 1720     		movs	r0, #23
+  72 0036 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  73              	.LVL1:
+ 309:./Src/motor_L.c ****   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  74              		.loc 1 309 0
+  75 003a 1720     		movs	r0, #23
+  76 003c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  77              	.LVL2:
+ 310:./Src/motor_L.c **** }
+  78              		.loc 1 310 0
+  79 0040 06B0     		add	sp, sp, #24
+  80              	.LCFI2:
+  81              		.cfi_def_cfa_offset 8
+  82              		@ sp needed
+  83 0042 10BD     		pop	{r4, pc}
+  84              	.L4:
+  85              		.align	2
+  86              	.L3:
+  87 0044 00100240 		.word	1073876992
+  88 0048 00003110 		.word	271646720
+  89 004c 000C0140 		.word	1073810432
+  90              		.cfi_endproc
+ARM GAS  /tmp/ccq4QFNj.s 			page 8
+
+
+  91              	.LFE69:
+  93              		.section	.text.mL_Low_CH1_ON,"ax",%progbits
+  94              		.align	2
+  95              		.global	mL_Low_CH1_ON
+  96              		.thumb
+  97              		.thumb_func
+  99              	mL_Low_CH1_ON:
+ 100              	.LFB70:
+ 311:./Src/motor_L.c **** 
+ 312:./Src/motor_L.c **** void mL_Low_CH1_ON(void){  
+ 101              		.loc 1 312 0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105              		@ link register save eliminated.
+ 313:./Src/motor_L.c ****   //Negato
+ 314:./Src/motor_L.c ****   GPIOA->BSRR = 0x00800000;
+ 106              		.loc 1 314 0
+ 107 0000 4FF40002 		mov	r2, #8388608
+ 108 0004 014B     		ldr	r3, .L6
+ 109 0006 1A61     		str	r2, [r3, #16]
+ 110 0008 7047     		bx	lr
+ 111              	.L7:
+ 112 000a 00BF     		.align	2
+ 113              	.L6:
+ 114 000c 00080140 		.word	1073809408
+ 115              		.cfi_endproc
+ 116              	.LFE70:
+ 118              		.section	.text.mL_Low_CH1_OFF,"ax",%progbits
+ 119              		.align	2
+ 120              		.global	mL_Low_CH1_OFF
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	mL_Low_CH1_OFF:
+ 125              	.LFB71:
+ 315:./Src/motor_L.c **** }
+ 316:./Src/motor_L.c **** void mL_Low_CH1_OFF(void){
+ 126              		.loc 1 316 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              		@ link register save eliminated.
+ 317:./Src/motor_L.c ****   GPIOA->BSRR = GPIO_PIN_7;
+ 131              		.loc 1 317 0
+ 132 0000 8022     		movs	r2, #128
+ 133 0002 014B     		ldr	r3, .L9
+ 134 0004 1A61     		str	r2, [r3, #16]
+ 135 0006 7047     		bx	lr
+ 136              	.L10:
+ 137              		.align	2
+ 138              	.L9:
+ 139 0008 00080140 		.word	1073809408
+ 140              		.cfi_endproc
+ 141              	.LFE71:
+ 143              		.section	.text.mL_Low_CH2_ON,"ax",%progbits
+ 144              		.align	2
+ 145              		.global	mL_Low_CH2_ON
+ARM GAS  /tmp/ccq4QFNj.s 			page 9
+
+
+ 146              		.thumb
+ 147              		.thumb_func
+ 149              	mL_Low_CH2_ON:
+ 150              	.LFB72:
+ 318:./Src/motor_L.c **** }
+ 319:./Src/motor_L.c **** void mL_Low_CH2_ON(void){  
+ 151              		.loc 1 319 0
+ 152              		.cfi_startproc
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155              		@ link register save eliminated.
+ 320:./Src/motor_L.c ****   //Negato
+ 321:./Src/motor_L.c ****   GPIOB->BSRR = 0x00010000;
+ 156              		.loc 1 321 0
+ 157 0000 4FF48032 		mov	r2, #65536
+ 158 0004 014B     		ldr	r3, .L12
+ 159 0006 1A61     		str	r2, [r3, #16]
+ 160 0008 7047     		bx	lr
+ 161              	.L13:
+ 162 000a 00BF     		.align	2
+ 163              	.L12:
+ 164 000c 000C0140 		.word	1073810432
+ 165              		.cfi_endproc
+ 166              	.LFE72:
+ 168              		.section	.text.mL_Low_CH2_OFF,"ax",%progbits
+ 169              		.align	2
+ 170              		.global	mL_Low_CH2_OFF
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	mL_Low_CH2_OFF:
+ 175              	.LFB73:
+ 322:./Src/motor_L.c **** }
+ 323:./Src/motor_L.c **** void mL_Low_CH2_OFF(void){
+ 176              		.loc 1 323 0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 324:./Src/motor_L.c ****   GPIOB->BSRR = GPIO_PIN_0;
+ 181              		.loc 1 324 0
+ 182 0000 0122     		movs	r2, #1
+ 183 0002 014B     		ldr	r3, .L15
+ 184 0004 1A61     		str	r2, [r3, #16]
+ 185 0006 7047     		bx	lr
+ 186              	.L16:
+ 187              		.align	2
+ 188              	.L15:
+ 189 0008 000C0140 		.word	1073810432
+ 190              		.cfi_endproc
+ 191              	.LFE73:
+ 193              		.section	.text.mL_Low_CH3_ON,"ax",%progbits
+ 194              		.align	2
+ 195              		.global	mL_Low_CH3_ON
+ 196              		.thumb
+ 197              		.thumb_func
+ 199              	mL_Low_CH3_ON:
+ 200              	.LFB74:
+ARM GAS  /tmp/ccq4QFNj.s 			page 10
+
+
+ 325:./Src/motor_L.c **** }
+ 326:./Src/motor_L.c **** void mL_Low_CH3_ON(void){  
+ 201              		.loc 1 326 0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205              		@ link register save eliminated.
+ 327:./Src/motor_L.c ****   //Negato
+ 328:./Src/motor_L.c ****   GPIOB->BSRR = 0x00020000;  
+ 206              		.loc 1 328 0
+ 207 0000 4FF40032 		mov	r2, #131072
+ 208 0004 014B     		ldr	r3, .L18
+ 209 0006 1A61     		str	r2, [r3, #16]
+ 210 0008 7047     		bx	lr
+ 211              	.L19:
+ 212 000a 00BF     		.align	2
+ 213              	.L18:
+ 214 000c 000C0140 		.word	1073810432
+ 215              		.cfi_endproc
+ 216              	.LFE74:
+ 218              		.section	.text.mL_Low_CH3_OFF,"ax",%progbits
+ 219              		.align	2
+ 220              		.global	mL_Low_CH3_OFF
+ 221              		.thumb
+ 222              		.thumb_func
+ 224              	mL_Low_CH3_OFF:
+ 225              	.LFB75:
+ 329:./Src/motor_L.c **** }
+ 330:./Src/motor_L.c **** void mL_Low_CH3_OFF(void){
+ 226              		.loc 1 330 0
+ 227              		.cfi_startproc
+ 228              		@ args = 0, pretend = 0, frame = 0
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230              		@ link register save eliminated.
+ 331:./Src/motor_L.c ****   GPIOB->BSRR = GPIO_PIN_1;
+ 231              		.loc 1 331 0
+ 232 0000 0222     		movs	r2, #2
+ 233 0002 014B     		ldr	r3, .L21
+ 234 0004 1A61     		str	r2, [r3, #16]
+ 235 0006 7047     		bx	lr
+ 236              	.L22:
+ 237              		.align	2
+ 238              	.L21:
+ 239 0008 000C0140 		.word	1073810432
+ 240              		.cfi_endproc
+ 241              	.LFE75:
+ 243              		.section	.text.mL_AHigh__ON,"ax",%progbits
+ 244              		.align	2
+ 245              		.global	mL_AHigh__ON
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	mL_AHigh__ON:
+ 250              	.LFB76:
+ 332:./Src/motor_L.c **** }
+ 333:./Src/motor_L.c **** 
+ 334:./Src/motor_L.c **** void mL_AHigh__ON(void){
+ 251              		.loc 1 334 0
+ARM GAS  /tmp/ccq4QFNj.s 			page 11
+
+
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 0
+ 254              		@ frame_needed = 0, uses_anonymous_args = 0
+ 255              		@ link register save eliminated.
+ 335:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER | 0x0001;  //mR_AHigh__ON(); --> CC1E = 1
+ 256              		.loc 1 335 0
+ 257 0000 034B     		ldr	r3, .L24
+ 258 0002 1A68     		ldr	r2, [r3]
+ 259 0004 136A     		ldr	r3, [r2, #32]
+ 260 0006 43F00103 		orr	r3, r3, #1
+ 261 000a 1362     		str	r3, [r2, #32]
+ 262 000c 7047     		bx	lr
+ 263              	.L25:
+ 264 000e 00BF     		.align	2
+ 265              	.L24:
+ 266 0010 00000000 		.word	htim8
+ 267              		.cfi_endproc
+ 268              	.LFE76:
+ 270              		.section	.text.mL_AHigh__OFF,"ax",%progbits
+ 271              		.align	2
+ 272              		.global	mL_AHigh__OFF
+ 273              		.thumb
+ 274              		.thumb_func
+ 276              	mL_AHigh__OFF:
+ 277              	.LFB77:
+ 336:./Src/motor_L.c **** }
+ 337:./Src/motor_L.c **** void mL_AHigh__OFF(void){
+ 278              		.loc 1 337 0
+ 279              		.cfi_startproc
+ 280              		@ args = 0, pretend = 0, frame = 0
+ 281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 282              		@ link register save eliminated.
+ 338:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER & 0xFFFE;  //mR_AHigh__ON(); --> CC1E = 0
+ 283              		.loc 1 338 0
+ 284 0000 044B     		ldr	r3, .L27
+ 285 0002 1A68     		ldr	r2, [r3]
+ 286 0004 136A     		ldr	r3, [r2, #32]
+ 287 0006 23F00103 		bic	r3, r3, #1
+ 288 000a 1B04     		lsls	r3, r3, #16
+ 289 000c 1B0C     		lsrs	r3, r3, #16
+ 290 000e 1362     		str	r3, [r2, #32]
+ 291 0010 7047     		bx	lr
+ 292              	.L28:
+ 293 0012 00BF     		.align	2
+ 294              	.L27:
+ 295 0014 00000000 		.word	htim8
+ 296              		.cfi_endproc
+ 297              	.LFE77:
+ 299              		.section	.text.mL_BHigh__ON,"ax",%progbits
+ 300              		.align	2
+ 301              		.global	mL_BHigh__ON
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	mL_BHigh__ON:
+ 306              	.LFB78:
+ 339:./Src/motor_L.c **** }
+ 340:./Src/motor_L.c **** void mL_BHigh__ON(void){
+ARM GAS  /tmp/ccq4QFNj.s 			page 12
+
+
+ 307              		.loc 1 340 0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 0
+ 310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 311              		@ link register save eliminated.
+ 341:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER | 0x0010;  //--> CC2E = 1
+ 312              		.loc 1 341 0
+ 313 0000 034B     		ldr	r3, .L30
+ 314 0002 1A68     		ldr	r2, [r3]
+ 315 0004 136A     		ldr	r3, [r2, #32]
+ 316 0006 43F01003 		orr	r3, r3, #16
+ 317 000a 1362     		str	r3, [r2, #32]
+ 318 000c 7047     		bx	lr
+ 319              	.L31:
+ 320 000e 00BF     		.align	2
+ 321              	.L30:
+ 322 0010 00000000 		.word	htim8
+ 323              		.cfi_endproc
+ 324              	.LFE78:
+ 326              		.section	.text.mL_BHigh__OFF,"ax",%progbits
+ 327              		.align	2
+ 328              		.global	mL_BHigh__OFF
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	mL_BHigh__OFF:
+ 333              	.LFB79:
+ 342:./Src/motor_L.c **** }
+ 343:./Src/motor_L.c **** void mL_BHigh__OFF(void){
+ 334              		.loc 1 343 0
+ 335              		.cfi_startproc
+ 336              		@ args = 0, pretend = 0, frame = 0
+ 337              		@ frame_needed = 0, uses_anonymous_args = 0
+ 338              		@ link register save eliminated.
+ 344:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER & 0xFFEF;  //--> CC2E = 0
+ 339              		.loc 1 344 0
+ 340 0000 044B     		ldr	r3, .L33
+ 341 0002 1A68     		ldr	r2, [r3]
+ 342 0004 136A     		ldr	r3, [r2, #32]
+ 343 0006 23F01003 		bic	r3, r3, #16
+ 344 000a 1B04     		lsls	r3, r3, #16
+ 345 000c 1B0C     		lsrs	r3, r3, #16
+ 346 000e 1362     		str	r3, [r2, #32]
+ 347 0010 7047     		bx	lr
+ 348              	.L34:
+ 349 0012 00BF     		.align	2
+ 350              	.L33:
+ 351 0014 00000000 		.word	htim8
+ 352              		.cfi_endproc
+ 353              	.LFE79:
+ 355              		.section	.text.mL_CHigh__ON,"ax",%progbits
+ 356              		.align	2
+ 357              		.global	mL_CHigh__ON
+ 358              		.thumb
+ 359              		.thumb_func
+ 361              	mL_CHigh__ON:
+ 362              	.LFB80:
+ 345:./Src/motor_L.c **** }
+ARM GAS  /tmp/ccq4QFNj.s 			page 13
+
+
+ 346:./Src/motor_L.c **** void mL_CHigh__ON(void){
+ 363              		.loc 1 346 0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 0
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367              		@ link register save eliminated.
+ 347:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER | 0x0100;  //--> CC3E = 1
+ 368              		.loc 1 347 0
+ 369 0000 034B     		ldr	r3, .L36
+ 370 0002 1A68     		ldr	r2, [r3]
+ 371 0004 136A     		ldr	r3, [r2, #32]
+ 372 0006 43F48073 		orr	r3, r3, #256
+ 373 000a 1362     		str	r3, [r2, #32]
+ 374 000c 7047     		bx	lr
+ 375              	.L37:
+ 376 000e 00BF     		.align	2
+ 377              	.L36:
+ 378 0010 00000000 		.word	htim8
+ 379              		.cfi_endproc
+ 380              	.LFE80:
+ 382              		.section	.text.mL_CHigh__OFF,"ax",%progbits
+ 383              		.align	2
+ 384              		.global	mL_CHigh__OFF
+ 385              		.thumb
+ 386              		.thumb_func
+ 388              	mL_CHigh__OFF:
+ 389              	.LFB81:
+ 348:./Src/motor_L.c **** }
+ 349:./Src/motor_L.c **** void mL_CHigh__OFF(void){
+ 390              		.loc 1 349 0
+ 391              		.cfi_startproc
+ 392              		@ args = 0, pretend = 0, frame = 0
+ 393              		@ frame_needed = 0, uses_anonymous_args = 0
+ 394              		@ link register save eliminated.
+ 350:./Src/motor_L.c ****   htim8.Instance->CCER = htim8.Instance->CCER & 0xFEFF;  //--> CC2E = 0
+ 395              		.loc 1 350 0
+ 396 0000 044B     		ldr	r3, .L39
+ 397 0002 1A68     		ldr	r2, [r3]
+ 398 0004 136A     		ldr	r3, [r2, #32]
+ 399 0006 23F48073 		bic	r3, r3, #256
+ 400 000a 1B04     		lsls	r3, r3, #16
+ 401 000c 1B0C     		lsrs	r3, r3, #16
+ 402 000e 1362     		str	r3, [r2, #32]
+ 403 0010 7047     		bx	lr
+ 404              	.L40:
+ 405 0012 00BF     		.align	2
+ 406              	.L39:
+ 407 0014 00000000 		.word	htim8
+ 408              		.cfi_endproc
+ 409              	.LFE81:
+ 411              		.section	.text.mL_PWM_Set_Ch1,"ax",%progbits
+ 412              		.align	2
+ 413              		.global	mL_PWM_Set_Ch1
+ 414              		.thumb
+ 415              		.thumb_func
+ 417              	mL_PWM_Set_Ch1:
+ 418              	.LFB82:
+ARM GAS  /tmp/ccq4QFNj.s 			page 14
+
+
+ 351:./Src/motor_L.c **** }
+ 352:./Src/motor_L.c **** 
+ 353:./Src/motor_L.c **** 
+ 354:./Src/motor_L.c **** void mL_PWM_Set_Ch1(uint16_t value){
+ 419              		.loc 1 354 0
+ 420              		.cfi_startproc
+ 421              		@ args = 0, pretend = 0, frame = 0
+ 422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 423              		@ link register save eliminated.
+ 424              	.LVL3:
+ 355:./Src/motor_L.c ****   uint32_t vpwm;
+ 356:./Src/motor_L.c ****   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
+ 425              		.loc 1 356 0
+ 426 0000 054B     		ldr	r3, .L42
+ 427 0002 1B68     		ldr	r3, [r3]
+ 428 0004 03FB00F0 		mul	r0, r3, r0
+ 429              	.LVL4:
+ 430 0008 044B     		ldr	r3, .L42+4
+ 431 000a A3FB0030 		umull	r3, r0, r3, r0
+ 432 000e 8009     		lsrs	r0, r0, #6
+ 433              	.LVL5:
+ 357:./Src/motor_L.c ****   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_1,vpwm);
+ 434              		.loc 1 357 0
+ 435 0010 034B     		ldr	r3, .L42+8
+ 436 0012 1B68     		ldr	r3, [r3]
+ 437 0014 5863     		str	r0, [r3, #52]
+ 438 0016 7047     		bx	lr
+ 439              	.L43:
+ 440              		.align	2
+ 441              	.L42:
+ 442 0018 00000000 		.word	motorL
+ 443 001c D34D6210 		.word	274877907
+ 444 0020 00000000 		.word	htim8
+ 445              		.cfi_endproc
+ 446              	.LFE82:
+ 448              		.section	.text.mL_PWM_Set_Ch2,"ax",%progbits
+ 449              		.align	2
+ 450              		.global	mL_PWM_Set_Ch2
+ 451              		.thumb
+ 452              		.thumb_func
+ 454              	mL_PWM_Set_Ch2:
+ 455              	.LFB83:
+ 358:./Src/motor_L.c **** }
+ 359:./Src/motor_L.c **** void mL_PWM_Set_Ch2(uint16_t value){
+ 456              		.loc 1 359 0
+ 457              		.cfi_startproc
+ 458              		@ args = 0, pretend = 0, frame = 0
+ 459              		@ frame_needed = 0, uses_anonymous_args = 0
+ 460              		@ link register save eliminated.
+ 461              	.LVL6:
+ 360:./Src/motor_L.c ****   uint32_t vpwm;
+ 361:./Src/motor_L.c ****   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
+ 462              		.loc 1 361 0
+ 463 0000 054B     		ldr	r3, .L45
+ 464 0002 1B68     		ldr	r3, [r3]
+ 465 0004 03FB00F0 		mul	r0, r3, r0
+ 466              	.LVL7:
+ARM GAS  /tmp/ccq4QFNj.s 			page 15
+
+
+ 467 0008 044B     		ldr	r3, .L45+4
+ 468 000a A3FB0030 		umull	r3, r0, r3, r0
+ 469 000e 8009     		lsrs	r0, r0, #6
+ 470              	.LVL8:
+ 362:./Src/motor_L.c ****   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_2,vpwm);
+ 471              		.loc 1 362 0
+ 472 0010 034B     		ldr	r3, .L45+8
+ 473 0012 1B68     		ldr	r3, [r3]
+ 474 0014 9863     		str	r0, [r3, #56]
+ 475 0016 7047     		bx	lr
+ 476              	.L46:
+ 477              		.align	2
+ 478              	.L45:
+ 479 0018 00000000 		.word	motorL
+ 480 001c D34D6210 		.word	274877907
+ 481 0020 00000000 		.word	htim8
+ 482              		.cfi_endproc
+ 483              	.LFE83:
+ 485              		.section	.text.mL_PWM_Set_Ch3,"ax",%progbits
+ 486              		.align	2
+ 487              		.global	mL_PWM_Set_Ch3
+ 488              		.thumb
+ 489              		.thumb_func
+ 491              	mL_PWM_Set_Ch3:
+ 492              	.LFB84:
+ 363:./Src/motor_L.c **** }
+ 364:./Src/motor_L.c **** void mL_PWM_Set_Ch3(uint16_t value){
+ 493              		.loc 1 364 0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 0
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497              		@ link register save eliminated.
+ 498              	.LVL9:
+ 365:./Src/motor_L.c ****   uint32_t vpwm;
+ 366:./Src/motor_L.c ****   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
+ 499              		.loc 1 366 0
+ 500 0000 054B     		ldr	r3, .L48
+ 501 0002 1B68     		ldr	r3, [r3]
+ 502 0004 03FB00F0 		mul	r0, r3, r0
+ 503              	.LVL10:
+ 504 0008 044B     		ldr	r3, .L48+4
+ 505 000a A3FB0030 		umull	r3, r0, r3, r0
+ 506 000e 8009     		lsrs	r0, r0, #6
+ 507              	.LVL11:
+ 367:./Src/motor_L.c ****   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_3,vpwm);
+ 508              		.loc 1 367 0
+ 509 0010 034B     		ldr	r3, .L48+8
+ 510 0012 1B68     		ldr	r3, [r3]
+ 511 0014 D863     		str	r0, [r3, #60]
+ 512 0016 7047     		bx	lr
+ 513              	.L49:
+ 514              		.align	2
+ 515              	.L48:
+ 516 0018 00000000 		.word	motorL
+ 517 001c D34D6210 		.word	274877907
+ 518 0020 00000000 		.word	htim8
+ 519              		.cfi_endproc
+ARM GAS  /tmp/ccq4QFNj.s 			page 16
+
+
+ 520              	.LFE84:
+ 522              		.section	.text.mL_PWM_Set_ChALL,"ax",%progbits
+ 523              		.align	2
+ 524              		.global	mL_PWM_Set_ChALL
+ 525              		.thumb
+ 526              		.thumb_func
+ 528              	mL_PWM_Set_ChALL:
+ 529              	.LFB85:
+ 368:./Src/motor_L.c **** }
+ 369:./Src/motor_L.c **** void mL_PWM_Set_ChALL(uint16_t value){
+ 530              		.loc 1 369 0
+ 531              		.cfi_startproc
+ 532              		@ args = 0, pretend = 0, frame = 0
+ 533              		@ frame_needed = 0, uses_anonymous_args = 0
+ 534              		@ link register save eliminated.
+ 535              	.LVL12:
+ 370:./Src/motor_L.c ****   uint32_t vpwm;
+ 371:./Src/motor_L.c ****   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
+ 536              		.loc 1 371 0
+ 537 0000 064B     		ldr	r3, .L51
+ 538 0002 1B68     		ldr	r3, [r3]
+ 539 0004 03FB00F0 		mul	r0, r3, r0
+ 540              	.LVL13:
+ 541 0008 054B     		ldr	r3, .L51+4
+ 542 000a A3FB0030 		umull	r3, r0, r3, r0
+ 543 000e 8009     		lsrs	r0, r0, #6
+ 544              	.LVL14:
+ 372:./Src/motor_L.c ****   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_1,vpwm);
+ 545              		.loc 1 372 0
+ 546 0010 044B     		ldr	r3, .L51+8
+ 547 0012 1B68     		ldr	r3, [r3]
+ 548 0014 5863     		str	r0, [r3, #52]
+ 373:./Src/motor_L.c ****   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_2,vpwm);
+ 549              		.loc 1 373 0
+ 550 0016 9863     		str	r0, [r3, #56]
+ 374:./Src/motor_L.c ****   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_3,vpwm);  
+ 551              		.loc 1 374 0
+ 552 0018 D863     		str	r0, [r3, #60]
+ 553 001a 7047     		bx	lr
+ 554              	.L52:
+ 555              		.align	2
+ 556              	.L51:
+ 557 001c 00000000 		.word	motorL
+ 558 0020 D34D6210 		.word	274877907
+ 559 0024 00000000 		.word	htim8
+ 560              		.cfi_endproc
+ 561              	.LFE85:
+ 563              		.section	.text.MotorL_stop,"ax",%progbits
+ 564              		.align	2
+ 565              		.global	MotorL_stop
+ 566              		.thumb
+ 567              		.thumb_func
+ 569              	MotorL_stop:
+ 570              	.LFB67:
+  75:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
+ 571              		.loc 1 75 0
+ 572              		.cfi_startproc
+ARM GAS  /tmp/ccq4QFNj.s 			page 17
+
+
+ 573              		@ args = 0, pretend = 0, frame = 0
+ 574              		@ frame_needed = 0, uses_anonymous_args = 0
+ 575 0000 10B5     		push	{r4, lr}
+ 576              	.LCFI3:
+ 577              		.cfi_def_cfa_offset 8
+ 578              		.cfi_offset 4, -8
+ 579              		.cfi_offset 14, -4
+  76:./Src/motor_L.c ****   motorL.stop = 1;
+ 580              		.loc 1 76 0
+ 581 0002 0020     		movs	r0, #0
+ 582 0004 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 583              	.LVL15:
+  77:./Src/motor_L.c ****   mL_Low_CH1_OFF();
+ 584              		.loc 1 77 0
+ 585 0008 104C     		ldr	r4, .L55
+ 586 000a 0123     		movs	r3, #1
+ 587 000c A373     		strb	r3, [r4, #14]
+  78:./Src/motor_L.c ****   mL_Low_CH2_OFF();
+ 588              		.loc 1 78 0
+ 589 000e FFF7FEFF 		bl	mL_Low_CH1_OFF
+ 590              	.LVL16:
+  79:./Src/motor_L.c ****   mL_Low_CH3_OFF();
+ 591              		.loc 1 79 0
+ 592 0012 FFF7FEFF 		bl	mL_Low_CH2_OFF
+ 593              	.LVL17:
+  80:./Src/motor_L.c ****   mL_AHigh__OFF();
+ 594              		.loc 1 80 0
+ 595 0016 FFF7FEFF 		bl	mL_Low_CH3_OFF
+ 596              	.LVL18:
+  81:./Src/motor_L.c ****   mL_BHigh__OFF();
+ 597              		.loc 1 81 0
+ 598 001a FFF7FEFF 		bl	mL_AHigh__OFF
+ 599              	.LVL19:
+  82:./Src/motor_L.c ****   mL_CHigh__OFF();
+ 600              		.loc 1 82 0
+ 601 001e FFF7FEFF 		bl	mL_BHigh__OFF
+ 602              	.LVL20:
+  83:./Src/motor_L.c **** 
+ 603              		.loc 1 83 0
+ 604 0022 FFF7FEFF 		bl	mL_CHigh__OFF
+ 605              	.LVL21:
+  85:./Src/motor_L.c ****   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+ 606              		.loc 1 85 0
+ 607 0026 0022     		movs	r2, #0
+ 608 0028 1146     		mov	r1, r2
+ 609 002a 1720     		movs	r0, #23
+ 610 002c FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 611              	.LVL22:
+  86:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_5);
+ 612              		.loc 1 86 0
+ 613 0030 1720     		movs	r0, #23
+ 614 0032 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 615              	.LVL23:
+  87:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_6);
+ 616              		.loc 1 87 0
+ 617 0036 064B     		ldr	r3, .L55+4
+ 618 0038 2022     		movs	r2, #32
+ARM GAS  /tmp/ccq4QFNj.s 			page 18
+
+
+ 619 003a 5A61     		str	r2, [r3, #20]
+  88:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_7);  
+ 620              		.loc 1 88 0
+ 621 003c 4022     		movs	r2, #64
+ 622 003e 5A61     		str	r2, [r3, #20]
+  89:./Src/motor_L.c ****     motorL.BLDCMotorL_count= 0;
+ 623              		.loc 1 89 0
+ 624 0040 8022     		movs	r2, #128
+ 625 0042 5A61     		str	r2, [r3, #20]
+  90:./Src/motor_L.c ****     motorL.BLDCMotorL_flag = 0;
+ 626              		.loc 1 90 0
+ 627 0044 0023     		movs	r3, #0
+ 628 0046 2371     		strb	r3, [r4, #4]
+  91:./Src/motor_L.c **** }
+ 629              		.loc 1 91 0
+ 630 0048 6371     		strb	r3, [r4, #5]
+ 631 004a 10BD     		pop	{r4, pc}
+ 632              	.L56:
+ 633              		.align	2
+ 634              	.L55:
+ 635 004c 00000000 		.word	motorL
+ 636 0050 00040140 		.word	1073808384
+ 637              		.cfi_endproc
+ 638              	.LFE67:
+ 640              		.section	.text.MX_TIM8_Init,"ax",%progbits
+ 641              		.align	2
+ 642              		.global	MX_TIM8_Init
+ 643              		.thumb
+ 644              		.thumb_func
+ 646              	MX_TIM8_Init:
+ 647              	.LFB68:
+  97:./Src/motor_L.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 648              		.loc 1 97 0
+ 649              		.cfi_startproc
+ 650              		@ args = 0, pretend = 0, frame = 96
+ 651              		@ frame_needed = 0, uses_anonymous_args = 0
+ 652 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 653              	.LCFI4:
+ 654              		.cfi_def_cfa_offset 28
+ 655              		.cfi_offset 4, -28
+ 656              		.cfi_offset 5, -24
+ 657              		.cfi_offset 6, -20
+ 658              		.cfi_offset 7, -16
+ 659              		.cfi_offset 8, -12
+ 660              		.cfi_offset 9, -8
+ 661              		.cfi_offset 14, -4
+ 662 0004 99B0     		sub	sp, sp, #100
+ 663              	.LCFI5:
+ 664              		.cfi_def_cfa_offset 128
+ 665              	.LBB7:
+ 103:./Src/motor_L.c ****    
+ 666              		.loc 1 103 0
+ 667 0006 644B     		ldr	r3, .L59
+ 668 0008 9A69     		ldr	r2, [r3, #24]
+ 669 000a 42F40052 		orr	r2, r2, #8192
+ 670 000e 9A61     		str	r2, [r3, #24]
+ 671 0010 9A69     		ldr	r2, [r3, #24]
+ARM GAS  /tmp/ccq4QFNj.s 			page 19
+
+
+ 672 0012 02F40052 		and	r2, r2, #8192
+ 673 0016 0192     		str	r2, [sp, #4]
+ 674 0018 019A     		ldr	r2, [sp, #4]
+ 675              	.LBE7:
+ 105:./Src/motor_L.c ****   
+ 676              		.loc 1 105 0
+ 677 001a 604A     		ldr	r2, .L59+4
+ 678 001c 1268     		ldr	r2, [r2]
+ 679 001e D208     		lsrs	r2, r2, #3
+ 680 0020 5F49     		ldr	r1, .L59+8
+ 681 0022 A1FB0212 		umull	r1, r2, r1, r2
+ 682 0026 120A     		lsrs	r2, r2, #8
+ 683 0028 013A     		subs	r2, r2, #1
+ 684 002a 5E4F     		ldr	r7, .L59+12
+ 685 002c 3A60     		str	r2, [r7]
+ 686              	.LBB8:
+ 212:./Src/motor_L.c **** __HAL_RCC_GPIOA_CLK_ENABLE();
+ 687              		.loc 1 212 0
+ 688 002e 9A69     		ldr	r2, [r3, #24]
+ 689 0030 42F40052 		orr	r2, r2, #8192
+ 690 0034 9A61     		str	r2, [r3, #24]
+ 691 0036 9A69     		ldr	r2, [r3, #24]
+ 692 0038 02F40052 		and	r2, r2, #8192
+ 693 003c 0292     		str	r2, [sp, #8]
+ 694 003e 029A     		ldr	r2, [sp, #8]
+ 695              	.LBE8:
+ 696              	.LBB9:
+ 213:./Src/motor_L.c **** __HAL_RCC_GPIOB_CLK_ENABLE();
+ 697              		.loc 1 213 0
+ 698 0040 9A69     		ldr	r2, [r3, #24]
+ 699 0042 42F00402 		orr	r2, r2, #4
+ 700 0046 9A61     		str	r2, [r3, #24]
+ 701 0048 9A69     		ldr	r2, [r3, #24]
+ 702 004a 02F00402 		and	r2, r2, #4
+ 703 004e 0392     		str	r2, [sp, #12]
+ 704 0050 039A     		ldr	r2, [sp, #12]
+ 705              	.LBE9:
+ 706              	.LBB10:
+ 214:./Src/motor_L.c **** __HAL_RCC_GPIOC_CLK_ENABLE();
+ 707              		.loc 1 214 0
+ 708 0052 9A69     		ldr	r2, [r3, #24]
+ 709 0054 42F00802 		orr	r2, r2, #8
+ 710 0058 9A61     		str	r2, [r3, #24]
+ 711 005a 9A69     		ldr	r2, [r3, #24]
+ 712 005c 02F00802 		and	r2, r2, #8
+ 713 0060 0492     		str	r2, [sp, #16]
+ 714 0062 049A     		ldr	r2, [sp, #16]
+ 715              	.LBE10:
+ 716              	.LBB11:
+ 215:./Src/motor_L.c ****   mL_Low_CH1_OFF();
+ 717              		.loc 1 215 0
+ 718 0064 9A69     		ldr	r2, [r3, #24]
+ 719 0066 42F01002 		orr	r2, r2, #16
+ 720 006a 9A61     		str	r2, [r3, #24]
+ 721 006c 9B69     		ldr	r3, [r3, #24]
+ 722 006e 03F01003 		and	r3, r3, #16
+ 723 0072 0593     		str	r3, [sp, #20]
+ARM GAS  /tmp/ccq4QFNj.s 			page 20
+
+
+ 724 0074 059B     		ldr	r3, [sp, #20]
+ 725              	.LBE11:
+ 216:./Src/motor_L.c ****   mL_Low_CH2_OFF();
+ 726              		.loc 1 216 0
+ 727 0076 FFF7FEFF 		bl	mL_Low_CH1_OFF
+ 728              	.LVL24:
+ 217:./Src/motor_L.c ****   mL_Low_CH3_OFF();
+ 729              		.loc 1 217 0
+ 730 007a FFF7FEFF 		bl	mL_Low_CH2_OFF
+ 731              	.LVL25:
+ 218:./Src/motor_L.c ****   //CH1N,CH2N,CH3N -- MANUAL mode -- 
+ 732              		.loc 1 218 0
+ 733 007e FFF7FEFF 		bl	mL_Low_CH3_OFF
+ 734              	.LVL26:
+ 220:./Src/motor_L.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ 735              		.loc 1 220 0
+ 736 0082 0126     		movs	r6, #1
+ 737 0084 1596     		str	r6, [sp, #84]
+ 221:./Src/motor_L.c ****   GPIO_InitStruct.Pull = GPIO_PULLUP;  
+ 738              		.loc 1 221 0
+ 739 0086 4FF00308 		mov	r8, #3
+ 740 008a CDF85C80 		str	r8, [sp, #92]
+ 222:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_7;
+ 741              		.loc 1 222 0
+ 742 008e 1696     		str	r6, [sp, #88]
+ 223:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 743              		.loc 1 223 0
+ 744 0090 18AC     		add	r4, sp, #96
+ 745 0092 8023     		movs	r3, #128
+ 746 0094 44F8103D 		str	r3, [r4, #-16]!
+ 224:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_0;
+ 747              		.loc 1 224 0
+ 748 0098 2146     		mov	r1, r4
+ 749 009a 4348     		ldr	r0, .L59+16
+ 750 009c FFF7FEFF 		bl	HAL_GPIO_Init
+ 751              	.LVL27:
+ 225:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 752              		.loc 1 225 0
+ 753 00a0 1496     		str	r6, [sp, #80]
+ 226:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_1;
+ 754              		.loc 1 226 0
+ 755 00a2 DFF81491 		ldr	r9, .L59+32
+ 756 00a6 2146     		mov	r1, r4
+ 757 00a8 4846     		mov	r0, r9
+ 758 00aa FFF7FEFF 		bl	HAL_GPIO_Init
+ 759              	.LVL28:
+ 227:./Src/motor_L.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 760              		.loc 1 227 0
+ 761 00ae 0225     		movs	r5, #2
+ 762 00b0 1495     		str	r5, [sp, #80]
+ 228:./Src/motor_L.c ****    
+ 763              		.loc 1 228 0
+ 764 00b2 2146     		mov	r1, r4
+ 765 00b4 4846     		mov	r0, r9
+ 766 00b6 FFF7FEFF 		bl	HAL_GPIO_Init
+ 767              	.LVL29:
+ 230:./Src/motor_L.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+ARM GAS  /tmp/ccq4QFNj.s 			page 21
+
+
+ 768              		.loc 1 230 0
+ 769 00ba 1595     		str	r5, [sp, #84]
+ 231:./Src/motor_L.c ****   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+ 770              		.loc 1 231 0
+ 771 00bc CDF85C80 		str	r8, [sp, #92]
+ 232:./Src/motor_L.c ****   GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8;
+ 772              		.loc 1 232 0
+ 773 00c0 1695     		str	r5, [sp, #88]
+ 233:./Src/motor_L.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 774              		.loc 1 233 0
+ 775 00c2 4FF4E073 		mov	r3, #448
+ 776 00c6 1493     		str	r3, [sp, #80]
+ 236:./Src/motor_L.c **** 
+ 777              		.loc 1 236 0
+ 778 00c8 2146     		mov	r1, r4
+ 779 00ca 3848     		ldr	r0, .L59+20
+ 780 00cc FFF7FEFF 		bl	HAL_GPIO_Init
+ 781              	.LVL30:
+ 238:./Src/motor_L.c ****   htim8.Init.Prescaler         = 0;
+ 782              		.loc 1 238 0
+ 783 00d0 374D     		ldr	r5, .L59+24
+ 784 00d2 384B     		ldr	r3, .L59+28
+ 785 00d4 2B60     		str	r3, [r5]
+ 239:./Src/motor_L.c ****   htim8.Init.Period            = motorL.uwPeriodValue;
+ 786              		.loc 1 239 0
+ 787 00d6 0024     		movs	r4, #0
+ 788 00d8 6C60     		str	r4, [r5, #4]
+ 240:./Src/motor_L.c ****   htim8.Init.ClockDivision     = 0;
+ 789              		.loc 1 240 0
+ 790 00da 3B68     		ldr	r3, [r7]
+ 791 00dc EB60     		str	r3, [r5, #12]
+ 241:./Src/motor_L.c ****   htim8.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 792              		.loc 1 241 0
+ 793 00de 2C61     		str	r4, [r5, #16]
+ 242:./Src/motor_L.c ****   htim8.Init.RepetitionCounter = 0;
+ 794              		.loc 1 242 0
+ 795 00e0 AC60     		str	r4, [r5, #8]
+ 243:./Src/motor_L.c ****   HAL_TIM_PWM_Init(&htim8); 
+ 796              		.loc 1 243 0
+ 797 00e2 6C61     		str	r4, [r5, #20]
+ 244:./Src/motor_L.c **** 
+ 798              		.loc 1 244 0
+ 799 00e4 2846     		mov	r0, r5
+ 800 00e6 FFF7FEFF 		bl	HAL_TIM_PWM_Init
+ 801              	.LVL31:
+ 246:./Src/motor_L.c ****   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_LOW; // TIM_BREAKPOLARITY_HIGH; //
+ 802              		.loc 1 246 0
+ 803 00ea 0C94     		str	r4, [sp, #48]
+ 247:./Src/motor_L.c ****   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+ 804              		.loc 1 247 0
+ 805 00ec 0B94     		str	r4, [sp, #44]
+ 248:./Src/motor_L.c ****   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+ 806              		.loc 1 248 0
+ 807 00ee 0A94     		str	r4, [sp, #40]
+ 249:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_ENABLE; //TIM_OSSI_DISABLE;
+ 808              		.loc 1 249 0
+ 809 00f0 0894     		str	r4, [sp, #32]
+ARM GAS  /tmp/ccq4QFNj.s 			page 22
+
+
+ 250:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_ENABLE; //TIM_OSSR_DISABLE;  
+ 810              		.loc 1 250 0
+ 811 00f2 4FF48063 		mov	r3, #1024
+ 812 00f6 0793     		str	r3, [sp, #28]
+ 251:./Src/motor_L.c ****   sBreakDeadTimeConfig.DeadTime = 40;   //10;  
+ 813              		.loc 1 251 0
+ 814 00f8 4FF40063 		mov	r3, #2048
+ 815 00fc 0693     		str	r3, [sp, #24]
+ 252:./Src/motor_L.c ****   HAL_TIMEx_ConfigBreakDeadTime(&htim8,&sBreakDeadTimeConfig);
+ 816              		.loc 1 252 0
+ 817 00fe 2823     		movs	r3, #40
+ 818 0100 0993     		str	r3, [sp, #36]
+ 253:./Src/motor_L.c ****   
+ 819              		.loc 1 253 0
+ 820 0102 06A9     		add	r1, sp, #24
+ 821 0104 2846     		mov	r0, r5
+ 822 0106 FFF7FEFF 		bl	HAL_TIMEx_ConfigBreakDeadTime
+ 823              	.LVL32:
+ 258:./Src/motor_L.c ****   sConfigOC.OCFastMode  = TIM_OCFAST_DISABLE; // TIM_OCFAST_DISABLE;
+ 824              		.loc 1 258 0
+ 825 010a 6023     		movs	r3, #96
+ 826 010c 0D93     		str	r3, [sp, #52]
+ 259:./Src/motor_L.c ****   sConfigOC.OCPolarity  = TIM_OCPOLARITY_HIGH; //TIM_OCPOLARITY_LOW;//TIM_OCPOLARITY_HIGH; //TIM_OC
+ 827              		.loc 1 259 0
+ 828 010e 1194     		str	r4, [sp, #68]
+ 260:./Src/motor_L.c ****   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_LOW; //TIM_OCNPOLARITY_HIGH; //TIM_OCNPOLARITY_HIGH;
+ 829              		.loc 1 260 0
+ 830 0110 0F94     		str	r4, [sp, #60]
+ 261:./Src/motor_L.c ****   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET; //TIM_OCIDLESTATE_SET; //TIM_OCNIDLESTATE_RESET; /
+ 831              		.loc 1 261 0
+ 832 0112 4FF00808 		mov	r8, #8
+ 833 0116 CDF84080 		str	r8, [sp, #64]
+ 262:./Src/motor_L.c ****   sConfigOC.OCNIdleState= TIM_OCNIDLESTATE_RESET; //TIM_OCNIDLESTATE_SET ; //TIM_OCIDLESTATE_SET; /
+ 834              		.loc 1 262 0
+ 835 011a 1294     		str	r4, [sp, #72]
+ 263:./Src/motor_L.c ****   
+ 836              		.loc 1 263 0
+ 837 011c 1394     		str	r4, [sp, #76]
+ 266:./Src/motor_L.c ****   HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_1); 
+ 838              		.loc 1 266 0
+ 839 011e 0E94     		str	r4, [sp, #56]
+ 267:./Src/motor_L.c ****   sConfigOC.Pulse = 0;
+ 840              		.loc 1 267 0
+ 841 0120 2246     		mov	r2, r4
+ 842 0122 0DA9     		add	r1, sp, #52
+ 843 0124 2846     		mov	r0, r5
+ 844 0126 FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ 845              	.LVL33:
+ 268:./Src/motor_L.c ****   HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_2);
+ 846              		.loc 1 268 0
+ 847 012a 0E94     		str	r4, [sp, #56]
+ 269:./Src/motor_L.c ****   sConfigOC.Pulse = 0;
+ 848              		.loc 1 269 0
+ 849 012c 0422     		movs	r2, #4
+ 850 012e 0DA9     		add	r1, sp, #52
+ 851 0130 2846     		mov	r0, r5
+ 852 0132 FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ARM GAS  /tmp/ccq4QFNj.s 			page 23
+
+
+ 853              	.LVL34:
+ 270:./Src/motor_L.c ****   HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_3);
+ 854              		.loc 1 270 0
+ 855 0136 0E94     		str	r4, [sp, #56]
+ 271:./Src/motor_L.c **** 
+ 856              		.loc 1 271 0
+ 857 0138 4246     		mov	r2, r8
+ 858 013a 0DA9     		add	r1, sp, #52
+ 859 013c 2846     		mov	r0, r5
+ 860 013e FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ 861              	.LVL35:
+ 274:./Src/motor_L.c ****   HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);         //CH2
+ 862              		.loc 1 274 0
+ 863 0142 2146     		mov	r1, r4
+ 864 0144 2846     		mov	r0, r5
+ 865 0146 FFF7FEFF 		bl	HAL_TIM_PWM_Start
+ 866              	.LVL36:
+ 275:./Src/motor_L.c ****   HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_3);         //CH3
+ 867              		.loc 1 275 0
+ 868 014a 0421     		movs	r1, #4
+ 869 014c 2846     		mov	r0, r5
+ 870 014e FFF7FEFF 		bl	HAL_TIM_PWM_Start
+ 871              	.LVL37:
+ 276:./Src/motor_L.c ****   HAL_TIM_PWM_Start_IT(&htim8, TIM_CHANNEL_4);         //CH4  
+ 872              		.loc 1 276 0
+ 873 0152 4146     		mov	r1, r8
+ 874 0154 2846     		mov	r0, r5
+ 875 0156 FFF7FEFF 		bl	HAL_TIM_PWM_Start
+ 876              	.LVL38:
+ 277:./Src/motor_L.c ****   
+ 877              		.loc 1 277 0
+ 878 015a 0C21     		movs	r1, #12
+ 879 015c 2846     		mov	r0, r5
+ 880 015e FFF7FEFF 		bl	HAL_TIM_PWM_Start_IT
+ 881              	.LVL39:
+ 279:./Src/motor_L.c ****   
+ 882              		.loc 1 279 0
+ 883 0162 2046     		mov	r0, r4
+ 884 0164 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 885              	.LVL40:
+ 281:./Src/motor_L.c ****   mL_Low_CH2_OFF();
+ 886              		.loc 1 281 0
+ 887 0168 FFF7FEFF 		bl	mL_Low_CH1_OFF
+ 888              	.LVL41:
+ 282:./Src/motor_L.c ****   mL_Low_CH3_OFF();
+ 889              		.loc 1 282 0
+ 890 016c FFF7FEFF 		bl	mL_Low_CH2_OFF
+ 891              	.LVL42:
+ 283:./Src/motor_L.c ****   mL_AHigh__OFF();
+ 892              		.loc 1 283 0
+ 893 0170 FFF7FEFF 		bl	mL_Low_CH3_OFF
+ 894              	.LVL43:
+ 284:./Src/motor_L.c ****   mL_BHigh__OFF();
+ 895              		.loc 1 284 0
+ 896 0174 FFF7FEFF 		bl	mL_AHigh__OFF
+ 897              	.LVL44:
+ 285:./Src/motor_L.c ****   mL_CHigh__OFF();
+ARM GAS  /tmp/ccq4QFNj.s 			page 24
+
+
+ 898              		.loc 1 285 0
+ 899 0178 FFF7FEFF 		bl	mL_BHigh__OFF
+ 900              	.LVL45:
+ 286:./Src/motor_L.c ****     
+ 901              		.loc 1 286 0
+ 902 017c FFF7FEFF 		bl	mL_CHigh__OFF
+ 903              	.LVL46:
+ 288:./Src/motor_L.c ****  /* Peripheral interrupt init */
+ 904              		.loc 1 288 0
+ 905 0180 BE73     		strb	r6, [r7, #14]
+ 290:./Src/motor_L.c ****   HAL_NVIC_EnableIRQ(TIM8_CC_IRQn);
+ 906              		.loc 1 290 0
+ 907 0182 3246     		mov	r2, r6
+ 908 0184 2146     		mov	r1, r4
+ 909 0186 2E20     		movs	r0, #46
+ 910 0188 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 911              	.LVL47:
+ 291:./Src/motor_L.c **** }
+ 912              		.loc 1 291 0
+ 913 018c 2E20     		movs	r0, #46
+ 914 018e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 915              	.LVL48:
+ 292:./Src/motor_L.c **** 
+ 916              		.loc 1 292 0
+ 917 0192 19B0     		add	sp, sp, #100
+ 918              	.LCFI6:
+ 919              		.cfi_def_cfa_offset 28
+ 920              		@ sp needed
+ 921 0194 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 922              	.L60:
+ 923              		.align	2
+ 924              	.L59:
+ 925 0198 00100240 		.word	1073876992
+ 926 019c 00000000 		.word	SystemCoreClock
+ 927 01a0 89B5F814 		.word	351843721
+ 928 01a4 00000000 		.word	motorL
+ 929 01a8 00080140 		.word	1073809408
+ 930 01ac 00100140 		.word	1073811456
+ 931 01b0 00000000 		.word	htim8
+ 932 01b4 00340140 		.word	1073820672
+ 933 01b8 000C0140 		.word	1073810432
+ 934              		.cfi_endproc
+ 935              	.LFE68:
+ 937              		.section	.text.MotorL_init,"ax",%progbits
+ 938              		.align	2
+ 939              		.global	MotorL_init
+ 940              		.thumb
+ 941              		.thumb_func
+ 943              	MotorL_init:
+ 944              	.LFB64:
+  11:./Src/motor_L.c ****   MX_TIM8_Init();
+ 945              		.loc 1 11 0
+ 946              		.cfi_startproc
+ 947              		@ args = 0, pretend = 0, frame = 0
+ 948              		@ frame_needed = 0, uses_anonymous_args = 0
+ 949 0000 08B5     		push	{r3, lr}
+ 950              	.LCFI7:
+ARM GAS  /tmp/ccq4QFNj.s 			page 25
+
+
+ 951              		.cfi_def_cfa_offset 8
+ 952              		.cfi_offset 3, -8
+ 953              		.cfi_offset 14, -4
+  12:./Src/motor_L.c ****   mL_HallSensor_init();
+ 954              		.loc 1 12 0
+ 955 0002 FFF7FEFF 		bl	MX_TIM8_Init
+ 956              	.LVL49:
+  13:./Src/motor_L.c ****   
+ 957              		.loc 1 13 0
+ 958 0006 FFF7FEFF 		bl	mL_HallSensor_init
+ 959              	.LVL50:
+  15:./Src/motor_L.c ****   motorL.BLDCMotorL_flag = 0; 
+ 960              		.loc 1 15 0
+ 961 000a 044B     		ldr	r3, .L63
+ 962 000c 0022     		movs	r2, #0
+ 963 000e 1A71     		strb	r2, [r3, #4]
+  16:./Src/motor_L.c ****   motorL.BLDCMotorL_velRAW = 0;
+ 964              		.loc 1 16 0
+ 965 0010 5A71     		strb	r2, [r3, #5]
+  17:./Src/motor_L.c ****   motorL.BLDCMotorL_deltavel = 0;
+ 966              		.loc 1 17 0
+ 967 0012 DA80     		strh	r2, [r3, #6]	@ movhi
+  18:./Src/motor_L.c ****   
+ 968              		.loc 1 18 0
+ 969 0014 1A81     		strh	r2, [r3, #8]	@ movhi
+  20:./Src/motor_L.c **** }
+ 970              		.loc 1 20 0
+ 971 0016 FFF7FEFF 		bl	MotorL_stop
+ 972              	.LVL51:
+ 973 001a 08BD     		pop	{r3, pc}
+ 974              	.L64:
+ 975              		.align	2
+ 976              	.L63:
+ 977 001c 00000000 		.word	motorL
+ 978              		.cfi_endproc
+ 979              	.LFE64:
+ 981              		.section	.text.mL_BLDCMotor,"ax",%progbits
+ 982              		.align	2
+ 983              		.global	mL_BLDCMotor
+ 984              		.thumb
+ 985              		.thumb_func
+ 987              	mL_BLDCMotor:
+ 988              	.LFB86:
+ 375:./Src/motor_L.c **** }
+ 376:./Src/motor_L.c **** 
+ 377:./Src/motor_L.c **** 
+ 378:./Src/motor_L.c **** 
+ 379:./Src/motor_L.c **** 
+ 380:./Src/motor_L.c **** void mL_BLDCMotor(void){
+ 989              		.loc 1 380 0
+ 990              		.cfi_startproc
+ 991              		@ args = 0, pretend = 0, frame = 0
+ 992              		@ frame_needed = 0, uses_anonymous_args = 0
+ 993 0000 10B5     		push	{r4, lr}
+ 994              	.LCFI8:
+ 995              		.cfi_def_cfa_offset 8
+ 996              		.cfi_offset 4, -8
+ARM GAS  /tmp/ccq4QFNj.s 			page 26
+
+
+ 997              		.cfi_offset 14, -4
+ 381:./Src/motor_L.c ****   motorL.newhallpos = (GPIOB->IDR & 0x00E0);    //b5,b6,b7
+ 998              		.loc 1 381 0
+ 999 0002 3E4B     		ldr	r3, .L85
+ 1000 0004 9B68     		ldr	r3, [r3, #8]
+ 1001 0006 03F0E003 		and	r3, r3, #224
+ 1002 000a 3D4C     		ldr	r4, .L85+4
+ 1003 000c A381     		strh	r3, [r4, #12]	@ movhi
+ 382:./Src/motor_L.c ****     
+ 383:./Src/motor_L.c ****   mL_Low_CH1_OFF();
+ 1004              		.loc 1 383 0
+ 1005 000e FFF7FEFF 		bl	mL_Low_CH1_OFF
+ 1006              	.LVL52:
+ 384:./Src/motor_L.c ****   mL_Low_CH2_OFF();
+ 1007              		.loc 1 384 0
+ 1008 0012 FFF7FEFF 		bl	mL_Low_CH2_OFF
+ 1009              	.LVL53:
+ 385:./Src/motor_L.c ****   mL_Low_CH3_OFF();
+ 1010              		.loc 1 385 0
+ 1011 0016 FFF7FEFF 		bl	mL_Low_CH3_OFF
+ 1012              	.LVL54:
+ 386:./Src/motor_L.c ****   mL_AHigh__OFF();
+ 1013              		.loc 1 386 0
+ 1014 001a FFF7FEFF 		bl	mL_AHigh__OFF
+ 1015              	.LVL55:
+ 387:./Src/motor_L.c ****   mL_BHigh__OFF();
+ 1016              		.loc 1 387 0
+ 1017 001e FFF7FEFF 		bl	mL_BHigh__OFF
+ 1018              	.LVL56:
+ 388:./Src/motor_L.c ****   mL_CHigh__OFF();
+ 1019              		.loc 1 388 0
+ 1020 0022 FFF7FEFF 		bl	mL_CHigh__OFF
+ 1021              	.LVL57:
+ 389:./Src/motor_L.c **** 
+ 390:./Src/motor_L.c ****   if(motorL.stop){
+ 1022              		.loc 1 390 0
+ 1023 0026 A37B     		ldrb	r3, [r4, #14]	@ zero_extendqisi2
+ 1024 0028 13F0FF0F 		tst	r3, #255
+ 1025 002c 65D1     		bne	.L65
+ 391:./Src/motor_L.c ****     return;
+ 392:./Src/motor_L.c ****   }
+ 393:./Src/motor_L.c ****   
+ 394:./Src/motor_L.c ****   if(motorL.reverse!=0){
+ 1026              		.loc 1 394 0
+ 1027 002e A37A     		ldrb	r3, [r4, #10]	@ zero_extendqisi2
+ 1028 0030 13F0FF0F 		tst	r3, #255
+ 1029 0034 30D0     		beq	.L67
+ 395:./Src/motor_L.c ****     switch (motorL.newhallpos){
+ 1030              		.loc 1 395 0
+ 1031 0036 A389     		ldrh	r3, [r4, #12]
+ 1032 0038 9BB2     		uxth	r3, r3
+ 1033 003a 602B     		cmp	r3, #96
+ 1034 003c 16D0     		beq	.L69
+ 1035 003e 04D8     		bhi	.L70
+ 1036 0040 202B     		cmp	r3, #32
+ 1037 0042 09D0     		beq	.L71
+ 1038 0044 402B     		cmp	r3, #64
+ARM GAS  /tmp/ccq4QFNj.s 			page 27
+
+
+ 1039 0046 0CD0     		beq	.L72
+ 1040 0048 24E0     		b	.L68
+ 1041              	.L70:
+ 1042 004a A02B     		cmp	r3, #160
+ 1043 004c 18D0     		beq	.L73
+ 1044 004e C02B     		cmp	r3, #192
+ 1045 0050 1BD0     		beq	.L74
+ 1046 0052 802B     		cmp	r3, #128
+ 1047 0054 1ED1     		bne	.L68
+ 1048 0056 0EE0     		b	.L75
+ 1049              	.L71:
+ 396:./Src/motor_L.c ****       case (0x0020):               //1
+ 397:./Src/motor_L.c ****         mL_AHigh__ON();
+ 1050              		.loc 1 397 0
+ 1051 0058 FFF7FEFF 		bl	mL_AHigh__ON
+ 1052              	.LVL58:
+ 398:./Src/motor_L.c ****         mL_Low_CH2_ON();
+ 1053              		.loc 1 398 0
+ 1054 005c FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1055              	.LVL59:
+ 399:./Src/motor_L.c ****       break;
+ 1056              		.loc 1 399 0
+ 1057 0060 10BD     		pop	{r4, pc}
+ 1058              	.L72:
+ 400:./Src/motor_L.c ****       case (0x0040):               //2
+ 401:./Src/motor_L.c ****         mL_BHigh__ON();
+ 1059              		.loc 1 401 0
+ 1060 0062 FFF7FEFF 		bl	mL_BHigh__ON
+ 1061              	.LVL60:
+ 402:./Src/motor_L.c ****         mL_Low_CH3_ON();    
+ 1062              		.loc 1 402 0
+ 1063 0066 FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1064              	.LVL61:
+ 403:./Src/motor_L.c ****       break;
+ 1065              		.loc 1 403 0
+ 1066 006a 10BD     		pop	{r4, pc}
+ 1067              	.L69:
+ 404:./Src/motor_L.c ****       case (0x0060):               //3
+ 405:./Src/motor_L.c ****         mL_AHigh__ON();
+ 1068              		.loc 1 405 0
+ 1069 006c FFF7FEFF 		bl	mL_AHigh__ON
+ 1070              	.LVL62:
+ 406:./Src/motor_L.c ****         mL_Low_CH3_ON();    
+ 1071              		.loc 1 406 0
+ 1072 0070 FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1073              	.LVL63:
+ 407:./Src/motor_L.c ****       break;
+ 1074              		.loc 1 407 0
+ 1075 0074 10BD     		pop	{r4, pc}
+ 1076              	.L75:
+ 408:./Src/motor_L.c ****       case (0x0080):              //4
+ 409:./Src/motor_L.c ****         mL_Low_CH1_ON();    
+ 1077              		.loc 1 409 0
+ 1078 0076 FFF7FEFF 		bl	mL_Low_CH1_ON
+ 1079              	.LVL64:
+ 410:./Src/motor_L.c ****         mL_CHigh__ON();
+ 1080              		.loc 1 410 0
+ARM GAS  /tmp/ccq4QFNj.s 			page 28
+
+
+ 1081 007a FFF7FEFF 		bl	mL_CHigh__ON
+ 1082              	.LVL65:
+ 411:./Src/motor_L.c ****       break;
+ 1083              		.loc 1 411 0
+ 1084 007e 10BD     		pop	{r4, pc}
+ 1085              	.L73:
+ 412:./Src/motor_L.c ****       case (0x00A0):              //5
+ 413:./Src/motor_L.c ****         mL_Low_CH2_ON();    
+ 1086              		.loc 1 413 0
+ 1087 0080 FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1088              	.LVL66:
+ 414:./Src/motor_L.c ****         mL_CHigh__ON();
+ 1089              		.loc 1 414 0
+ 1090 0084 FFF7FEFF 		bl	mL_CHigh__ON
+ 1091              	.LVL67:
+ 415:./Src/motor_L.c ****       break;
+ 1092              		.loc 1 415 0
+ 1093 0088 10BD     		pop	{r4, pc}
+ 1094              	.L74:
+ 416:./Src/motor_L.c ****       case (0x00C0):              //6
+ 417:./Src/motor_L.c ****         mL_Low_CH1_ON();    
+ 1095              		.loc 1 417 0
+ 1096 008a FFF7FEFF 		bl	mL_Low_CH1_ON
+ 1097              	.LVL68:
+ 418:./Src/motor_L.c ****         mL_BHigh__ON();
+ 1098              		.loc 1 418 0
+ 1099 008e FFF7FEFF 		bl	mL_BHigh__ON
+ 1100              	.LVL69:
+ 419:./Src/motor_L.c ****       break;  
+ 1101              		.loc 1 419 0
+ 1102 0092 10BD     		pop	{r4, pc}
+ 1103              	.L68:
+ 1104              	.LBB12:
+ 1105              	.LBB13:
+ 1106              		.file 2 "./Drivers/CMSIS/Include/cmsis_gcc.h"
+   1:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
+   2:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
+   3:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS Cortex-M Core Function/Instruction Header File
+   4:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * @version  V4.30
+   5:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     20. October 2015
+   6:./Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
+   7:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* Copyright (c) 2009 - 2015 ARM LIMITED
+   8:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+   9:./Drivers/CMSIS/Include/cmsis_gcc.h ****    All rights reserved.
+  10:./Drivers/CMSIS/Include/cmsis_gcc.h ****    Redistribution and use in source and binary forms, with or without
+  11:./Drivers/CMSIS/Include/cmsis_gcc.h ****    modification, are permitted provided that the following conditions are met:
+  12:./Drivers/CMSIS/Include/cmsis_gcc.h ****    - Redistributions of source code must retain the above copyright
+  13:./Drivers/CMSIS/Include/cmsis_gcc.h ****      notice, this list of conditions and the following disclaimer.
+  14:./Drivers/CMSIS/Include/cmsis_gcc.h ****    - Redistributions in binary form must reproduce the above copyright
+  15:./Drivers/CMSIS/Include/cmsis_gcc.h ****      notice, this list of conditions and the following disclaimer in the
+  16:./Drivers/CMSIS/Include/cmsis_gcc.h ****      documentation and/or other materials provided with the distribution.
+  17:./Drivers/CMSIS/Include/cmsis_gcc.h ****    - Neither the name of ARM nor the names of its contributors may be used
+  18:./Drivers/CMSIS/Include/cmsis_gcc.h ****      to endorse or promote products derived from this software without
+  19:./Drivers/CMSIS/Include/cmsis_gcc.h ****      specific prior written permission.
+  20:./Drivers/CMSIS/Include/cmsis_gcc.h ****    *
+  21:./Drivers/CMSIS/Include/cmsis_gcc.h ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22:./Drivers/CMSIS/Include/cmsis_gcc.h ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ARM GAS  /tmp/ccq4QFNj.s 			page 29
+
+
+  23:./Drivers/CMSIS/Include/cmsis_gcc.h ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  24:./Drivers/CMSIS/Include/cmsis_gcc.h ****    ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+  25:./Drivers/CMSIS/Include/cmsis_gcc.h ****    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  26:./Drivers/CMSIS/Include/cmsis_gcc.h ****    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  27:./Drivers/CMSIS/Include/cmsis_gcc.h ****    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:./Drivers/CMSIS/Include/cmsis_gcc.h ****    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:./Drivers/CMSIS/Include/cmsis_gcc.h ****    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  30:./Drivers/CMSIS/Include/cmsis_gcc.h ****    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  31:./Drivers/CMSIS/Include/cmsis_gcc.h ****    POSSIBILITY OF SUCH DAMAGE.
+  32:./Drivers/CMSIS/Include/cmsis_gcc.h ****    ---------------------------------------------------------------------------*/
+  33:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  34:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  35:./Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  36:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_H
+  37:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  38:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* ignore some GCC warnings */
+  39:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if defined ( __GNUC__ )
+  40:./Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic push
+  41:./Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  42:./Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  43:./Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  44:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  45:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  46:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  47:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
+  48:./Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+  49:./Drivers/CMSIS/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+  50:./Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+  51:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  52:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  53:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+  54:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
+  55:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+  56:./Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+  57:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  58:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __enable_irq(void)
+  59:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+  60:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+  61:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+  62:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  63:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  64:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+  65:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+  66:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
+  67:./Drivers/CMSIS/Include/cmsis_gcc.h ****   Can only be executed in Privileged modes.
+  68:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  69:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_irq(void)
+  70:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+  71:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+  72:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+  73:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  74:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  75:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+  76:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register
+  77:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the Control Register.
+  78:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Control Register value
+  79:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccq4QFNj.s 			page 30
+
+
+  80:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_CONTROL(void)
+  81:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+  82:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+  83:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  84:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
+  85:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+  86:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+  87:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  88:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  89:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+  90:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Control Register
+  91:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Writes the given value to the Control Register.
+  92:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    control  Control Register value to set
+  93:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  94:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_CONTROL(uint32_t control)
+  95:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+  96:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) : "memory");
+  97:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+  98:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  99:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 100:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 101:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get IPSR Register
+ 102:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the IPSR Register.
+ 103:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               IPSR Register value
+ 104:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 105:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_IPSR(void)
+ 106:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 107:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 108:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 109:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
+ 110:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 111:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 112:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 113:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 114:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 115:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get APSR Register
+ 116:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
+ 117:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               APSR Register value
+ 118:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 119:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_APSR(void)
+ 120:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 121:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 122:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 123:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
+ 124:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 125:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 126:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 127:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 128:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 129:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get xPSR Register
+ 130:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the xPSR Register.
+ 131:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 132:./Drivers/CMSIS/Include/cmsis_gcc.h ****     \return               xPSR Register value
+ 133:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 134:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_xPSR(void)
+ 135:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 136:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ARM GAS  /tmp/ccq4QFNj.s 			page 31
+
+
+ 137:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 138:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
+ 139:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 140:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 141:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 142:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 143:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 144:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer
+ 145:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Process Stack Pointer (PSP).
+ 146:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               PSP Register value
+ 147:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 148:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_PSP(void)
+ 149:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 150:./Drivers/CMSIS/Include/cmsis_gcc.h ****   register uint32_t result;
+ 151:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 152:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp\n"  : "=r" (result) );
+ 153:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 154:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 155:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 156:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 157:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 158:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer
+ 159:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
+ 160:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 161:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 162:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_PSP(uint32_t topOfProcStack)
+ 163:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 164:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psp, %0\n" : : "r" (topOfProcStack) : "sp");
+ 165:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 166:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 167:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 168:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 169:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer
+ 170:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer (MSP).
+ 171:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               MSP Register value
+ 172:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 173:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_MSP(void)
+ 174:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 175:./Drivers/CMSIS/Include/cmsis_gcc.h ****   register uint32_t result;
+ 176:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 177:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp\n" : "=r" (result) );
+ 178:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 179:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 180:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 181:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 182:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 183:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer
+ 184:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer (MSP).
+ 185:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 186:./Drivers/CMSIS/Include/cmsis_gcc.h ****     \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 187:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 188:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_MSP(uint32_t topOfMainStack)
+ 189:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 190:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0\n" : : "r" (topOfMainStack) : "sp");
+ 191:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 192:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 193:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccq4QFNj.s 			page 32
+
+
+ 194:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 195:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Priority Mask
+ 196:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current state of the priority mask bit from the Priority Mask Register.
+ 197:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Priority Mask value
+ 198:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 199:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_PRIMASK(void)
+ 200:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 201:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 202:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 203:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) );
+ 204:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 205:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 206:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 207:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 208:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 209:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Priority Mask
+ 210:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Priority Mask Register.
+ 211:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
+ 212:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 213:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_PRIMASK(uint32_t priMask)
+ 214:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 215:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR primask, %0" : : "r" (priMask) : "memory");
+ 216:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 217:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 218:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 219:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if       (__CORTEX_M >= 0x03U)
+ 220:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 221:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 222:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable FIQ
+ 223:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
+ 224:./Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 225:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 226:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __enable_fault_irq(void)
+ 227:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 228:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie f" : : : "memory");
+ 229:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 230:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 231:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 232:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 233:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable FIQ
+ 234:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
+ 235:./Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 236:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 237:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_fault_irq(void)
+ 238:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 239:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid f" : : : "memory");
+ 240:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 241:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 242:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 243:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 244:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Base Priority
+ 245:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Base Priority register.
+ 246:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Base Priority register value
+ 247:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 248:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_BASEPRI(void)
+ 249:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 250:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ARM GAS  /tmp/ccq4QFNj.s 			page 33
+
+
+ 251:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 252:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, basepri" : "=r" (result) );
+ 253:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 254:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 255:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 256:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 257:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 258:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Base Priority
+ 259:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Base Priority register.
+ 260:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
+ 261:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 262:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_BASEPRI(uint32_t value)
+ 263:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 264:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri, %0" : : "r" (value) : "memory");
+ 265:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 266:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 267:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 268:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 269:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Base Priority with condition
+ 270:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Base Priority register only if BASEPRI masking is disable
+ 271:./Drivers/CMSIS/Include/cmsis_gcc.h ****            or the new value increases the BASEPRI priority level.
+ 272:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
+ 273:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 274:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_BASEPRI_MAX(uint32_t value)
+ 275:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 276:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri_max, %0" : : "r" (value) : "memory");
+ 277:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 278:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 279:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 280:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 281:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Fault Mask
+ 282:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Fault Mask register.
+ 283:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Fault Mask register value
+ 284:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 285:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_FAULTMASK(void)
+ 286:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 287:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 288:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 289:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, faultmask" : "=r" (result) );
+ 290:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 291:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 292:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 293:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 294:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 295:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Fault Mask
+ 296:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Fault Mask register.
+ 297:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    faultMask  Fault Mask value to set
+ 298:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 299:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_FAULTMASK(uint32_t faultMask)
+ 300:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 301:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
+ 302:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 303:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 304:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif /* (__CORTEX_M >= 0x03U) */
+ 305:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 306:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 307:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if       (__CORTEX_M == 0x04U) || (__CORTEX_M == 0x07U)
+ARM GAS  /tmp/ccq4QFNj.s 			page 34
+
+
+ 308:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 309:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 310:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get FPSCR
+ 311:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Floating Point Status/Control register.
+ 312:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Floating Point Status/Control register value
+ 313:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 314:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_FPSCR(void)
+ 315:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 316:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if (__FPU_PRESENT == 1U) && (__FPU_USED == 1U)
+ 317:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 318:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 319:./Drivers/CMSIS/Include/cmsis_gcc.h ****   /* Empty asm statement works as a scheduling barrier */
+ 320:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("");
+ 321:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("VMRS %0, fpscr" : "=r" (result) );
+ 322:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("");
+ 323:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 324:./Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 325:./Drivers/CMSIS/Include/cmsis_gcc.h ****    return(0);
+ 326:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 327:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 328:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 329:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 330:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 331:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set FPSCR
+ 332:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Floating Point Status/Control register.
+ 333:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    fpscr  Floating Point Status/Control value to set
+ 334:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 335:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_FPSCR(uint32_t fpscr)
+ 336:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 337:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if (__FPU_PRESENT == 1U) && (__FPU_USED == 1U)
+ 338:./Drivers/CMSIS/Include/cmsis_gcc.h ****   /* Empty asm statement works as a scheduling barrier */
+ 339:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("");
+ 340:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("VMSR fpscr, %0" : : "r" (fpscr) : "vfpcc");
+ 341:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("");
+ 342:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 343:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 344:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 345:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif /* (__CORTEX_M == 0x04U) || (__CORTEX_M == 0x07U) */
+ 346:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 347:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 348:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 349:./Drivers/CMSIS/Include/cmsis_gcc.h **** /*@} end of CMSIS_Core_RegAccFunctions */
+ 350:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 351:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 352:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* ##########################  Core Instruction Access  ######################### */
+ 353:./Drivers/CMSIS/Include/cmsis_gcc.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+ 354:./Drivers/CMSIS/Include/cmsis_gcc.h ****   Access to dedicated instructions
+ 355:./Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+ 356:./Drivers/CMSIS/Include/cmsis_gcc.h **** */
+ 357:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 358:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* Define macros for porting to both thumb1 and thumb2.
+ 359:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * For thumb1, use low register (r0-r7), specified by constraint "l"
+ 360:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * Otherwise, use general registers, specified by constraint "r" */
+ 361:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if defined (__thumb__) && !defined (__thumb2__)
+ 362:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=l" (r)
+ 363:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "l" (r)
+ 364:./Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ARM GAS  /tmp/ccq4QFNj.s 			page 35
+
+
+ 365:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=r" (r)
+ 366:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "r" (r)
+ 367:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 368:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 369:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 370:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   No Operation
+ 371:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details No Operation does nothing. This instruction can be used for code alignment purposes.
+ 372:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 373:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE void __NOP(void)
+ 374:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 375:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("nop");
+ 1107              		.loc 2 375 0
+ 1108              		.syntax unified
+ 1109              	@ 375 "./Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1110 0094 00BF     		nop
+ 1111              	@ 0 "" 2
+ 1112              		.thumb
+ 1113              		.syntax unified
+ 1114 0096 10BD     		pop	{r4, pc}
+ 1115              	.L67:
+ 1116              	.LBE13:
+ 1117              	.LBE12:
+ 420:./Src/motor_L.c ****       default:
+ 421:./Src/motor_L.c ****         __NOP();
+ 422:./Src/motor_L.c ****       break;      
+ 423:./Src/motor_L.c ****     }    
+ 424:./Src/motor_L.c ****   }else{
+ 425:./Src/motor_L.c ****     switch (motorL.newhallpos){
+ 1118              		.loc 1 425 0
+ 1119 0098 194B     		ldr	r3, .L85+4
+ 1120 009a 9B89     		ldrh	r3, [r3, #12]
+ 1121 009c 9BB2     		uxth	r3, r3
+ 1122 009e 602B     		cmp	r3, #96
+ 1123 00a0 16D0     		beq	.L77
+ 1124 00a2 04D8     		bhi	.L78
+ 1125 00a4 202B     		cmp	r3, #32
+ 1126 00a6 09D0     		beq	.L79
+ 1127 00a8 402B     		cmp	r3, #64
+ 1128 00aa 0CD0     		beq	.L80
+ 1129 00ac 24E0     		b	.L76
+ 1130              	.L78:
+ 1131 00ae A02B     		cmp	r3, #160
+ 1132 00b0 18D0     		beq	.L81
+ 1133 00b2 C02B     		cmp	r3, #192
+ 1134 00b4 1BD0     		beq	.L82
+ 1135 00b6 802B     		cmp	r3, #128
+ 1136 00b8 1ED1     		bne	.L76
+ 1137 00ba 0EE0     		b	.L83
+ 1138              	.L79:
+ 426:./Src/motor_L.c ****       case (0x0020):               //1
+ 427:./Src/motor_L.c ****         mL_Low_CH1_ON();
+ 1139              		.loc 1 427 0
+ 1140 00bc FFF7FEFF 		bl	mL_Low_CH1_ON
+ 1141              	.LVL70:
+ 428:./Src/motor_L.c ****         mL_BHigh__ON();
+ 1142              		.loc 1 428 0
+ 1143 00c0 FFF7FEFF 		bl	mL_BHigh__ON
+ARM GAS  /tmp/ccq4QFNj.s 			page 36
+
+
+ 1144              	.LVL71:
+ 429:./Src/motor_L.c ****       break;
+ 1145              		.loc 1 429 0
+ 1146 00c4 10BD     		pop	{r4, pc}
+ 1147              	.L80:
+ 430:./Src/motor_L.c ****       case (0x0040):               //2
+ 431:./Src/motor_L.c ****         mL_Low_CH2_ON();
+ 1148              		.loc 1 431 0
+ 1149 00c6 FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1150              	.LVL72:
+ 432:./Src/motor_L.c ****         mL_CHigh__ON();        
+ 1151              		.loc 1 432 0
+ 1152 00ca FFF7FEFF 		bl	mL_CHigh__ON
+ 1153              	.LVL73:
+ 433:./Src/motor_L.c ****       break;
+ 1154              		.loc 1 433 0
+ 1155 00ce 10BD     		pop	{r4, pc}
+ 1156              	.L77:
+ 434:./Src/motor_L.c ****       case (0x0060):               //3
+ 435:./Src/motor_L.c ****         mL_Low_CH1_ON();        
+ 1157              		.loc 1 435 0
+ 1158 00d0 FFF7FEFF 		bl	mL_Low_CH1_ON
+ 1159              	.LVL74:
+ 436:./Src/motor_L.c ****         mL_CHigh__ON();
+ 1160              		.loc 1 436 0
+ 1161 00d4 FFF7FEFF 		bl	mL_CHigh__ON
+ 1162              	.LVL75:
+ 437:./Src/motor_L.c ****       break;
+ 1163              		.loc 1 437 0
+ 1164 00d8 10BD     		pop	{r4, pc}
+ 1165              	.L83:
+ 438:./Src/motor_L.c ****       case (0x0080):              //4
+ 439:./Src/motor_L.c ****         mL_AHigh__ON();
+ 1166              		.loc 1 439 0
+ 1167 00da FFF7FEFF 		bl	mL_AHigh__ON
+ 1168              	.LVL76:
+ 440:./Src/motor_L.c ****         mL_Low_CH3_ON();        
+ 1169              		.loc 1 440 0
+ 1170 00de FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1171              	.LVL77:
+ 441:./Src/motor_L.c ****       break;
+ 1172              		.loc 1 441 0
+ 1173 00e2 10BD     		pop	{r4, pc}
+ 1174              	.L81:
+ 442:./Src/motor_L.c ****       case (0x00A0):              //5
+ 443:./Src/motor_L.c ****         mL_BHigh__ON();
+ 1175              		.loc 1 443 0
+ 1176 00e4 FFF7FEFF 		bl	mL_BHigh__ON
+ 1177              	.LVL78:
+ 444:./Src/motor_L.c ****         mL_Low_CH3_ON();        
+ 1178              		.loc 1 444 0
+ 1179 00e8 FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1180              	.LVL79:
+ 445:./Src/motor_L.c ****       break;
+ 1181              		.loc 1 445 0
+ 1182 00ec 10BD     		pop	{r4, pc}
+ 1183              	.L82:
+ARM GAS  /tmp/ccq4QFNj.s 			page 37
+
+
+ 446:./Src/motor_L.c ****       case (0x00C0):              //6
+ 447:./Src/motor_L.c ****         mL_AHigh__ON();
+ 1184              		.loc 1 447 0
+ 1185 00ee FFF7FEFF 		bl	mL_AHigh__ON
+ 1186              	.LVL80:
+ 448:./Src/motor_L.c ****         mL_Low_CH2_ON();        
+ 1187              		.loc 1 448 0
+ 1188 00f2 FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1189              	.LVL81:
+ 449:./Src/motor_L.c ****       break;  
+ 1190              		.loc 1 449 0
+ 1191 00f6 10BD     		pop	{r4, pc}
+ 1192              	.L76:
+ 1193              	.LBB14:
+ 1194              	.LBB15:
+ 1195              		.loc 2 375 0
+ 1196              		.syntax unified
+ 1197              	@ 375 "./Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1198 00f8 00BF     		nop
+ 1199              	@ 0 "" 2
+ 1200              		.thumb
+ 1201              		.syntax unified
+ 1202              	.L65:
+ 1203 00fa 10BD     		pop	{r4, pc}
+ 1204              	.L86:
+ 1205              		.align	2
+ 1206              	.L85:
+ 1207 00fc 000C0140 		.word	1073810432
+ 1208 0100 00000000 		.word	motorL
+ 1209              	.LBE15:
+ 1210              	.LBE14:
+ 1211              		.cfi_endproc
+ 1212              	.LFE86:
+ 1214              		.section	.text.MotorL_start,"ax",%progbits
+ 1215              		.align	2
+ 1216              		.global	MotorL_start
+ 1217              		.thumb
+ 1218              		.thumb_func
+ 1220              	MotorL_start:
+ 1221              	.LFB65:
+  23:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
+ 1222              		.loc 1 23 0
+ 1223              		.cfi_startproc
+ 1224              		@ args = 0, pretend = 0, frame = 0
+ 1225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1226 0000 38B5     		push	{r3, r4, r5, lr}
+ 1227              	.LCFI9:
+ 1228              		.cfi_def_cfa_offset 16
+ 1229              		.cfi_offset 3, -16
+ 1230              		.cfi_offset 4, -12
+ 1231              		.cfi_offset 5, -8
+ 1232              		.cfi_offset 14, -4
+  24:./Src/motor_L.c ****   motorL.BLDCMotorL_deltavel = 0;
+ 1233              		.loc 1 24 0
+ 1234 0002 0020     		movs	r0, #0
+ 1235 0004 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1236              	.LVL82:
+ARM GAS  /tmp/ccq4QFNj.s 			page 38
+
+
+  25:./Src/motor_L.c ****   motorL.BLDCMotorL_velRAW = 0;
+ 1237              		.loc 1 25 0
+ 1238 0008 094D     		ldr	r5, .L89
+ 1239 000a 0024     		movs	r4, #0
+ 1240 000c 2C81     		strh	r4, [r5, #8]	@ movhi
+  26:./Src/motor_L.c ****   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+ 1241              		.loc 1 26 0
+ 1242 000e EC80     		strh	r4, [r5, #6]	@ movhi
+  27:./Src/motor_L.c ****   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  
+ 1243              		.loc 1 27 0
+ 1244 0010 2246     		mov	r2, r4
+ 1245 0012 2146     		mov	r1, r4
+ 1246 0014 1720     		movs	r0, #23
+ 1247 0016 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 1248              	.LVL83:
+  28:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
+ 1249              		.loc 1 28 0
+ 1250 001a 1720     		movs	r0, #23
+ 1251 001c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 1252              	.LVL84:
+  29:./Src/motor_L.c ****   motorL.stop = 0;  
+ 1253              		.loc 1 29 0
+ 1254 0020 2046     		mov	r0, r4
+ 1255 0022 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1256              	.LVL85:
+  30:./Src/motor_L.c ****   mL_BLDCMotor();
+ 1257              		.loc 1 30 0
+ 1258 0026 AC73     		strb	r4, [r5, #14]
+  31:./Src/motor_L.c **** }
+ 1259              		.loc 1 31 0
+ 1260 0028 FFF7FEFF 		bl	mL_BLDCMotor
+ 1261              	.LVL86:
+ 1262 002c 38BD     		pop	{r3, r4, r5, pc}
+ 1263              	.L90:
+ 1264 002e 00BF     		.align	2
+ 1265              	.L89:
+ 1266 0030 00000000 		.word	motorL
+ 1267              		.cfi_endproc
+ 1268              	.LFE65:
+ 1270              		.section	.text.MotorL_pwm,"ax",%progbits
+ 1271              		.align	2
+ 1272              		.global	MotorL_pwm
+ 1273              		.thumb
+ 1274              		.thumb_func
+ 1276              	MotorL_pwm:
+ 1277              	.LFB66:
+  34:./Src/motor_L.c ****   static uint8_t last_motorL=0;
+ 1278              		.loc 1 34 0
+ 1279              		.cfi_startproc
+ 1280              		@ args = 0, pretend = 0, frame = 0
+ 1281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1282              	.LVL87:
+ 1283 0000 10B5     		push	{r4, lr}
+ 1284              	.LCFI10:
+ 1285              		.cfi_def_cfa_offset 8
+ 1286              		.cfi_offset 4, -8
+ 1287              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccq4QFNj.s 			page 39
+
+
+ 1288 0002 0446     		mov	r4, r0
+  38:./Src/motor_L.c ****     value_percent = 1000;
+ 1289              		.loc 1 38 0
+ 1290 0004 B0F57A7F 		cmp	r0, #1000
+ 1291 0008 01DD     		ble	.L92
+  39:./Src/motor_L.c ****   }
+ 1292              		.loc 1 39 0
+ 1293 000a 4FF47A74 		mov	r4, #1000
+ 1294              	.L92:
+ 1295              	.LVL88:
+  41:./Src/motor_L.c ****     value_percent = -1000;
+ 1296              		.loc 1 41 0
+ 1297 000e 14F57A7F 		cmn	r4, #1000
+ 1298 0012 00DA     		bge	.L93
+  42:./Src/motor_L.c ****   }
+ 1299              		.loc 1 42 0
+ 1300 0014 1B4C     		ldr	r4, .L104
+ 1301              	.LVL89:
+ 1302              	.L93:
+  44:./Src/motor_L.c ****     value_percent = value_percent * -1;
+ 1303              		.loc 1 44 0
+ 1304 0016 002C     		cmp	r4, #0
+ 1305 0018 0DDA     		bge	.L94
+  45:./Src/motor_L.c **** 
+ 1306              		.loc 1 45 0
+ 1307 001a 6042     		negs	r0, r4
+ 1308 001c 80B2     		uxth	r0, r0
+ 1309 001e 04B2     		sxth	r4, r0
+ 1310              	.LVL90:
+  47:./Src/motor_L.c ****       mL_PWM_Set_ChALL(value_percent);
+ 1311              		.loc 1 47 0
+ 1312 0020 194B     		ldr	r3, .L104+4
+ 1313 0022 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1314 0024 0BB9     		cbnz	r3, .L95
+  48:./Src/motor_L.c ****     }
+ 1315              		.loc 1 48 0
+ 1316 0026 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1317              	.LVL91:
+ 1318              	.L95:
+  50:./Src/motor_L.c ****     last_motorL = 1;
+ 1319              		.loc 1 50 0
+ 1320 002a 0123     		movs	r3, #1
+ 1321 002c 174A     		ldr	r2, .L104+8
+ 1322 002e 9372     		strb	r3, [r2, #10]
+  51:./Src/motor_L.c ****   }else{
+ 1323              		.loc 1 51 0
+ 1324 0030 154A     		ldr	r2, .L104+4
+ 1325 0032 1370     		strb	r3, [r2]
+ 1326 0034 0BE0     		b	.L96
+ 1327              	.L94:
+  53:./Src/motor_L.c ****       mL_PWM_Set_ChALL(value_percent);
+ 1328              		.loc 1 53 0
+ 1329 0036 144B     		ldr	r3, .L104+4
+ 1330 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1331 003a 012B     		cmp	r3, #1
+ 1332 003c 02D1     		bne	.L97
+  54:./Src/motor_L.c ****     }
+ARM GAS  /tmp/ccq4QFNj.s 			page 40
+
+
+ 1333              		.loc 1 54 0
+ 1334 003e A0B2     		uxth	r0, r4
+ 1335 0040 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1336              	.LVL92:
+ 1337              	.L97:
+  56:./Src/motor_L.c ****      last_motorL = 0;
+ 1338              		.loc 1 56 0
+ 1339 0044 0023     		movs	r3, #0
+ 1340 0046 114A     		ldr	r2, .L104+8
+ 1341 0048 9372     		strb	r3, [r2, #10]
+  57:./Src/motor_L.c ****   }
+ 1342              		.loc 1 57 0
+ 1343 004a 0F4A     		ldr	r2, .L104+4
+ 1344 004c 1370     		strb	r3, [r2]
+ 1345              	.L96:
+  60:./Src/motor_L.c ****     motorL.stop = 1;    //ferma motore
+ 1346              		.loc 1 60 0
+ 1347 004e A4B2     		uxth	r4, r4
+ 1348 0050 631D     		adds	r3, r4, #5
+ 1349 0052 9BB2     		uxth	r3, r3
+ 1350 0054 0A2B     		cmp	r3, #10
+ 1351 0056 05D8     		bhi	.L98
+  61:./Src/motor_L.c ****     last_motorLStop = 1;    
+ 1352              		.loc 1 61 0
+ 1353 0058 0123     		movs	r3, #1
+ 1354 005a 0C4A     		ldr	r2, .L104+8
+ 1355 005c 9373     		strb	r3, [r2, #14]
+  62:./Src/motor_L.c ****   }else{
+ 1356              		.loc 1 62 0
+ 1357 005e 0C4A     		ldr	r2, .L104+12
+ 1358 0060 1370     		strb	r3, [r2]
+ 1359 0062 0AE0     		b	.L99
+ 1360              	.L98:
+  64:./Src/motor_L.c ****     if(last_motorLStop){
+ 1361              		.loc 1 64 0
+ 1362 0064 0022     		movs	r2, #0
+ 1363 0066 094B     		ldr	r3, .L104+8
+ 1364 0068 9A73     		strb	r2, [r3, #14]
+  65:./Src/motor_L.c ****         //riattiva
+ 1365              		.loc 1 65 0
+ 1366 006a 094B     		ldr	r3, .L104+12
+ 1367 006c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1368 006e 0BB1     		cbz	r3, .L100
+  67:./Src/motor_L.c ****     }
+ 1369              		.loc 1 67 0
+ 1370 0070 FFF7FEFF 		bl	mL_BLDCMotor
+ 1371              	.LVL93:
+ 1372              	.L100:
+  69:./Src/motor_L.c ****   }
+ 1373              		.loc 1 69 0
+ 1374 0074 0022     		movs	r2, #0
+ 1375 0076 064B     		ldr	r3, .L104+12
+ 1376 0078 1A70     		strb	r2, [r3]
+ 1377              	.L99:
+  72:./Src/motor_L.c **** }
+ 1378              		.loc 1 72 0
+ 1379 007a 2046     		mov	r0, r4
+ARM GAS  /tmp/ccq4QFNj.s 			page 41
+
+
+ 1380 007c FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1381              	.LVL94:
+ 1382 0080 10BD     		pop	{r4, pc}
+ 1383              	.LVL95:
+ 1384              	.L105:
+ 1385 0082 00BF     		.align	2
+ 1386              	.L104:
+ 1387 0084 18FCFFFF 		.word	-1000
+ 1388 0088 00000000 		.word	.LANCHOR0
+ 1389 008c 00000000 		.word	motorL
+ 1390 0090 00000000 		.word	.LANCHOR1
+ 1391              		.cfi_endproc
+ 1392              	.LFE66:
+ 1394              		.section	.text.HALL_L_ISR_Callback,"ax",%progbits
+ 1395              		.align	2
+ 1396              		.global	HALL_L_ISR_Callback
+ 1397              		.thumb
+ 1398              		.thumb_func
+ 1400              	HALL_L_ISR_Callback:
+ 1401              	.LFB87:
+ 450:./Src/motor_L.c ****       default:
+ 451:./Src/motor_L.c ****         __NOP();
+ 452:./Src/motor_L.c ****       break;
+ 453:./Src/motor_L.c ****     }   
+ 454:./Src/motor_L.c ****   }
+ 455:./Src/motor_L.c **** }
+ 456:./Src/motor_L.c **** 
+ 457:./Src/motor_L.c **** 
+ 458:./Src/motor_L.c **** 
+ 459:./Src/motor_L.c **** 
+ 460:./Src/motor_L.c **** 
+ 461:./Src/motor_L.c **** void HALL_L_ISR_Callback(void){
+ 1402              		.loc 1 461 0
+ 1403              		.cfi_startproc
+ 1404              		@ args = 0, pretend = 0, frame = 0
+ 1405              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1406              		@ link register save eliminated.
+ 462:./Src/motor_L.c ****     motorL.BLDCMotorL_count= 1;        //Delay x ritardo x debounce
+ 1407              		.loc 1 462 0
+ 1408 0000 024B     		ldr	r3, .L107
+ 1409 0002 0122     		movs	r2, #1
+ 1410 0004 1A71     		strb	r2, [r3, #4]
+ 463:./Src/motor_L.c ****     motorL.BLDCMotorL_flag = 1;        //Update motor
+ 1411              		.loc 1 463 0
+ 1412 0006 5A71     		strb	r2, [r3, #5]
+ 1413 0008 7047     		bx	lr
+ 1414              	.L108:
+ 1415 000a 00BF     		.align	2
+ 1416              	.L107:
+ 1417 000c 00000000 		.word	motorL
+ 1418              		.cfi_endproc
+ 1419              	.LFE87:
+ 1421              		.section	.text.PWM_L_ISR_Callback,"ax",%progbits
+ 1422              		.align	2
+ 1423              		.global	PWM_L_ISR_Callback
+ 1424              		.thumb
+ 1425              		.thumb_func
+ARM GAS  /tmp/ccq4QFNj.s 			page 42
+
+
+ 1427              	PWM_L_ISR_Callback:
+ 1428              	.LFB88:
+ 464:./Src/motor_L.c **** }
+ 465:./Src/motor_L.c **** 
+ 466:./Src/motor_L.c **** //40uS Interrupt -- 25Khz
+ 467:./Src/motor_L.c **** void PWM_L_ISR_Callback(void){
+ 1429              		.loc 1 467 0
+ 1430              		.cfi_startproc
+ 1431              		@ args = 0, pretend = 0, frame = 0
+ 1432              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1433 0000 08B5     		push	{r3, lr}
+ 1434              	.LCFI11:
+ 1435              		.cfi_def_cfa_offset 8
+ 1436              		.cfi_offset 3, -8
+ 1437              		.cfi_offset 14, -4
+ 468:./Src/motor_L.c ****    if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count==0)){
+ 1438              		.loc 1 468 0
+ 1439 0002 1B4B     		ldr	r3, .L114
+ 1440 0004 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 1441 0006 13F0FF0F 		tst	r3, #255
+ 1442 000a 0ED0     		beq	.L110
+ 1443              		.loc 1 468 0 is_stmt 0 discriminator 1
+ 1444 000c 184B     		ldr	r3, .L114
+ 1445 000e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1446 0010 13F0FF0F 		tst	r3, #255
+ 1447 0014 09D1     		bne	.L110
+ 469:./Src/motor_L.c ****       mL_BLDCMotor();        //5uS
+ 1448              		.loc 1 469 0 is_stmt 1
+ 1449 0016 FFF7FEFF 		bl	mL_BLDCMotor
+ 1450              	.LVL96:
+ 470:./Src/motor_L.c ****       motorL.BLDCMotorL_flag = 0;      
+ 1451              		.loc 1 470 0
+ 1452 001a 154B     		ldr	r3, .L114
+ 1453 001c 0021     		movs	r1, #0
+ 1454 001e 5971     		strb	r1, [r3, #5]
+ 471:./Src/motor_L.c ****       //---
+ 472:./Src/motor_L.c ****       motorL.BLDCMotorL_velRAW = motorL.BLDCMotorL_deltavel;
+ 1455              		.loc 1 472 0
+ 1456 0020 1A89     		ldrh	r2, [r3, #8]
+ 1457 0022 92B2     		uxth	r2, r2
+ 1458 0024 DA80     		strh	r2, [r3, #6]	@ movhi
+ 473:./Src/motor_L.c ****       motorL.BLDCMotorL_deltavel = 0;      
+ 1459              		.loc 1 473 0
+ 1460 0026 1981     		strh	r1, [r3, #8]	@ movhi
+ 1461 0028 0EE0     		b	.L111
+ 1462              	.L110:
+ 474:./Src/motor_L.c ****    }else if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count!=0)){
+ 1463              		.loc 1 474 0
+ 1464 002a 114B     		ldr	r3, .L114
+ 1465 002c 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 1466 002e 13F0FF0F 		tst	r3, #255
+ 1467 0032 09D0     		beq	.L111
+ 1468              		.loc 1 474 0 is_stmt 0 discriminator 1
+ 1469 0034 0E4B     		ldr	r3, .L114
+ 1470 0036 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1471 0038 13F0FF0F 		tst	r3, #255
+ 1472 003c 04D0     		beq	.L111
+ARM GAS  /tmp/ccq4QFNj.s 			page 43
+
+
+ 475:./Src/motor_L.c ****       motorL.BLDCMotorL_count--;
+ 1473              		.loc 1 475 0 is_stmt 1
+ 1474 003e 0C4A     		ldr	r2, .L114
+ 1475 0040 1379     		ldrb	r3, [r2, #4]	@ zero_extendqisi2
+ 1476 0042 013B     		subs	r3, r3, #1
+ 1477 0044 DBB2     		uxtb	r3, r3
+ 1478 0046 1371     		strb	r3, [r2, #4]
+ 1479              	.L111:
+ 476:./Src/motor_L.c ****    }
+ 477:./Src/motor_L.c ****    motorL.BLDCMotorL_deltavel++;       //Calcolo velocita motore inc ogni 40uS
+ 1480              		.loc 1 477 0
+ 1481 0048 094A     		ldr	r2, .L114
+ 1482 004a 1389     		ldrh	r3, [r2, #8]
+ 1483 004c 9BB2     		uxth	r3, r3
+ 1484 004e 0133     		adds	r3, r3, #1
+ 1485 0050 9BB2     		uxth	r3, r3
+ 1486 0052 1381     		strh	r3, [r2, #8]	@ movhi
+ 478:./Src/motor_L.c ****    if(motorL.BLDCMotorL_deltavel>=5000){
+ 1487              		.loc 1 478 0
+ 1488 0054 1389     		ldrh	r3, [r2, #8]
+ 1489 0056 9BB2     		uxth	r3, r3
+ 1490 0058 41F28732 		movw	r2, #4999
+ 1491 005c 9342     		cmp	r3, r2
+ 1492 005e 05D9     		bls	.L109
+ 479:./Src/motor_L.c ****     motorL.BLDCMotorL_deltavel = 5000;
+ 1493              		.loc 1 479 0
+ 1494 0060 034B     		ldr	r3, .L114
+ 1495 0062 41F28832 		movw	r2, #5000
+ 1496 0066 1A81     		strh	r2, [r3, #8]	@ movhi
+ 480:./Src/motor_L.c ****     motorL.BLDCMotorL_velRAW = 0;     //Minima vel, motore fermo
+ 1497              		.loc 1 480 0
+ 1498 0068 0022     		movs	r2, #0
+ 1499 006a DA80     		strh	r2, [r3, #6]	@ movhi
+ 1500              	.L109:
+ 1501 006c 08BD     		pop	{r3, pc}
+ 1502              	.L115:
+ 1503 006e 00BF     		.align	2
+ 1504              	.L114:
+ 1505 0070 00000000 		.word	motorL
+ 1506              		.cfi_endproc
+ 1507              	.LFE88:
+ 1509              		.comm	motorL,16,4
+ 1510              		.comm	htim8,60,4
+ 1511              		.section	.bss.last_motorL.7432,"aw",%nobits
+ 1512              		.set	.LANCHOR0,. + 0
+ 1515              	last_motorL.7432:
+ 1516 0000 00       		.space	1
+ 1517              		.section	.bss.last_motorLStop.7433,"aw",%nobits
+ 1518              		.set	.LANCHOR1,. + 0
+ 1521              	last_motorLStop.7433:
+ 1522 0000 00       		.space	1
+ 1523              		.text
+ 1524              	.Letext0:
+ 1525              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 1526              		.file 4 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 1527              		.file 5 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 1528              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ARM GAS  /tmp/ccq4QFNj.s 			page 44
+
+
+ 1529              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1530              		.file 8 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 1531              		.file 9 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 1532              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h"
+ 1533              		.file 11 "./Inc/motor_L.h"
+ 1534              		.file 12 "./Drivers/CMSIS/Include/core_cm3.h"
+ 1535              		.file 13 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1536              		.file 14 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ARM GAS  /tmp/ccq4QFNj.s 			page 45
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 motor_L.c
+     /tmp/ccq4QFNj.s:20     .text.mL_HallSensor_init:00000000 $t
+     /tmp/ccq4QFNj.s:25     .text.mL_HallSensor_init:00000000 mL_HallSensor_init
+     /tmp/ccq4QFNj.s:87     .text.mL_HallSensor_init:00000044 $d
+     /tmp/ccq4QFNj.s:94     .text.mL_Low_CH1_ON:00000000 $t
+     /tmp/ccq4QFNj.s:99     .text.mL_Low_CH1_ON:00000000 mL_Low_CH1_ON
+     /tmp/ccq4QFNj.s:114    .text.mL_Low_CH1_ON:0000000c $d
+     /tmp/ccq4QFNj.s:119    .text.mL_Low_CH1_OFF:00000000 $t
+     /tmp/ccq4QFNj.s:124    .text.mL_Low_CH1_OFF:00000000 mL_Low_CH1_OFF
+     /tmp/ccq4QFNj.s:139    .text.mL_Low_CH1_OFF:00000008 $d
+     /tmp/ccq4QFNj.s:144    .text.mL_Low_CH2_ON:00000000 $t
+     /tmp/ccq4QFNj.s:149    .text.mL_Low_CH2_ON:00000000 mL_Low_CH2_ON
+     /tmp/ccq4QFNj.s:164    .text.mL_Low_CH2_ON:0000000c $d
+     /tmp/ccq4QFNj.s:169    .text.mL_Low_CH2_OFF:00000000 $t
+     /tmp/ccq4QFNj.s:174    .text.mL_Low_CH2_OFF:00000000 mL_Low_CH2_OFF
+     /tmp/ccq4QFNj.s:189    .text.mL_Low_CH2_OFF:00000008 $d
+     /tmp/ccq4QFNj.s:194    .text.mL_Low_CH3_ON:00000000 $t
+     /tmp/ccq4QFNj.s:199    .text.mL_Low_CH3_ON:00000000 mL_Low_CH3_ON
+     /tmp/ccq4QFNj.s:214    .text.mL_Low_CH3_ON:0000000c $d
+     /tmp/ccq4QFNj.s:219    .text.mL_Low_CH3_OFF:00000000 $t
+     /tmp/ccq4QFNj.s:224    .text.mL_Low_CH3_OFF:00000000 mL_Low_CH3_OFF
+     /tmp/ccq4QFNj.s:239    .text.mL_Low_CH3_OFF:00000008 $d
+     /tmp/ccq4QFNj.s:244    .text.mL_AHigh__ON:00000000 $t
+     /tmp/ccq4QFNj.s:249    .text.mL_AHigh__ON:00000000 mL_AHigh__ON
+     /tmp/ccq4QFNj.s:266    .text.mL_AHigh__ON:00000010 $d
+                            *COM*:0000003c htim8
+     /tmp/ccq4QFNj.s:271    .text.mL_AHigh__OFF:00000000 $t
+     /tmp/ccq4QFNj.s:276    .text.mL_AHigh__OFF:00000000 mL_AHigh__OFF
+     /tmp/ccq4QFNj.s:295    .text.mL_AHigh__OFF:00000014 $d
+     /tmp/ccq4QFNj.s:300    .text.mL_BHigh__ON:00000000 $t
+     /tmp/ccq4QFNj.s:305    .text.mL_BHigh__ON:00000000 mL_BHigh__ON
+     /tmp/ccq4QFNj.s:322    .text.mL_BHigh__ON:00000010 $d
+     /tmp/ccq4QFNj.s:327    .text.mL_BHigh__OFF:00000000 $t
+     /tmp/ccq4QFNj.s:332    .text.mL_BHigh__OFF:00000000 mL_BHigh__OFF
+     /tmp/ccq4QFNj.s:351    .text.mL_BHigh__OFF:00000014 $d
+     /tmp/ccq4QFNj.s:356    .text.mL_CHigh__ON:00000000 $t
+     /tmp/ccq4QFNj.s:361    .text.mL_CHigh__ON:00000000 mL_CHigh__ON
+     /tmp/ccq4QFNj.s:378    .text.mL_CHigh__ON:00000010 $d
+     /tmp/ccq4QFNj.s:383    .text.mL_CHigh__OFF:00000000 $t
+     /tmp/ccq4QFNj.s:388    .text.mL_CHigh__OFF:00000000 mL_CHigh__OFF
+     /tmp/ccq4QFNj.s:407    .text.mL_CHigh__OFF:00000014 $d
+     /tmp/ccq4QFNj.s:412    .text.mL_PWM_Set_Ch1:00000000 $t
+     /tmp/ccq4QFNj.s:417    .text.mL_PWM_Set_Ch1:00000000 mL_PWM_Set_Ch1
+     /tmp/ccq4QFNj.s:442    .text.mL_PWM_Set_Ch1:00000018 $d
+                            *COM*:00000010 motorL
+     /tmp/ccq4QFNj.s:449    .text.mL_PWM_Set_Ch2:00000000 $t
+     /tmp/ccq4QFNj.s:454    .text.mL_PWM_Set_Ch2:00000000 mL_PWM_Set_Ch2
+     /tmp/ccq4QFNj.s:479    .text.mL_PWM_Set_Ch2:00000018 $d
+     /tmp/ccq4QFNj.s:486    .text.mL_PWM_Set_Ch3:00000000 $t
+     /tmp/ccq4QFNj.s:491    .text.mL_PWM_Set_Ch3:00000000 mL_PWM_Set_Ch3
+     /tmp/ccq4QFNj.s:516    .text.mL_PWM_Set_Ch3:00000018 $d
+     /tmp/ccq4QFNj.s:523    .text.mL_PWM_Set_ChALL:00000000 $t
+     /tmp/ccq4QFNj.s:528    .text.mL_PWM_Set_ChALL:00000000 mL_PWM_Set_ChALL
+     /tmp/ccq4QFNj.s:557    .text.mL_PWM_Set_ChALL:0000001c $d
+     /tmp/ccq4QFNj.s:564    .text.MotorL_stop:00000000 $t
+     /tmp/ccq4QFNj.s:569    .text.MotorL_stop:00000000 MotorL_stop
+ARM GAS  /tmp/ccq4QFNj.s 			page 46
+
+
+     /tmp/ccq4QFNj.s:635    .text.MotorL_stop:0000004c $d
+     /tmp/ccq4QFNj.s:641    .text.MX_TIM8_Init:00000000 $t
+     /tmp/ccq4QFNj.s:646    .text.MX_TIM8_Init:00000000 MX_TIM8_Init
+     /tmp/ccq4QFNj.s:925    .text.MX_TIM8_Init:00000198 $d
+     /tmp/ccq4QFNj.s:938    .text.MotorL_init:00000000 $t
+     /tmp/ccq4QFNj.s:943    .text.MotorL_init:00000000 MotorL_init
+     /tmp/ccq4QFNj.s:977    .text.MotorL_init:0000001c $d
+     /tmp/ccq4QFNj.s:982    .text.mL_BLDCMotor:00000000 $t
+     /tmp/ccq4QFNj.s:987    .text.mL_BLDCMotor:00000000 mL_BLDCMotor
+     /tmp/ccq4QFNj.s:1207   .text.mL_BLDCMotor:000000fc $d
+     /tmp/ccq4QFNj.s:1215   .text.MotorL_start:00000000 $t
+     /tmp/ccq4QFNj.s:1220   .text.MotorL_start:00000000 MotorL_start
+     /tmp/ccq4QFNj.s:1266   .text.MotorL_start:00000030 $d
+     /tmp/ccq4QFNj.s:1271   .text.MotorL_pwm:00000000 $t
+     /tmp/ccq4QFNj.s:1276   .text.MotorL_pwm:00000000 MotorL_pwm
+     /tmp/ccq4QFNj.s:1387   .text.MotorL_pwm:00000084 $d
+     /tmp/ccq4QFNj.s:1395   .text.HALL_L_ISR_Callback:00000000 $t
+     /tmp/ccq4QFNj.s:1400   .text.HALL_L_ISR_Callback:00000000 HALL_L_ISR_Callback
+     /tmp/ccq4QFNj.s:1417   .text.HALL_L_ISR_Callback:0000000c $d
+     /tmp/ccq4QFNj.s:1422   .text.PWM_L_ISR_Callback:00000000 $t
+     /tmp/ccq4QFNj.s:1427   .text.PWM_L_ISR_Callback:00000000 PWM_L_ISR_Callback
+     /tmp/ccq4QFNj.s:1505   .text.PWM_L_ISR_Callback:00000070 $d
+     /tmp/ccq4QFNj.s:1515   .bss.last_motorL.7432:00000000 last_motorL.7432
+     /tmp/ccq4QFNj.s:1516   .bss.last_motorL.7432:00000000 $d
+     /tmp/ccq4QFNj.s:1521   .bss.last_motorLStop.7433:00000000 last_motorLStop.7433
+     /tmp/ccq4QFNj.s:1522   .bss.last_motorLStop.7433:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ
+HAL_TIM_PWM_Init
+HAL_TIMEx_ConfigBreakDeadTime
+HAL_TIM_PWM_ConfigChannel
+HAL_TIM_PWM_Start
+HAL_TIM_PWM_Start_IT
+SystemCoreClock

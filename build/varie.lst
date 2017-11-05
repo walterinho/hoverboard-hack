@@ -1,0 +1,1031 @@
+ARM GAS  /tmp/ccMhf1Jx.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"varie.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Led_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	Led_init
+  22              		.thumb
+  23              		.thumb_func
+  25              	Led_init:
+  26              	.LFB65:
+  27              		.file 1 "./Src/varie.c"
+   1:./Src/varie.c **** #include "varie.h"
+   2:./Src/varie.c **** #include "stm32f1xx_hal.h"
+   3:./Src/varie.c **** #include "delay.h"
+   4:./Src/varie.c **** 
+   5:./Src/varie.c **** extern IWDG_HandleTypeDef hiwdg;
+   6:./Src/varie.c **** 
+   7:./Src/varie.c **** void Buzzer_init(void){
+   8:./Src/varie.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+   9:./Src/varie.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+  10:./Src/varie.c ****   /*Configure GPIO pin Output Level */
+  11:./Src/varie.c ****   HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_RESET);
+  12:./Src/varie.c ****   /*Configure GPIO pin : BUZZER_Pin */
+  13:./Src/varie.c ****   GPIO_InitStruct.Pin = BUZZER_Pin;
+  14:./Src/varie.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  15:./Src/varie.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  16:./Src/varie.c ****   HAL_GPIO_Init(BUZZER_GPIO_Port, &GPIO_InitStruct);
+  17:./Src/varie.c ****   Buzzer_Set(0);
+  18:./Src/varie.c ****   Buzzer_Set(1);
+  19:./Src/varie.c ****   Buzzer_Set(0); 
+  20:./Src/varie.c **** }
+  21:./Src/varie.c **** 
+  22:./Src/varie.c **** void Led_init(void){
+  28              		.loc 1 22 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccMhf1Jx.s 			page 2
+
+
+  37 0002 86B0     		sub	sp, sp, #24
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40              	.LBB2:
+  23:./Src/varie.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+  24:./Src/varie.c ****   __HAL_RCC_GPIOB_CLK_ENABLE();
+  41              		.loc 1 24 0
+  42 0004 0D4B     		ldr	r3, .L3
+  43 0006 9A69     		ldr	r2, [r3, #24]
+  44 0008 42F00802 		orr	r2, r2, #8
+  45 000c 9A61     		str	r2, [r3, #24]
+  46 000e 9B69     		ldr	r3, [r3, #24]
+  47 0010 03F00803 		and	r3, r3, #8
+  48 0014 0193     		str	r3, [sp, #4]
+  49 0016 019B     		ldr	r3, [sp, #4]
+  50              	.LBE2:
+  25:./Src/varie.c ****   /*Configure GPIO pin Output Level */
+  26:./Src/varie.c ****   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);  
+  51              		.loc 1 26 0
+  52 0018 094C     		ldr	r4, .L3+4
+  53 001a 0022     		movs	r2, #0
+  54 001c 0421     		movs	r1, #4
+  55 001e 2046     		mov	r0, r4
+  56 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  57              	.LVL0:
+  27:./Src/varie.c ****   /*Configure GPIO pin : LED_Pin */
+  28:./Src/varie.c ****   GPIO_InitStruct.Pin = LED_Pin;
+  58              		.loc 1 28 0
+  59 0024 0423     		movs	r3, #4
+  60 0026 0293     		str	r3, [sp, #8]
+  29:./Src/varie.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  61              		.loc 1 29 0
+  62 0028 0123     		movs	r3, #1
+  63 002a 0393     		str	r3, [sp, #12]
+  30:./Src/varie.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  64              		.loc 1 30 0
+  65 002c 0223     		movs	r3, #2
+  66 002e 0593     		str	r3, [sp, #20]
+  31:./Src/varie.c ****   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
+  67              		.loc 1 31 0
+  68 0030 02A9     		add	r1, sp, #8
+  69 0032 2046     		mov	r0, r4
+  70 0034 FFF7FEFF 		bl	HAL_GPIO_Init
+  71              	.LVL1:
+  32:./Src/varie.c **** }
+  72              		.loc 1 32 0
+  73 0038 06B0     		add	sp, sp, #24
+  74              	.LCFI2:
+  75              		.cfi_def_cfa_offset 8
+  76              		@ sp needed
+  77 003a 10BD     		pop	{r4, pc}
+  78              	.L4:
+  79              		.align	2
+  80              	.L3:
+  81 003c 00100240 		.word	1073876992
+  82 0040 000C0140 		.word	1073810432
+  83              		.cfi_endproc
+ARM GAS  /tmp/ccMhf1Jx.s 			page 3
+
+
+  84              	.LFE65:
+  86              		.section	.text.IS_Charge_init,"ax",%progbits
+  87              		.align	2
+  88              		.global	IS_Charge_init
+  89              		.thumb
+  90              		.thumb_func
+  92              	IS_Charge_init:
+  93              	.LFB66:
+  33:./Src/varie.c **** 
+  34:./Src/varie.c **** void IS_Charge_init(void){
+  94              		.loc 1 34 0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 24
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98 0000 00B5     		push	{lr}
+  99              	.LCFI3:
+ 100              		.cfi_def_cfa_offset 4
+ 101              		.cfi_offset 14, -4
+ 102 0002 87B0     		sub	sp, sp, #28
+ 103              	.LCFI4:
+ 104              		.cfi_def_cfa_offset 32
+ 105              	.LBB3:
+  35:./Src/varie.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+  36:./Src/varie.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+ 106              		.loc 1 36 0
+ 107 0004 0B4B     		ldr	r3, .L7
+ 108 0006 9A69     		ldr	r2, [r3, #24]
+ 109 0008 42F00402 		orr	r2, r2, #4
+ 110 000c 9A61     		str	r2, [r3, #24]
+ 111 000e 9B69     		ldr	r3, [r3, #24]
+ 112 0010 03F00403 		and	r3, r3, #4
+ 113 0014 0193     		str	r3, [sp, #4]
+ 114 0016 019B     		ldr	r3, [sp, #4]
+ 115              	.LBE3:
+  37:./Src/varie.c ****   /*Configure GPIO pin : IS_CHARGE_Pin */
+  38:./Src/varie.c ****   GPIO_InitStruct.Pin = IS_CHARGE_Pin;
+ 116              		.loc 1 38 0
+ 117 0018 4FF48053 		mov	r3, #4096
+ 118 001c 0293     		str	r3, [sp, #8]
+  39:./Src/varie.c ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+ 119              		.loc 1 39 0
+ 120 001e 0023     		movs	r3, #0
+ 121 0020 0393     		str	r3, [sp, #12]
+  40:./Src/varie.c ****   GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 122              		.loc 1 40 0
+ 123 0022 0123     		movs	r3, #1
+ 124 0024 0493     		str	r3, [sp, #16]
+  41:./Src/varie.c ****   HAL_GPIO_Init(IS_CHARGE_GPIO_Port, &GPIO_InitStruct);
+ 125              		.loc 1 41 0
+ 126 0026 02A9     		add	r1, sp, #8
+ 127 0028 0348     		ldr	r0, .L7+4
+ 128 002a FFF7FEFF 		bl	HAL_GPIO_Init
+ 129              	.LVL2:
+  42:./Src/varie.c **** }
+ 130              		.loc 1 42 0
+ 131 002e 07B0     		add	sp, sp, #28
+ 132              	.LCFI5:
+ARM GAS  /tmp/ccMhf1Jx.s 			page 4
+
+
+ 133              		.cfi_def_cfa_offset 4
+ 134              		@ sp needed
+ 135 0030 5DF804FB 		ldr	pc, [sp], #4
+ 136              	.L8:
+ 137              		.align	2
+ 138              	.L7:
+ 139 0034 00100240 		.word	1073876992
+ 140 0038 00080140 		.word	1073809408
+ 141              		.cfi_endproc
+ 142              	.LFE66:
+ 144              		.section	.text.Led_Set,"ax",%progbits
+ 145              		.align	2
+ 146              		.global	Led_Set
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	Led_Set:
+ 151              	.LFB67:
+  43:./Src/varie.c **** 
+  44:./Src/varie.c **** void Led_Set(uint8_t stato){
+ 152              		.loc 1 44 0
+ 153              		.cfi_startproc
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156              	.LVL3:
+ 157 0000 08B5     		push	{r3, lr}
+ 158              	.LCFI6:
+ 159              		.cfi_def_cfa_offset 8
+ 160              		.cfi_offset 3, -8
+ 161              		.cfi_offset 14, -4
+  45:./Src/varie.c ****   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, (GPIO_PinState)stato);
+ 162              		.loc 1 45 0
+ 163 0002 0246     		mov	r2, r0
+ 164 0004 0421     		movs	r1, #4
+ 165 0006 0248     		ldr	r0, .L11
+ 166              	.LVL4:
+ 167 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 168              	.LVL5:
+ 169 000c 08BD     		pop	{r3, pc}
+ 170              	.L12:
+ 171 000e 00BF     		.align	2
+ 172              	.L11:
+ 173 0010 000C0140 		.word	1073810432
+ 174              		.cfi_endproc
+ 175              	.LFE67:
+ 177              		.section	.text.Buzzer_Set,"ax",%progbits
+ 178              		.align	2
+ 179              		.global	Buzzer_Set
+ 180              		.thumb
+ 181              		.thumb_func
+ 183              	Buzzer_Set:
+ 184              	.LFB68:
+  46:./Src/varie.c **** }
+  47:./Src/varie.c **** void Buzzer_Set(uint8_t stato){
+ 185              		.loc 1 47 0
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 0
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccMhf1Jx.s 			page 5
+
+
+ 189              	.LVL6:
+ 190 0000 08B5     		push	{r3, lr}
+ 191              	.LCFI7:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 3, -8
+ 194              		.cfi_offset 14, -4
+  48:./Src/varie.c ****   HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, (GPIO_PinState)stato);
+ 195              		.loc 1 48 0
+ 196 0002 0246     		mov	r2, r0
+ 197 0004 1021     		movs	r1, #16
+ 198 0006 0248     		ldr	r0, .L15
+ 199              	.LVL7:
+ 200 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 201              	.LVL8:
+ 202 000c 08BD     		pop	{r3, pc}
+ 203              	.L16:
+ 204 000e 00BF     		.align	2
+ 205              	.L15:
+ 206 0010 00080140 		.word	1073809408
+ 207              		.cfi_endproc
+ 208              	.LFE68:
+ 210              		.section	.text.Buzzer_init,"ax",%progbits
+ 211              		.align	2
+ 212              		.global	Buzzer_init
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	Buzzer_init:
+ 217              	.LFB64:
+   7:./Src/varie.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 218              		.loc 1 7 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 24
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222 0000 30B5     		push	{r4, r5, lr}
+ 223              	.LCFI8:
+ 224              		.cfi_def_cfa_offset 12
+ 225              		.cfi_offset 4, -12
+ 226              		.cfi_offset 5, -8
+ 227              		.cfi_offset 14, -4
+ 228 0002 87B0     		sub	sp, sp, #28
+ 229              	.LCFI9:
+ 230              		.cfi_def_cfa_offset 40
+ 231              	.LBB4:
+   9:./Src/varie.c ****   /*Configure GPIO pin Output Level */
+ 232              		.loc 1 9 0
+ 233 0004 124B     		ldr	r3, .L19
+ 234 0006 9A69     		ldr	r2, [r3, #24]
+ 235 0008 42F00402 		orr	r2, r2, #4
+ 236 000c 9A61     		str	r2, [r3, #24]
+ 237 000e 9B69     		ldr	r3, [r3, #24]
+ 238 0010 03F00403 		and	r3, r3, #4
+ 239 0014 0193     		str	r3, [sp, #4]
+ 240 0016 019B     		ldr	r3, [sp, #4]
+ 241              	.LBE4:
+  11:./Src/varie.c ****   /*Configure GPIO pin : BUZZER_Pin */
+ 242              		.loc 1 11 0
+ 243 0018 0E4D     		ldr	r5, .L19+4
+ARM GAS  /tmp/ccMhf1Jx.s 			page 6
+
+
+ 244 001a 0022     		movs	r2, #0
+ 245 001c 1021     		movs	r1, #16
+ 246 001e 2846     		mov	r0, r5
+ 247 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 248              	.LVL9:
+  13:./Src/varie.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 249              		.loc 1 13 0
+ 250 0024 1023     		movs	r3, #16
+ 251 0026 0293     		str	r3, [sp, #8]
+  14:./Src/varie.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 252              		.loc 1 14 0
+ 253 0028 0124     		movs	r4, #1
+ 254 002a 0394     		str	r4, [sp, #12]
+  15:./Src/varie.c ****   HAL_GPIO_Init(BUZZER_GPIO_Port, &GPIO_InitStruct);
+ 255              		.loc 1 15 0
+ 256 002c 0223     		movs	r3, #2
+ 257 002e 0593     		str	r3, [sp, #20]
+  16:./Src/varie.c ****   Buzzer_Set(0);
+ 258              		.loc 1 16 0
+ 259 0030 02A9     		add	r1, sp, #8
+ 260 0032 2846     		mov	r0, r5
+ 261 0034 FFF7FEFF 		bl	HAL_GPIO_Init
+ 262              	.LVL10:
+  17:./Src/varie.c ****   Buzzer_Set(1);
+ 263              		.loc 1 17 0
+ 264 0038 0020     		movs	r0, #0
+ 265 003a FFF7FEFF 		bl	Buzzer_Set
+ 266              	.LVL11:
+  18:./Src/varie.c ****   Buzzer_Set(0); 
+ 267              		.loc 1 18 0
+ 268 003e 2046     		mov	r0, r4
+ 269 0040 FFF7FEFF 		bl	Buzzer_Set
+ 270              	.LVL12:
+  19:./Src/varie.c **** }
+ 271              		.loc 1 19 0
+ 272 0044 0020     		movs	r0, #0
+ 273 0046 FFF7FEFF 		bl	Buzzer_Set
+ 274              	.LVL13:
+  20:./Src/varie.c **** 
+ 275              		.loc 1 20 0
+ 276 004a 07B0     		add	sp, sp, #28
+ 277              	.LCFI10:
+ 278              		.cfi_def_cfa_offset 12
+ 279              		@ sp needed
+ 280 004c 30BD     		pop	{r4, r5, pc}
+ 281              	.L20:
+ 282 004e 00BF     		.align	2
+ 283              	.L19:
+ 284 0050 00100240 		.word	1073876992
+ 285 0054 00080140 		.word	1073809408
+ 286              		.cfi_endproc
+ 287              	.LFE64:
+ 289              		.section	.text.Buzzer_OneBeep,"ax",%progbits
+ 290              		.align	2
+ 291              		.global	Buzzer_OneBeep
+ 292              		.thumb
+ 293              		.thumb_func
+ARM GAS  /tmp/ccMhf1Jx.s 			page 7
+
+
+ 295              	Buzzer_OneBeep:
+ 296              	.LFB69:
+  49:./Src/varie.c **** }
+  50:./Src/varie.c **** void Buzzer_OneBeep(void){
+ 297              		.loc 1 50 0
+ 298              		.cfi_startproc
+ 299              		@ args = 0, pretend = 0, frame = 0
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301 0000 10B5     		push	{r4, lr}
+ 302              	.LCFI11:
+ 303              		.cfi_def_cfa_offset 8
+ 304              		.cfi_offset 4, -8
+ 305              		.cfi_offset 14, -4
+ 306              	.LVL14:
+ 307              	.LBB5:
+  51:./Src/varie.c ****   for(int i=0;i<200;i++){
+ 308              		.loc 1 51 0
+ 309 0002 0024     		movs	r4, #0
+ 310 0004 0FE0     		b	.L22
+ 311              	.LVL15:
+ 312              	.L23:
+  52:./Src/varie.c ****     Buzzer_Set(1);
+ 313              		.loc 1 52 0 discriminator 3
+ 314 0006 0120     		movs	r0, #1
+ 315 0008 FFF7FEFF 		bl	Buzzer_Set
+ 316              	.LVL16:
+  53:./Src/varie.c ****     Delay_us(160);
+ 317              		.loc 1 53 0 discriminator 3
+ 318 000c A020     		movs	r0, #160
+ 319 000e FFF7FEFF 		bl	Delay_us
+ 320              	.LVL17:
+  54:./Src/varie.c ****     Buzzer_Set(0);
+ 321              		.loc 1 54 0 discriminator 3
+ 322 0012 0020     		movs	r0, #0
+ 323 0014 FFF7FEFF 		bl	Buzzer_Set
+ 324              	.LVL18:
+  55:./Src/varie.c ****     Delay_us(160);
+ 325              		.loc 1 55 0 discriminator 3
+ 326 0018 A020     		movs	r0, #160
+ 327 001a FFF7FEFF 		bl	Delay_us
+ 328              	.LVL19:
+  56:./Src/varie.c ****     HAL_IWDG_Refresh(&hiwdg);   //819mS    
+ 329              		.loc 1 56 0 discriminator 3
+ 330 001e 0548     		ldr	r0, .L25
+ 331 0020 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 332              	.LVL20:
+  51:./Src/varie.c ****     Buzzer_Set(1);
+ 333              		.loc 1 51 0 discriminator 3
+ 334 0024 0134     		adds	r4, r4, #1
+ 335              	.LVL21:
+ 336              	.L22:
+  51:./Src/varie.c ****     Buzzer_Set(1);
+ 337              		.loc 1 51 0 is_stmt 0 discriminator 1
+ 338 0026 C72C     		cmp	r4, #199
+ 339 0028 EDDD     		ble	.L23
+ 340              	.LBE5:
+  57:./Src/varie.c ****   }
+ARM GAS  /tmp/ccMhf1Jx.s 			page 8
+
+
+  58:./Src/varie.c ****   Buzzer_Set(0); 
+ 341              		.loc 1 58 0 is_stmt 1
+ 342 002a 0020     		movs	r0, #0
+ 343 002c FFF7FEFF 		bl	Buzzer_Set
+ 344              	.LVL22:
+ 345 0030 10BD     		pop	{r4, pc}
+ 346              	.LVL23:
+ 347              	.L26:
+ 348 0032 00BF     		.align	2
+ 349              	.L25:
+ 350 0034 00000000 		.word	hiwdg
+ 351              		.cfi_endproc
+ 352              	.LFE69:
+ 354              		.section	.text.Buzzer_TwoBeep,"ax",%progbits
+ 355              		.align	2
+ 356              		.global	Buzzer_TwoBeep
+ 357              		.thumb
+ 358              		.thumb_func
+ 360              	Buzzer_TwoBeep:
+ 361              	.LFB70:
+  59:./Src/varie.c **** }
+  60:./Src/varie.c **** void Buzzer_TwoBeep(void){
+ 362              		.loc 1 60 0
+ 363              		.cfi_startproc
+ 364              		@ args = 0, pretend = 0, frame = 0
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 366 0000 38B5     		push	{r3, r4, r5, lr}
+ 367              	.LCFI12:
+ 368              		.cfi_def_cfa_offset 16
+ 369              		.cfi_offset 3, -16
+ 370              		.cfi_offset 4, -12
+ 371              		.cfi_offset 5, -8
+ 372              		.cfi_offset 14, -4
+ 373              	.LVL24:
+ 374              	.LBB6:
+  61:./Src/varie.c ****   for(int j=0;j<2;j++){  
+ 375              		.loc 1 61 0
+ 376 0002 0025     		movs	r5, #0
+ 377 0004 1AE0     		b	.L28
+ 378              	.LVL25:
+ 379              	.L29:
+ 380              	.LBB7:
+  62:./Src/varie.c ****     for(int i=0;i<150;i++){
+  63:./Src/varie.c ****       Buzzer_Set(1);
+ 381              		.loc 1 63 0 discriminator 3
+ 382 0006 0120     		movs	r0, #1
+ 383 0008 FFF7FEFF 		bl	Buzzer_Set
+ 384              	.LVL26:
+  64:./Src/varie.c ****       Delay_us(160);     
+ 385              		.loc 1 64 0 discriminator 3
+ 386 000c A020     		movs	r0, #160
+ 387 000e FFF7FEFF 		bl	Delay_us
+ 388              	.LVL27:
+  65:./Src/varie.c ****       Buzzer_Set(0);
+ 389              		.loc 1 65 0 discriminator 3
+ 390 0012 0020     		movs	r0, #0
+ 391 0014 FFF7FEFF 		bl	Buzzer_Set
+ARM GAS  /tmp/ccMhf1Jx.s 			page 9
+
+
+ 392              	.LVL28:
+  66:./Src/varie.c ****       Delay_us(160);      
+ 393              		.loc 1 66 0 discriminator 3
+ 394 0018 A020     		movs	r0, #160
+ 395 001a FFF7FEFF 		bl	Delay_us
+ 396              	.LVL29:
+  67:./Src/varie.c ****       HAL_IWDG_Refresh(&hiwdg);   //819mS     
+ 397              		.loc 1 67 0 discriminator 3
+ 398 001e 0A48     		ldr	r0, .L33
+ 399 0020 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 400              	.LVL30:
+  62:./Src/varie.c ****       Buzzer_Set(1);
+ 401              		.loc 1 62 0 discriminator 3
+ 402 0024 0134     		adds	r4, r4, #1
+ 403              	.LVL31:
+ 404 0026 00E0     		b	.L30
+ 405              	.LVL32:
+ 406              	.L31:
+ 407              	.LBE7:
+ 408 0028 0024     		movs	r4, #0
+ 409              	.L30:
+ 410              	.LVL33:
+ 411              	.LBB8:
+  62:./Src/varie.c ****       Buzzer_Set(1);
+ 412              		.loc 1 62 0 is_stmt 0 discriminator 1
+ 413 002a 952C     		cmp	r4, #149
+ 414 002c EBDD     		ble	.L29
+ 415              	.LBE8:
+  68:./Src/varie.c ****     }
+  69:./Src/varie.c ****     Buzzer_Set(0);
+ 416              		.loc 1 69 0 is_stmt 1 discriminator 2
+ 417 002e 0020     		movs	r0, #0
+ 418 0030 FFF7FEFF 		bl	Buzzer_Set
+ 419              	.LVL34:
+  70:./Src/varie.c ****     HAL_Delay(200);
+ 420              		.loc 1 70 0 discriminator 2
+ 421 0034 C820     		movs	r0, #200
+ 422 0036 FFF7FEFF 		bl	HAL_Delay
+ 423              	.LVL35:
+  61:./Src/varie.c ****     for(int i=0;i<150;i++){
+ 424              		.loc 1 61 0 discriminator 2
+ 425 003a 0135     		adds	r5, r5, #1
+ 426              	.LVL36:
+ 427              	.L28:
+  61:./Src/varie.c ****     for(int i=0;i<150;i++){
+ 428              		.loc 1 61 0 is_stmt 0 discriminator 1
+ 429 003c 012D     		cmp	r5, #1
+ 430 003e F3DD     		ble	.L31
+ 431              	.LBE6:
+  71:./Src/varie.c ****   }
+  72:./Src/varie.c ****   Buzzer_Set(0);
+ 432              		.loc 1 72 0 is_stmt 1
+ 433 0040 0020     		movs	r0, #0
+ 434 0042 FFF7FEFF 		bl	Buzzer_Set
+ 435              	.LVL37:
+ 436 0046 38BD     		pop	{r3, r4, r5, pc}
+ 437              	.LVL38:
+ARM GAS  /tmp/ccMhf1Jx.s 			page 10
+
+
+ 438              	.L34:
+ 439              		.align	2
+ 440              	.L33:
+ 441 0048 00000000 		.word	hiwdg
+ 442              		.cfi_endproc
+ 443              	.LFE70:
+ 445              		.section	.text.Buzzer_OneShortBeep,"ax",%progbits
+ 446              		.align	2
+ 447              		.global	Buzzer_OneShortBeep
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	Buzzer_OneShortBeep:
+ 452              	.LFB71:
+  73:./Src/varie.c **** }
+  74:./Src/varie.c **** void Buzzer_OneShortBeep(void){
+ 453              		.loc 1 74 0
+ 454              		.cfi_startproc
+ 455              		@ args = 0, pretend = 0, frame = 0
+ 456              		@ frame_needed = 0, uses_anonymous_args = 0
+ 457 0000 10B5     		push	{r4, lr}
+ 458              	.LCFI13:
+ 459              		.cfi_def_cfa_offset 8
+ 460              		.cfi_offset 4, -8
+ 461              		.cfi_offset 14, -4
+ 462              	.LVL39:
+ 463              	.LBB9:
+  75:./Src/varie.c ****   for(int i=0;i<80;i++){
+ 464              		.loc 1 75 0
+ 465 0002 0024     		movs	r4, #0
+ 466 0004 0FE0     		b	.L36
+ 467              	.LVL40:
+ 468              	.L37:
+  76:./Src/varie.c ****     Buzzer_Set(1);
+ 469              		.loc 1 76 0 discriminator 3
+ 470 0006 0120     		movs	r0, #1
+ 471 0008 FFF7FEFF 		bl	Buzzer_Set
+ 472              	.LVL41:
+  77:./Src/varie.c ****     Delay_us(160);
+ 473              		.loc 1 77 0 discriminator 3
+ 474 000c A020     		movs	r0, #160
+ 475 000e FFF7FEFF 		bl	Delay_us
+ 476              	.LVL42:
+  78:./Src/varie.c ****     Buzzer_Set(0);
+ 477              		.loc 1 78 0 discriminator 3
+ 478 0012 0020     		movs	r0, #0
+ 479 0014 FFF7FEFF 		bl	Buzzer_Set
+ 480              	.LVL43:
+  79:./Src/varie.c ****     Delay_us(160);
+ 481              		.loc 1 79 0 discriminator 3
+ 482 0018 A020     		movs	r0, #160
+ 483 001a FFF7FEFF 		bl	Delay_us
+ 484              	.LVL44:
+  80:./Src/varie.c ****     HAL_IWDG_Refresh(&hiwdg);   //819mS    
+ 485              		.loc 1 80 0 discriminator 3
+ 486 001e 0548     		ldr	r0, .L39
+ 487 0020 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 488              	.LVL45:
+ARM GAS  /tmp/ccMhf1Jx.s 			page 11
+
+
+  75:./Src/varie.c ****     Buzzer_Set(1);
+ 489              		.loc 1 75 0 discriminator 3
+ 490 0024 0134     		adds	r4, r4, #1
+ 491              	.LVL46:
+ 492              	.L36:
+  75:./Src/varie.c ****     Buzzer_Set(1);
+ 493              		.loc 1 75 0 is_stmt 0 discriminator 1
+ 494 0026 4F2C     		cmp	r4, #79
+ 495 0028 EDDD     		ble	.L37
+ 496              	.LBE9:
+  81:./Src/varie.c ****   }
+  82:./Src/varie.c ****   Buzzer_Set(0); 
+ 497              		.loc 1 82 0 is_stmt 1
+ 498 002a 0020     		movs	r0, #0
+ 499 002c FFF7FEFF 		bl	Buzzer_Set
+ 500              	.LVL47:
+ 501 0030 10BD     		pop	{r4, pc}
+ 502              	.LVL48:
+ 503              	.L40:
+ 504 0032 00BF     		.align	2
+ 505              	.L39:
+ 506 0034 00000000 		.word	hiwdg
+ 507              		.cfi_endproc
+ 508              	.LFE71:
+ 510              		.section	.text.Buzzer_OneLongBeep,"ax",%progbits
+ 511              		.align	2
+ 512              		.global	Buzzer_OneLongBeep
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	Buzzer_OneLongBeep:
+ 517              	.LFB72:
+  83:./Src/varie.c **** }
+  84:./Src/varie.c **** void Buzzer_OneLongBeep(void){
+ 518              		.loc 1 84 0
+ 519              		.cfi_startproc
+ 520              		@ args = 0, pretend = 0, frame = 0
+ 521              		@ frame_needed = 0, uses_anonymous_args = 0
+ 522 0000 10B5     		push	{r4, lr}
+ 523              	.LCFI14:
+ 524              		.cfi_def_cfa_offset 8
+ 525              		.cfi_offset 4, -8
+ 526              		.cfi_offset 14, -4
+ 527              	.LVL49:
+ 528              	.LBB10:
+  85:./Src/varie.c ****   for(int i=0;i<600;i++){
+ 529              		.loc 1 85 0
+ 530 0002 0024     		movs	r4, #0
+ 531 0004 0FE0     		b	.L42
+ 532              	.LVL50:
+ 533              	.L43:
+  86:./Src/varie.c ****     Buzzer_Set(1);
+ 534              		.loc 1 86 0 discriminator 3
+ 535 0006 0120     		movs	r0, #1
+ 536 0008 FFF7FEFF 		bl	Buzzer_Set
+ 537              	.LVL51:
+  87:./Src/varie.c ****     Delay_us(160);
+ 538              		.loc 1 87 0 discriminator 3
+ARM GAS  /tmp/ccMhf1Jx.s 			page 12
+
+
+ 539 000c A020     		movs	r0, #160
+ 540 000e FFF7FEFF 		bl	Delay_us
+ 541              	.LVL52:
+  88:./Src/varie.c ****     Buzzer_Set(0);
+ 542              		.loc 1 88 0 discriminator 3
+ 543 0012 0020     		movs	r0, #0
+ 544 0014 FFF7FEFF 		bl	Buzzer_Set
+ 545              	.LVL53:
+  89:./Src/varie.c ****     Delay_us(160);
+ 546              		.loc 1 89 0 discriminator 3
+ 547 0018 A020     		movs	r0, #160
+ 548 001a FFF7FEFF 		bl	Delay_us
+ 549              	.LVL54:
+  90:./Src/varie.c ****     HAL_IWDG_Refresh(&hiwdg);   //819mS
+ 550              		.loc 1 90 0 discriminator 3
+ 551 001e 0548     		ldr	r0, .L45
+ 552 0020 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 553              	.LVL55:
+  85:./Src/varie.c ****     Buzzer_Set(1);
+ 554              		.loc 1 85 0 discriminator 3
+ 555 0024 0134     		adds	r4, r4, #1
+ 556              	.LVL56:
+ 557              	.L42:
+  85:./Src/varie.c ****     Buzzer_Set(1);
+ 558              		.loc 1 85 0 is_stmt 0 discriminator 1
+ 559 0026 B4F5167F 		cmp	r4, #600
+ 560 002a ECDB     		blt	.L43
+ 561              	.LBE10:
+  91:./Src/varie.c ****   }
+  92:./Src/varie.c ****   Buzzer_Set(0); 
+ 562              		.loc 1 92 0 is_stmt 1
+ 563 002c 0020     		movs	r0, #0
+ 564 002e FFF7FEFF 		bl	Buzzer_Set
+ 565              	.LVL57:
+ 566 0032 10BD     		pop	{r4, pc}
+ 567              	.LVL58:
+ 568              	.L46:
+ 569              		.align	2
+ 570              	.L45:
+ 571 0034 00000000 		.word	hiwdg
+ 572              		.cfi_endproc
+ 573              	.LFE72:
+ 575              		.section	.text.IS_Charge,"ax",%progbits
+ 576              		.align	2
+ 577              		.global	IS_Charge
+ 578              		.thumb
+ 579              		.thumb_func
+ 581              	IS_Charge:
+ 582              	.LFB73:
+  93:./Src/varie.c **** }
+  94:./Src/varie.c **** 
+  95:./Src/varie.c **** uint8_t IS_Charge(void){
+ 583              		.loc 1 95 0
+ 584              		.cfi_startproc
+ 585              		@ args = 0, pretend = 0, frame = 0
+ 586              		@ frame_needed = 0, uses_anonymous_args = 0
+ 587 0000 08B5     		push	{r3, lr}
+ARM GAS  /tmp/ccMhf1Jx.s 			page 13
+
+
+ 588              	.LCFI15:
+ 589              		.cfi_def_cfa_offset 8
+ 590              		.cfi_offset 3, -8
+ 591              		.cfi_offset 14, -4
+  96:./Src/varie.c ****   return (uint8_t)HAL_GPIO_ReadPin(IS_CHARGE_GPIO_Port, IS_CHARGE_Pin);
+ 592              		.loc 1 96 0
+ 593 0002 4FF48051 		mov	r1, #4096
+ 594 0006 0248     		ldr	r0, .L49
+ 595 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 596              	.LVL59:
+  97:./Src/varie.c **** }
+ 597              		.loc 1 97 0
+ 598 000c 08BD     		pop	{r3, pc}
+ 599              	.L50:
+ 600 000e 00BF     		.align	2
+ 601              	.L49:
+ 602 0010 00080140 		.word	1073809408
+ 603              		.cfi_endproc
+ 604              	.LFE73:
+ 606              		.section	.text.DebugPin_init,"ax",%progbits
+ 607              		.align	2
+ 608              		.global	DebugPin_init
+ 609              		.thumb
+ 610              		.thumb_func
+ 612              	DebugPin_init:
+ 613              	.LFB74:
+  98:./Src/varie.c **** //volatile uint32_t tu32;
+  99:./Src/varie.c **** void DebugPin_init(void){
+ 614              		.loc 1 99 0
+ 615              		.cfi_startproc
+ 616              		@ args = 0, pretend = 0, frame = 24
+ 617              		@ frame_needed = 0, uses_anonymous_args = 0
+ 618 0000 10B5     		push	{r4, lr}
+ 619              	.LCFI16:
+ 620              		.cfi_def_cfa_offset 8
+ 621              		.cfi_offset 4, -8
+ 622              		.cfi_offset 14, -4
+ 623 0002 86B0     		sub	sp, sp, #24
+ 624              	.LCFI17:
+ 625              		.cfi_def_cfa_offset 32
+ 626              	.LBB11:
+ 100:./Src/varie.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 101:./Src/varie.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+ 627              		.loc 1 101 0
+ 628 0004 144B     		ldr	r3, .L53
+ 629 0006 9A69     		ldr	r2, [r3, #24]
+ 630 0008 42F01002 		orr	r2, r2, #16
+ 631 000c 9A61     		str	r2, [r3, #24]
+ 632 000e 9B69     		ldr	r3, [r3, #24]
+ 633 0010 03F01003 		and	r3, r3, #16
+ 634 0014 0193     		str	r3, [sp, #4]
+ 635 0016 019B     		ldr	r3, [sp, #4]
+ 636              	.LBE11:
+ 102:./Src/varie.c ****   /*Configure GPIO pin Output Level */
+ 103:./Src/varie.c ****   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);  
+ 637              		.loc 1 103 0
+ 638 0018 104C     		ldr	r4, .L53+4
+ARM GAS  /tmp/ccMhf1Jx.s 			page 14
+
+
+ 639 001a 0022     		movs	r2, #0
+ 640 001c 1021     		movs	r1, #16
+ 641 001e 2046     		mov	r0, r4
+ 642 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 643              	.LVL60:
+ 104:./Src/varie.c ****   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);  
+ 644              		.loc 1 104 0
+ 645 0024 0022     		movs	r2, #0
+ 646 0026 2021     		movs	r1, #32
+ 647 0028 2046     		mov	r0, r4
+ 648 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 649              	.LVL61:
+ 105:./Src/varie.c ****   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+ 650              		.loc 1 105 0
+ 651 002e 0223     		movs	r3, #2
+ 652 0030 0493     		str	r3, [sp, #16]
+ 106:./Src/varie.c ****   GPIO_InitStruct.Pin = GPIO_PIN_4;
+ 653              		.loc 1 106 0
+ 654 0032 1023     		movs	r3, #16
+ 655 0034 0293     		str	r3, [sp, #8]
+ 107:./Src/varie.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 656              		.loc 1 107 0
+ 657 0036 0123     		movs	r3, #1
+ 658 0038 0393     		str	r3, [sp, #12]
+ 108:./Src/varie.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 659              		.loc 1 108 0
+ 660 003a 0323     		movs	r3, #3
+ 661 003c 0593     		str	r3, [sp, #20]
+ 109:./Src/varie.c ****   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 662              		.loc 1 109 0
+ 663 003e 02A9     		add	r1, sp, #8
+ 664 0040 2046     		mov	r0, r4
+ 665 0042 FFF7FEFF 		bl	HAL_GPIO_Init
+ 666              	.LVL62:
+ 110:./Src/varie.c ****   GPIO_InitStruct.Pin = GPIO_PIN_5;
+ 667              		.loc 1 110 0
+ 668 0046 2023     		movs	r3, #32
+ 669 0048 0293     		str	r3, [sp, #8]
+ 111:./Src/varie.c ****   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 670              		.loc 1 111 0
+ 671 004a 02A9     		add	r1, sp, #8
+ 672 004c 2046     		mov	r0, r4
+ 673 004e FFF7FEFF 		bl	HAL_GPIO_Init
+ 674              	.LVL63:
+ 112:./Src/varie.c **** 
+ 113:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_4 << 16;
+ 114:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_5 << 16;
+ 115:./Src/varie.c ****   
+ 116:./Src/varie.c **** }
+ 675              		.loc 1 116 0
+ 676 0052 06B0     		add	sp, sp, #24
+ 677              	.LCFI18:
+ 678              		.cfi_def_cfa_offset 8
+ 679              		@ sp needed
+ 680 0054 10BD     		pop	{r4, pc}
+ 681              	.L54:
+ 682 0056 00BF     		.align	2
+ARM GAS  /tmp/ccMhf1Jx.s 			page 15
+
+
+ 683              	.L53:
+ 684 0058 00100240 		.word	1073876992
+ 685 005c 00100140 		.word	1073811456
+ 686              		.cfi_endproc
+ 687              	.LFE74:
+ 689              		.section	.text.DebugPin4_ON,"ax",%progbits
+ 690              		.align	2
+ 691              		.global	DebugPin4_ON
+ 692              		.thumb
+ 693              		.thumb_func
+ 695              	DebugPin4_ON:
+ 696              	.LFB75:
+ 117:./Src/varie.c **** void DebugPin4_ON(void){
+ 697              		.loc 1 117 0
+ 698              		.cfi_startproc
+ 699              		@ args = 0, pretend = 0, frame = 0
+ 700              		@ frame_needed = 0, uses_anonymous_args = 0
+ 701              		@ link register save eliminated.
+ 118:./Src/varie.c ****   GPIOC->BSRR = GPIO_PIN_4;
+ 702              		.loc 1 118 0
+ 703 0000 1022     		movs	r2, #16
+ 704 0002 014B     		ldr	r3, .L56
+ 705 0004 1A61     		str	r2, [r3, #16]
+ 706 0006 7047     		bx	lr
+ 707              	.L57:
+ 708              		.align	2
+ 709              	.L56:
+ 710 0008 00100140 		.word	1073811456
+ 711              		.cfi_endproc
+ 712              	.LFE75:
+ 714              		.section	.text.DebugPin4_OFF,"ax",%progbits
+ 715              		.align	2
+ 716              		.global	DebugPin4_OFF
+ 717              		.thumb
+ 718              		.thumb_func
+ 720              	DebugPin4_OFF:
+ 721              	.LFB76:
+ 119:./Src/varie.c **** }
+ 120:./Src/varie.c **** void DebugPin4_OFF(void){ 
+ 722              		.loc 1 120 0
+ 723              		.cfi_startproc
+ 724              		@ args = 0, pretend = 0, frame = 0
+ 725              		@ frame_needed = 0, uses_anonymous_args = 0
+ 726              		@ link register save eliminated.
+ 121:./Src/varie.c ****   GPIOC->BSRR = 0x00100000;
+ 727              		.loc 1 121 0
+ 728 0000 4FF48012 		mov	r2, #1048576
+ 729 0004 014B     		ldr	r3, .L59
+ 730 0006 1A61     		str	r2, [r3, #16]
+ 731 0008 7047     		bx	lr
+ 732              	.L60:
+ 733 000a 00BF     		.align	2
+ 734              	.L59:
+ 735 000c 00100140 		.word	1073811456
+ 736              		.cfi_endproc
+ 737              	.LFE76:
+ 739              		.section	.text.DebugPin5_ON,"ax",%progbits
+ARM GAS  /tmp/ccMhf1Jx.s 			page 16
+
+
+ 740              		.align	2
+ 741              		.global	DebugPin5_ON
+ 742              		.thumb
+ 743              		.thumb_func
+ 745              	DebugPin5_ON:
+ 746              	.LFB77:
+ 122:./Src/varie.c **** }
+ 123:./Src/varie.c **** void DebugPin5_ON(void){
+ 747              		.loc 1 123 0
+ 748              		.cfi_startproc
+ 749              		@ args = 0, pretend = 0, frame = 0
+ 750              		@ frame_needed = 0, uses_anonymous_args = 0
+ 751              		@ link register save eliminated.
+ 124:./Src/varie.c ****   GPIOC->BSRR = GPIO_PIN_5;
+ 752              		.loc 1 124 0
+ 753 0000 2022     		movs	r2, #32
+ 754 0002 014B     		ldr	r3, .L62
+ 755 0004 1A61     		str	r2, [r3, #16]
+ 756 0006 7047     		bx	lr
+ 757              	.L63:
+ 758              		.align	2
+ 759              	.L62:
+ 760 0008 00100140 		.word	1073811456
+ 761              		.cfi_endproc
+ 762              	.LFE77:
+ 764              		.section	.text.DebugPin5_OFF,"ax",%progbits
+ 765              		.align	2
+ 766              		.global	DebugPin5_OFF
+ 767              		.thumb
+ 768              		.thumb_func
+ 770              	DebugPin5_OFF:
+ 771              	.LFB78:
+ 125:./Src/varie.c **** }
+ 126:./Src/varie.c **** void DebugPin5_OFF(void){ 
+ 772              		.loc 1 126 0
+ 773              		.cfi_startproc
+ 774              		@ args = 0, pretend = 0, frame = 0
+ 775              		@ frame_needed = 0, uses_anonymous_args = 0
+ 776              		@ link register save eliminated.
+ 127:./Src/varie.c ****   GPIOC->BSRR = 0x00200000;
+ 777              		.loc 1 127 0
+ 778 0000 4FF40012 		mov	r2, #2097152
+ 779 0004 014B     		ldr	r3, .L65
+ 780 0006 1A61     		str	r2, [r3, #16]
+ 781 0008 7047     		bx	lr
+ 782              	.L66:
+ 783 000a 00BF     		.align	2
+ 784              	.L65:
+ 785 000c 00100140 		.word	1073811456
+ 786              		.cfi_endproc
+ 787              	.LFE78:
+ 789              		.text
+ 790              	.Letext0:
+ 791              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 792              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 793              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 794              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ARM GAS  /tmp/ccMhf1Jx.s 			page 17
+
+
+ 795              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 796              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h"
+ 797              		.file 8 "./Drivers/CMSIS/Include/core_cm3.h"
+ 798              		.file 9 "./Inc/delay.h"
+ 799              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  /tmp/ccMhf1Jx.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 varie.c
+     /tmp/ccMhf1Jx.s:20     .text.Led_init:00000000 $t
+     /tmp/ccMhf1Jx.s:25     .text.Led_init:00000000 Led_init
+     /tmp/ccMhf1Jx.s:81     .text.Led_init:0000003c $d
+     /tmp/ccMhf1Jx.s:87     .text.IS_Charge_init:00000000 $t
+     /tmp/ccMhf1Jx.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
+     /tmp/ccMhf1Jx.s:139    .text.IS_Charge_init:00000034 $d
+     /tmp/ccMhf1Jx.s:145    .text.Led_Set:00000000 $t
+     /tmp/ccMhf1Jx.s:150    .text.Led_Set:00000000 Led_Set
+     /tmp/ccMhf1Jx.s:173    .text.Led_Set:00000010 $d
+     /tmp/ccMhf1Jx.s:178    .text.Buzzer_Set:00000000 $t
+     /tmp/ccMhf1Jx.s:183    .text.Buzzer_Set:00000000 Buzzer_Set
+     /tmp/ccMhf1Jx.s:206    .text.Buzzer_Set:00000010 $d
+     /tmp/ccMhf1Jx.s:211    .text.Buzzer_init:00000000 $t
+     /tmp/ccMhf1Jx.s:216    .text.Buzzer_init:00000000 Buzzer_init
+     /tmp/ccMhf1Jx.s:284    .text.Buzzer_init:00000050 $d
+     /tmp/ccMhf1Jx.s:290    .text.Buzzer_OneBeep:00000000 $t
+     /tmp/ccMhf1Jx.s:295    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
+     /tmp/ccMhf1Jx.s:350    .text.Buzzer_OneBeep:00000034 $d
+     /tmp/ccMhf1Jx.s:355    .text.Buzzer_TwoBeep:00000000 $t
+     /tmp/ccMhf1Jx.s:360    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
+     /tmp/ccMhf1Jx.s:441    .text.Buzzer_TwoBeep:00000048 $d
+     /tmp/ccMhf1Jx.s:446    .text.Buzzer_OneShortBeep:00000000 $t
+     /tmp/ccMhf1Jx.s:451    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
+     /tmp/ccMhf1Jx.s:506    .text.Buzzer_OneShortBeep:00000034 $d
+     /tmp/ccMhf1Jx.s:511    .text.Buzzer_OneLongBeep:00000000 $t
+     /tmp/ccMhf1Jx.s:516    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
+     /tmp/ccMhf1Jx.s:571    .text.Buzzer_OneLongBeep:00000034 $d
+     /tmp/ccMhf1Jx.s:576    .text.IS_Charge:00000000 $t
+     /tmp/ccMhf1Jx.s:581    .text.IS_Charge:00000000 IS_Charge
+     /tmp/ccMhf1Jx.s:602    .text.IS_Charge:00000010 $d
+     /tmp/ccMhf1Jx.s:607    .text.DebugPin_init:00000000 $t
+     /tmp/ccMhf1Jx.s:612    .text.DebugPin_init:00000000 DebugPin_init
+     /tmp/ccMhf1Jx.s:684    .text.DebugPin_init:00000058 $d
+     /tmp/ccMhf1Jx.s:690    .text.DebugPin4_ON:00000000 $t
+     /tmp/ccMhf1Jx.s:695    .text.DebugPin4_ON:00000000 DebugPin4_ON
+     /tmp/ccMhf1Jx.s:710    .text.DebugPin4_ON:00000008 $d
+     /tmp/ccMhf1Jx.s:715    .text.DebugPin4_OFF:00000000 $t
+     /tmp/ccMhf1Jx.s:720    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
+     /tmp/ccMhf1Jx.s:735    .text.DebugPin4_OFF:0000000c $d
+     /tmp/ccMhf1Jx.s:740    .text.DebugPin5_ON:00000000 $t
+     /tmp/ccMhf1Jx.s:745    .text.DebugPin5_ON:00000000 DebugPin5_ON
+     /tmp/ccMhf1Jx.s:760    .text.DebugPin5_ON:00000008 $d
+     /tmp/ccMhf1Jx.s:765    .text.DebugPin5_OFF:00000000 $t
+     /tmp/ccMhf1Jx.s:770    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
+     /tmp/ccMhf1Jx.s:785    .text.DebugPin5_OFF:0000000c $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_GPIO_Init
+Delay_us
+HAL_IWDG_Refresh
+hiwdg
+HAL_Delay
+HAL_GPIO_ReadPin
+ARM GAS  /tmp/ccMhf1Jx.s 			page 19
+
+

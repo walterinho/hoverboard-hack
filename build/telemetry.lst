@@ -1,0 +1,847 @@
+ARM GAS  /tmp/ccsVlUcE.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"telemetry.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Telemetry_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	Telemetry_init
+  22              		.thumb
+  23              		.thumb_func
+  25              	Telemetry_init:
+  26              	.LFB64:
+  27              		.file 1 "./Src/telemetry.c"
+   1:./Src/telemetry.c **** #include "telemetry.h"
+   2:./Src/telemetry.c **** #include "uart.h"
+   3:./Src/telemetry.c **** #include "application.h"
+   4:./Src/telemetry.c **** #include <stdio.h>
+   5:./Src/telemetry.c **** #include <stdlib.h>
+   6:./Src/telemetry.c **** #include <string.h>
+   7:./Src/telemetry.c **** 
+   8:./Src/telemetry.c **** extern UART_HandleTypeDef huart2;
+   9:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart2_rx;
+  10:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart2_tx;
+  11:./Src/telemetry.c **** extern volatile __IO struct UART_dati uartDati;
+  12:./Src/telemetry.c **** extern volatile __IO struct APPLICATION_dati app;
+  13:./Src/telemetry.c **** extern volatile __IO struct BATTERY_dati battery_dati;
+  14:./Src/telemetry.c **** volatile __IO struct TELEMETRY_dati telemetry;
+  15:./Src/telemetry.c **** 
+  16:./Src/telemetry.c ****  
+  17:./Src/telemetry.c ****  
+  18:./Src/telemetry.c ****  volatile __IO uint32_t leftToTransfer;
+  19:./Src/telemetry.c ****  
+  20:./Src/telemetry.c **** void Telemetry_init(void){
+  28              		.loc 1 20 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 38B5     		push	{r3, r4, r5, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 3, -16
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccsVlUcE.s 			page 2
+
+
+  21:./Src/telemetry.c ****   MX_USART2_UART_Init();
+  39              		.loc 1 21 0
+  40 0002 FFF7FEFF 		bl	MX_USART2_UART_Init
+  41              	.LVL0:
+  22:./Src/telemetry.c ****   telemetry.statoTX = telemetry_wait;
+  42              		.loc 1 22 0
+  43 0006 094C     		ldr	r4, .L3
+  44 0008 0025     		movs	r5, #0
+  45 000a 2570     		strb	r5, [r4]
+  23:./Src/telemetry.c ****   telemetry.time_send = HAL_GetTick();
+  46              		.loc 1 23 0
+  47 000c FFF7FEFF 		bl	HAL_GetTick
+  48              	.LVL1:
+  49 0010 6060     		str	r0, [r4, #4]
+  24:./Src/telemetry.c ****   telemetry.statoRX = 0;
+  50              		.loc 1 24 0
+  51 0012 2572     		strb	r5, [r4, #8]
+  25:./Src/telemetry.c **** 
+  26:./Src/telemetry.c ****   
+  27:./Src/telemetry.c ****   telemetry.counterBufferRX = 0;
+  52              		.loc 1 27 0
+  53 0014 6572     		strb	r5, [r4, #9]
+  28:./Src/telemetry.c ****   telemetry.counterBufferRXTrama = 0;
+  54              		.loc 1 28 0
+  55 0016 2575     		strb	r5, [r4, #20]
+  29:./Src/telemetry.c ****   telemetry.dataREADY_JOYSTICK = 0;
+  56              		.loc 1 29 0
+  57 0018 6575     		strb	r5, [r4, #21]
+  30:./Src/telemetry.c ****   telemetry.joyx = 0;
+  58              		.loc 1 30 0
+  59 001a 2583     		strh	r5, [r4, #24]	@ movhi
+  31:./Src/telemetry.c ****   telemetry.joyy = 0;
+  60              		.loc 1 31 0
+  61 001c 6583     		strh	r5, [r4, #26]	@ movhi
+  32:./Src/telemetry.c ****   telemetry.dataLast_Command = 0;
+  62              		.loc 1 32 0
+  63 001e A575     		strb	r5, [r4, #22]
+  33:./Src/telemetry.c ****     
+  34:./Src/telemetry.c ****   HAL_UART_Receive_DMA(&huart2, (uint8_t *)&uartDati.bUartRx[0], 100);
+  64              		.loc 1 34 0
+  65 0020 6422     		movs	r2, #100
+  66 0022 0349     		ldr	r1, .L3+4
+  67 0024 0348     		ldr	r0, .L3+8
+  68 0026 FFF7FEFF 		bl	HAL_UART_Receive_DMA
+  69              	.LVL2:
+  70 002a 38BD     		pop	{r3, r4, r5, pc}
+  71              	.L4:
+  72              		.align	2
+  73              	.L3:
+  74 002c 00000000 		.word	telemetry
+  75 0030 00000000 		.word	uartDati
+  76 0034 00000000 		.word	huart2
+  77              		.cfi_endproc
+  78              	.LFE64:
+  80              		.section	.text.Telemetry_RX_parseData,"ax",%progbits
+  81              		.align	2
+  82              		.global	Telemetry_RX_parseData
+ARM GAS  /tmp/ccsVlUcE.s 			page 3
+
+
+  83              		.thumb
+  84              		.thumb_func
+  86              	Telemetry_RX_parseData:
+  87              	.LFB66:
+  35:./Src/telemetry.c ****  
+  36:./Src/telemetry.c **** }
+  37:./Src/telemetry.c **** 
+  38:./Src/telemetry.c **** 
+  39:./Src/telemetry.c **** volatile __IO uint16_t datatoRead;
+  40:./Src/telemetry.c **** 
+  41:./Src/telemetry.c **** void Telemetry_TASK(void){
+  42:./Src/telemetry.c ****   float tf1,tf2,tf3;
+  43:./Src/telemetry.c ****   uint8_t temp1;
+  44:./Src/telemetry.c ****   uint16_t temp16;
+  45:./Src/telemetry.c ****   
+  46:./Src/telemetry.c ****  // uint8_t datatoRead,ic;
+  47:./Src/telemetry.c ****   
+  48:./Src/telemetry.c ****   
+  49:./Src/telemetry.c ****   //Trasmit telemetry
+  50:./Src/telemetry.c ****   switch(telemetry.statoTX){
+  51:./Src/telemetry.c ****     case (telemetry_wait):
+  52:./Src/telemetry.c ****       if((HAL_GetTick() - telemetry.time_send) > 250){
+  53:./Src/telemetry.c ****         if(Uart2_IS_TX_free()){
+  54:./Src/telemetry.c ****             telemetry.statoTX = telemetry_send;
+  55:./Src/telemetry.c ****         }
+  56:./Src/telemetry.c ****         telemetry.time_send = HAL_GetTick();      
+  57:./Src/telemetry.c ****       }
+  58:./Src/telemetry.c ****     break;
+  59:./Src/telemetry.c ****   
+  60:./Src/telemetry.c ****     case (telemetry_send):
+  61:./Src/telemetry.c ****       tf1 = battery_dati.VBatt;
+  62:./Src/telemetry.c ****       tf2 = app.Current_M_LEFT;
+  63:./Src/telemetry.c ****       tf3 = app.Current_M_RIGHT;
+  64:./Src/telemetry.c ****       sprintf((char *)&uartDati.bUartTx[0],"T%.1f;%.1f;%.1f\n",tf1,tf2,tf3);
+  65:./Src/telemetry.c ****       //sprintf((char *)&uartDati.bUartTx[0],"Ciao");
+  66:./Src/telemetry.c **** 
+  67:./Src/telemetry.c ****       Uart2_TX((char *)&uartDati.bUartTx[0]);
+  68:./Src/telemetry.c ****       telemetry.statoTX = telemetry_wait;
+  69:./Src/telemetry.c ****       telemetry.time_send = HAL_GetTick();     
+  70:./Src/telemetry.c ****     break; 
+  71:./Src/telemetry.c ****   }
+  72:./Src/telemetry.c ****   
+  73:./Src/telemetry.c ****   
+  74:./Src/telemetry.c ****   
+  75:./Src/telemetry.c ****   //-----------------------RX TELEMETRY------------------------
+  76:./Src/telemetry.c ****   
+  77:./Src/telemetry.c ****   //Data Read in buffer ? , quantitizza dati da leggere
+  78:./Src/telemetry.c ****   datatoRead = 0;
+  79:./Src/telemetry.c ****   leftToTransfer = 100 -  __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);  
+  80:./Src/telemetry.c ****   temp1 = telemetry.counterBufferRX;
+  81:./Src/telemetry.c ****   if(temp1 > leftToTransfer){
+  82:./Src/telemetry.c ****     datatoRead = 100 - telemetry.counterBufferRX;
+  83:./Src/telemetry.c ****     temp16 = datatoRead;
+  84:./Src/telemetry.c ****     datatoRead = temp16 + leftToTransfer;
+  85:./Src/telemetry.c ****   }else{
+  86:./Src/telemetry.c ****     temp1 = telemetry.counterBufferRX;
+  87:./Src/telemetry.c ****     datatoRead = leftToTransfer - temp1;
+ARM GAS  /tmp/ccsVlUcE.s 			page 4
+
+
+  88:./Src/telemetry.c ****   }
+  89:./Src/telemetry.c ****   //processa dati, Parse ALL DATA!!
+  90:./Src/telemetry.c ****   if(datatoRead!=0){
+  91:./Src/telemetry.c ****     temp1 = telemetry.counterBufferRX;
+  92:./Src/telemetry.c ****     Telemetry_RX_parseData(temp1, datatoRead);
+  93:./Src/telemetry.c ****     
+  94:./Src/telemetry.c ****     //Aggiorna puntatore , dati letti e processati
+  95:./Src/telemetry.c ****     temp1 = telemetry.counterBufferRX;
+  96:./Src/telemetry.c ****     telemetry.counterBufferRX = (temp1 + datatoRead) % 100;
+  97:./Src/telemetry.c ****   }  
+  98:./Src/telemetry.c **** }
+  99:./Src/telemetry.c **** 
+ 100:./Src/telemetry.c **** volatile __IO uint16_t ic, temp_pointerCNT;
+ 101:./Src/telemetry.c **** volatile __IO uint8_t rxvalue;
+ 102:./Src/telemetry.c **** volatile __IO uint8_t temp_pointerBuff;
+ 103:./Src/telemetry.c **** 
+ 104:./Src/telemetry.c **** void Telemetry_RX_parseData(uint8_t p_start_readBuffer, uint16_t size_readBuff){
+  88              		.loc 1 104 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              	.LVL3:
+  93 0000 38B5     		push	{r3, r4, r5, lr}
+  94              	.LCFI1:
+  95              		.cfi_def_cfa_offset 16
+  96              		.cfi_offset 3, -16
+  97              		.cfi_offset 4, -12
+  98              		.cfi_offset 5, -8
+  99              		.cfi_offset 14, -4
+ 100 0002 0C46     		mov	r4, r1
+ 105:./Src/telemetry.c ****   uint8_t temp11;
+ 106:./Src/telemetry.c ****     
+ 107:./Src/telemetry.c ****   temp_pointerBuff = p_start_readBuffer;
+ 101              		.loc 1 107 0
+ 102 0004 514B     		ldr	r3, .L16
+ 103 0006 1870     		strb	r0, [r3]
+ 108:./Src/telemetry.c ****   
+ 109:./Src/telemetry.c ****   for(ic=0;ic<size_readBuff;ic++){
+ 104              		.loc 1 109 0
+ 105 0008 0022     		movs	r2, #0
+ 106 000a 514B     		ldr	r3, .L16+4
+ 107 000c 1A80     		strh	r2, [r3]	@ movhi
+ 108 000e 95E0     		b	.L6
+ 109              	.LVL4:
+ 110              	.L14:
+ 110:./Src/telemetry.c ****     temp11 = temp_pointerBuff;
+ 111              		.loc 1 110 0
+ 112 0010 4E4B     		ldr	r3, .L16
+ 113 0012 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 114              	.LVL5:
+ 111:./Src/telemetry.c ****     temp_pointerCNT = (temp11 + ic) % 100;
+ 115              		.loc 1 111 0
+ 116 0014 4E4B     		ldr	r3, .L16+4
+ 117 0016 1B88     		ldrh	r3, [r3]
+ 118 0018 9BB2     		uxth	r3, r3
+ 119 001a 1A44     		add	r2, r2, r3
+ 120              	.LVL6:
+ARM GAS  /tmp/ccsVlUcE.s 			page 5
+
+
+ 121 001c 4D4B     		ldr	r3, .L16+8
+ 122 001e 83FB0231 		smull	r3, r1, r3, r2
+ 123 0022 D317     		asrs	r3, r2, #31
+ 124 0024 C3EB6113 		rsb	r3, r3, r1, asr #5
+ 125 0028 6421     		movs	r1, #100
+ 126 002a 01FB1323 		mls	r3, r1, r3, r2
+ 127 002e 9BB2     		uxth	r3, r3
+ 128 0030 494A     		ldr	r2, .L16+12
+ 129 0032 1380     		strh	r3, [r2]	@ movhi
+ 112:./Src/telemetry.c **** 
+ 113:./Src/telemetry.c ****     rxvalue = uartDati.bUartRx[temp_pointerCNT];
+ 130              		.loc 1 113 0
+ 131 0034 1388     		ldrh	r3, [r2]
+ 132 0036 9BB2     		uxth	r3, r3
+ 133 0038 484A     		ldr	r2, .L16+16
+ 134 003a D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 135 003c DBB2     		uxtb	r3, r3
+ 136 003e 484A     		ldr	r2, .L16+20
+ 137 0040 1370     		strb	r3, [r2]
+ 114:./Src/telemetry.c ****     
+ 115:./Src/telemetry.c ****     switch(telemetry.statoRX){
+ 138              		.loc 1 115 0
+ 139 0042 484B     		ldr	r3, .L16+24
+ 140 0044 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 141 0046 DBB2     		uxtb	r3, r3
+ 142 0048 012B     		cmp	r3, #1
+ 143 004a 21D0     		beq	.L8
+ 144 004c 13B1     		cbz	r3, .L9
+ 145 004e 022B     		cmp	r3, #2
+ 146 0050 40D0     		beq	.L10
+ 147 0052 6DE0     		b	.L7
+ 148              	.L9:
+ 116:./Src/telemetry.c ****       case 0:
+ 117:./Src/telemetry.c ****         //Find pattern 'R' o 'F'
+ 118:./Src/telemetry.c ****         if(rxvalue=='F'){
+ 149              		.loc 1 118 0
+ 150 0054 424B     		ldr	r3, .L16+20
+ 151 0056 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 152 0058 DBB2     		uxtb	r3, r3
+ 153 005a 462B     		cmp	r3, #70
+ 154 005c 09D1     		bne	.L11
+ 119:./Src/telemetry.c ****           telemetry.statoRX = 1;
+ 155              		.loc 1 119 0
+ 156 005e 414B     		ldr	r3, .L16+24
+ 157 0060 0122     		movs	r2, #1
+ 158 0062 1A72     		strb	r2, [r3, #8]
+ 120:./Src/telemetry.c ****           telemetry.counterBufferRXTrama = 0;
+ 159              		.loc 1 120 0
+ 160 0064 0022     		movs	r2, #0
+ 161 0066 1A75     		strb	r2, [r3, #20]
+ 121:./Src/telemetry.c ****             telemetry.TelemetryRX_TramaX[0] = 0;
+ 162              		.loc 1 121 0
+ 163 0068 9A72     		strb	r2, [r3, #10]
+ 122:./Src/telemetry.c ****             telemetry.TelemetryRX_TramaY[0] = 0;          
+ 164              		.loc 1 122 0
+ 165 006a DA73     		strb	r2, [r3, #15]
+ 123:./Src/telemetry.c ****             telemetry.dataLast_Command = 'F';
+ARM GAS  /tmp/ccsVlUcE.s 			page 6
+
+
+ 166              		.loc 1 123 0
+ 167 006c 4622     		movs	r2, #70
+ 168 006e 9A75     		strb	r2, [r3, #22]
+ 169 0070 5EE0     		b	.L7
+ 170              	.L11:
+ 124:./Src/telemetry.c ****         }else if(rxvalue=='R'){
+ 171              		.loc 1 124 0
+ 172 0072 3B4B     		ldr	r3, .L16+20
+ 173 0074 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 174 0076 DBB2     		uxtb	r3, r3
+ 175 0078 522B     		cmp	r3, #82
+ 176 007a 59D1     		bne	.L7
+ 125:./Src/telemetry.c ****           telemetry.statoRX = 1;      
+ 177              		.loc 1 125 0
+ 178 007c 394B     		ldr	r3, .L16+24
+ 179 007e 0122     		movs	r2, #1
+ 180 0080 1A72     		strb	r2, [r3, #8]
+ 126:./Src/telemetry.c ****           telemetry.counterBufferRXTrama = 0;
+ 181              		.loc 1 126 0
+ 182 0082 0022     		movs	r2, #0
+ 183 0084 1A75     		strb	r2, [r3, #20]
+ 127:./Src/telemetry.c ****           telemetry.TelemetryRX_TramaX[0] = 0;
+ 184              		.loc 1 127 0
+ 185 0086 9A72     		strb	r2, [r3, #10]
+ 128:./Src/telemetry.c ****           telemetry.TelemetryRX_TramaY[0] = 0;               
+ 186              		.loc 1 128 0
+ 187 0088 DA73     		strb	r2, [r3, #15]
+ 129:./Src/telemetry.c ****             telemetry.dataLast_Command = 'R';          
+ 188              		.loc 1 129 0
+ 189 008a 5222     		movs	r2, #82
+ 190 008c 9A75     		strb	r2, [r3, #22]
+ 191 008e 4FE0     		b	.L7
+ 192              	.L8:
+ 130:./Src/telemetry.c ****         }
+ 131:./Src/telemetry.c ****       break;
+ 132:./Src/telemetry.c ****       case 1:
+ 133:./Src/telemetry.c ****         if(rxvalue != ';'){
+ 193              		.loc 1 133 0
+ 194 0090 334B     		ldr	r3, .L16+20
+ 195 0092 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 196 0094 DBB2     		uxtb	r3, r3
+ 197 0096 3B2B     		cmp	r3, #59
+ 198 0098 13D0     		beq	.L12
+ 134:./Src/telemetry.c ****           temp11 = telemetry.counterBufferRXTrama;
+ 199              		.loc 1 134 0
+ 200 009a 324B     		ldr	r3, .L16+24
+ 201 009c 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
+ 202              	.LVL7:
+ 135:./Src/telemetry.c ****           telemetry.TelemetryRX_TramaX[temp11] = rxvalue;
+ 203              		.loc 1 135 0
+ 204 009e 3049     		ldr	r1, .L16+20
+ 205 00a0 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 206 00a2 C9B2     		uxtb	r1, r1
+ 207 00a4 1A44     		add	r2, r2, r3
+ 208              	.LVL8:
+ 209 00a6 9172     		strb	r1, [r2, #10]
+ 136:./Src/telemetry.c ****           telemetry.counterBufferRXTrama++;
+ARM GAS  /tmp/ccsVlUcE.s 			page 7
+
+
+ 210              		.loc 1 136 0
+ 211 00a8 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
+ 212 00aa 0132     		adds	r2, r2, #1
+ 213 00ac D2B2     		uxtb	r2, r2
+ 214 00ae 1A75     		strb	r2, [r3, #20]
+ 137:./Src/telemetry.c ****           if(telemetry.counterBufferRXTrama>=5){
+ 215              		.loc 1 137 0
+ 216 00b0 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 217 00b2 DBB2     		uxtb	r3, r3
+ 218 00b4 042B     		cmp	r3, #4
+ 219 00b6 3BD9     		bls	.L7
+ 138:./Src/telemetry.c ****             //Error reset
+ 139:./Src/telemetry.c ****             telemetry.statoRX = 0;
+ 220              		.loc 1 139 0
+ 221 00b8 2A4B     		ldr	r3, .L16+24
+ 222 00ba 0022     		movs	r2, #0
+ 223 00bc 1A72     		strb	r2, [r3, #8]
+ 140:./Src/telemetry.c ****             telemetry.dataLast_Command = 0;
+ 224              		.loc 1 140 0
+ 225 00be 9A75     		strb	r2, [r3, #22]
+ 226 00c0 36E0     		b	.L7
+ 227              	.L12:
+ 141:./Src/telemetry.c ****           }                
+ 142:./Src/telemetry.c ****         }else{
+ 143:./Src/telemetry.c ****             telemetry.TelemetryRX_TramaX[telemetry.counterBufferRXTrama] = 0;            
+ 228              		.loc 1 143 0
+ 229 00c2 284B     		ldr	r3, .L16+24
+ 230 00c4 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
+ 231 00c6 1A44     		add	r2, r2, r3
+ 232 00c8 0021     		movs	r1, #0
+ 233 00ca 9172     		strb	r1, [r2, #10]
+ 144:./Src/telemetry.c ****             telemetry.counterBufferRXTrama = 0;
+ 234              		.loc 1 144 0
+ 235 00cc 1975     		strb	r1, [r3, #20]
+ 145:./Src/telemetry.c ****             telemetry.statoRX = 2;        
+ 236              		.loc 1 145 0
+ 237 00ce 0222     		movs	r2, #2
+ 238 00d0 1A72     		strb	r2, [r3, #8]
+ 239 00d2 2DE0     		b	.L7
+ 240              	.L10:
+ 146:./Src/telemetry.c ****         }
+ 147:./Src/telemetry.c ****       break;
+ 148:./Src/telemetry.c ****       case 2:
+ 149:./Src/telemetry.c ****         if(rxvalue != '\n'){
+ 241              		.loc 1 149 0
+ 242 00d4 224B     		ldr	r3, .L16+20
+ 243 00d6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 244 00d8 DBB2     		uxtb	r3, r3
+ 245 00da 0A2B     		cmp	r3, #10
+ 246 00dc 13D0     		beq	.L13
+ 150:./Src/telemetry.c ****           temp11 = telemetry.counterBufferRXTrama;
+ 247              		.loc 1 150 0
+ 248 00de 214B     		ldr	r3, .L16+24
+ 249 00e0 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
+ 250              	.LVL9:
+ 151:./Src/telemetry.c ****           telemetry.TelemetryRX_TramaY[temp11] = rxvalue;
+ 251              		.loc 1 151 0
+ARM GAS  /tmp/ccsVlUcE.s 			page 8
+
+
+ 252 00e2 1F49     		ldr	r1, .L16+20
+ 253 00e4 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 254 00e6 C9B2     		uxtb	r1, r1
+ 255 00e8 1A44     		add	r2, r2, r3
+ 256              	.LVL10:
+ 257 00ea D173     		strb	r1, [r2, #15]
+ 152:./Src/telemetry.c ****           telemetry.counterBufferRXTrama++;
+ 258              		.loc 1 152 0
+ 259 00ec 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
+ 260 00ee 0132     		adds	r2, r2, #1
+ 261 00f0 D2B2     		uxtb	r2, r2
+ 262 00f2 1A75     		strb	r2, [r3, #20]
+ 153:./Src/telemetry.c ****           if(telemetry.counterBufferRXTrama>=5){
+ 263              		.loc 1 153 0
+ 264 00f4 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 265 00f6 DBB2     		uxtb	r3, r3
+ 266 00f8 042B     		cmp	r3, #4
+ 267 00fa 19D9     		bls	.L7
+ 154:./Src/telemetry.c ****             //Error reset
+ 155:./Src/telemetry.c ****             telemetry.statoRX = 0;
+ 268              		.loc 1 155 0
+ 269 00fc 194B     		ldr	r3, .L16+24
+ 270 00fe 0022     		movs	r2, #0
+ 271 0100 1A72     		strb	r2, [r3, #8]
+ 156:./Src/telemetry.c ****             telemetry.dataLast_Command = 0;            
+ 272              		.loc 1 156 0
+ 273 0102 9A75     		strb	r2, [r3, #22]
+ 274 0104 14E0     		b	.L7
+ 275              	.L13:
+ 157:./Src/telemetry.c ****           }                
+ 158:./Src/telemetry.c ****         }else{
+ 159:./Src/telemetry.c ****             telemetry.TelemetryRX_TramaY[telemetry.counterBufferRXTrama] = 0;            
+ 276              		.loc 1 159 0
+ 277 0106 174D     		ldr	r5, .L16+24
+ 278 0108 2A7D     		ldrb	r2, [r5, #20]	@ zero_extendqisi2
+ 279 010a 2A44     		add	r2, r2, r5
+ 280 010c 0023     		movs	r3, #0
+ 281 010e D373     		strb	r3, [r2, #15]
+ 160:./Src/telemetry.c ****             telemetry.counterBufferRXTrama = 0;
+ 282              		.loc 1 160 0
+ 283 0110 2B75     		strb	r3, [r5, #20]
+ 161:./Src/telemetry.c ****             telemetry.statoRX = 0;        
+ 284              		.loc 1 161 0
+ 285 0112 2B72     		strb	r3, [r5, #8]
+ 162:./Src/telemetry.c ****             //Data ...ok !!!!!!!!!!!!!!!!!!!!!!
+ 163:./Src/telemetry.c ****             telemetry.dataREADY_JOYSTICK = 1;           //Attiva FLAG --> Data redy!!!!!!!!!!
+ 286              		.loc 1 163 0
+ 287 0114 0123     		movs	r3, #1
+ 288 0116 6B75     		strb	r3, [r5, #21]
+ 164:./Src/telemetry.c ****             telemetry.joyx = atoi((char *)&telemetry.TelemetryRX_TramaX[0]);
+ 289              		.loc 1 164 0
+ 290 0118 05F10A00 		add	r0, r5, #10
+ 291 011c FFF7FEFF 		bl	atoi
+ 292              	.LVL11:
+ 293 0120 00B2     		sxth	r0, r0
+ 294 0122 2883     		strh	r0, [r5, #24]	@ movhi
+ 165:./Src/telemetry.c ****             telemetry.joyy = atoi((char *)&telemetry.TelemetryRX_TramaY[0]);    
+ARM GAS  /tmp/ccsVlUcE.s 			page 9
+
+
+ 295              		.loc 1 165 0
+ 296 0124 05F10F00 		add	r0, r5, #15
+ 297 0128 FFF7FEFF 		bl	atoi
+ 298              	.LVL12:
+ 299 012c 00B2     		sxth	r0, r0
+ 300 012e 6883     		strh	r0, [r5, #26]	@ movhi
+ 301              	.L7:
+ 109:./Src/telemetry.c ****     temp11 = temp_pointerBuff;
+ 302              		.loc 1 109 0 discriminator 2
+ 303 0130 074A     		ldr	r2, .L16+4
+ 304 0132 1388     		ldrh	r3, [r2]
+ 305 0134 9BB2     		uxth	r3, r3
+ 306 0136 0133     		adds	r3, r3, #1
+ 307 0138 9BB2     		uxth	r3, r3
+ 308 013a 1380     		strh	r3, [r2]	@ movhi
+ 309              	.L6:
+ 109:./Src/telemetry.c ****     temp11 = temp_pointerBuff;
+ 310              		.loc 1 109 0 is_stmt 0 discriminator 1
+ 311 013c 044B     		ldr	r3, .L16+4
+ 312 013e 1B88     		ldrh	r3, [r3]
+ 313 0140 9BB2     		uxth	r3, r3
+ 314 0142 A342     		cmp	r3, r4
+ 315 0144 FFF464AF 		bcc	.L14
+ 166:./Src/telemetry.c ****         }
+ 167:./Src/telemetry.c ****       break;    
+ 168:./Src/telemetry.c ****     }
+ 169:./Src/telemetry.c ****   }
+ 170:./Src/telemetry.c **** 
+ 171:./Src/telemetry.c **** }
+ 316              		.loc 1 171 0 is_stmt 1
+ 317 0148 38BD     		pop	{r3, r4, r5, pc}
+ 318              	.L17:
+ 319 014a 00BF     		.align	2
+ 320              	.L16:
+ 321 014c 00000000 		.word	temp_pointerBuff
+ 322 0150 00000000 		.word	ic
+ 323 0154 1F85EB51 		.word	1374389535
+ 324 0158 00000000 		.word	temp_pointerCNT
+ 325 015c 00000000 		.word	uartDati
+ 326 0160 00000000 		.word	rxvalue
+ 327 0164 00000000 		.word	telemetry
+ 328              		.cfi_endproc
+ 329              	.LFE66:
+ 331              		.global	__aeabi_f2d
+ 332              		.section	.text.Telemetry_TASK,"ax",%progbits
+ 333              		.align	2
+ 334              		.global	Telemetry_TASK
+ 335              		.thumb
+ 336              		.thumb_func
+ 338              	Telemetry_TASK:
+ 339              	.LFB65:
+  41:./Src/telemetry.c ****   float tf1,tf2,tf3;
+ 340              		.loc 1 41 0
+ 341              		.cfi_startproc
+ 342              		@ args = 0, pretend = 0, frame = 0
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+ 344 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ARM GAS  /tmp/ccsVlUcE.s 			page 10
+
+
+ 345              	.LCFI2:
+ 346              		.cfi_def_cfa_offset 24
+ 347              		.cfi_offset 4, -24
+ 348              		.cfi_offset 5, -20
+ 349              		.cfi_offset 6, -16
+ 350              		.cfi_offset 7, -12
+ 351              		.cfi_offset 8, -8
+ 352              		.cfi_offset 14, -4
+ 353 0004 84B0     		sub	sp, sp, #16
+ 354              	.LCFI3:
+ 355              		.cfi_def_cfa_offset 40
+  50:./Src/telemetry.c ****     case (telemetry_wait):
+ 356              		.loc 1 50 0
+ 357 0006 414B     		ldr	r3, .L27
+ 358 0008 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 359 000a 23B1     		cbz	r3, .L20
+ 360 000c 03F0FF02 		and	r2, r3, #255
+ 361 0010 012A     		cmp	r2, #1
+ 362 0012 12D0     		beq	.L21
+ 363 0014 35E0     		b	.L19
+ 364              	.L20:
+  52:./Src/telemetry.c ****         if(Uart2_IS_TX_free()){
+ 365              		.loc 1 52 0
+ 366 0016 FFF7FEFF 		bl	HAL_GetTick
+ 367              	.LVL13:
+ 368 001a 3C4B     		ldr	r3, .L27
+ 369 001c 5B68     		ldr	r3, [r3, #4]
+ 370 001e C01A     		subs	r0, r0, r3
+ 371 0020 FA28     		cmp	r0, #250
+ 372 0022 2ED9     		bls	.L19
+  53:./Src/telemetry.c ****             telemetry.statoTX = telemetry_send;
+ 373              		.loc 1 53 0
+ 374 0024 FFF7FEFF 		bl	Uart2_IS_TX_free
+ 375              	.LVL14:
+ 376 0028 10B1     		cbz	r0, .L22
+  54:./Src/telemetry.c ****         }
+ 377              		.loc 1 54 0
+ 378 002a 0122     		movs	r2, #1
+ 379 002c 374B     		ldr	r3, .L27
+ 380 002e 1A70     		strb	r2, [r3]
+ 381              	.L22:
+  56:./Src/telemetry.c ****       }
+ 382              		.loc 1 56 0
+ 383 0030 FFF7FEFF 		bl	HAL_GetTick
+ 384              	.LVL15:
+ 385 0034 354B     		ldr	r3, .L27
+ 386 0036 5860     		str	r0, [r3, #4]
+ 387 0038 23E0     		b	.L19
+ 388              	.L21:
+  61:./Src/telemetry.c ****       tf2 = app.Current_M_LEFT;
+ 389              		.loc 1 61 0
+ 390 003a 354B     		ldr	r3, .L27+4
+ 391 003c 1868     		ldr	r0, [r3]	@ float
+ 392              	.LVL16:
+  62:./Src/telemetry.c ****       tf3 = app.Current_M_RIGHT;
+ 393              		.loc 1 62 0
+ 394 003e 354B     		ldr	r3, .L27+8
+ARM GAS  /tmp/ccsVlUcE.s 			page 11
+
+
+ 395 0040 1D6C     		ldr	r5, [r3, #64]	@ float
+ 396              	.LVL17:
+  63:./Src/telemetry.c ****       sprintf((char *)&uartDati.bUartTx[0],"T%.1f;%.1f;%.1f\n",tf1,tf2,tf3);
+ 397              		.loc 1 63 0
+ 398 0042 D3F84480 		ldr	r8, [r3, #68]	@ float
+ 399              	.LVL18:
+  64:./Src/telemetry.c ****       //sprintf((char *)&uartDati.bUartTx[0],"Ciao");
+ 400              		.loc 1 64 0
+ 401 0046 FFF7FEFF 		bl	__aeabi_f2d
+ 402              	.LVL19:
+ 403 004a 0646     		mov	r6, r0
+ 404 004c 0F46     		mov	r7, r1
+ 405 004e 324C     		ldr	r4, .L27+12
+ 406 0050 4046     		mov	r0, r8
+ 407 0052 FFF7FEFF 		bl	__aeabi_f2d
+ 408              	.LVL20:
+ 409 0056 CDE90201 		strd	r0, [sp, #8]
+ 410 005a 2846     		mov	r0, r5
+ 411 005c FFF7FEFF 		bl	__aeabi_f2d
+ 412              	.LVL21:
+ 413 0060 CDE90001 		strd	r0, [sp]
+ 414 0064 3246     		mov	r2, r6
+ 415 0066 3B46     		mov	r3, r7
+ 416 0068 2C49     		ldr	r1, .L27+16
+ 417 006a 2046     		mov	r0, r4
+ 418 006c FFF7FEFF 		bl	sprintf
+ 419              	.LVL22:
+  67:./Src/telemetry.c ****       telemetry.statoTX = telemetry_wait;
+ 420              		.loc 1 67 0
+ 421 0070 2046     		mov	r0, r4
+ 422 0072 FFF7FEFF 		bl	Uart2_TX
+ 423              	.LVL23:
+  68:./Src/telemetry.c ****       telemetry.time_send = HAL_GetTick();     
+ 424              		.loc 1 68 0
+ 425 0076 254C     		ldr	r4, .L27
+ 426 0078 0023     		movs	r3, #0
+ 427 007a 2370     		strb	r3, [r4]
+  69:./Src/telemetry.c ****     break; 
+ 428              		.loc 1 69 0
+ 429 007c FFF7FEFF 		bl	HAL_GetTick
+ 430              	.LVL24:
+ 431 0080 6060     		str	r0, [r4, #4]
+ 432              	.LVL25:
+ 433              	.L19:
+  78:./Src/telemetry.c ****   leftToTransfer = 100 -  __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);  
+ 434              		.loc 1 78 0
+ 435 0082 0022     		movs	r2, #0
+ 436 0084 264B     		ldr	r3, .L27+20
+ 437 0086 1A80     		strh	r2, [r3]	@ movhi
+  79:./Src/telemetry.c ****   temp1 = telemetry.counterBufferRX;
+ 438              		.loc 1 79 0
+ 439 0088 264B     		ldr	r3, .L27+24
+ 440 008a 1B68     		ldr	r3, [r3]
+ 441 008c 5B68     		ldr	r3, [r3, #4]
+ 442 008e C3F16403 		rsb	r3, r3, #100
+ 443 0092 254A     		ldr	r2, .L27+28
+ 444 0094 1360     		str	r3, [r2]
+ARM GAS  /tmp/ccsVlUcE.s 			page 12
+
+
+  80:./Src/telemetry.c ****   if(temp1 > leftToTransfer){
+ 445              		.loc 1 80 0
+ 446 0096 1D4B     		ldr	r3, .L27
+ 447 0098 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+ 448 009a DBB2     		uxtb	r3, r3
+ 449              	.LVL26:
+  81:./Src/telemetry.c ****     datatoRead = 100 - telemetry.counterBufferRX;
+ 450              		.loc 1 81 0
+ 451 009c 1268     		ldr	r2, [r2]
+ 452 009e 9342     		cmp	r3, r2
+ 453 00a0 0ED9     		bls	.L23
+  82:./Src/telemetry.c ****     temp16 = datatoRead;
+ 454              		.loc 1 82 0
+ 455 00a2 1A4B     		ldr	r3, .L27
+ 456              	.LVL27:
+ 457 00a4 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+ 458 00a6 C3F16403 		rsb	r3, r3, #100
+ 459 00aa 9BB2     		uxth	r3, r3
+ 460 00ac 1C49     		ldr	r1, .L27+20
+ 461 00ae 0B80     		strh	r3, [r1]	@ movhi
+  83:./Src/telemetry.c ****     datatoRead = temp16 + leftToTransfer;
+ 462              		.loc 1 83 0
+ 463 00b0 0B88     		ldrh	r3, [r1]
+ 464 00b2 9BB2     		uxth	r3, r3
+ 465              	.LVL28:
+  84:./Src/telemetry.c ****   }else{
+ 466              		.loc 1 84 0
+ 467 00b4 1C4A     		ldr	r2, .L27+28
+ 468 00b6 1268     		ldr	r2, [r2]
+ 469 00b8 1344     		add	r3, r3, r2
+ 470              	.LVL29:
+ 471 00ba 9BB2     		uxth	r3, r3
+ 472 00bc 0B80     		strh	r3, [r1]	@ movhi
+ 473 00be 07E0     		b	.L24
+ 474              	.LVL30:
+ 475              	.L23:
+  86:./Src/telemetry.c ****     datatoRead = leftToTransfer - temp1;
+ 476              		.loc 1 86 0
+ 477 00c0 124B     		ldr	r3, .L27
+ 478              	.LVL31:
+ 479 00c2 5A7A     		ldrb	r2, [r3, #9]	@ zero_extendqisi2
+ 480              	.LVL32:
+  87:./Src/telemetry.c ****   }
+ 481              		.loc 1 87 0
+ 482 00c4 184B     		ldr	r3, .L27+28
+ 483 00c6 1B68     		ldr	r3, [r3]
+ 484 00c8 9B1A     		subs	r3, r3, r2
+ 485 00ca 9BB2     		uxth	r3, r3
+ 486 00cc 144A     		ldr	r2, .L27+20
+ 487              	.LVL33:
+ 488 00ce 1380     		strh	r3, [r2]	@ movhi
+ 489              	.L24:
+  90:./Src/telemetry.c ****     temp1 = telemetry.counterBufferRX;
+ 490              		.loc 1 90 0
+ 491 00d0 134B     		ldr	r3, .L27+20
+ 492 00d2 1B88     		ldrh	r3, [r3]
+ 493 00d4 9BB2     		uxth	r3, r3
+ARM GAS  /tmp/ccsVlUcE.s 			page 13
+
+
+ 494 00d6 ABB1     		cbz	r3, .L18
+  91:./Src/telemetry.c ****     Telemetry_RX_parseData(temp1, datatoRead);
+ 495              		.loc 1 91 0
+ 496 00d8 0C4C     		ldr	r4, .L27
+ 497 00da 607A     		ldrb	r0, [r4, #9]	@ zero_extendqisi2
+ 498              	.LVL34:
+  92:./Src/telemetry.c ****     
+ 499              		.loc 1 92 0
+ 500 00dc 104D     		ldr	r5, .L27+20
+ 501 00de 2988     		ldrh	r1, [r5]
+ 502 00e0 89B2     		uxth	r1, r1
+ 503 00e2 FFF7FEFF 		bl	Telemetry_RX_parseData
+ 504              	.LVL35:
+  95:./Src/telemetry.c ****     telemetry.counterBufferRX = (temp1 + datatoRead) % 100;
+ 505              		.loc 1 95 0
+ 506 00e6 627A     		ldrb	r2, [r4, #9]	@ zero_extendqisi2
+ 507              	.LVL36:
+  96:./Src/telemetry.c ****   }  
+ 508              		.loc 1 96 0
+ 509 00e8 2B88     		ldrh	r3, [r5]
+ 510 00ea 9BB2     		uxth	r3, r3
+ 511 00ec 1A44     		add	r2, r2, r3
+ 512              	.LVL37:
+ 513 00ee 0F4B     		ldr	r3, .L27+32
+ 514 00f0 83FB0231 		smull	r3, r1, r3, r2
+ 515 00f4 D317     		asrs	r3, r2, #31
+ 516 00f6 C3EB6113 		rsb	r3, r3, r1, asr #5
+ 517 00fa 6421     		movs	r1, #100
+ 518 00fc 01FB1323 		mls	r3, r1, r3, r2
+ 519 0100 DBB2     		uxtb	r3, r3
+ 520 0102 6372     		strb	r3, [r4, #9]
+ 521              	.L18:
+  98:./Src/telemetry.c **** 
+ 522              		.loc 1 98 0
+ 523 0104 04B0     		add	sp, sp, #16
+ 524              	.LCFI4:
+ 525              		.cfi_def_cfa_offset 24
+ 526              		@ sp needed
+ 527 0106 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 528              	.L28:
+ 529 010a 00BF     		.align	2
+ 530              	.L27:
+ 531 010c 00000000 		.word	telemetry
+ 532 0110 00000000 		.word	battery_dati
+ 533 0114 00000000 		.word	app
+ 534 0118 65000000 		.word	uartDati+101
+ 535 011c 00000000 		.word	.LC0
+ 536 0120 00000000 		.word	datatoRead
+ 537 0124 00000000 		.word	hdma_usart2_rx
+ 538 0128 00000000 		.word	leftToTransfer
+ 539 012c 1F85EB51 		.word	1374389535
+ 540              		.cfi_endproc
+ 541              	.LFE65:
+ 543              		.comm	temp_pointerBuff,1,1
+ 544              		.comm	rxvalue,1,1
+ 545              		.comm	temp_pointerCNT,2,2
+ 546              		.comm	ic,2,2
+ARM GAS  /tmp/ccsVlUcE.s 			page 14
+
+
+ 547              		.comm	datatoRead,2,2
+ 548              		.comm	leftToTransfer,4,4
+ 549              		.comm	telemetry,28,4
+ 550              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 551              		.align	2
+ 552              	.LC0:
+ 553 0000 54252E31 		.ascii	"T%.1f;%.1f;%.1f\012\000"
+ 553      663B252E 
+ 553      31663B25 
+ 553      2E31660A 
+ 553      00
+ 554              		.text
+ 555              	.Letext0:
+ 556              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 557              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 558              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 559              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 560              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 561              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 562              		.file 8 "./Inc/telemetry.h"
+ 563              		.file 9 "./Inc/uart.h"
+ 564              		.file 10 "./Inc/application.h"
+ 565              		.file 11 "./Drivers/CMSIS/Include/core_cm3.h"
+ 566              		.file 12 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 567              		.file 13 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/stdlib.h"
+ 568              		.file 14 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/stdio.h"
+ARM GAS  /tmp/ccsVlUcE.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 telemetry.c
+     /tmp/ccsVlUcE.s:20     .text.Telemetry_init:00000000 $t
+     /tmp/ccsVlUcE.s:25     .text.Telemetry_init:00000000 Telemetry_init
+     /tmp/ccsVlUcE.s:74     .text.Telemetry_init:0000002c $d
+                            *COM*:0000001c telemetry
+     /tmp/ccsVlUcE.s:81     .text.Telemetry_RX_parseData:00000000 $t
+     /tmp/ccsVlUcE.s:86     .text.Telemetry_RX_parseData:00000000 Telemetry_RX_parseData
+     /tmp/ccsVlUcE.s:321    .text.Telemetry_RX_parseData:0000014c $d
+                            *COM*:00000001 temp_pointerBuff
+                            *COM*:00000002 ic
+                            *COM*:00000002 temp_pointerCNT
+                            *COM*:00000001 rxvalue
+     /tmp/ccsVlUcE.s:333    .text.Telemetry_TASK:00000000 $t
+     /tmp/ccsVlUcE.s:338    .text.Telemetry_TASK:00000000 Telemetry_TASK
+     /tmp/ccsVlUcE.s:531    .text.Telemetry_TASK:0000010c $d
+                            *COM*:00000002 datatoRead
+                            *COM*:00000004 leftToTransfer
+     /tmp/ccsVlUcE.s:551    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+MX_USART2_UART_Init
+HAL_GetTick
+HAL_UART_Receive_DMA
+uartDati
+huart2
+atoi
+__aeabi_f2d
+Uart2_IS_TX_free
+sprintf
+Uart2_TX
+battery_dati
+app
+hdma_usart2_rx
