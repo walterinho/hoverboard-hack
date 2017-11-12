@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
+ARM GAS  /tmp/cc4w0hzM.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
   29:./Src/motor_R.c ****   motorR.stop = 0;
   30:./Src/motor_R.c ****   mR_BLDCMotor();
   31:./Src/motor_R.c **** }
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 2
+ARM GAS  /tmp/cc4w0hzM.s 			page 2
 
 
   32:./Src/motor_R.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
   86:./Src/motor_R.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_12);
   87:./Src/motor_R.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_11);
   88:./Src/motor_R.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_10);  
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 3
+ARM GAS  /tmp/cc4w0hzM.s 			page 3
 
 
   89:./Src/motor_R.c ****     motorR.BLDCMotorL_count= 0;
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  143:./Src/motor_R.c ****     Error_Handler();
  144:./Src/motor_R.c ****   }
  145:./Src/motor_R.c ****   
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 4
+ARM GAS  /tmp/cc4w0hzM.s 			page 4
 
 
  146:./Src/motor_R.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  200:./Src/motor_R.c ****   */
  201:./Src/motor_R.c ****   
  202:./Src/motor_R.c ****   
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 5
+ARM GAS  /tmp/cc4w0hzM.s 			page 5
 
 
  203:./Src/motor_R.c ****   //Test
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  257:./Src/motor_R.c ****   sConfigOC.OCPolarity  = TIM_OCPOLARITY_HIGH; //TIM_OCPOLARITY_LOW;//TIM_OCPOLARITY_HIGH; //TIM_OC
  258:./Src/motor_R.c ****   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_LOW; //TIM_OCNPOLARITY_HIGH; //TIM_OCNPOLARITY_HIGH;
  259:./Src/motor_R.c ****   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET; //TIM_OCIDLESTATE_SET; //TIM_OCNIDLESTATE_RESET; /
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 6
+ARM GAS  /tmp/cc4w0hzM.s 			page 6
 
 
  260:./Src/motor_R.c ****   sConfigOC.OCNIdleState= TIM_OCNIDLESTATE_RESET; //TIM_OCNIDLESTATE_SET ; //TIM_OCIDLESTATE_SET; /
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
   47              		.global	mR_Low_CH1_OFF
   48              		.thumb
   49              		.thumb_func
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 7
+ARM GAS  /tmp/cc4w0hzM.s 			page 7
 
 
   51              	mR_Low_CH1_OFF:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  102              	.LFB72:
  303:./Src/motor_R.c **** }
  304:./Src/motor_R.c **** void mR_Low_CH2_OFF(void){
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 8
+ARM GAS  /tmp/cc4w0hzM.s 			page 8
 
 
  103              		.loc 1 304 0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  154              		.cfi_startproc
  155              		@ args = 0, pretend = 0, frame = 0
  156              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 9
+ARM GAS  /tmp/cc4w0hzM.s 			page 9
 
 
  157              		@ link register save eliminated.
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  202 0018 4FF4E053 		mov	r3, #7168
  203 001c 0293     		str	r3, [sp, #8]
  323:./Src/motor_R.c ****   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 10
+ARM GAS  /tmp/cc4w0hzM.s 			page 10
 
 
  204              		.loc 1 323 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  333:./Src/motor_R.c **** void mR_AHigh__ON(void){
  251              		.loc 1 333 0
  252              		.cfi_startproc
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 11
+ARM GAS  /tmp/cc4w0hzM.s 			page 11
 
 
  253              		@ args = 0, pretend = 0, frame = 0
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  338:./Src/motor_R.c **** }
  339:./Src/motor_R.c **** void mR_BHigh__ON(void){
  307              		.loc 1 339 0
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 12
+ARM GAS  /tmp/cc4w0hzM.s 			page 12
 
 
  308              		.cfi_startproc
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  362              	.LFB80:
  344:./Src/motor_R.c **** }
  345:./Src/motor_R.c **** void mR_CHigh__ON(void){
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 13
+ARM GAS  /tmp/cc4w0hzM.s 			page 13
 
 
  363              		.loc 1 345 0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  417              	mR_PWM_Set_Ch1:
  418              	.LFB82:
  350:./Src/motor_R.c **** }
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 14
+ARM GAS  /tmp/cc4w0hzM.s 			page 14
 
 
  351:./Src/motor_R.c **** 
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  465 0004 03FB00F0 		mul	r0, r3, r0
  466              	.LVL7:
  467 0008 044B     		ldr	r3, .L45+4
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 15
+ARM GAS  /tmp/cc4w0hzM.s 			page 15
 
 
  468 000a A3FB0030 		umull	r3, r0, r3, r0
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  518 0020 00000000 		.word	htim1
  519              		.cfi_endproc
  520              	.LFE84:
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 16
+ARM GAS  /tmp/cc4w0hzM.s 			page 16
 
 
  522              		.section	.text.mR_PWM_Set_ChALL,"ax",%progbits
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  571              		.loc 1 74 0
  572              		.cfi_startproc
  573              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 17
+ARM GAS  /tmp/cc4w0hzM.s 			page 17
 
 
  574              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  617 0036 084B     		ldr	r3, .L55+4
  618 0038 4FF48052 		mov	r2, #4096
  619 003c 5A61     		str	r2, [r3, #20]
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 18
+ARM GAS  /tmp/cc4w0hzM.s 			page 18
 
 
   87:./Src/motor_R.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_10);  
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  670 0010 9A69     		ldr	r2, [r3, #24]
  671 0012 02F40062 		and	r2, r2, #2048
  672 0016 0092     		str	r2, [sp]
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 19
+ARM GAS  /tmp/cc4w0hzM.s 			page 19
 
 
  673 0018 009A     		ldr	r2, [sp]
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  212:./Src/motor_R.c ****    //CH1N,CH2N,CH3N -- MANUAL mode --
  721              		.loc 1 212 0
  722 006c FFF7FEFF 		bl	mR_Low_CH3_OFF
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 20
+ARM GAS  /tmp/cc4w0hzM.s 			page 20
 
 
  723              	.LVL26:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  228:./Src/motor_R.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
  765              		.loc 1 228 0
  766 00b8 4FF48073 		mov	r3, #256
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 21
+ARM GAS  /tmp/cc4w0hzM.s 			page 21
 
 
  767 00bc 1293     		str	r3, [sp, #72]
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  809              	.LVL33:
  243:./Src/motor_R.c ****   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_LOW; // TIM_BREAKPOLARITY_HIGH; //
  810              		.loc 1 243 0
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 22
+ARM GAS  /tmp/cc4w0hzM.s 			page 22
 
 
  811 0102 0A94     		str	r4, [sp, #40]
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  850 013a 2846     		mov	r0, r5
  851 013c FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
  852              	.LVL35:
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 23
+ARM GAS  /tmp/cc4w0hzM.s 			page 23
 
 
  265:./Src/motor_R.c ****   HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2);
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  896              		.loc 1 279 0
  897 0182 FFF7FEFF 		bl	mR_Low_CH2_OFF
  898              	.LVL44:
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 24
+ARM GAS  /tmp/cc4w0hzM.s 			page 24
 
 
  280:./Src/motor_R.c ****   mR_AHigh__OFF();
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  946              		.thumb_func
  948              	MotorR_init:
  949              	.LFB64:
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 25
+ARM GAS  /tmp/cc4w0hzM.s 			page 25
 
 
   11:./Src/motor_R.c ****   MX_TIM1_Init();
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  995              		.cfi_startproc
  996              		@ args = 0, pretend = 0, frame = 0
  997              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 26
+ARM GAS  /tmp/cc4w0hzM.s 			page 26
 
 
  998 0000 10B5     		push	{r4, lr}
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1037 0038 9BB2     		uxth	r3, r3
  1038 003a B3F5406F 		cmp	r3, #3072
  1039 003e 1BD0     		beq	.L69
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 27
+ARM GAS  /tmp/cc4w0hzM.s 			page 27
 
 
  1040 0040 06D8     		bhi	.L70
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  404:./Src/motor_R.c ****       case (0x1000):              //4
  405:./Src/motor_R.c ****         mR_AHigh__ON();
  1082              		.loc 1 405 0
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 28
+ARM GAS  /tmp/cc4w0hzM.s 			page 28
 
 
  1083 0082 FFF7FEFF 		bl	mR_AHigh__ON
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
   16:./Drivers/CMSIS/Include/cmsis_gcc.h ****      documentation and/or other materials provided with the distribution.
   17:./Drivers/CMSIS/Include/cmsis_gcc.h ****    - Neither the name of ARM nor the names of its contributors may be used
   18:./Drivers/CMSIS/Include/cmsis_gcc.h ****      to endorse or promote products derived from this software without
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 29
+ARM GAS  /tmp/cc4w0hzM.s 			page 29
 
 
   19:./Drivers/CMSIS/Include/cmsis_gcc.h ****      specific prior written permission.
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
   73:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
   74:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
   75:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 30
+ARM GAS  /tmp/cc4w0hzM.s 			page 30
 
 
   76:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  130:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the xPSR Register.
  131:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  132:./Drivers/CMSIS/Include/cmsis_gcc.h ****     \return               xPSR Register value
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 31
+ARM GAS  /tmp/cc4w0hzM.s 			page 31
 
 
  133:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  187:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  188:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_MSP(uint32_t topOfMainStack)
  189:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 32
+ARM GAS  /tmp/cc4w0hzM.s 			page 32
 
 
  190:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0\n" : : "r" (topOfMainStack) : "sp");
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  244:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Base Priority
  245:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Base Priority register.
  246:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Base Priority register value
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 33
+ARM GAS  /tmp/cc4w0hzM.s 			page 33
 
 
  247:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  301:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
  302:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
  303:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 34
+ARM GAS  /tmp/cc4w0hzM.s 			page 34
 
 
  304:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif /* (__CORTEX_M >= 0x03U) */
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  358:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* Define macros for porting to both thumb1 and thumb2.
  359:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * For thumb1, use low register (r0-r7), specified by constraint "l"
  360:./Drivers/CMSIS/Include/cmsis_gcc.h ****  * Otherwise, use general registers, specified by constraint "r" */
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 35
+ARM GAS  /tmp/cc4w0hzM.s 			page 35
 
 
  361:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if defined (__thumb__) && !defined (__thumb2__)
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  423:./Src/motor_R.c ****         mR_AHigh__ON();
  1144              		.loc 1 423 0
  1145 00d4 FFF7FEFF 		bl	mR_AHigh__ON
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 36
+ARM GAS  /tmp/cc4w0hzM.s 			page 36
 
 
  1146              	.LVL72:
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1183              		.loc 1 440 0
  1184 0100 FFF7FEFF 		bl	mR_CHigh__ON
  1185              	.LVL81:
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 37
+ARM GAS  /tmp/cc4w0hzM.s 			page 37
 
 
  441:./Src/motor_R.c ****       break;
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1236              		.cfi_offset 5, -8
  1237              		.cfi_offset 14, -4
   23:./Src/motor_R.c ****   motorR.BLDCMotorL_deltavel = 0;
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 38
+ARM GAS  /tmp/cc4w0hzM.s 			page 38
 
 
  1238              		.loc 1 23 0
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1286              		@ frame_needed = 0, uses_anonymous_args = 0
  1287              	.LVL89:
  1288 0000 10B5     		push	{r4, lr}
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 39
+ARM GAS  /tmp/cc4w0hzM.s 			page 39
 
 
  1289              	.LCFI10:
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
   52:./Src/motor_R.c ****       mR_PWM_Set_ChALL(value_percent);
  1333              		.loc 1 52 0
  1334 0036 144B     		ldr	r3, .L104+4
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 40
+ARM GAS  /tmp/cc4w0hzM.s 			page 40
 
 
  1335 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1379 0074 0022     		movs	r2, #0
  1380 0076 064B     		ldr	r3, .L104+12
  1381 0078 1A70     		strb	r2, [r3]
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 41
+ARM GAS  /tmp/cc4w0hzM.s 			page 41
 
 
  1382              	.L99:
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1428              		.global	PWM_R_ISR_Callback
  1429              		.thumb
  1430              		.thumb_func
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 42
+ARM GAS  /tmp/cc4w0hzM.s 			page 42
 
 
  1432              	PWM_R_ISR_Callback:
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1474 0034 0E4B     		ldr	r3, .L114
  1475 0036 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
  1476 0038 13F0FF0F 		tst	r3, #255
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 43
+ARM GAS  /tmp/cc4w0hzM.s 			page 43
 
 
  1477 003c 04D0     		beq	.L111
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1530              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
  1531              		.file 4 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
  1532              		.file 5 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 44
+ARM GAS  /tmp/cc4w0hzM.s 			page 44
 
 
  1533              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
@@ -2590,95 +2590,95 @@ ARM GAS  /tmp/cc2VJ3Vo.s 			page 1
  1539              		.file 12 "./Drivers/CMSIS/Include/core_cm3.h"
  1540              		.file 13 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  1541              		.file 14 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 45
+ARM GAS  /tmp/cc4w0hzM.s 			page 45
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 motor_R.c
-     /tmp/cc2VJ3Vo.s:20     .text.mR_Low_CH1_ON:00000000 $t
-     /tmp/cc2VJ3Vo.s:25     .text.mR_Low_CH1_ON:00000000 mR_Low_CH1_ON
-     /tmp/cc2VJ3Vo.s:41     .text.mR_Low_CH1_ON:0000000c $d
-     /tmp/cc2VJ3Vo.s:46     .text.mR_Low_CH1_OFF:00000000 $t
-     /tmp/cc2VJ3Vo.s:51     .text.mR_Low_CH1_OFF:00000000 mR_Low_CH1_OFF
-     /tmp/cc2VJ3Vo.s:66     .text.mR_Low_CH1_OFF:0000000c $d
-     /tmp/cc2VJ3Vo.s:71     .text.mR_Low_CH2_ON:00000000 $t
-     /tmp/cc2VJ3Vo.s:76     .text.mR_Low_CH2_ON:00000000 mR_Low_CH2_ON
-     /tmp/cc2VJ3Vo.s:91     .text.mR_Low_CH2_ON:0000000c $d
-     /tmp/cc2VJ3Vo.s:96     .text.mR_Low_CH2_OFF:00000000 $t
-     /tmp/cc2VJ3Vo.s:101    .text.mR_Low_CH2_OFF:00000000 mR_Low_CH2_OFF
-     /tmp/cc2VJ3Vo.s:116    .text.mR_Low_CH2_OFF:0000000c $d
-     /tmp/cc2VJ3Vo.s:121    .text.mR_Low_CH3_ON:00000000 $t
-     /tmp/cc2VJ3Vo.s:126    .text.mR_Low_CH3_ON:00000000 mR_Low_CH3_ON
-     /tmp/cc2VJ3Vo.s:141    .text.mR_Low_CH3_ON:0000000c $d
-     /tmp/cc2VJ3Vo.s:146    .text.mR_Low_CH3_OFF:00000000 $t
-     /tmp/cc2VJ3Vo.s:151    .text.mR_Low_CH3_OFF:00000000 mR_Low_CH3_OFF
-     /tmp/cc2VJ3Vo.s:166    .text.mR_Low_CH3_OFF:0000000c $d
-     /tmp/cc2VJ3Vo.s:171    .text.mR_HallSensor_init:00000000 $t
-     /tmp/cc2VJ3Vo.s:176    .text.mR_HallSensor_init:00000000 mR_HallSensor_init
-     /tmp/cc2VJ3Vo.s:237    .text.mR_HallSensor_init:00000048 $d
-     /tmp/cc2VJ3Vo.s:244    .text.mR_AHigh__ON:00000000 $t
-     /tmp/cc2VJ3Vo.s:249    .text.mR_AHigh__ON:00000000 mR_AHigh__ON
-     /tmp/cc2VJ3Vo.s:266    .text.mR_AHigh__ON:00000010 $d
+     /tmp/cc4w0hzM.s:20     .text.mR_Low_CH1_ON:00000000 $t
+     /tmp/cc4w0hzM.s:25     .text.mR_Low_CH1_ON:00000000 mR_Low_CH1_ON
+     /tmp/cc4w0hzM.s:41     .text.mR_Low_CH1_ON:0000000c $d
+     /tmp/cc4w0hzM.s:46     .text.mR_Low_CH1_OFF:00000000 $t
+     /tmp/cc4w0hzM.s:51     .text.mR_Low_CH1_OFF:00000000 mR_Low_CH1_OFF
+     /tmp/cc4w0hzM.s:66     .text.mR_Low_CH1_OFF:0000000c $d
+     /tmp/cc4w0hzM.s:71     .text.mR_Low_CH2_ON:00000000 $t
+     /tmp/cc4w0hzM.s:76     .text.mR_Low_CH2_ON:00000000 mR_Low_CH2_ON
+     /tmp/cc4w0hzM.s:91     .text.mR_Low_CH2_ON:0000000c $d
+     /tmp/cc4w0hzM.s:96     .text.mR_Low_CH2_OFF:00000000 $t
+     /tmp/cc4w0hzM.s:101    .text.mR_Low_CH2_OFF:00000000 mR_Low_CH2_OFF
+     /tmp/cc4w0hzM.s:116    .text.mR_Low_CH2_OFF:0000000c $d
+     /tmp/cc4w0hzM.s:121    .text.mR_Low_CH3_ON:00000000 $t
+     /tmp/cc4w0hzM.s:126    .text.mR_Low_CH3_ON:00000000 mR_Low_CH3_ON
+     /tmp/cc4w0hzM.s:141    .text.mR_Low_CH3_ON:0000000c $d
+     /tmp/cc4w0hzM.s:146    .text.mR_Low_CH3_OFF:00000000 $t
+     /tmp/cc4w0hzM.s:151    .text.mR_Low_CH3_OFF:00000000 mR_Low_CH3_OFF
+     /tmp/cc4w0hzM.s:166    .text.mR_Low_CH3_OFF:0000000c $d
+     /tmp/cc4w0hzM.s:171    .text.mR_HallSensor_init:00000000 $t
+     /tmp/cc4w0hzM.s:176    .text.mR_HallSensor_init:00000000 mR_HallSensor_init
+     /tmp/cc4w0hzM.s:237    .text.mR_HallSensor_init:00000048 $d
+     /tmp/cc4w0hzM.s:244    .text.mR_AHigh__ON:00000000 $t
+     /tmp/cc4w0hzM.s:249    .text.mR_AHigh__ON:00000000 mR_AHigh__ON
+     /tmp/cc4w0hzM.s:266    .text.mR_AHigh__ON:00000010 $d
                             *COM*:0000003c htim1
-     /tmp/cc2VJ3Vo.s:271    .text.mR_AHigh__OFF:00000000 $t
-     /tmp/cc2VJ3Vo.s:276    .text.mR_AHigh__OFF:00000000 mR_AHigh__OFF
-     /tmp/cc2VJ3Vo.s:295    .text.mR_AHigh__OFF:00000014 $d
-     /tmp/cc2VJ3Vo.s:300    .text.mR_BHigh__ON:00000000 $t
-     /tmp/cc2VJ3Vo.s:305    .text.mR_BHigh__ON:00000000 mR_BHigh__ON
-     /tmp/cc2VJ3Vo.s:322    .text.mR_BHigh__ON:00000010 $d
-     /tmp/cc2VJ3Vo.s:327    .text.mR_BHigh__OFF:00000000 $t
-     /tmp/cc2VJ3Vo.s:332    .text.mR_BHigh__OFF:00000000 mR_BHigh__OFF
-     /tmp/cc2VJ3Vo.s:351    .text.mR_BHigh__OFF:00000014 $d
-     /tmp/cc2VJ3Vo.s:356    .text.mR_CHigh__ON:00000000 $t
-     /tmp/cc2VJ3Vo.s:361    .text.mR_CHigh__ON:00000000 mR_CHigh__ON
-     /tmp/cc2VJ3Vo.s:378    .text.mR_CHigh__ON:00000010 $d
-     /tmp/cc2VJ3Vo.s:383    .text.mR_CHigh__OFF:00000000 $t
-     /tmp/cc2VJ3Vo.s:388    .text.mR_CHigh__OFF:00000000 mR_CHigh__OFF
-     /tmp/cc2VJ3Vo.s:407    .text.mR_CHigh__OFF:00000014 $d
-     /tmp/cc2VJ3Vo.s:412    .text.mR_PWM_Set_Ch1:00000000 $t
-     /tmp/cc2VJ3Vo.s:417    .text.mR_PWM_Set_Ch1:00000000 mR_PWM_Set_Ch1
-     /tmp/cc2VJ3Vo.s:442    .text.mR_PWM_Set_Ch1:00000018 $d
+     /tmp/cc4w0hzM.s:271    .text.mR_AHigh__OFF:00000000 $t
+     /tmp/cc4w0hzM.s:276    .text.mR_AHigh__OFF:00000000 mR_AHigh__OFF
+     /tmp/cc4w0hzM.s:295    .text.mR_AHigh__OFF:00000014 $d
+     /tmp/cc4w0hzM.s:300    .text.mR_BHigh__ON:00000000 $t
+     /tmp/cc4w0hzM.s:305    .text.mR_BHigh__ON:00000000 mR_BHigh__ON
+     /tmp/cc4w0hzM.s:322    .text.mR_BHigh__ON:00000010 $d
+     /tmp/cc4w0hzM.s:327    .text.mR_BHigh__OFF:00000000 $t
+     /tmp/cc4w0hzM.s:332    .text.mR_BHigh__OFF:00000000 mR_BHigh__OFF
+     /tmp/cc4w0hzM.s:351    .text.mR_BHigh__OFF:00000014 $d
+     /tmp/cc4w0hzM.s:356    .text.mR_CHigh__ON:00000000 $t
+     /tmp/cc4w0hzM.s:361    .text.mR_CHigh__ON:00000000 mR_CHigh__ON
+     /tmp/cc4w0hzM.s:378    .text.mR_CHigh__ON:00000010 $d
+     /tmp/cc4w0hzM.s:383    .text.mR_CHigh__OFF:00000000 $t
+     /tmp/cc4w0hzM.s:388    .text.mR_CHigh__OFF:00000000 mR_CHigh__OFF
+     /tmp/cc4w0hzM.s:407    .text.mR_CHigh__OFF:00000014 $d
+     /tmp/cc4w0hzM.s:412    .text.mR_PWM_Set_Ch1:00000000 $t
+     /tmp/cc4w0hzM.s:417    .text.mR_PWM_Set_Ch1:00000000 mR_PWM_Set_Ch1
+     /tmp/cc4w0hzM.s:442    .text.mR_PWM_Set_Ch1:00000018 $d
                             *COM*:00000010 motorR
-     /tmp/cc2VJ3Vo.s:449    .text.mR_PWM_Set_Ch2:00000000 $t
-     /tmp/cc2VJ3Vo.s:454    .text.mR_PWM_Set_Ch2:00000000 mR_PWM_Set_Ch2
-     /tmp/cc2VJ3Vo.s:479    .text.mR_PWM_Set_Ch2:00000018 $d
-     /tmp/cc2VJ3Vo.s:486    .text.mR_PWM_Set_Ch3:00000000 $t
-     /tmp/cc2VJ3Vo.s:491    .text.mR_PWM_Set_Ch3:00000000 mR_PWM_Set_Ch3
-     /tmp/cc2VJ3Vo.s:516    .text.mR_PWM_Set_Ch3:00000018 $d
-     /tmp/cc2VJ3Vo.s:523    .text.mR_PWM_Set_ChALL:00000000 $t
-     /tmp/cc2VJ3Vo.s:528    .text.mR_PWM_Set_ChALL:00000000 mR_PWM_Set_ChALL
-     /tmp/cc2VJ3Vo.s:557    .text.mR_PWM_Set_ChALL:0000001c $d
-     /tmp/cc2VJ3Vo.s:564    .text.MotorR_stop:00000000 $t
-     /tmp/cc2VJ3Vo.s:569    .text.MotorR_stop:00000000 MotorR_stop
-ARM GAS  /tmp/cc2VJ3Vo.s 			page 46
+     /tmp/cc4w0hzM.s:449    .text.mR_PWM_Set_Ch2:00000000 $t
+     /tmp/cc4w0hzM.s:454    .text.mR_PWM_Set_Ch2:00000000 mR_PWM_Set_Ch2
+     /tmp/cc4w0hzM.s:479    .text.mR_PWM_Set_Ch2:00000018 $d
+     /tmp/cc4w0hzM.s:486    .text.mR_PWM_Set_Ch3:00000000 $t
+     /tmp/cc4w0hzM.s:491    .text.mR_PWM_Set_Ch3:00000000 mR_PWM_Set_Ch3
+     /tmp/cc4w0hzM.s:516    .text.mR_PWM_Set_Ch3:00000018 $d
+     /tmp/cc4w0hzM.s:523    .text.mR_PWM_Set_ChALL:00000000 $t
+     /tmp/cc4w0hzM.s:528    .text.mR_PWM_Set_ChALL:00000000 mR_PWM_Set_ChALL
+     /tmp/cc4w0hzM.s:557    .text.mR_PWM_Set_ChALL:0000001c $d
+     /tmp/cc4w0hzM.s:564    .text.MotorR_stop:00000000 $t
+     /tmp/cc4w0hzM.s:569    .text.MotorR_stop:00000000 MotorR_stop
+ARM GAS  /tmp/cc4w0hzM.s 			page 46
 
 
-     /tmp/cc2VJ3Vo.s:635    .text.MotorR_stop:00000054 $d
-     /tmp/cc2VJ3Vo.s:641    .text.MX_TIM1_Init:00000000 $t
-     /tmp/cc2VJ3Vo.s:646    .text.MX_TIM1_Init:00000000 MX_TIM1_Init
-     /tmp/cc2VJ3Vo.s:932    .text.MX_TIM1_Init:000001b0 $d
-     /tmp/cc2VJ3Vo.s:943    .text.MotorR_init:00000000 $t
-     /tmp/cc2VJ3Vo.s:948    .text.MotorR_init:00000000 MotorR_init
-     /tmp/cc2VJ3Vo.s:982    .text.MotorR_init:0000001c $d
-     /tmp/cc2VJ3Vo.s:987    .text.mR_BLDCMotor:00000000 $t
-     /tmp/cc2VJ3Vo.s:992    .text.mR_BLDCMotor:00000000 mR_BLDCMotor
-     /tmp/cc2VJ3Vo.s:1212   .text.mR_BLDCMotor:00000114 $d
-     /tmp/cc2VJ3Vo.s:1220   .text.MotorR_start:00000000 $t
-     /tmp/cc2VJ3Vo.s:1225   .text.MotorR_start:00000000 MotorR_start
-     /tmp/cc2VJ3Vo.s:1271   .text.MotorR_start:00000030 $d
-     /tmp/cc2VJ3Vo.s:1276   .text.MotorR_pwm:00000000 $t
-     /tmp/cc2VJ3Vo.s:1281   .text.MotorR_pwm:00000000 MotorR_pwm
-     /tmp/cc2VJ3Vo.s:1392   .text.MotorR_pwm:00000084 $d
-     /tmp/cc2VJ3Vo.s:1400   .text.HALL_R_ISR_Callback:00000000 $t
-     /tmp/cc2VJ3Vo.s:1405   .text.HALL_R_ISR_Callback:00000000 HALL_R_ISR_Callback
-     /tmp/cc2VJ3Vo.s:1422   .text.HALL_R_ISR_Callback:0000000c $d
-     /tmp/cc2VJ3Vo.s:1427   .text.PWM_R_ISR_Callback:00000000 $t
-     /tmp/cc2VJ3Vo.s:1432   .text.PWM_R_ISR_Callback:00000000 PWM_R_ISR_Callback
-     /tmp/cc2VJ3Vo.s:1510   .text.PWM_R_ISR_Callback:00000070 $d
-     /tmp/cc2VJ3Vo.s:1520   .bss.last_motorR.7436:00000000 last_motorR.7436
-     /tmp/cc2VJ3Vo.s:1521   .bss.last_motorR.7436:00000000 $d
-     /tmp/cc2VJ3Vo.s:1526   .bss.last_motorRStop.7437:00000000 last_motorRStop.7437
-     /tmp/cc2VJ3Vo.s:1527   .bss.last_motorRStop.7437:00000000 $d
+     /tmp/cc4w0hzM.s:635    .text.MotorR_stop:00000054 $d
+     /tmp/cc4w0hzM.s:641    .text.MX_TIM1_Init:00000000 $t
+     /tmp/cc4w0hzM.s:646    .text.MX_TIM1_Init:00000000 MX_TIM1_Init
+     /tmp/cc4w0hzM.s:932    .text.MX_TIM1_Init:000001b0 $d
+     /tmp/cc4w0hzM.s:943    .text.MotorR_init:00000000 $t
+     /tmp/cc4w0hzM.s:948    .text.MotorR_init:00000000 MotorR_init
+     /tmp/cc4w0hzM.s:982    .text.MotorR_init:0000001c $d
+     /tmp/cc4w0hzM.s:987    .text.mR_BLDCMotor:00000000 $t
+     /tmp/cc4w0hzM.s:992    .text.mR_BLDCMotor:00000000 mR_BLDCMotor
+     /tmp/cc4w0hzM.s:1212   .text.mR_BLDCMotor:00000114 $d
+     /tmp/cc4w0hzM.s:1220   .text.MotorR_start:00000000 $t
+     /tmp/cc4w0hzM.s:1225   .text.MotorR_start:00000000 MotorR_start
+     /tmp/cc4w0hzM.s:1271   .text.MotorR_start:00000030 $d
+     /tmp/cc4w0hzM.s:1276   .text.MotorR_pwm:00000000 $t
+     /tmp/cc4w0hzM.s:1281   .text.MotorR_pwm:00000000 MotorR_pwm
+     /tmp/cc4w0hzM.s:1392   .text.MotorR_pwm:00000084 $d
+     /tmp/cc4w0hzM.s:1400   .text.HALL_R_ISR_Callback:00000000 $t
+     /tmp/cc4w0hzM.s:1405   .text.HALL_R_ISR_Callback:00000000 HALL_R_ISR_Callback
+     /tmp/cc4w0hzM.s:1422   .text.HALL_R_ISR_Callback:0000000c $d
+     /tmp/cc4w0hzM.s:1427   .text.PWM_R_ISR_Callback:00000000 $t
+     /tmp/cc4w0hzM.s:1432   .text.PWM_R_ISR_Callback:00000000 PWM_R_ISR_Callback
+     /tmp/cc4w0hzM.s:1510   .text.PWM_R_ISR_Callback:00000070 $d
+     /tmp/cc4w0hzM.s:1520   .bss.last_motorR.7436:00000000 last_motorR.7436
+     /tmp/cc4w0hzM.s:1521   .bss.last_motorR.7436:00000000 $d
+     /tmp/cc4w0hzM.s:1526   .bss.last_motorRStop.7437:00000000 last_motorRStop.7437
+     /tmp/cc4w0hzM.s:1527   .bss.last_motorRStop.7437:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

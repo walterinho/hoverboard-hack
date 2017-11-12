@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccNrAyP2.s 			page 1
+ARM GAS  /tmp/ccKyKaDg.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccNrAyP2.s 			page 1
   29:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   *
   30:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   31:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   *
-ARM GAS  /tmp/ccNrAyP2.s 			page 2
+ARM GAS  /tmp/ccKyKaDg.s 			page 2
 
 
   32:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * Redistribution and use in source and binary forms, with or without modification,
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccNrAyP2.s 			page 1
   86:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****                      
   87:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c **** @endverbatim
   88:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * @{
-ARM GAS  /tmp/ccNrAyP2.s 			page 3
+ARM GAS  /tmp/ccKyKaDg.s 			page 3
 
 
   89:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   */
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccNrAyP2.s 			page 1
   58              		.loc 1 114 0
   59              		.cfi_startproc
   60              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccNrAyP2.s 			page 4
+ARM GAS  /tmp/ccKyKaDg.s 			page 4
 
 
   61              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -235,20 +235,20 @@ ARM GAS  /tmp/ccNrAyP2.s 			page 1
  105              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
  106              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
  107              		.file 5 "./Drivers/CMSIS/Include/core_cm3.h"
-ARM GAS  /tmp/ccNrAyP2.s 			page 5
+ARM GAS  /tmp/ccKyKaDg.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_gpio_ex.c
-     /tmp/ccNrAyP2.s:20     .text.HAL_GPIOEx_ConfigEventout:00000000 $t
-     /tmp/ccNrAyP2.s:25     .text.HAL_GPIOEx_ConfigEventout:00000000 HAL_GPIOEx_ConfigEventout
-     /tmp/ccNrAyP2.s:46     .text.HAL_GPIOEx_ConfigEventout:00000010 $d
-     /tmp/ccNrAyP2.s:51     .text.HAL_GPIOEx_EnableEventout:00000000 $t
-     /tmp/ccNrAyP2.s:56     .text.HAL_GPIOEx_EnableEventout:00000000 HAL_GPIOEx_EnableEventout
-     /tmp/ccNrAyP2.s:72     .text.HAL_GPIOEx_EnableEventout:0000000c $d
-     /tmp/ccNrAyP2.s:77     .text.HAL_GPIOEx_DisableEventout:00000000 $t
-     /tmp/ccNrAyP2.s:82     .text.HAL_GPIOEx_DisableEventout:00000000 HAL_GPIOEx_DisableEventout
-     /tmp/ccNrAyP2.s:98     .text.HAL_GPIOEx_DisableEventout:0000000c $d
+     /tmp/ccKyKaDg.s:20     .text.HAL_GPIOEx_ConfigEventout:00000000 $t
+     /tmp/ccKyKaDg.s:25     .text.HAL_GPIOEx_ConfigEventout:00000000 HAL_GPIOEx_ConfigEventout
+     /tmp/ccKyKaDg.s:46     .text.HAL_GPIOEx_ConfigEventout:00000010 $d
+     /tmp/ccKyKaDg.s:51     .text.HAL_GPIOEx_EnableEventout:00000000 $t
+     /tmp/ccKyKaDg.s:56     .text.HAL_GPIOEx_EnableEventout:00000000 HAL_GPIOEx_EnableEventout
+     /tmp/ccKyKaDg.s:72     .text.HAL_GPIOEx_EnableEventout:0000000c $d
+     /tmp/ccKyKaDg.s:77     .text.HAL_GPIOEx_DisableEventout:00000000 $t
+     /tmp/ccKyKaDg.s:82     .text.HAL_GPIOEx_DisableEventout:00000000 HAL_GPIOEx_DisableEventout
+     /tmp/ccKyKaDg.s:98     .text.HAL_GPIOEx_DisableEventout:0000000c $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

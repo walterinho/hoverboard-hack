@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccMhf1Jx.s 			page 1
+ARM GAS  /tmp/ccYv1oWV.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
   34              		.cfi_def_cfa_offset 8
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccMhf1Jx.s 			page 2
+ARM GAS  /tmp/ccYv1oWV.s 			page 2
 
 
   37 0002 86B0     		sub	sp, sp, #24
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
   81 003c 00100240 		.word	1073876992
   82 0040 000C0140 		.word	1073810432
   83              		.cfi_endproc
-ARM GAS  /tmp/ccMhf1Jx.s 			page 3
+ARM GAS  /tmp/ccYv1oWV.s 			page 3
 
 
   84              	.LFE65:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  130              		.loc 1 42 0
  131 002e 07B0     		add	sp, sp, #28
  132              	.LCFI5:
-ARM GAS  /tmp/ccMhf1Jx.s 			page 4
+ARM GAS  /tmp/ccYv1oWV.s 			page 4
 
 
  133              		.cfi_def_cfa_offset 4
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  186              		.cfi_startproc
  187              		@ args = 0, pretend = 0, frame = 0
  188              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccMhf1Jx.s 			page 5
+ARM GAS  /tmp/ccYv1oWV.s 			page 5
 
 
  189              	.LVL6:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
   11:./Src/varie.c ****   /*Configure GPIO pin : BUZZER_Pin */
  242              		.loc 1 11 0
  243 0018 0E4D     		ldr	r5, .L19+4
-ARM GAS  /tmp/ccMhf1Jx.s 			page 6
+ARM GAS  /tmp/ccYv1oWV.s 			page 6
 
 
  244 001a 0022     		movs	r2, #0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  291              		.global	Buzzer_OneBeep
  292              		.thumb
  293              		.thumb_func
-ARM GAS  /tmp/ccMhf1Jx.s 			page 7
+ARM GAS  /tmp/ccYv1oWV.s 			page 7
 
 
  295              	Buzzer_OneBeep:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  339 0028 EDDD     		ble	.L23
  340              	.LBE5:
   57:./Src/varie.c ****   }
-ARM GAS  /tmp/ccMhf1Jx.s 			page 8
+ARM GAS  /tmp/ccYv1oWV.s 			page 8
 
 
   58:./Src/varie.c ****   Buzzer_Set(0); 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  389              		.loc 1 65 0 discriminator 3
  390 0012 0020     		movs	r0, #0
  391 0014 FFF7FEFF 		bl	Buzzer_Set
-ARM GAS  /tmp/ccMhf1Jx.s 			page 9
+ARM GAS  /tmp/ccYv1oWV.s 			page 9
 
 
  392              	.LVL28:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  435              	.LVL37:
  436 0046 38BD     		pop	{r3, r4, r5, pc}
  437              	.LVL38:
-ARM GAS  /tmp/ccMhf1Jx.s 			page 10
+ARM GAS  /tmp/ccYv1oWV.s 			page 10
 
 
  438              	.L34:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  486 001e 0548     		ldr	r0, .L39
  487 0020 FFF7FEFF 		bl	HAL_IWDG_Refresh
  488              	.LVL45:
-ARM GAS  /tmp/ccMhf1Jx.s 			page 11
+ARM GAS  /tmp/ccYv1oWV.s 			page 11
 
 
   75:./Src/varie.c ****     Buzzer_Set(1);
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  537              	.LVL51:
   87:./Src/varie.c ****     Delay_us(160);
  538              		.loc 1 87 0 discriminator 3
-ARM GAS  /tmp/ccMhf1Jx.s 			page 12
+ARM GAS  /tmp/ccYv1oWV.s 			page 12
 
 
  539 000c A020     		movs	r0, #160
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  585              		@ args = 0, pretend = 0, frame = 0
  586              		@ frame_needed = 0, uses_anonymous_args = 0
  587 0000 08B5     		push	{r3, lr}
-ARM GAS  /tmp/ccMhf1Jx.s 			page 13
+ARM GAS  /tmp/ccYv1oWV.s 			page 13
 
 
  588              	.LCFI15:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  103:./Src/varie.c ****   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);  
  637              		.loc 1 103 0
  638 0018 104C     		ldr	r4, .L53+4
-ARM GAS  /tmp/ccMhf1Jx.s 			page 14
+ARM GAS  /tmp/ccYv1oWV.s 			page 14
 
 
  639 001a 0022     		movs	r2, #0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  680 0054 10BD     		pop	{r4, pc}
  681              	.L54:
  682 0056 00BF     		.align	2
-ARM GAS  /tmp/ccMhf1Jx.s 			page 15
+ARM GAS  /tmp/ccYv1oWV.s 			page 15
 
 
  683              	.L53:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  736              		.cfi_endproc
  737              	.LFE76:
  739              		.section	.text.DebugPin5_ON,"ax",%progbits
-ARM GAS  /tmp/ccMhf1Jx.s 			page 16
+ARM GAS  /tmp/ccYv1oWV.s 			page 16
 
 
  740              		.align	2
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  792              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
  793              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
  794              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
-ARM GAS  /tmp/ccMhf1Jx.s 			page 17
+ARM GAS  /tmp/ccYv1oWV.s 			page 17
 
 
  795              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
@@ -966,56 +966,56 @@ ARM GAS  /tmp/ccMhf1Jx.s 			page 1
  797              		.file 8 "./Drivers/CMSIS/Include/core_cm3.h"
  798              		.file 9 "./Inc/delay.h"
  799              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  /tmp/ccMhf1Jx.s 			page 18
+ARM GAS  /tmp/ccYv1oWV.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 varie.c
-     /tmp/ccMhf1Jx.s:20     .text.Led_init:00000000 $t
-     /tmp/ccMhf1Jx.s:25     .text.Led_init:00000000 Led_init
-     /tmp/ccMhf1Jx.s:81     .text.Led_init:0000003c $d
-     /tmp/ccMhf1Jx.s:87     .text.IS_Charge_init:00000000 $t
-     /tmp/ccMhf1Jx.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
-     /tmp/ccMhf1Jx.s:139    .text.IS_Charge_init:00000034 $d
-     /tmp/ccMhf1Jx.s:145    .text.Led_Set:00000000 $t
-     /tmp/ccMhf1Jx.s:150    .text.Led_Set:00000000 Led_Set
-     /tmp/ccMhf1Jx.s:173    .text.Led_Set:00000010 $d
-     /tmp/ccMhf1Jx.s:178    .text.Buzzer_Set:00000000 $t
-     /tmp/ccMhf1Jx.s:183    .text.Buzzer_Set:00000000 Buzzer_Set
-     /tmp/ccMhf1Jx.s:206    .text.Buzzer_Set:00000010 $d
-     /tmp/ccMhf1Jx.s:211    .text.Buzzer_init:00000000 $t
-     /tmp/ccMhf1Jx.s:216    .text.Buzzer_init:00000000 Buzzer_init
-     /tmp/ccMhf1Jx.s:284    .text.Buzzer_init:00000050 $d
-     /tmp/ccMhf1Jx.s:290    .text.Buzzer_OneBeep:00000000 $t
-     /tmp/ccMhf1Jx.s:295    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
-     /tmp/ccMhf1Jx.s:350    .text.Buzzer_OneBeep:00000034 $d
-     /tmp/ccMhf1Jx.s:355    .text.Buzzer_TwoBeep:00000000 $t
-     /tmp/ccMhf1Jx.s:360    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
-     /tmp/ccMhf1Jx.s:441    .text.Buzzer_TwoBeep:00000048 $d
-     /tmp/ccMhf1Jx.s:446    .text.Buzzer_OneShortBeep:00000000 $t
-     /tmp/ccMhf1Jx.s:451    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
-     /tmp/ccMhf1Jx.s:506    .text.Buzzer_OneShortBeep:00000034 $d
-     /tmp/ccMhf1Jx.s:511    .text.Buzzer_OneLongBeep:00000000 $t
-     /tmp/ccMhf1Jx.s:516    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
-     /tmp/ccMhf1Jx.s:571    .text.Buzzer_OneLongBeep:00000034 $d
-     /tmp/ccMhf1Jx.s:576    .text.IS_Charge:00000000 $t
-     /tmp/ccMhf1Jx.s:581    .text.IS_Charge:00000000 IS_Charge
-     /tmp/ccMhf1Jx.s:602    .text.IS_Charge:00000010 $d
-     /tmp/ccMhf1Jx.s:607    .text.DebugPin_init:00000000 $t
-     /tmp/ccMhf1Jx.s:612    .text.DebugPin_init:00000000 DebugPin_init
-     /tmp/ccMhf1Jx.s:684    .text.DebugPin_init:00000058 $d
-     /tmp/ccMhf1Jx.s:690    .text.DebugPin4_ON:00000000 $t
-     /tmp/ccMhf1Jx.s:695    .text.DebugPin4_ON:00000000 DebugPin4_ON
-     /tmp/ccMhf1Jx.s:710    .text.DebugPin4_ON:00000008 $d
-     /tmp/ccMhf1Jx.s:715    .text.DebugPin4_OFF:00000000 $t
-     /tmp/ccMhf1Jx.s:720    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
-     /tmp/ccMhf1Jx.s:735    .text.DebugPin4_OFF:0000000c $d
-     /tmp/ccMhf1Jx.s:740    .text.DebugPin5_ON:00000000 $t
-     /tmp/ccMhf1Jx.s:745    .text.DebugPin5_ON:00000000 DebugPin5_ON
-     /tmp/ccMhf1Jx.s:760    .text.DebugPin5_ON:00000008 $d
-     /tmp/ccMhf1Jx.s:765    .text.DebugPin5_OFF:00000000 $t
-     /tmp/ccMhf1Jx.s:770    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
-     /tmp/ccMhf1Jx.s:785    .text.DebugPin5_OFF:0000000c $d
+     /tmp/ccYv1oWV.s:20     .text.Led_init:00000000 $t
+     /tmp/ccYv1oWV.s:25     .text.Led_init:00000000 Led_init
+     /tmp/ccYv1oWV.s:81     .text.Led_init:0000003c $d
+     /tmp/ccYv1oWV.s:87     .text.IS_Charge_init:00000000 $t
+     /tmp/ccYv1oWV.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
+     /tmp/ccYv1oWV.s:139    .text.IS_Charge_init:00000034 $d
+     /tmp/ccYv1oWV.s:145    .text.Led_Set:00000000 $t
+     /tmp/ccYv1oWV.s:150    .text.Led_Set:00000000 Led_Set
+     /tmp/ccYv1oWV.s:173    .text.Led_Set:00000010 $d
+     /tmp/ccYv1oWV.s:178    .text.Buzzer_Set:00000000 $t
+     /tmp/ccYv1oWV.s:183    .text.Buzzer_Set:00000000 Buzzer_Set
+     /tmp/ccYv1oWV.s:206    .text.Buzzer_Set:00000010 $d
+     /tmp/ccYv1oWV.s:211    .text.Buzzer_init:00000000 $t
+     /tmp/ccYv1oWV.s:216    .text.Buzzer_init:00000000 Buzzer_init
+     /tmp/ccYv1oWV.s:284    .text.Buzzer_init:00000050 $d
+     /tmp/ccYv1oWV.s:290    .text.Buzzer_OneBeep:00000000 $t
+     /tmp/ccYv1oWV.s:295    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
+     /tmp/ccYv1oWV.s:350    .text.Buzzer_OneBeep:00000034 $d
+     /tmp/ccYv1oWV.s:355    .text.Buzzer_TwoBeep:00000000 $t
+     /tmp/ccYv1oWV.s:360    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
+     /tmp/ccYv1oWV.s:441    .text.Buzzer_TwoBeep:00000048 $d
+     /tmp/ccYv1oWV.s:446    .text.Buzzer_OneShortBeep:00000000 $t
+     /tmp/ccYv1oWV.s:451    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
+     /tmp/ccYv1oWV.s:506    .text.Buzzer_OneShortBeep:00000034 $d
+     /tmp/ccYv1oWV.s:511    .text.Buzzer_OneLongBeep:00000000 $t
+     /tmp/ccYv1oWV.s:516    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
+     /tmp/ccYv1oWV.s:571    .text.Buzzer_OneLongBeep:00000034 $d
+     /tmp/ccYv1oWV.s:576    .text.IS_Charge:00000000 $t
+     /tmp/ccYv1oWV.s:581    .text.IS_Charge:00000000 IS_Charge
+     /tmp/ccYv1oWV.s:602    .text.IS_Charge:00000010 $d
+     /tmp/ccYv1oWV.s:607    .text.DebugPin_init:00000000 $t
+     /tmp/ccYv1oWV.s:612    .text.DebugPin_init:00000000 DebugPin_init
+     /tmp/ccYv1oWV.s:684    .text.DebugPin_init:00000058 $d
+     /tmp/ccYv1oWV.s:690    .text.DebugPin4_ON:00000000 $t
+     /tmp/ccYv1oWV.s:695    .text.DebugPin4_ON:00000000 DebugPin4_ON
+     /tmp/ccYv1oWV.s:710    .text.DebugPin4_ON:00000008 $d
+     /tmp/ccYv1oWV.s:715    .text.DebugPin4_OFF:00000000 $t
+     /tmp/ccYv1oWV.s:720    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
+     /tmp/ccYv1oWV.s:735    .text.DebugPin4_OFF:0000000c $d
+     /tmp/ccYv1oWV.s:740    .text.DebugPin5_ON:00000000 $t
+     /tmp/ccYv1oWV.s:745    .text.DebugPin5_ON:00000000 DebugPin5_ON
+     /tmp/ccYv1oWV.s:760    .text.DebugPin5_ON:00000008 $d
+     /tmp/ccYv1oWV.s:765    .text.DebugPin5_OFF:00000000 $t
+     /tmp/ccYv1oWV.s:770    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
+     /tmp/ccYv1oWV.s:785    .text.DebugPin5_OFF:0000000c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -1026,6 +1026,6 @@ HAL_IWDG_Refresh
 hiwdg
 HAL_Delay
 HAL_GPIO_ReadPin
-ARM GAS  /tmp/ccMhf1Jx.s 			page 19
+ARM GAS  /tmp/ccYv1oWV.s 			page 19
 
 

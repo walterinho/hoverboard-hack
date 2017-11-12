@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cconONJI.s 			page 1
+ARM GAS  /tmp/ccABcJL5.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
   29:./Src/i2c.c   ****   hi2c2.Init.OwnAddress2 = 0;
   30:./Src/i2c.c   ****   hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   31:./Src/i2c.c   ****   hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-ARM GAS  /tmp/cconONJI.s 			page 2
+ARM GAS  /tmp/ccABcJL5.s 			page 2
 
 
   32:./Src/i2c.c   ****   if (HAL_I2C_Init(&hi2c2) != HAL_OK)
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
   55              		.loc 1 58 0 discriminator 1
   56 001c 074B     		ldr	r3, .L4+4
   57 001e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
-ARM GAS  /tmp/cconONJI.s 			page 3
+ARM GAS  /tmp/ccABcJL5.s 			page 3
 
 
   58 0020 13F0FF0F 		tst	r3, #255
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  108 000c DA61     		str	r2, [r3, #28]
  109 000e DA69     		ldr	r2, [r3, #28]
  110 0010 02F48002 		and	r2, r2, #4194304
-ARM GAS  /tmp/cconONJI.s 			page 4
+ARM GAS  /tmp/ccABcJL5.s 			page 4
 
 
  111 0014 0092     		str	r2, [sp]
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
   27:./Src/i2c.c   ****   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
  156              		.loc 1 27 0
  157 005a 4FF48042 		mov	r2, #16384
-ARM GAS  /tmp/cconONJI.s 			page 5
+ARM GAS  /tmp/ccABcJL5.s 			page 5
 
 
  158 005e 0261     		str	r2, [r0, #16]
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  199 008e 00BF     		.align	2
  200              	.L9:
  201 0090 00100240 		.word	1073876992
-ARM GAS  /tmp/cconONJI.s 			page 6
+ARM GAS  /tmp/ccABcJL5.s 			page 6
 
 
  202 0094 00000000 		.word	hi2c2
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  104:./Src/i2c.c   ****   
  105:./Src/i2c.c   ****     case 3:
  106:./Src/i2c.c   ****       wii_JOYdati.I2CTxDone = 0;
-ARM GAS  /tmp/cconONJI.s 			page 7
+ARM GAS  /tmp/ccABcJL5.s 			page 7
 
 
  107:./Src/i2c.c   ****       wii_JOYdati.I2CRxDone = 0;
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  161:./Src/i2c.c   ****     break;
  162:./Src/i2c.c   ****   
  163:./Src/i2c.c   ****     case 11:
-ARM GAS  /tmp/cconONJI.s 			page 8
+ARM GAS  /tmp/ccABcJL5.s 			page 8
 
 
  164:./Src/i2c.c   ****       if((HAL_GetTick() - wii_JOYdati.mS) >= 1){             
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  236              		.global	WiiNunchuck_TASK
  237              		.thumb
  238              		.thumb_func
-ARM GAS  /tmp/cconONJI.s 			page 9
+ARM GAS  /tmp/ccABcJL5.s 			page 9
 
 
  240              	WiiNunchuck_TASK:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  289 0040 FFF7FEFF 		bl	HAL_I2C_Master_Transmit_DMA
  290              	.LVL13:
   74:./Src/i2c.c   ****       wii_JOYdati.mS = HAL_GetTick();
-ARM GAS  /tmp/cconONJI.s 			page 10
+ARM GAS  /tmp/ccABcJL5.s 			page 10
 
 
  291              		.loc 1 74 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
   89:./Src/i2c.c   ****         wii_JOYdati.I2CTxDone = 0;
  335              		.loc 1 89 0
  336 0082 5B4B     		ldr	r3, .L29
-ARM GAS  /tmp/cconONJI.s 			page 11
+ARM GAS  /tmp/ccABcJL5.s 			page 11
 
 
  337 0084 9B7B     		ldrb	r3, [r3, #14]	@ zero_extendqisi2
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  109:./Src/i2c.c   ****       wii_JOYdati.stato = 4;     
  380              		.loc 1 109 0
  381 00c6 0623     		movs	r3, #6
-ARM GAS  /tmp/cconONJI.s 			page 12
+ARM GAS  /tmp/ccABcJL5.s 			page 12
 
 
  382 00c8 621D     		adds	r2, r4, #5
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  425 0104 13F0FF0F 		tst	r3, #255
  426 0108 09D0     		beq	.L26
  124:./Src/i2c.c   ****         wii_JOYdati.I2CRxDone = 0;
-ARM GAS  /tmp/cconONJI.s 			page 13
+ARM GAS  /tmp/ccABcJL5.s 			page 13
 
 
  427              		.loc 1 124 0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  470              	.LVL24:
  139:./Src/i2c.c   ****         wii_JOYdati.bc = wii_JOYdati.bc >> 1;
  471              		.loc 1 139 0
-ARM GAS  /tmp/cconONJI.s 			page 14
+ARM GAS  /tmp/ccABcJL5.s 			page 14
 
 
  472 014a 00F00203 		and	r3, r0, #2
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  514 0188 6373     		strb	r3, [r4, #13]
  158:./Src/i2c.c   ****       wii_JOYdati.stato = 11;
  515              		.loc 1 158 0
-ARM GAS  /tmp/cconONJI.s 			page 15
+ARM GAS  /tmp/ccABcJL5.s 			page 15
 
 
  516 018a A373     		strb	r3, [r4, #14]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  559 01c6 2061     		str	r0, [r4, #16]
  560              	.L27:
  177:./Src/i2c.c   ****         wii_JOYdati.I2CTxDone = 0;
-ARM GAS  /tmp/cconONJI.s 			page 16
+ARM GAS  /tmp/ccABcJL5.s 			page 16
 
 
  561              		.loc 1 177 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  204:./Src/i2c.c   ****     
  205:./Src/i2c.c   **** //HAL_I2C_Master_Transmit_DMA
  206:./Src/i2c.c   **** //HAL_I2C_Master_Receive_DMA
-ARM GAS  /tmp/cconONJI.s 			page 17
+ARM GAS  /tmp/ccABcJL5.s 			page 17
 
 
  207:./Src/i2c.c   **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  653 000a 024B     		ldr	r3, .L37+4
  654 000c 5A73     		strb	r2, [r3, #13]
  655              	.L35:
-ARM GAS  /tmp/cconONJI.s 			page 18
+ARM GAS  /tmp/ccABcJL5.s 			page 18
 
 
  656 000e 7047     		bx	lr
@@ -1078,42 +1078,42 @@ ARM GAS  /tmp/cconONJI.s 			page 1
  707              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
  708              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
  709              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
-ARM GAS  /tmp/cconONJI.s 			page 19
+ARM GAS  /tmp/ccABcJL5.s 			page 19
 
 
  710              		.file 8 "./Inc/i2c.h"
  711              		.file 9 "./Drivers/CMSIS/Include/core_cm3.h"
  712              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  713              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
-ARM GAS  /tmp/cconONJI.s 			page 20
+ARM GAS  /tmp/ccABcJL5.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 i2c.c
-     /tmp/cconONJI.s:20     .text.WiiNunchuck_INIT:00000000 $t
-     /tmp/cconONJI.s:25     .text.WiiNunchuck_INIT:00000000 WiiNunchuck_INIT
-     /tmp/cconONJI.s:79     .text.WiiNunchuck_INIT:00000038 $d
+     /tmp/ccABcJL5.s:20     .text.WiiNunchuck_INIT:00000000 $t
+     /tmp/ccABcJL5.s:25     .text.WiiNunchuck_INIT:00000000 WiiNunchuck_INIT
+     /tmp/ccABcJL5.s:79     .text.WiiNunchuck_INIT:00000038 $d
                             *COM*:0000003c hi2c2
                             *COM*:00000014 wii_JOYdati
-     /tmp/cconONJI.s:85     .text.MX_I2C2_Init:00000000 $t
-     /tmp/cconONJI.s:90     .text.MX_I2C2_Init:00000000 MX_I2C2_Init
-     /tmp/cconONJI.s:201    .text.MX_I2C2_Init:00000090 $d
-     /tmp/cconONJI.s:210    .text.nunchuk_decode_byte:00000000 $t
-     /tmp/cconONJI.s:215    .text.nunchuk_decode_byte:00000000 nunchuk_decode_byte
-     /tmp/cconONJI.s:235    .text.WiiNunchuck_TASK:00000000 $t
-     /tmp/cconONJI.s:240    .text.WiiNunchuck_TASK:00000000 WiiNunchuck_TASK
-     /tmp/cconONJI.s:263    .text.WiiNunchuck_TASK:00000014 $d
-     /tmp/cconONJI.s:276    .text.WiiNunchuck_TASK:0000002e $t
-     /tmp/cconONJI.s:594    .text.WiiNunchuck_TASK:000001f0 $d
-     /tmp/cconONJI.s:600    .text.HAL_I2C_MasterTxCpltCallback:00000000 $t
-     /tmp/cconONJI.s:605    .text.HAL_I2C_MasterTxCpltCallback:00000000 HAL_I2C_MasterTxCpltCallback
-     /tmp/cconONJI.s:627    .text.HAL_I2C_MasterTxCpltCallback:00000010 $d
-     /tmp/cconONJI.s:633    .text.HAL_I2C_MasterRxCpltCallback:00000000 $t
-     /tmp/cconONJI.s:638    .text.HAL_I2C_MasterRxCpltCallback:00000000 HAL_I2C_MasterRxCpltCallback
-     /tmp/cconONJI.s:660    .text.HAL_I2C_MasterRxCpltCallback:00000010 $d
-     /tmp/cconONJI.s:666    .text.HAL_I2C_ErrorCallback:00000000 $t
-     /tmp/cconONJI.s:671    .text.HAL_I2C_ErrorCallback:00000000 HAL_I2C_ErrorCallback
-     /tmp/cconONJI.s:693    .text.HAL_I2C_ErrorCallback:00000010 $d
+     /tmp/ccABcJL5.s:85     .text.MX_I2C2_Init:00000000 $t
+     /tmp/ccABcJL5.s:90     .text.MX_I2C2_Init:00000000 MX_I2C2_Init
+     /tmp/ccABcJL5.s:201    .text.MX_I2C2_Init:00000090 $d
+     /tmp/ccABcJL5.s:210    .text.nunchuk_decode_byte:00000000 $t
+     /tmp/ccABcJL5.s:215    .text.nunchuk_decode_byte:00000000 nunchuk_decode_byte
+     /tmp/ccABcJL5.s:235    .text.WiiNunchuck_TASK:00000000 $t
+     /tmp/ccABcJL5.s:240    .text.WiiNunchuck_TASK:00000000 WiiNunchuck_TASK
+     /tmp/ccABcJL5.s:263    .text.WiiNunchuck_TASK:00000014 $d
+     /tmp/ccABcJL5.s:276    .text.WiiNunchuck_TASK:0000002e $t
+     /tmp/ccABcJL5.s:594    .text.WiiNunchuck_TASK:000001f0 $d
+     /tmp/ccABcJL5.s:600    .text.HAL_I2C_MasterTxCpltCallback:00000000 $t
+     /tmp/ccABcJL5.s:605    .text.HAL_I2C_MasterTxCpltCallback:00000000 HAL_I2C_MasterTxCpltCallback
+     /tmp/ccABcJL5.s:627    .text.HAL_I2C_MasterTxCpltCallback:00000010 $d
+     /tmp/ccABcJL5.s:633    .text.HAL_I2C_MasterRxCpltCallback:00000000 $t
+     /tmp/ccABcJL5.s:638    .text.HAL_I2C_MasterRxCpltCallback:00000000 HAL_I2C_MasterRxCpltCallback
+     /tmp/ccABcJL5.s:660    .text.HAL_I2C_MasterRxCpltCallback:00000010 $d
+     /tmp/ccABcJL5.s:666    .text.HAL_I2C_ErrorCallback:00000000 $t
+     /tmp/ccABcJL5.s:671    .text.HAL_I2C_ErrorCallback:00000000 HAL_I2C_ErrorCallback
+     /tmp/ccABcJL5.s:693    .text.HAL_I2C_ErrorCallback:00000010 $d
                             *COM*:00000038 hdma_i2c2_tx
                             *COM*:00000038 hdma_i2c2_rx
                      .debug_frame:00000010 $d
