@@ -42,7 +42,6 @@ VARIE
 */
 #include "main.h"
 #include "stm32f1xx_hal.h"
-#include "i2c.h"
 #include "motor_L.h"
 #include "motor_R.h"
 #include "varie.h"
@@ -53,6 +52,24 @@ VARIE
 #include "application.h"
 #include "telemetry.h"
 #include <math.h>
+
+// copied from STMBL
+#define NO 0
+#define YES 1
+#define ABS(a) (((a) < 0.0) ? -(a) : (a))
+#define LIMIT(x, lowhigh) (((x) > (lowhigh)) ? (lowhigh) : (((x) < (-lowhigh)) ? (-lowhigh) : (x)))
+#define SAT(x, lowhigh) (((x) > (lowhigh)) ? (1.0) : (((x) < (-lowhigh)) ? (-1.0) : (0.0)))
+#define SAT2(x, low, high) (((x) > (high)) ? (1.0) : (((x) < (low)) ? (-1.0) : (0.0)))
+#define STEP(from, to, step) (((from) < (to)) ? (MIN((from) + (step), (to))) : (MAX((from) - (step), (to))))
+#define DEG(a) ((a)*M_PI / 180.0)
+#define RAD(a) ((a)*180.0 / M_PI)
+#define SIGN(a) (((a) < 0.0) ? (-1.0) : (((a) > 0.0) ? (1.0) : (0.0)))
+#define CLAMP(x, low, high) (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
+#define SCALE(value, high, max) MIN(MAX(((max) - (value)) / ((max) - (high)), 0.0), 1.0)
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#define MIN3(a, b, c) MIN(a, MIN(b, c))
+#define MAX3(a, b, c) MAX(a, MAX(b, c))
 
 #define PI 3.14159265
 
@@ -65,7 +82,9 @@ void Error_Handler(void);
 static void MX_IWDG_Init(void);
 IWDG_HandleTypeDef hiwdg;
 
+volatile __IO int16_t speed = 0;
 extern struct TELEMETRY_dati telemetry;
+//extern struct COMMAND_data commandsequence;
 
 //TEMP
 /*
@@ -90,7 +109,7 @@ int main(void)
   _init_us();
 
   //MX_I2C2_Init();
-  //Telemetry_init();
+  Telemetry_init();
 
  /*
   while(1){
@@ -125,29 +144,41 @@ int main(void)
 
   applcation_init();
   MotorR_start();
-  //MotorR_pwm(200);
-
   MotorL_start();
-  //MotorL_pwm(1000);
 
   uint32_t sinValue = 45 * 50;
   uint8_t state = 0;
   while(1){
     sinValue++;
-    MotorL_pwm((int)(500*sin((sinValue / 50.0)*(PI / 180.0))));
-    MotorR_pwm(-(int)(500*cos((sinValue / 50.0)*(PI / 180.0))));
+    int speedL = -CLAMP(getMotorR(), -200, 200);
+    int speedR = -CLAMP(getMotorL(), -200, 200);
+    MotorL_pwm(speedL*10);
+    MotorR_pwm(speedR*10);
     counterTemp = HAL_GetTick();
     if ((sinValue) % (180 * 50) == 0) {
       state = !state;
       Led_Set(state);
-      Buzzer_OneBeep();
+      //Console_Log("otter!\n\r");
+      //Buzzer_OneBeep();
+      /*char str[50];
+      memset(&str[0], 0, sizeof(str));
+      sprintf(str, "MR = %i\n\r", speedR);
+
+      Console_Log(str);
+
+      memset(&str[0], 0, sizeof(str));
+      sprintf(str, "ML = %i\n\r", speedL);
+
+      Console_Log(str);*/
     }
+
+
 
     //Battery_TASK();
     //Current_Motor_TASK();
     //sWiiNunchuck_TASK();
     //applcation_TASK();
-    //Telemetry_TASK();s
+    //Telemetry_TASK();
 
     //Batteria Scarica?
     /*if(GET_BatteryAverage() < 31.0){

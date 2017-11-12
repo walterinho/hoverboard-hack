@@ -23,7 +23,7 @@ void MX_USART2_UART_Init(void)
   HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
 
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 9600;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -34,14 +34,14 @@ void MX_USART2_UART_Init(void)
   {
     Error_Handler();
   }
-  
+
   uartDati.UartRxReady = 0;
   uartDati.UarttxReady = 1;
 }
 
 void Console_Log(char *message)
 {
-    while(huart2.State != HAL_UART_STATE_READY);
+    //while(huart2.State != HAL_UART_STATE_READY);
     HAL_UART_Transmit_DMA(&huart2, (uint8_t *)message, strlen(message));
 //    HAL_UART_Transmit(&huart2, (uint8_t *)message, strlen(message),200);
 }
