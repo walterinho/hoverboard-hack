@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc4Ryly6.s 			page 1
+ARM GAS  /tmp/ccvG7kSb.s 			page 1
 
 
    1              		.syntax unified
@@ -57,8 +57,8 @@ ARM GAS  /tmp/cc4Ryly6.s 			page 1
   39              	.LBB2:
   17:./Src/uart.c  ****   __HAL_RCC_USART2_CLK_ENABLE();
   40              		.loc 1 17 0
-  41 0004 1A4B     		ldr	r3, .L4
-ARM GAS  /tmp/cc4Ryly6.s 			page 2
+  41 0004 164B     		ldr	r3, .L4
+ARM GAS  /tmp/ccvG7kSb.s 			page 2
 
 
   42 0006 DA69     		ldr	r2, [r3, #28]
@@ -70,369 +70,359 @@ ARM GAS  /tmp/cc4Ryly6.s 			page 1
   48 0016 019B     		ldr	r3, [sp, #4]
   49              	.LBE2:
   18:./Src/uart.c  ****   /* DMA1_Channel6_IRQn interrupt configuration */
-  19:./Src/uart.c  ****   HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 5, 6);
-  50              		.loc 1 19 0
-  51 0018 0622     		movs	r2, #6
-  52 001a 0521     		movs	r1, #5
-  53 001c 1020     		movs	r0, #16
-  54 001e FFF7FEFF 		bl	HAL_NVIC_SetPriority
-  55              	.LVL0:
-  20:./Src/uart.c  ****   HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
-  56              		.loc 1 20 0
-  57 0022 1020     		movs	r0, #16
-  58 0024 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
-  59              	.LVL1:
+  19:./Src/uart.c  ****   //HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 5, 6);
+  20:./Src/uart.c  ****   //HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
   21:./Src/uart.c  ****   /* DMA1_Channel7_IRQn interrupt configuration */
   22:./Src/uart.c  ****   HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 5, 7);
-  60              		.loc 1 22 0
-  61 0028 0722     		movs	r2, #7
-  62 002a 0521     		movs	r1, #5
-  63 002c 1120     		movs	r0, #17
-  64 002e FFF7FEFF 		bl	HAL_NVIC_SetPriority
-  65              	.LVL2:
+  50              		.loc 1 22 0
+  51 0018 0722     		movs	r2, #7
+  52 001a 0521     		movs	r1, #5
+  53 001c 1120     		movs	r0, #17
+  54 001e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  55              	.LVL0:
   23:./Src/uart.c  ****   HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
-  66              		.loc 1 23 0
-  67 0032 1120     		movs	r0, #17
-  68 0034 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
-  69              	.LVL3:
+  56              		.loc 1 23 0
+  57 0022 1120     		movs	r0, #17
+  58 0024 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  59              	.LVL1:
   24:./Src/uart.c  **** 
   25:./Src/uart.c  ****   huart2.Instance = USART2;
-  70              		.loc 1 25 0
-  71 0038 0E48     		ldr	r0, .L4+4
-  72 003a 0F4B     		ldr	r3, .L4+8
-  73 003c 0360     		str	r3, [r0]
+  60              		.loc 1 25 0
+  61 0028 0E48     		ldr	r0, .L4+4
+  62 002a 0F4B     		ldr	r3, .L4+8
+  63 002c 0360     		str	r3, [r0]
   26:./Src/uart.c  ****   huart2.Init.BaudRate = 115200;
-  74              		.loc 1 26 0
-  75 003e 4FF4E133 		mov	r3, #115200
-  76 0042 4360     		str	r3, [r0, #4]
+  64              		.loc 1 26 0
+  65 002e 4FF4E133 		mov	r3, #115200
+  66 0032 4360     		str	r3, [r0, #4]
   27:./Src/uart.c  ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  77              		.loc 1 27 0
-  78 0044 0023     		movs	r3, #0
-  79 0046 8360     		str	r3, [r0, #8]
+  67              		.loc 1 27 0
+  68 0034 0023     		movs	r3, #0
+  69 0036 8360     		str	r3, [r0, #8]
   28:./Src/uart.c  ****   huart2.Init.StopBits = UART_STOPBITS_1;
-  80              		.loc 1 28 0
-  81 0048 C360     		str	r3, [r0, #12]
+  70              		.loc 1 28 0
+  71 0038 C360     		str	r3, [r0, #12]
   29:./Src/uart.c  ****   huart2.Init.Parity = UART_PARITY_NONE;
-  82              		.loc 1 29 0
-  83 004a 0361     		str	r3, [r0, #16]
+  72              		.loc 1 29 0
+  73 003a 0361     		str	r3, [r0, #16]
   30:./Src/uart.c  ****   huart2.Init.Mode = UART_MODE_TX_RX;
-  84              		.loc 1 30 0
-  85 004c 0C22     		movs	r2, #12
-ARM GAS  /tmp/cc4Ryly6.s 			page 3
-
-
-  86 004e 4261     		str	r2, [r0, #20]
+  74              		.loc 1 30 0
+  75 003c 0C22     		movs	r2, #12
+  76 003e 4261     		str	r2, [r0, #20]
   31:./Src/uart.c  ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  87              		.loc 1 31 0
-  88 0050 8361     		str	r3, [r0, #24]
+  77              		.loc 1 31 0
+  78 0040 8361     		str	r3, [r0, #24]
   32:./Src/uart.c  ****  // huart2.Init.OverSampling = UART_OVERSAMPLING_16;
   33:./Src/uart.c  ****   if (HAL_UART_Init(&huart2) != HAL_OK)
-  89              		.loc 1 33 0
-  90 0052 FFF7FEFF 		bl	HAL_UART_Init
-  91              	.LVL4:
-  92 0056 08B1     		cbz	r0, .L2
+  79              		.loc 1 33 0
+  80 0042 FFF7FEFF 		bl	HAL_UART_Init
+  81              	.LVL2:
+  82 0046 08B1     		cbz	r0, .L2
+ARM GAS  /tmp/ccvG7kSb.s 			page 3
+
+
   34:./Src/uart.c  ****   {
   35:./Src/uart.c  ****     Error_Handler();
-  93              		.loc 1 35 0
-  94 0058 FFF7FEFF 		bl	Error_Handler
-  95              	.LVL5:
-  96              	.L2:
+  83              		.loc 1 35 0
+  84 0048 FFF7FEFF 		bl	Error_Handler
+  85              	.LVL3:
+  86              	.L2:
   36:./Src/uart.c  ****   }
   37:./Src/uart.c  **** 
   38:./Src/uart.c  ****   uartDati.UartRxReady = 0;
-  97              		.loc 1 38 0
-  98 005c 074B     		ldr	r3, .L4+12
-  99 005e 0022     		movs	r2, #0
- 100 0060 83F87920 		strb	r2, [r3, #121]
+  87              		.loc 1 38 0
+  88 004c 074B     		ldr	r3, .L4+12
+  89 004e 0022     		movs	r2, #0
+  90 0050 83F87920 		strb	r2, [r3, #121]
   39:./Src/uart.c  ****   uartDati.UarttxReady = 1;
- 101              		.loc 1 39 0
- 102 0064 0122     		movs	r2, #1
- 103 0066 83F87A20 		strb	r2, [r3, #122]
+  91              		.loc 1 39 0
+  92 0054 0122     		movs	r2, #1
+  93 0056 83F87A20 		strb	r2, [r3, #122]
   40:./Src/uart.c  **** }
- 104              		.loc 1 40 0
- 105 006a 03B0     		add	sp, sp, #12
- 106              	.LCFI2:
- 107              		.cfi_def_cfa_offset 4
- 108              		@ sp needed
- 109 006c 5DF804FB 		ldr	pc, [sp], #4
- 110              	.L5:
+  94              		.loc 1 40 0
+  95 005a 03B0     		add	sp, sp, #12
+  96              	.LCFI2:
+  97              		.cfi_def_cfa_offset 4
+  98              		@ sp needed
+  99 005c 5DF804FB 		ldr	pc, [sp], #4
+ 100              	.L5:
+ 101              		.align	2
+ 102              	.L4:
+ 103 0060 00100240 		.word	1073876992
+ 104 0064 00000000 		.word	huart2
+ 105 0068 00440040 		.word	1073759232
+ 106 006c 00000000 		.word	uartDati
+ 107              		.cfi_endproc
+ 108              	.LFE64:
+ 110              		.section	.text.Console_Log,"ax",%progbits
  111              		.align	2
- 112              	.L4:
- 113 0070 00100240 		.word	1073876992
- 114 0074 00000000 		.word	huart2
- 115 0078 00440040 		.word	1073759232
- 116 007c 00000000 		.word	uartDati
- 117              		.cfi_endproc
- 118              	.LFE64:
- 120              		.section	.text.Console_Log,"ax",%progbits
- 121              		.align	2
- 122              		.global	Console_Log
- 123              		.thumb
- 124              		.thumb_func
- 126              	Console_Log:
- 127              	.LFB65:
+ 112              		.global	Console_Log
+ 113              		.thumb
+ 114              		.thumb_func
+ 116              	Console_Log:
+ 117              	.LFB65:
   41:./Src/uart.c  **** 
   42:./Src/uart.c  **** void Console_Log(char *message)
   43:./Src/uart.c  **** {
- 128              		.loc 1 43 0
- 129              		.cfi_startproc
- 130              		@ args = 0, pretend = 0, frame = 0
- 131              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc4Ryly6.s 			page 4
-
-
- 132              	.LVL6:
- 133 0000 10B5     		push	{r4, lr}
- 134              	.LCFI3:
- 135              		.cfi_def_cfa_offset 8
- 136              		.cfi_offset 4, -8
- 137              		.cfi_offset 14, -4
- 138 0002 0446     		mov	r4, r0
+ 118              		.loc 1 43 0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              	.LVL4:
+ 123 0000 10B5     		push	{r4, lr}
+ 124              	.LCFI3:
+ 125              		.cfi_def_cfa_offset 8
+ 126              		.cfi_offset 4, -8
+ 127              		.cfi_offset 14, -4
+ 128 0002 0446     		mov	r4, r0
   44:./Src/uart.c  ****     //while(huart2.State != HAL_UART_STATE_READY);
   45:./Src/uart.c  ****     HAL_UART_Transmit_DMA(&huart2, (uint8_t *)message, strlen(message));
- 139              		.loc 1 45 0
- 140 0004 FFF7FEFF 		bl	strlen
- 141              	.LVL7:
- 142 0008 82B2     		uxth	r2, r0
- 143 000a 2146     		mov	r1, r4
- 144 000c 0148     		ldr	r0, .L8
- 145 000e FFF7FEFF 		bl	HAL_UART_Transmit_DMA
- 146              	.LVL8:
- 147 0012 10BD     		pop	{r4, pc}
- 148              	.LVL9:
- 149              	.L9:
- 150              		.align	2
- 151              	.L8:
- 152 0014 00000000 		.word	huart2
- 153              		.cfi_endproc
- 154              	.LFE65:
- 156              		.section	.text.Uart2_TX,"ax",%progbits
- 157              		.align	2
- 158              		.global	Uart2_TX
- 159              		.thumb
- 160              		.thumb_func
- 162              	Uart2_TX:
- 163              	.LFB66:
+ 129              		.loc 1 45 0
+ARM GAS  /tmp/ccvG7kSb.s 			page 4
+
+
+ 130 0004 FFF7FEFF 		bl	strlen
+ 131              	.LVL5:
+ 132 0008 82B2     		uxth	r2, r0
+ 133 000a 2146     		mov	r1, r4
+ 134 000c 0148     		ldr	r0, .L8
+ 135 000e FFF7FEFF 		bl	HAL_UART_Transmit_DMA
+ 136              	.LVL6:
+ 137 0012 10BD     		pop	{r4, pc}
+ 138              	.LVL7:
+ 139              	.L9:
+ 140              		.align	2
+ 141              	.L8:
+ 142 0014 00000000 		.word	huart2
+ 143              		.cfi_endproc
+ 144              	.LFE65:
+ 146              		.section	.text.Uart2_TX,"ax",%progbits
+ 147              		.align	2
+ 148              		.global	Uart2_TX
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	Uart2_TX:
+ 153              	.LFB66:
   46:./Src/uart.c  **** //    HAL_UART_Transmit(&huart2, (uint8_t *)message, strlen(message),200);
   47:./Src/uart.c  **** }
   48:./Src/uart.c  **** 
   49:./Src/uart.c  **** void Uart2_TX(char *message)
   50:./Src/uart.c  **** {
- 164              		.loc 1 50 0
- 165              		.cfi_startproc
- 166              		@ args = 0, pretend = 0, frame = 0
- 167              		@ frame_needed = 0, uses_anonymous_args = 0
- 168              	.LVL10:
- 169 0000 10B5     		push	{r4, lr}
- 170              	.LCFI4:
- 171              		.cfi_def_cfa_offset 8
- 172              		.cfi_offset 4, -8
- 173              		.cfi_offset 14, -4
- 174 0002 0446     		mov	r4, r0
+ 154              		.loc 1 50 0
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 0
+ 157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158              	.LVL8:
+ 159 0000 10B5     		push	{r4, lr}
+ 160              	.LCFI4:
+ 161              		.cfi_def_cfa_offset 8
+ 162              		.cfi_offset 4, -8
+ 163              		.cfi_offset 14, -4
+ 164 0002 0446     		mov	r4, r0
   51:./Src/uart.c  ****     uartDati.UarttxReady = 0;    //occupato
- 175              		.loc 1 51 0
- 176 0004 0022     		movs	r2, #0
- 177 0006 054B     		ldr	r3, .L12
- 178 0008 83F87A20 		strb	r2, [r3, #122]
+ 165              		.loc 1 51 0
+ 166 0004 0022     		movs	r2, #0
+ 167 0006 054B     		ldr	r3, .L12
+ 168 0008 83F87A20 		strb	r2, [r3, #122]
   52:./Src/uart.c  ****     HAL_UART_Transmit_DMA(&huart2, (uint8_t *)message, strlen(message));
- 179              		.loc 1 52 0
- 180 000c FFF7FEFF 		bl	strlen
- 181              	.LVL11:
-ARM GAS  /tmp/cc4Ryly6.s 			page 5
+ 169              		.loc 1 52 0
+ 170 000c FFF7FEFF 		bl	strlen
+ 171              	.LVL9:
+ 172 0010 82B2     		uxth	r2, r0
+ 173 0012 2146     		mov	r1, r4
+ 174 0014 0248     		ldr	r0, .L12+4
+ 175 0016 FFF7FEFF 		bl	HAL_UART_Transmit_DMA
+ 176              	.LVL10:
+ 177 001a 10BD     		pop	{r4, pc}
+ 178              	.LVL11:
+ 179              	.L13:
+ 180              		.align	2
+ 181              	.L12:
+ARM GAS  /tmp/ccvG7kSb.s 			page 5
 
 
- 182 0010 82B2     		uxth	r2, r0
- 183 0012 2146     		mov	r1, r4
- 184 0014 0248     		ldr	r0, .L12+4
- 185 0016 FFF7FEFF 		bl	HAL_UART_Transmit_DMA
- 186              	.LVL12:
- 187 001a 10BD     		pop	{r4, pc}
- 188              	.LVL13:
- 189              	.L13:
- 190              		.align	2
- 191              	.L12:
- 192 001c 00000000 		.word	uartDati
- 193 0020 00000000 		.word	huart2
- 194              		.cfi_endproc
- 195              	.LFE66:
- 197              		.section	.text.Uart2_IS_TX_free,"ax",%progbits
- 198              		.align	2
- 199              		.global	Uart2_IS_TX_free
- 200              		.thumb
- 201              		.thumb_func
- 203              	Uart2_IS_TX_free:
- 204              	.LFB67:
+ 182 001c 00000000 		.word	uartDati
+ 183 0020 00000000 		.word	huart2
+ 184              		.cfi_endproc
+ 185              	.LFE66:
+ 187              		.section	.text.Uart2_IS_TX_free,"ax",%progbits
+ 188              		.align	2
+ 189              		.global	Uart2_IS_TX_free
+ 190              		.thumb
+ 191              		.thumb_func
+ 193              	Uart2_IS_TX_free:
+ 194              	.LFB67:
   53:./Src/uart.c  **** }
   54:./Src/uart.c  **** uint8_t Uart2_IS_TX_free(void){
- 205              		.loc 1 54 0
- 206              		.cfi_startproc
- 207              		@ args = 0, pretend = 0, frame = 0
- 208              		@ frame_needed = 0, uses_anonymous_args = 0
- 209              		@ link register save eliminated.
+ 195              		.loc 1 54 0
+ 196              		.cfi_startproc
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199              		@ link register save eliminated.
   55:./Src/uart.c  ****   return (uartDati.UarttxReady); //(huart2.State == HAL_UART_STATE_READY);
- 210              		.loc 1 55 0
- 211 0000 014B     		ldr	r3, .L15
- 212 0002 93F87A00 		ldrb	r0, [r3, #122]	@ zero_extendqisi2
+ 200              		.loc 1 55 0
+ 201 0000 014B     		ldr	r3, .L15
+ 202 0002 93F87A00 		ldrb	r0, [r3, #122]	@ zero_extendqisi2
   56:./Src/uart.c  **** }
- 213              		.loc 1 56 0
- 214 0006 7047     		bx	lr
- 215              	.L16:
- 216              		.align	2
- 217              	.L15:
- 218 0008 00000000 		.word	uartDati
- 219              		.cfi_endproc
- 220              	.LFE67:
- 222              		.section	.text.Uart2_IS_RX_available,"ax",%progbits
- 223              		.align	2
- 224              		.global	Uart2_IS_RX_available
- 225              		.thumb
- 226              		.thumb_func
- 228              	Uart2_IS_RX_available:
- 229              	.LFB68:
+ 203              		.loc 1 56 0
+ 204 0006 7047     		bx	lr
+ 205              	.L16:
+ 206              		.align	2
+ 207              	.L15:
+ 208 0008 00000000 		.word	uartDati
+ 209              		.cfi_endproc
+ 210              	.LFE67:
+ 212              		.section	.text.Uart2_IS_RX_available,"ax",%progbits
+ 213              		.align	2
+ 214              		.global	Uart2_IS_RX_available
+ 215              		.thumb
+ 216              		.thumb_func
+ 218              	Uart2_IS_RX_available:
+ 219              	.LFB68:
   57:./Src/uart.c  **** 
   58:./Src/uart.c  **** uint8_t Uart2_IS_RX_available(void){
- 230              		.loc 1 58 0
- 231              		.cfi_startproc
- 232              		@ args = 0, pretend = 0, frame = 0
- 233              		@ frame_needed = 0, uses_anonymous_args = 0
- 234              		@ link register save eliminated.
+ 220              		.loc 1 58 0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 0
+ 223              		@ frame_needed = 0, uses_anonymous_args = 0
+ 224              		@ link register save eliminated.
   59:./Src/uart.c  ****   return (uartDati.UartRxReady); //(huart2.State == HAL_UART_STATE_READY);
- 235              		.loc 1 59 0
-ARM GAS  /tmp/cc4Ryly6.s 			page 6
-
-
- 236 0000 014B     		ldr	r3, .L18
- 237 0002 93F87900 		ldrb	r0, [r3, #121]	@ zero_extendqisi2
+ 225              		.loc 1 59 0
+ 226 0000 014B     		ldr	r3, .L18
+ 227 0002 93F87900 		ldrb	r0, [r3, #121]	@ zero_extendqisi2
   60:./Src/uart.c  **** }
- 238              		.loc 1 60 0
- 239 0006 7047     		bx	lr
- 240              	.L19:
- 241              		.align	2
- 242              	.L18:
- 243 0008 00000000 		.word	uartDati
- 244              		.cfi_endproc
- 245              	.LFE68:
- 247              		.section	.text.HAL_UART_RxCpltCallback,"ax",%progbits
- 248              		.align	2
- 249              		.global	HAL_UART_RxCpltCallback
- 250              		.thumb
- 251              		.thumb_func
- 253              	HAL_UART_RxCpltCallback:
- 254              	.LFB69:
+ 228              		.loc 1 60 0
+ 229 0006 7047     		bx	lr
+ 230              	.L19:
+ 231              		.align	2
+ 232              	.L18:
+ 233 0008 00000000 		.word	uartDati
+ 234              		.cfi_endproc
+ARM GAS  /tmp/ccvG7kSb.s 			page 6
+
+
+ 235              	.LFE68:
+ 237              		.section	.text.HAL_UART_RxCpltCallback,"ax",%progbits
+ 238              		.align	2
+ 239              		.global	HAL_UART_RxCpltCallback
+ 240              		.thumb
+ 241              		.thumb_func
+ 243              	HAL_UART_RxCpltCallback:
+ 244              	.LFB69:
   61:./Src/uart.c  **** 
   62:./Src/uart.c  **** 
   63:./Src/uart.c  **** void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   64:./Src/uart.c  **** {
- 255              		.loc 1 64 0
- 256              		.cfi_startproc
- 257              		@ args = 0, pretend = 0, frame = 0
- 258              		@ frame_needed = 0, uses_anonymous_args = 0
- 259              		@ link register save eliminated.
- 260              	.LVL14:
+ 245              		.loc 1 64 0
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 0
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 249              		@ link register save eliminated.
+ 250              	.LVL12:
   65:./Src/uart.c  ****      if (huart->Instance == USART2) {
- 261              		.loc 1 65 0
- 262 0000 0268     		ldr	r2, [r0]
- 263 0002 044B     		ldr	r3, .L22
- 264 0004 9A42     		cmp	r2, r3
- 265 0006 03D1     		bne	.L20
+ 251              		.loc 1 65 0
+ 252 0000 0268     		ldr	r2, [r0]
+ 253 0002 044B     		ldr	r3, .L22
+ 254 0004 9A42     		cmp	r2, r3
+ 255 0006 03D1     		bne	.L20
   66:./Src/uart.c  ****         uartDati.UartRxReady = 1;
- 266              		.loc 1 66 0
- 267 0008 0122     		movs	r2, #1
- 268 000a 034B     		ldr	r3, .L22+4
- 269 000c 83F87920 		strb	r2, [r3, #121]
- 270              	.L20:
- 271 0010 7047     		bx	lr
- 272              	.L23:
- 273 0012 00BF     		.align	2
- 274              	.L22:
- 275 0014 00440040 		.word	1073759232
- 276 0018 00000000 		.word	uartDati
- 277              		.cfi_endproc
- 278              	.LFE69:
- 280              		.section	.text.HAL_UART_TxCpltCallback,"ax",%progbits
- 281              		.align	2
- 282              		.global	HAL_UART_TxCpltCallback
- 283              		.thumb
- 284              		.thumb_func
- 286              	HAL_UART_TxCpltCallback:
- 287              	.LFB70:
+ 256              		.loc 1 66 0
+ 257 0008 0122     		movs	r2, #1
+ 258 000a 034B     		ldr	r3, .L22+4
+ 259 000c 83F87920 		strb	r2, [r3, #121]
+ 260              	.L20:
+ 261 0010 7047     		bx	lr
+ 262              	.L23:
+ 263 0012 00BF     		.align	2
+ 264              	.L22:
+ 265 0014 00440040 		.word	1073759232
+ 266 0018 00000000 		.word	uartDati
+ 267              		.cfi_endproc
+ 268              	.LFE69:
+ 270              		.section	.text.HAL_UART_TxCpltCallback,"ax",%progbits
+ 271              		.align	2
+ 272              		.global	HAL_UART_TxCpltCallback
+ 273              		.thumb
+ 274              		.thumb_func
+ 276              	HAL_UART_TxCpltCallback:
+ 277              	.LFB70:
   67:./Src/uart.c  ****      }
   68:./Src/uart.c  **** }
-ARM GAS  /tmp/cc4Ryly6.s 			page 7
-
-
   69:./Src/uart.c  **** 
   70:./Src/uart.c  **** void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
- 288              		.loc 1 70 0
- 289              		.cfi_startproc
- 290              		@ args = 0, pretend = 0, frame = 0
- 291              		@ frame_needed = 0, uses_anonymous_args = 0
- 292              		@ link register save eliminated.
- 293              	.LVL15:
+ 278              		.loc 1 70 0
+ 279              		.cfi_startproc
+ 280              		@ args = 0, pretend = 0, frame = 0
+ 281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 282              		@ link register save eliminated.
+ 283              	.LVL13:
   71:./Src/uart.c  ****      if (huart->Instance == USART2) {
- 294              		.loc 1 71 0
- 295 0000 0268     		ldr	r2, [r0]
- 296 0002 044B     		ldr	r3, .L26
- 297 0004 9A42     		cmp	r2, r3
- 298 0006 03D1     		bne	.L24
+ 284              		.loc 1 71 0
+ARM GAS  /tmp/ccvG7kSb.s 			page 7
+
+
+ 285 0000 0268     		ldr	r2, [r0]
+ 286 0002 044B     		ldr	r3, .L26
+ 287 0004 9A42     		cmp	r2, r3
+ 288 0006 03D1     		bne	.L24
   72:./Src/uart.c  ****        uartDati.UarttxReady = 1;
- 299              		.loc 1 72 0
- 300 0008 0122     		movs	r2, #1
- 301 000a 034B     		ldr	r3, .L26+4
- 302 000c 83F87A20 		strb	r2, [r3, #122]
- 303              	.L24:
- 304 0010 7047     		bx	lr
- 305              	.L27:
- 306 0012 00BF     		.align	2
- 307              	.L26:
- 308 0014 00440040 		.word	1073759232
- 309 0018 00000000 		.word	uartDati
- 310              		.cfi_endproc
- 311              	.LFE70:
- 313              		.comm	uartDati,123,4
- 314              		.comm	hdma_usart2_tx,56,4
- 315              		.comm	hdma_usart2_rx,56,4
- 316              		.comm	huart2,64,4
- 317              		.text
- 318              	.Letext0:
- 319              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
- 320              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
- 321              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
- 322              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 323              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 324              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
- 325              		.file 8 "./Inc/uart.h"
- 326              		.file 9 "./Drivers/CMSIS/Include/core_cm3.h"
- 327              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
- 328              		.file 11 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/string.h"
-ARM GAS  /tmp/cc4Ryly6.s 			page 8
+ 289              		.loc 1 72 0
+ 290 0008 0122     		movs	r2, #1
+ 291 000a 034B     		ldr	r3, .L26+4
+ 292 000c 83F87A20 		strb	r2, [r3, #122]
+ 293              	.L24:
+ 294 0010 7047     		bx	lr
+ 295              	.L27:
+ 296 0012 00BF     		.align	2
+ 297              	.L26:
+ 298 0014 00440040 		.word	1073759232
+ 299 0018 00000000 		.word	uartDati
+ 300              		.cfi_endproc
+ 301              	.LFE70:
+ 303              		.comm	uartDati,123,4
+ 304              		.comm	hdma_usart2_tx,56,4
+ 305              		.comm	hdma_usart2_rx,56,4
+ 306              		.comm	huart2,64,4
+ 307              		.text
+ 308              	.Letext0:
+ 309              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 310              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 311              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 312              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 313              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 314              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 315              		.file 8 "./Inc/uart.h"
+ 316              		.file 9 "./Drivers/CMSIS/Include/core_cm3.h"
+ 317              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ 318              		.file 11 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/string.h"
+ARM GAS  /tmp/ccvG7kSb.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 uart.c
-     /tmp/cc4Ryly6.s:20     .text.MX_USART2_UART_Init:00000000 $t
-     /tmp/cc4Ryly6.s:25     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
-     /tmp/cc4Ryly6.s:113    .text.MX_USART2_UART_Init:00000070 $d
+     /tmp/ccvG7kSb.s:20     .text.MX_USART2_UART_Init:00000000 $t
+     /tmp/ccvG7kSb.s:25     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+     /tmp/ccvG7kSb.s:103    .text.MX_USART2_UART_Init:00000060 $d
                             *COM*:00000040 huart2
                             *COM*:0000007b uartDati
-     /tmp/cc4Ryly6.s:121    .text.Console_Log:00000000 $t
-     /tmp/cc4Ryly6.s:126    .text.Console_Log:00000000 Console_Log
-     /tmp/cc4Ryly6.s:152    .text.Console_Log:00000014 $d
-     /tmp/cc4Ryly6.s:157    .text.Uart2_TX:00000000 $t
-     /tmp/cc4Ryly6.s:162    .text.Uart2_TX:00000000 Uart2_TX
-     /tmp/cc4Ryly6.s:192    .text.Uart2_TX:0000001c $d
-     /tmp/cc4Ryly6.s:198    .text.Uart2_IS_TX_free:00000000 $t
-     /tmp/cc4Ryly6.s:203    .text.Uart2_IS_TX_free:00000000 Uart2_IS_TX_free
-     /tmp/cc4Ryly6.s:218    .text.Uart2_IS_TX_free:00000008 $d
-     /tmp/cc4Ryly6.s:223    .text.Uart2_IS_RX_available:00000000 $t
-     /tmp/cc4Ryly6.s:228    .text.Uart2_IS_RX_available:00000000 Uart2_IS_RX_available
-     /tmp/cc4Ryly6.s:243    .text.Uart2_IS_RX_available:00000008 $d
-     /tmp/cc4Ryly6.s:248    .text.HAL_UART_RxCpltCallback:00000000 $t
-     /tmp/cc4Ryly6.s:253    .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
-     /tmp/cc4Ryly6.s:275    .text.HAL_UART_RxCpltCallback:00000014 $d
-     /tmp/cc4Ryly6.s:281    .text.HAL_UART_TxCpltCallback:00000000 $t
-     /tmp/cc4Ryly6.s:286    .text.HAL_UART_TxCpltCallback:00000000 HAL_UART_TxCpltCallback
-     /tmp/cc4Ryly6.s:308    .text.HAL_UART_TxCpltCallback:00000014 $d
+     /tmp/ccvG7kSb.s:111    .text.Console_Log:00000000 $t
+     /tmp/ccvG7kSb.s:116    .text.Console_Log:00000000 Console_Log
+     /tmp/ccvG7kSb.s:142    .text.Console_Log:00000014 $d
+     /tmp/ccvG7kSb.s:147    .text.Uart2_TX:00000000 $t
+     /tmp/ccvG7kSb.s:152    .text.Uart2_TX:00000000 Uart2_TX
+     /tmp/ccvG7kSb.s:182    .text.Uart2_TX:0000001c $d
+     /tmp/ccvG7kSb.s:188    .text.Uart2_IS_TX_free:00000000 $t
+     /tmp/ccvG7kSb.s:193    .text.Uart2_IS_TX_free:00000000 Uart2_IS_TX_free
+     /tmp/ccvG7kSb.s:208    .text.Uart2_IS_TX_free:00000008 $d
+     /tmp/ccvG7kSb.s:213    .text.Uart2_IS_RX_available:00000000 $t
+     /tmp/ccvG7kSb.s:218    .text.Uart2_IS_RX_available:00000000 Uart2_IS_RX_available
+     /tmp/ccvG7kSb.s:233    .text.Uart2_IS_RX_available:00000008 $d
+     /tmp/ccvG7kSb.s:238    .text.HAL_UART_RxCpltCallback:00000000 $t
+     /tmp/ccvG7kSb.s:243    .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
+     /tmp/ccvG7kSb.s:265    .text.HAL_UART_RxCpltCallback:00000014 $d
+     /tmp/ccvG7kSb.s:271    .text.HAL_UART_TxCpltCallback:00000000 $t
+     /tmp/ccvG7kSb.s:276    .text.HAL_UART_TxCpltCallback:00000000 HAL_UART_TxCpltCallback
+     /tmp/ccvG7kSb.s:298    .text.HAL_UART_TxCpltCallback:00000014 $d
                             *COM*:00000038 hdma_usart2_tx
                             *COM*:00000038 hdma_usart2_rx
                      .debug_frame:00000010 $d
