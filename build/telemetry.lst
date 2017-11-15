@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc25mYAb.s 			page 1
+ARM GAS  /tmp/ccsxLNeQ.s 			page 1
 
 
    1              		.syntax unified
@@ -34,9 +34,9 @@ ARM GAS  /tmp/cc25mYAb.s 			page 1
    5:./Src/telemetry.c **** #include <stdlib.h>
    6:./Src/telemetry.c **** #include <string.h>
    7:./Src/telemetry.c **** 
-   8:./Src/telemetry.c **** extern UART_HandleTypeDef huart2;
-   9:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart2_rx;
-  10:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart2_tx;
+   8:./Src/telemetry.c **** extern UART_HandleTypeDef huart3;
+   9:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart3_rx;
+  10:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart3_tx;
   11:./Src/telemetry.c **** extern volatile __IO struct UART_dati uartData;
   12:./Src/telemetry.c **** extern volatile __IO struct APPLICATION_dati app;
   13:./Src/telemetry.c **** extern volatile __IO struct BATTERY_dati battery_dati;
@@ -56,14 +56,14 @@ ARM GAS  /tmp/cc25mYAb.s 			page 1
   34              		.cfi_def_cfa_offset 8
   35              		.cfi_offset 3, -8
   36              		.cfi_offset 14, -4
-  21:./Src/telemetry.c ****   MX_USART2_UART_Init();
+  21:./Src/telemetry.c ****   MX_USART3_UART_Init();
   37              		.loc 1 21 0
-ARM GAS  /tmp/cc25mYAb.s 			page 2
+ARM GAS  /tmp/ccsxLNeQ.s 			page 2
 
 
-  38 0002 FFF7FEFF 		bl	MX_USART2_UART_Init
+  38 0002 FFF7FEFF 		bl	MX_USART3_UART_Init
   39              	.LVL0:
-  22:./Src/telemetry.c ****   HAL_UART_Receive_DMA(&huart2, (uint8_t *)&commandsequence, 8);
+  22:./Src/telemetry.c ****   HAL_UART_Receive_DMA(&huart3, (uint8_t *)&commandsequence, 8);
   40              		.loc 1 22 0
   41 0006 0822     		movs	r2, #8
   42 0008 0249     		ldr	r1, .L3
@@ -75,7 +75,7 @@ ARM GAS  /tmp/cc25mYAb.s 			page 1
   48 0012 00BF     		.align	2
   49              	.L3:
   50 0014 00000000 		.word	commandsequence
-  51 0018 00000000 		.word	huart2
+  51 0018 00000000 		.word	huart3
   52              		.cfi_endproc
   53              	.LFE64:
   55              		.global	__aeabi_fmul
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc25mYAb.s 			page 1
   87              	.L7:
   88 0014 00000000 		.word	commandsequence
   89 0018 00007A44 		.word	1148846080
-ARM GAS  /tmp/cc25mYAb.s 			page 3
+ARM GAS  /tmp/ccsxLNeQ.s 			page 3
 
 
   90              		.cfi_endproc
@@ -175,28 +175,28 @@ ARM GAS  /tmp/cc25mYAb.s 			page 1
  140              		.file 8 "./Inc/telemetry.h"
  141              		.file 9 "./Drivers/CMSIS/Include/core_cm3.h"
  142              		.file 10 "./Inc/uart.h"
-ARM GAS  /tmp/cc25mYAb.s 			page 4
+ARM GAS  /tmp/ccsxLNeQ.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 telemetry.c
-     /tmp/cc25mYAb.s:20     .text.Telemetry_init:00000000 $t
-     /tmp/cc25mYAb.s:25     .text.Telemetry_init:00000000 Telemetry_init
-     /tmp/cc25mYAb.s:50     .text.Telemetry_init:00000014 $d
+     /tmp/ccsxLNeQ.s:20     .text.Telemetry_init:00000000 $t
+     /tmp/ccsxLNeQ.s:25     .text.Telemetry_init:00000000 Telemetry_init
+     /tmp/ccsxLNeQ.s:50     .text.Telemetry_init:00000014 $d
                             *COM*:00000008 commandsequence
-     /tmp/cc25mYAb.s:58     .text.getMotorL:00000000 $t
-     /tmp/cc25mYAb.s:63     .text.getMotorL:00000000 getMotorL
-     /tmp/cc25mYAb.s:88     .text.getMotorL:00000014 $d
-     /tmp/cc25mYAb.s:94     .text.getMotorR:00000000 $t
-     /tmp/cc25mYAb.s:99     .text.getMotorR:00000000 getMotorR
-     /tmp/cc25mYAb.s:124    .text.getMotorR:00000014 $d
+     /tmp/ccsxLNeQ.s:58     .text.getMotorL:00000000 $t
+     /tmp/ccsxLNeQ.s:63     .text.getMotorL:00000000 getMotorL
+     /tmp/ccsxLNeQ.s:88     .text.getMotorL:00000014 $d
+     /tmp/ccsxLNeQ.s:94     .text.getMotorR:00000000 $t
+     /tmp/ccsxLNeQ.s:99     .text.getMotorR:00000000 getMotorR
+     /tmp/ccsxLNeQ.s:124    .text.getMotorR:00000014 $d
                             *COM*:00000004 leftToTransfer
                             *COM*:0000001c telemetry
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
-MX_USART2_UART_Init
+MX_USART3_UART_Init
 HAL_UART_Receive_DMA
-huart2
+huart3
 __aeabi_fmul
 __aeabi_f2iz

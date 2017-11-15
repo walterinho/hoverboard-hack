@@ -145,31 +145,27 @@ int main(void)
   applcation_init();
   MotorR_start();
   MotorL_start();
+  MotorR_pwm(80);
 
   uint32_t sinValue = 45 * 50;
   uint8_t state = 0;
   while(1){
     sinValue++;
-    int speedL = -CLAMP(getMotorR(), -200, 200);
-    int speedR = -CLAMP(getMotorL(), -200, 200);
-    MotorL_pwm(speedL*10);
-    MotorR_pwm(speedR*10);
+    //int speedL = -CLAMP(getMotorR(), -200, 200);
+    //int speedR = -CLAMP(getMotorL(), -200, 200);
+    //MotorL_pwm(speedL*10);
+    //MotorR_pwm(speedR*10);
     counterTemp = HAL_GetTick();
     if ((sinValue) % (180 * 50) == 0) {
       state = !state;
       Led_Set(state);
       //Console_Log("otter!\n\r");
       //Buzzer_OneBeep();
-      /*char str[50];
+      char str[100];
       memset(&str[0], 0, sizeof(str));
-      sprintf(str, "MR = %i\n\r", speedR);
+      sprintf(str, "%i;%i\n\r", ADC_PA2(), ADC_PA3());
 
       Console_Log(str);
-
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "ML = %i\n\r", speedL);
-
-      Console_Log(str);*/
     }
 
 
