@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccnnS5YL.s 			page 1
+ARM GAS  /tmp/ccpsuFD6.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
   30:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   31:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
   32:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-ARM GAS  /tmp/ccnnS5YL.s 			page 2
+ARM GAS  /tmp/ccpsuFD6.s 			page 2
 
 
   33:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
   87:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * @}
   88:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   */
   89:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****    
-ARM GAS  /tmp/ccnnS5YL.s 			page 3
+ARM GAS  /tmp/ccpsuFD6.s 			page 3
 
 
   90:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** /** @defgroup PWR_CR_register_alias PWR CR Register alias address
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
   33              		.syntax unified
   34              	@ 137 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" 1
   35 0000 20BF     		wfe
-ARM GAS  /tmp/ccnnS5YL.s 			page 4
+ARM GAS  /tmp/ccpsuFD6.s 			page 4
 
 
   36              	@ 0 "" 2
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  175:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** {
   55              		.loc 1 175 0
   56              		.cfi_startproc
-ARM GAS  /tmp/ccnnS5YL.s 			page 5
+ARM GAS  /tmp/ccpsuFD6.s 			page 5
 
 
   57              		@ args = 0, pretend = 0, frame = 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
    7:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* Copyright (c) 2009 - 2015 ARM LIMITED
    8:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
    9:./Drivers/CMSIS/Include/cmsis_gcc.h ****    All rights reserved.
-ARM GAS  /tmp/ccnnS5YL.s 			page 6
+ARM GAS  /tmp/ccpsuFD6.s 			page 6
 
 
   10:./Drivers/CMSIS/Include/cmsis_gcc.h ****    Redistribution and use in source and binary forms, with or without
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
   64:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
   65:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
   66:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
-ARM GAS  /tmp/ccnnS5YL.s 			page 7
+ARM GAS  /tmp/ccpsuFD6.s 			page 7
 
 
   67:./Drivers/CMSIS/Include/cmsis_gcc.h ****   Can only be executed in Privileged modes.
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  121:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
  122:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  123:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
-ARM GAS  /tmp/ccnnS5YL.s 			page 8
+ARM GAS  /tmp/ccpsuFD6.s 			page 8
 
 
  124:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  178:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
  179:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
  180:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccnnS5YL.s 			page 9
+ARM GAS  /tmp/ccpsuFD6.s 			page 9
 
 
  181:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  235:./Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
  236:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  237:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_fault_irq(void)
-ARM GAS  /tmp/ccnnS5YL.s 			page 10
+ARM GAS  /tmp/ccpsuFD6.s 			page 10
 
 
  238:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  292:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  293:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  294:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccnnS5YL.s 			page 11
+ARM GAS  /tmp/ccpsuFD6.s 			page 11
 
 
  295:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Fault Mask
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  349:./Drivers/CMSIS/Include/cmsis_gcc.h **** /*@} end of CMSIS_Core_RegAccFunctions */
  350:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  351:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccnnS5YL.s 			page 12
+ARM GAS  /tmp/ccpsuFD6.s 			page 12
 
 
  352:./Drivers/CMSIS/Include/cmsis_gcc.h **** /* ##########################  Core Instruction Access  ######################### */
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  406:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("sev");
  407:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
  408:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccnnS5YL.s 			page 13
+ARM GAS  /tmp/ccpsuFD6.s 			page 13
 
 
  409:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  463:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  464:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Reverse byte order (16 bit)
  465:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Reverses the byte order in two unsigned short values.
-ARM GAS  /tmp/ccnnS5YL.s 			page 14
+ARM GAS  /tmp/ccpsuFD6.s 			page 14
 
 
  466:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    value  Value to reverse
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  520:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  521:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Reverse bit order of value
  522:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Reverses the bit order of the given value.
-ARM GAS  /tmp/ccnnS5YL.s 			page 15
+ARM GAS  /tmp/ccpsuFD6.s 			page 15
 
 
  523:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    value  Value to reverse
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  128              		@ link register save eliminated.
  129              	.LVL2:
  130              	.LBB30:
-ARM GAS  /tmp/ccnnS5YL.s 			page 16
+ARM GAS  /tmp/ccpsuFD6.s 			page 16
 
 
  131              	.LBB31:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  227:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****           __HAL_PVD_EXTI_ENABLE_IT() macro.
  228:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****       (+) The PVD is stopped in Standby mode.
  229:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
-ARM GAS  /tmp/ccnnS5YL.s 			page 17
+ARM GAS  /tmp/ccpsuFD6.s 			page 17
 
 
  230:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****     *** WakeUp pin configuration ***
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  284:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****           (++) WFE entry mode, Any EXTI Line (Internal or External) configured in Event mode.
  285:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
  286:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****    *** Standby mode ***
-ARM GAS  /tmp/ccnnS5YL.s 			page 18
+ARM GAS  /tmp/ccpsuFD6.s 			page 18
 
 
  287:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****    ====================
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  167              	.LVL4:
  336:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Check the parameters */
  337:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   assert_param(IS_PWR_PVD_LEVEL(sConfigPVD->PVDLevel));
-ARM GAS  /tmp/ccnnS5YL.s 			page 19
+ARM GAS  /tmp/ccpsuFD6.s 			page 19
 
 
  338:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   assert_param(IS_PWR_PVD_MODE(sConfigPVD->Mode));
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  203 0042 4368     		ldr	r3, [r0, #4]
  204 0044 13F4003F 		tst	r3, #131072
  205 0048 04D0     		beq	.L9
-ARM GAS  /tmp/ccnnS5YL.s 			page 20
+ARM GAS  /tmp/ccpsuFD6.s 			page 20
 
 
  357:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   {
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  370:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   }
  371:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** }
  372:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
-ARM GAS  /tmp/ccnnS5YL.s 			page 21
+ARM GAS  /tmp/ccpsuFD6.s 			page 21
 
 
  373:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** /**
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  289              		@ args = 0, pretend = 0, frame = 0
  290              		@ frame_needed = 0, uses_anonymous_args = 0
  291              		@ link register save eliminated.
-ARM GAS  /tmp/ccnnS5YL.s 			page 22
+ARM GAS  /tmp/ccpsuFD6.s 			page 22
 
 
  292              	.LVL7:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  335              	@ 531 "./Drivers/CMSIS/Include/cmsis_gcc.h" 1
  336 0000 90FAA0F0 		rbit r0, r0
  337              	@ 0 "" 2
-ARM GAS  /tmp/ccnnS5YL.s 			page 23
+ARM GAS  /tmp/ccpsuFD6.s 			page 23
 
 
  338              	.LVL10:
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  379              		.syntax unified
  380              	.LBE39:
  381              	.LBE38:
-ARM GAS  /tmp/ccnnS5YL.s 			page 24
+ARM GAS  /tmp/ccpsuFD6.s 			page 24
 
 
  417:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Check the parameter */
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  412 0004 23F00403 		bic	r3, r3, #4
  413 0008 1361     		str	r3, [r2, #16]
  443:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
-ARM GAS  /tmp/ccnnS5YL.s 			page 25
+ARM GAS  /tmp/ccpsuFD6.s 			page 25
 
 
  444:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Select SLEEP mode entry -------------------------------------------------*/
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  463              	.L25:
  464 001c 00ED00E0 		.word	-536810240
  465              	.LBE47:
-ARM GAS  /tmp/ccnnS5YL.s 			page 26
+ARM GAS  /tmp/ccpsuFD6.s 			page 26
 
 
  466              	.LBE46:
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  480:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Check the parameters */
  481:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   assert_param(IS_PWR_REGULATOR(Regulator));
  482:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   assert_param(IS_PWR_STOP_ENTRY(STOPEntry));
-ARM GAS  /tmp/ccnnS5YL.s 			page 27
+ARM GAS  /tmp/ccpsuFD6.s 			page 27
 
 
  483:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  528              		.syntax unified
  529              	.LBE51:
  530              	.LBE50:
-ARM GAS  /tmp/ccnnS5YL.s 			page 28
+ARM GAS  /tmp/ccpsuFD6.s 			page 28
 
 
  495:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   {
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  562              		@ args = 0, pretend = 0, frame = 0
  563              		@ frame_needed = 0, uses_anonymous_args = 0
  564              		@ link register save eliminated.
-ARM GAS  /tmp/ccnnS5YL.s 			page 29
+ARM GAS  /tmp/ccpsuFD6.s 			page 29
 
 
  520:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Select Standby mode */
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  537:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * @note Set SLEEPONEXIT bit of SCR register. When this bit is set, the processor 
  538:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   *       re-enters SLEEP mode when an interruption handling is over.
  539:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   *       Setting this bit is useful when the processor is expected to run only on
-ARM GAS  /tmp/ccnnS5YL.s 			page 30
+ARM GAS  /tmp/ccpsuFD6.s 			page 30
 
 
  540:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   *       interruptions handling.         
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  639 000a 7047     		bx	lr
  640              	.L41:
  641              		.align	2
-ARM GAS  /tmp/ccnnS5YL.s 			page 31
+ARM GAS  /tmp/ccpsuFD6.s 			page 31
 
 
  642              	.L40:
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  579:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   *       WFE to wake up when an interrupt moves from inactive to pended.         
  580:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * @retval None
  581:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   */
-ARM GAS  /tmp/ccnnS5YL.s 			page 32
+ARM GAS  /tmp/ccpsuFD6.s 			page 32
 
 
  582:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** void HAL_PWR_DisableSEVOnPend(void)
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  612:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** __weak void HAL_PWR_PVDCallback(void)
  613:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** {
  707              		.loc 1 613 0
-ARM GAS  /tmp/ccnnS5YL.s 			page 33
+ARM GAS  /tmp/ccpsuFD6.s 			page 33
 
 
  708              		.cfi_startproc
@@ -1978,62 +1978,62 @@ ARM GAS  /tmp/ccnnS5YL.s 			page 1
  760              		.file 6 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
  761              		.file 7 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
  762              		.file 8 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h"
-ARM GAS  /tmp/ccnnS5YL.s 			page 34
+ARM GAS  /tmp/ccpsuFD6.s 			page 34
 
 
-ARM GAS  /tmp/ccnnS5YL.s 			page 35
+ARM GAS  /tmp/ccpsuFD6.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_pwr.c
-     /tmp/ccnnS5YL.s:20     .text.PWR_OverloadWfe:00000000 $t
-     /tmp/ccnnS5YL.s:24     .text.PWR_OverloadWfe:00000000 PWR_OverloadWfe
-     /tmp/ccnnS5YL.s:48     .text.HAL_PWR_DeInit:00000000 $t
-     /tmp/ccnnS5YL.s:53     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
-     /tmp/ccnnS5YL.s:73     .text.HAL_PWR_DeInit:00000014 $d
-     /tmp/ccnnS5YL.s:78     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
-     /tmp/ccnnS5YL.s:83     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
-     /tmp/ccnnS5YL.s:117    .text.HAL_PWR_DisableBkUpAccess:00000000 $t
-     /tmp/ccnnS5YL.s:122    .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
-     /tmp/ccnnS5YL.s:155    .text.HAL_PWR_ConfigPVD:00000000 $t
-     /tmp/ccnnS5YL.s:160    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
-     /tmp/ccnnS5YL.s:236    .text.HAL_PWR_ConfigPVD:0000007c $d
-     /tmp/ccnnS5YL.s:242    .text.HAL_PWR_EnablePVD:00000000 $t
-     /tmp/ccnnS5YL.s:247    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
-     /tmp/ccnnS5YL.s:280    .text.HAL_PWR_DisablePVD:00000000 $t
-     /tmp/ccnnS5YL.s:285    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
-     /tmp/ccnnS5YL.s:318    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
-     /tmp/ccnnS5YL.s:323    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
-     /tmp/ccnnS5YL.s:352    .text.HAL_PWR_EnableWakeUpPin:00000014 $d
-     /tmp/ccnnS5YL.s:357    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
-     /tmp/ccnnS5YL.s:362    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
-     /tmp/ccnnS5YL.s:391    .text.HAL_PWR_DisableWakeUpPin:00000014 $d
-     /tmp/ccnnS5YL.s:396    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
-     /tmp/ccnnS5YL.s:401    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
-     /tmp/ccnnS5YL.s:464    .text.HAL_PWR_EnterSLEEPMode:0000001c $d
-     /tmp/ccnnS5YL.s:471    .text.HAL_PWR_EnterSTOPMode:00000000 $t
-     /tmp/ccnnS5YL.s:476    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
-     /tmp/ccnnS5YL.s:547    .text.HAL_PWR_EnterSTOPMode:00000040 $d
-     /tmp/ccnnS5YL.s:553    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
-     /tmp/ccnnS5YL.s:558    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
-     /tmp/ccnnS5YL.s:588    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
-     /tmp/ccnnS5YL.s:596    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
-     /tmp/ccnnS5YL.s:601    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
-     /tmp/ccnnS5YL.s:617    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
-     /tmp/ccnnS5YL.s:622    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
-     /tmp/ccnnS5YL.s:627    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
-     /tmp/ccnnS5YL.s:643    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
-     /tmp/ccnnS5YL.s:648    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
-     /tmp/ccnnS5YL.s:653    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
-     /tmp/ccnnS5YL.s:669    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
-     /tmp/ccnnS5YL.s:674    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
-     /tmp/ccnnS5YL.s:679    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
-     /tmp/ccnnS5YL.s:695    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
-     /tmp/ccnnS5YL.s:700    .text.HAL_PWR_PVDCallback:00000000 $t
-     /tmp/ccnnS5YL.s:705    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
-     /tmp/ccnnS5YL.s:717    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
-     /tmp/ccnnS5YL.s:722    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
-     /tmp/ccnnS5YL.s:751    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
+     /tmp/ccpsuFD6.s:20     .text.PWR_OverloadWfe:00000000 $t
+     /tmp/ccpsuFD6.s:24     .text.PWR_OverloadWfe:00000000 PWR_OverloadWfe
+     /tmp/ccpsuFD6.s:48     .text.HAL_PWR_DeInit:00000000 $t
+     /tmp/ccpsuFD6.s:53     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
+     /tmp/ccpsuFD6.s:73     .text.HAL_PWR_DeInit:00000014 $d
+     /tmp/ccpsuFD6.s:78     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
+     /tmp/ccpsuFD6.s:83     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
+     /tmp/ccpsuFD6.s:117    .text.HAL_PWR_DisableBkUpAccess:00000000 $t
+     /tmp/ccpsuFD6.s:122    .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
+     /tmp/ccpsuFD6.s:155    .text.HAL_PWR_ConfigPVD:00000000 $t
+     /tmp/ccpsuFD6.s:160    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
+     /tmp/ccpsuFD6.s:236    .text.HAL_PWR_ConfigPVD:0000007c $d
+     /tmp/ccpsuFD6.s:242    .text.HAL_PWR_EnablePVD:00000000 $t
+     /tmp/ccpsuFD6.s:247    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
+     /tmp/ccpsuFD6.s:280    .text.HAL_PWR_DisablePVD:00000000 $t
+     /tmp/ccpsuFD6.s:285    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
+     /tmp/ccpsuFD6.s:318    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
+     /tmp/ccpsuFD6.s:323    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
+     /tmp/ccpsuFD6.s:352    .text.HAL_PWR_EnableWakeUpPin:00000014 $d
+     /tmp/ccpsuFD6.s:357    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
+     /tmp/ccpsuFD6.s:362    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
+     /tmp/ccpsuFD6.s:391    .text.HAL_PWR_DisableWakeUpPin:00000014 $d
+     /tmp/ccpsuFD6.s:396    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
+     /tmp/ccpsuFD6.s:401    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
+     /tmp/ccpsuFD6.s:464    .text.HAL_PWR_EnterSLEEPMode:0000001c $d
+     /tmp/ccpsuFD6.s:471    .text.HAL_PWR_EnterSTOPMode:00000000 $t
+     /tmp/ccpsuFD6.s:476    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
+     /tmp/ccpsuFD6.s:547    .text.HAL_PWR_EnterSTOPMode:00000040 $d
+     /tmp/ccpsuFD6.s:553    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
+     /tmp/ccpsuFD6.s:558    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
+     /tmp/ccpsuFD6.s:588    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
+     /tmp/ccpsuFD6.s:596    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
+     /tmp/ccpsuFD6.s:601    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
+     /tmp/ccpsuFD6.s:617    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
+     /tmp/ccpsuFD6.s:622    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
+     /tmp/ccpsuFD6.s:627    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
+     /tmp/ccpsuFD6.s:643    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
+     /tmp/ccpsuFD6.s:648    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
+     /tmp/ccpsuFD6.s:653    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
+     /tmp/ccpsuFD6.s:669    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
+     /tmp/ccpsuFD6.s:674    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
+     /tmp/ccpsuFD6.s:679    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
+     /tmp/ccpsuFD6.s:695    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
+     /tmp/ccpsuFD6.s:700    .text.HAL_PWR_PVDCallback:00000000 $t
+     /tmp/ccpsuFD6.s:705    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
+     /tmp/ccpsuFD6.s:717    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
+     /tmp/ccpsuFD6.s:722    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
+     /tmp/ccpsuFD6.s:751    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

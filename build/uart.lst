@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccBjyFna.s 			page 1
+ARM GAS  /tmp/ccG2Eamk.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccBjyFna.s 			page 1
   17:./Src/uart.c  ****   __HAL_RCC_USART3_CLK_ENABLE();
   40              		.loc 1 17 0
   41 0004 1A4B     		ldr	r3, .L4
-ARM GAS  /tmp/ccBjyFna.s 			page 2
+ARM GAS  /tmp/ccG2Eamk.s 			page 2
 
 
   42 0006 DA69     		ldr	r2, [r3, #28]
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccBjyFna.s 			page 1
   30:./Src/uart.c  ****   huart3.Init.Mode = UART_MODE_TX_RX;
   84              		.loc 1 30 0
   85 004c 0C22     		movs	r2, #12
-ARM GAS  /tmp/ccBjyFna.s 			page 3
+ARM GAS  /tmp/ccG2Eamk.s 			page 3
 
 
   86 004e 4261     		str	r2, [r0, #20]
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccBjyFna.s 			page 1
  129              		.cfi_startproc
  130              		@ args = 0, pretend = 0, frame = 0
  131              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccBjyFna.s 			page 4
+ARM GAS  /tmp/ccG2Eamk.s 			page 4
 
 
  132              	.LVL6:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccBjyFna.s 			page 1
  179              		.loc 1 52 0
  180 000c FFF7FEFF 		bl	strlen
  181              	.LVL11:
-ARM GAS  /tmp/ccBjyFna.s 			page 5
+ARM GAS  /tmp/ccG2Eamk.s 			page 5
 
 
  182 0010 82B2     		uxth	r2, r0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccBjyFna.s 			page 1
  234              		@ link register save eliminated.
   59:./Src/uart.c  ****   return (uartDati.UartRxReady); //(huart2.State == HAL_UART_STATE_READY);
  235              		.loc 1 59 0
-ARM GAS  /tmp/ccBjyFna.s 			page 6
+ARM GAS  /tmp/ccG2Eamk.s 			page 6
 
 
  236 0000 014B     		ldr	r3, .L18
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccBjyFna.s 			page 1
  287              	.LFB70:
   67:./Src/uart.c  ****      }
   68:./Src/uart.c  **** }
-ARM GAS  /tmp/ccBjyFna.s 			page 7
+ARM GAS  /tmp/ccG2Eamk.s 			page 7
 
 
   69:./Src/uart.c  **** 
@@ -405,34 +405,34 @@ ARM GAS  /tmp/ccBjyFna.s 			page 1
  326              		.file 9 "./Drivers/CMSIS/Include/core_cm3.h"
  327              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
  328              		.file 11 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/string.h"
-ARM GAS  /tmp/ccBjyFna.s 			page 8
+ARM GAS  /tmp/ccG2Eamk.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 uart.c
-     /tmp/ccBjyFna.s:20     .text.MX_USART3_UART_Init:00000000 $t
-     /tmp/ccBjyFna.s:25     .text.MX_USART3_UART_Init:00000000 MX_USART3_UART_Init
-     /tmp/ccBjyFna.s:113    .text.MX_USART3_UART_Init:00000070 $d
+     /tmp/ccG2Eamk.s:20     .text.MX_USART3_UART_Init:00000000 $t
+     /tmp/ccG2Eamk.s:25     .text.MX_USART3_UART_Init:00000000 MX_USART3_UART_Init
+     /tmp/ccG2Eamk.s:113    .text.MX_USART3_UART_Init:00000070 $d
                             *COM*:00000040 huart3
                             *COM*:0000007b uartDati
-     /tmp/ccBjyFna.s:121    .text.Console_Log:00000000 $t
-     /tmp/ccBjyFna.s:126    .text.Console_Log:00000000 Console_Log
-     /tmp/ccBjyFna.s:152    .text.Console_Log:00000014 $d
-     /tmp/ccBjyFna.s:157    .text.Uart3_TX:00000000 $t
-     /tmp/ccBjyFna.s:162    .text.Uart3_TX:00000000 Uart3_TX
-     /tmp/ccBjyFna.s:192    .text.Uart3_TX:0000001c $d
-     /tmp/ccBjyFna.s:198    .text.Uart3_IS_TX_free:00000000 $t
-     /tmp/ccBjyFna.s:203    .text.Uart3_IS_TX_free:00000000 Uart3_IS_TX_free
-     /tmp/ccBjyFna.s:218    .text.Uart3_IS_TX_free:00000008 $d
-     /tmp/ccBjyFna.s:223    .text.Uart3_IS_RX_available:00000000 $t
-     /tmp/ccBjyFna.s:228    .text.Uart3_IS_RX_available:00000000 Uart3_IS_RX_available
-     /tmp/ccBjyFna.s:243    .text.Uart3_IS_RX_available:00000008 $d
-     /tmp/ccBjyFna.s:248    .text.HAL_UART_RxCpltCallback:00000000 $t
-     /tmp/ccBjyFna.s:253    .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
-     /tmp/ccBjyFna.s:275    .text.HAL_UART_RxCpltCallback:00000014 $d
-     /tmp/ccBjyFna.s:281    .text.HAL_UART_TxCpltCallback:00000000 $t
-     /tmp/ccBjyFna.s:286    .text.HAL_UART_TxCpltCallback:00000000 HAL_UART_TxCpltCallback
-     /tmp/ccBjyFna.s:308    .text.HAL_UART_TxCpltCallback:00000014 $d
+     /tmp/ccG2Eamk.s:121    .text.Console_Log:00000000 $t
+     /tmp/ccG2Eamk.s:126    .text.Console_Log:00000000 Console_Log
+     /tmp/ccG2Eamk.s:152    .text.Console_Log:00000014 $d
+     /tmp/ccG2Eamk.s:157    .text.Uart3_TX:00000000 $t
+     /tmp/ccG2Eamk.s:162    .text.Uart3_TX:00000000 Uart3_TX
+     /tmp/ccG2Eamk.s:192    .text.Uart3_TX:0000001c $d
+     /tmp/ccG2Eamk.s:198    .text.Uart3_IS_TX_free:00000000 $t
+     /tmp/ccG2Eamk.s:203    .text.Uart3_IS_TX_free:00000000 Uart3_IS_TX_free
+     /tmp/ccG2Eamk.s:218    .text.Uart3_IS_TX_free:00000008 $d
+     /tmp/ccG2Eamk.s:223    .text.Uart3_IS_RX_available:00000000 $t
+     /tmp/ccG2Eamk.s:228    .text.Uart3_IS_RX_available:00000000 Uart3_IS_RX_available
+     /tmp/ccG2Eamk.s:243    .text.Uart3_IS_RX_available:00000008 $d
+     /tmp/ccG2Eamk.s:248    .text.HAL_UART_RxCpltCallback:00000000 $t
+     /tmp/ccG2Eamk.s:253    .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
+     /tmp/ccG2Eamk.s:275    .text.HAL_UART_RxCpltCallback:00000014 $d
+     /tmp/ccG2Eamk.s:281    .text.HAL_UART_TxCpltCallback:00000000 $t
+     /tmp/ccG2Eamk.s:286    .text.HAL_UART_TxCpltCallback:00000000 HAL_UART_TxCpltCallback
+     /tmp/ccG2Eamk.s:308    .text.HAL_UART_TxCpltCallback:00000014 $d
                             *COM*:00000038 hdma_usart3_tx
                             *COM*:00000038 hdma_usart3_rx
                      .debug_frame:00000010 $d
