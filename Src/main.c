@@ -145,27 +145,44 @@ int main(void)
   applcation_init();
   MotorR_start();
   MotorL_start();
-  MotorR_pwm(80);
+  //MotorR_pwm(80);
 
   uint32_t sinValue = 45 * 50;
   uint8_t state = 0;
+  int lastSpeedL = 0, lastSpeedR = 0;
   while(1){
     sinValue++;
-    //int speedL = -CLAMP(getMotorR(), -200, 200);
-    //int speedR = -CLAMP(getMotorL(), -200, 200);
-    //MotorL_pwm(speedL*10);
-    //MotorR_pwm(speedR*10);
     counterTemp = HAL_GetTick();
-    if ((sinValue) % (180 * 50) == 0) {
-      state = !state;
-      Led_Set(state);
-      //Console_Log("otter!\n\r");
-      //Buzzer_OneBeep();
+    if ((sinValue) % (500) == 0) {
+      uint16_t distance = CLAMP(ADC_PA3() - 175, 0, 4095);
+      int16_t steering = ADC_PA2() - 2048;
+      int speedL = -CLAMP((distance - 1000) -  (steering / 10.0), -800, 800);
+      int speedR = -CLAMP((distance - 1000) +  (steering / 10.0), -800, 800);
+      if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50)) {
+        if (distance > 850) {
+          MotorL_pwm(speedL);
+          MotorR_pwm(speedR);
+        } else {
+          MotorL_pwm(0);
+          MotorR_pwm(0);
+        }
+      }
+      if (distance > 3000) { // Error, robot too far away!
+        MotorL_pwm(0);
+        MotorR_pwm(0);
+        while(1) {
+          HAL_IWDG_Refresh(&hiwdg);
+        }
+      }
+
       char str[100];
       memset(&str[0], 0, sizeof(str));
-      sprintf(str, "%i;%i\n\r", ADC_PA2(), ADC_PA3());
-
+      sprintf(str, "%i;%i\n\r", distance, steering);
       Console_Log(str);
+
+
+      lastSpeedL = speedL;
+      lastSpeedR = speedR;
     }
 
 
