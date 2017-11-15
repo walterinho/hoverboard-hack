@@ -59,7 +59,7 @@ void applcation_init(void){
   MotorL_stop();
   battery_dati.time_batt = HAL_GetTick();
   battery_dati.time_lowvoltage = HAL_GetTick();
-  battery_dati.somma_batt = 0;
+  battery_dati.somma_batt = 1400;
   battery_dati.counter_media = 0;
   app.cruise_soft_run_nohand = 0.0;
 
@@ -645,8 +645,8 @@ void Battery_TASK(void){
     battery_dati.time_batt = HAL_GetTick();
 
     temp32 = battery_dati.somma_batt;
-    battery_dati.somma_batt -=  temp32 / 30.0;
-    battery_dati.somma_batt += ADC_BATTERY() / 30.0;
+    battery_dati.somma_batt -=  temp32 / 10.0;
+    battery_dati.somma_batt += ADC_BATTERY() / 10.0;
 
       //Batteria media valore
    battery_dati.VBatt = battery_dati.somma_batt * ADC_BATTERY_VOLT;
@@ -726,6 +726,13 @@ void Current_Motor_TASK(void){
 
 
   }
+}
+
+int16_t getMotorCurrentR(){
+  return (ADC_MOTOR_RIGHT()  - ADC_MOTOR_R_CENTER);
+}
+int16_t getMotorCurrentL(){
+  return (ADC_MOTOR_LEFT()  - ADC_MOTOR_L_CENTER);
 }
 
 
