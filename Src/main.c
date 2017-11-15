@@ -104,23 +104,12 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-  MX_IWDG_Init();
+  Button_init();
 
-  _init_us();
+  Power_Set(1);
 
-  //MX_I2C2_Init();
+
   Telemetry_init();
-
- /*
-  while(1){
-
-      Telemetry_TASK();
-      if(telemetry.dataREADY_JOYSTICK){
-          telemetry.dataREADY_JOYSTICK = 0;
-      }
-
-  }
-  */
 
   Buzzer_init();
   Led_init();
@@ -131,59 +120,71 @@ int main(void)
   MotorL_init();
   MotorR_init();
 
+
   //PID_init(0,900); //pwm limit
   //PID_set_L_costant(0.05,0.01,0.0);
   //PID_set_R_costant(2.0,0.5,0.0);
 
 //DebugPin_init();
-
-  Led_Set(1);
-  Buzzer_OneBeep();
   HAL_Delay(350);
-  Led_Set(0);
+  while(IS_Button()) {
+    Led_Set(0);
+  }
 
   applcation_init();
+  Battery_TASK();
+
+  MX_IWDG_Init();
+
+  Led_Set(1);
+  Buzzer_TwoBeep();
+  HAL_Delay(350);
+
   MotorR_start();
   MotorL_start();
 
-  uint32_t sinValue = 45 * 50;
-  uint8_t state = 0;
+  uint32_t sinValue = 0;
+  int lastSpeedL = 0, lastSpeedR = 0;
   while(1){
     sinValue++;
-    int speedL = -CLAMP(getMotorR(), -200, 200);
-    int speedR = -CLAMP(getMotorL(), -200, 200);
-    MotorL_pwm(speedL*10);
-    MotorR_pwm(speedR*10);
-    counterTemp = HAL_GetTick();
-    if ((sinValue) % (180 * 50) == 0) {
-      state = !state;
-      Led_Set(state);
-      //Console_Log("otter!\n\r");
-      //Buzzer_OneBeep();
-      /*char str[50];
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "MR = %i\n\r", speedR);
+    if(IS_Button()) {
+      while(IS_Button()) {
+        HAL_IWDG_Refresh(&hiwdg);
+      }
+      Buzzer_OneLongBeep();
+      HAL_Delay(350);
+      Power_Set(0);
+    }
+    if ((sinValue) % (200) == 0) {
+      int speedL = -CLAMP(getMotorR(), -200, 200);
+      int speedR = -CLAMP(getMotorL(), -200, 200);
+      if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50)) {
+        MotorL_pwm(speedL);
+        MotorR_pwm(speedR);
+      }
 
+      char str[100];
+      memset(&str[0], 0, sizeof(str));
+      sprintf(str, "%i;%i\n\r", speedL, speedR);
       Console_Log(str);
-
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "ML = %i\n\r", speedL);
-
-      Console_Log(str);*/
     }
 
 
 
-    //Battery_TASK();
+    Battery_TASK();
     //Current_Motor_TASK();
     //sWiiNunchuck_TASK();
     //applcation_TASK();
     //Telemetry_TASK();
 
     //Batteria Scarica?
-    /*if(GET_BatteryAverage() < 31.0){
-      TASK_BATTERY_LOW_VOLTAGE();
-    }*/
+    if(GET_BatteryAverage() < 31.0 || ABS(getMotorCurrentR() * 0.02) > 20.0 || ABS(getMotorCurrentL() * 0.02) > 20.0){
+      MotorL_pwm(0);
+      MotorR_pwm(0);
+      Buzzer_OneLongBeep();
+      HAL_Delay(350);
+      Power_Set(0);
+    }
     //In Carica?
     /*if(IS_Charge()==0){
       WAIT_CHARGE_FINISH();
@@ -192,11 +193,7 @@ int main(void)
     HAL_IWDG_Refresh(&hiwdg);   //819mS
 
     counterTempTT = HAL_GetTick() - counterTemp;
-
-
-
   }
-
 }
 
 /** System Clock Configuration

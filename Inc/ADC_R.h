@@ -3,22 +3,22 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
- 
+
    #include "stm32f1xx_hal.h"
 
    #define ADC_BATTERY_VOLT     0.02647435897435897435897435897436
    #define MOTOR_R_AMP_CONV_AMP 0.01935483870967741935483870967742
-   #define ADC_MOTOR_R_CENTER   1916
-   
+   #define ADC_MOTOR_R_CENTER   1900
+
    //1A = adc 3150
-   
+
    struct ADC_Rdati{
     volatile __IO uint16_t data[3];
     volatile __IO uint8_t convflag;
    };
-// ----------------------PUBLIC----------------------   
+// ----------------------PUBLIC----------------------
    void ADC_R_init(void);
 // ------------NORMALIZATE----------------
    float GET_BATTERY_VOLT(void);
@@ -31,13 +31,12 @@
 
 // ----------------------PRIVATE----------------------
    void ADC_R_callback(void);
-   
+
        extern void Error_Handler(void);
-   
-   
+
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM32F1xx_IT_H */
-   
