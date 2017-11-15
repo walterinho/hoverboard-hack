@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern UART_HandleTypeDef huart2;
-extern DMA_HandleTypeDef hdma_usart2_rx;
-extern DMA_HandleTypeDef hdma_usart2_tx;
+extern UART_HandleTypeDef huart3;
+extern DMA_HandleTypeDef hdma_usart3_rx;
+extern DMA_HandleTypeDef hdma_usart3_tx;
 extern volatile __IO struct UART_dati uartData;
 extern volatile __IO struct APPLICATION_dati app;
 extern volatile __IO struct BATTERY_dati battery_dati;
@@ -18,8 +18,8 @@ volatile __IO uint32_t leftToTransfer;
 
 
 void Telemetry_init(void){
-  MX_USART2_UART_Init();
-  HAL_UART_Receive_DMA(&huart2, (uint8_t *)&commandsequence, 8);
+  MX_USART3_UART_Init();
+  HAL_UART_Receive_DMA(&huart3, (uint8_t *)&commandsequence, 8);
 
 }
 
