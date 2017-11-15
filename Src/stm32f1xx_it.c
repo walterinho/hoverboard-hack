@@ -59,12 +59,12 @@ extern void PWM_R_ISR_Callback(void);
 extern void HALL_R_ISR_Callback(void);
 extern TIM_HandleTypeDef Tim3PID;
 /******************************************************************************/
-/*            Cortex-M3 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M3 Processor Interruption and Exception Handlers         */
 /******************************************************************************/
 extern ADC_HandleTypeDef hadc1;
 extern ADC_HandleTypeDef hadc3;
 extern DMA_HandleTypeDef hdma_adc3;
-
+extern TIM_HandleTypeDef htim2;
 /**
 * @brief This function handles Non maskable interrupt.
 */
@@ -83,6 +83,17 @@ void NMI_Handler(void)
   /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+  Led_Set(1);
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  /* USER CODE END TIM3_IRQn 1 */
+}
+
 /**
 * @brief This function handles Hard fault interrupt.
 */
@@ -90,7 +101,7 @@ void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
   MotorR_stop();
-  MotorL_stop();  
+  MotorL_stop();
 
   /* USER CODE END HardFault_IRQn 0 */
   while (1)
@@ -108,7 +119,7 @@ void MemManage_Handler(void)
 {
   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
   MotorR_stop();
-  MotorL_stop();  
+  MotorL_stop();
   /* USER CODE END MemoryManagement_IRQn 0 */
   while (1)
   {
@@ -125,7 +136,7 @@ void BusFault_Handler(void)
 {
   /* USER CODE BEGIN BusFault_IRQn 0 */
   MotorR_stop();
-  MotorL_stop();  
+  MotorL_stop();
   /* USER CODE END BusFault_IRQn 0 */
   while (1)
   {
@@ -142,7 +153,7 @@ void UsageFault_Handler(void)
 {
   /* USER CODE BEGIN UsageFault_IRQn 0 */
   MotorR_stop();
-  MotorL_stop();  
+  MotorL_stop();
   /* USER CODE END UsageFault_IRQn 0 */
   while (1)
   {
@@ -320,11 +331,17 @@ void EXTI15_10_IRQHandler(void)
   {
 
     HALL_R_ISR_Callback();
-     
+
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_10);
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_11);
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_12);
-  }  
+  }
+}
+
+void EXTI3_IRQHandler(void)
+{
+    PPM_ISR_Callback();
+    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_3);
 }
 
 /**
@@ -343,11 +360,11 @@ void EXTI9_5_IRQHandler(void)
   {
 
     HALL_L_ISR_Callback();
-     
+
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_5);
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_6);
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_7);
-  }  
+  }
 }
 
 /**
@@ -360,10 +377,10 @@ void TIM1_CC_IRQHandler(void)
   __HAL_TIM_CLEAR_IT(&htim1, TIM_IT_CC2);
   __HAL_TIM_CLEAR_IT(&htim1, TIM_IT_CC3);
   __HAL_TIM_CLEAR_IT(&htim1, TIM_IT_CC4);
-  
-  PWM_R_ISR_Callback();  
+
+  PWM_R_ISR_Callback();
   HAL_ADC_Start(&hadc1);
-  //DebugPin4_OFF();  
+  //DebugPin4_OFF();
 }
 void TIM8_CC_IRQHandler(void)
 {
@@ -371,15 +388,15 @@ void TIM8_CC_IRQHandler(void)
   __HAL_TIM_CLEAR_IT(&htim8, TIM_IT_CC2);
   __HAL_TIM_CLEAR_IT(&htim8, TIM_IT_CC3);
   __HAL_TIM_CLEAR_IT(&htim8, TIM_IT_CC4);
-  
-  PWM_L_ISR_Callback();  
+
+  PWM_L_ISR_Callback();
   HAL_ADC_Start(&hadc3);
 }
 
 //ADC1 -PC1-PC2-
 void DMA1_Channel1_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(&hdma_adc1); 
+  HAL_DMA_IRQHandler(&hdma_adc1);
 }
 //ADC3 -PC0-
 void DMA2_Channel4_5_IRQHandler(void)
@@ -393,10 +410,10 @@ void DMA2_Channel4_5_IRQHandler(void)
 //PID
 void TIM3_IRQHandler(void)
 {
-  //DebugPin4_ON(); 
+  //DebugPin4_ON();
   __HAL_TIM_CLEAR_IT(&Tim3PID, TIM_IT_UPDATE);
-  //DebugPin4_OFF(); 
-//testVelR = 0;  
+  //DebugPin4_OFF();
+//testVelR = 0;
 }
 
 /* USER CODE BEGIN 1 */

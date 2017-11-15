@@ -84,6 +84,8 @@ IWDG_HandleTypeDef hiwdg;
 
 volatile __IO int16_t speed = 0;
 extern struct TELEMETRY_dati telemetry;
+extern struct MOTOR_Ldati motorL;
+extern struct MOTOR_Rdati motorR;
 //extern struct COMMAND_data commandsequence;
 
 //TEMP
@@ -95,6 +97,30 @@ volatile __IO uint8_t bufferTX[100],ai2cBuffer[10];
 int32_t speed;
 */
 volatile __IO uint32_t counterTemp,counterTempTT;
+
+TIM_HandleTypeDef htim2;
+
+uint16_t captured_value[8] = {0};
+uint16_t rc_data[5] = {0};
+uint8_t pointer = 0;
+uint8_t data_ready = 0;
+/* USER CODE END PV */
+uint8_t rx_count = 0;
+
+void PPM_ISR_Callback() {
+  // Dummy loop with 16 bit count wrap around
+  uint16_t rc_delay = TIM2->CNT;
+  _stop_timer();
+
+  if (rc_delay > 4000) {
+    rx_count = 0;
+  }
+  else {
+    captured_value[rx_count] = CLAMP(rc_delay, 1000, 2000) - 1000;
+    rx_count++;
+  }
+  _init_us();
+}
 
 int main(void)
 {
@@ -131,6 +157,11 @@ int main(void)
   MotorL_init();
   MotorR_init();
 
+//  Timer_init();
+  //Timer_init();
+  //MX_TIM2_Init();
+
+
   //PID_init(0,900); //pwm limit
   //PID_set_L_costant(0.05,0.01,0.0);
   //PID_set_R_costant(2.0,0.5,0.0);
@@ -146,30 +177,38 @@ int main(void)
   MotorR_start();
   MotorL_start();
 
+  //Timer_init();
+
+  //MotorR_pwm(200);
+  //MotorL_pwm(-150);
+
+  MotorR_pwm(-250);
+  MotorL_pwm(250);
+
   uint32_t sinValue = 45 * 50;
   uint8_t state = 0;
   while(1){
     sinValue++;
-    int speedL = -CLAMP(getMotorR(), -200, 200);
-    int speedR = -CLAMP(getMotorL(), -200, 200);
-    MotorL_pwm(speedL*10);
-    MotorR_pwm(speedR*10);
-    counterTemp = HAL_GetTick();
-    if ((sinValue) % (180 * 50) == 0) {
-      state = !state;
-      Led_Set(state);
+    //int speedL = -CLAMP(getMotorR(), -200, 200);
+    //int speedR = -CLAMP(getMotorL(), -200, 200);
+    //MotorL_pwm(speedL*10);
+    //MotorR_pwm(speedR*10);
+    //counterTemp = HAL_GetTick();
+    if ((sinValue) % (1000) == 0) {
+      //state = !state;
+      //Led_Set(state);
       //Console_Log("otter!\n\r");
       //Buzzer_OneBeep();
-      /*char str[50];
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "MR = %i\n\r", speedR);
-
-      Console_Log(str);
-
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "ML = %i\n\r", speedL);
-
-      Console_Log(str);*/
+      //char str[200];
+      //memset(&str[0], 0, sizeof(str));
+      //sprintf(str, "%i;%i;%i;%i;%i;%i\n\r", captured_value[0], captured_value[1], captured_value[2], captured_value[3], captured_value[4], captured_value[5]);
+      //HAL_IWDG_Refresh(&hiwdg);
+      //MotorR_pwm(CLAMP((((captured_value[1]-500)-(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
+      //HAL_IWDG_Refresh(&hiwdg);
+      //MotorL_pwm(CLAMP((((captured_value[1]-500)+(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
+      //MotorR_pwm(-250);
+      //MotorL_pwm(250);
+      //Console_Log(str);
     }
 
 
@@ -191,7 +230,7 @@ int main(void)
 
     HAL_IWDG_Refresh(&hiwdg);   //819mS
 
-    counterTempTT = HAL_GetTick() - counterTemp;
+    //counterTempTT = HAL_GetTick() - counterTemp;
 
 
 
