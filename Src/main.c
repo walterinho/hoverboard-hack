@@ -106,16 +106,18 @@ uint8_t pointer = 0;
 uint8_t data_ready = 0;
 /* USER CODE END PV */
 uint8_t rx_count = 0;
+uint32_t timeout = 0;
 
 void PPM_ISR_Callback() {
   // Dummy loop with 16 bit count wrap around
   uint16_t rc_delay = TIM2->CNT;
   _stop_timer();
+  timeout = 0;
 
   if (rc_delay > 4000) {
     rx_count = 0;
   }
-  else {
+  else if (rx_count < 6){
     captured_value[rx_count] = CLAMP(rc_delay, 1000, 2000) - 1000;
     rx_count++;
   }
@@ -130,23 +132,12 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-  MX_IWDG_Init();
+  Button_init();
 
-  _init_us();
+  Power_Set(1);
 
-  //MX_I2C2_Init();
+
   Telemetry_init();
-
- /*
-  while(1){
-
-      Telemetry_TASK();
-      if(telemetry.dataREADY_JOYSTICK){
-          telemetry.dataREADY_JOYSTICK = 0;
-      }
-
-  }
-  */
 
   Buzzer_init();
   Led_init();
@@ -167,62 +158,136 @@ int main(void)
   //PID_set_R_costant(2.0,0.5,0.0);
 
 //DebugPin_init();
-
-  Led_Set(1);
-  Buzzer_OneBeep();
-  HAL_Delay(350);
-  Led_Set(0);
+  //HAL_Delay(350);
+  while(IS_Button()) {
+    Led_Set(0);
+  }
 
   applcation_init();
+  Battery_TASK();
+
+  MX_IWDG_Init();
+
+  Led_Set(1);
+  Buzzer_TwoBeep();
+  HAL_Delay(350);
+
   MotorR_start();
   MotorL_start();
+  //MotorR_pwm(80);
+  //MotorL_pwm(-200);
 
-  //Timer_init();
+  Timer_init();
 
   //MotorR_pwm(200);
   //MotorL_pwm(-150);
 
-  MotorR_pwm(-250);
-  MotorL_pwm(250);
+  //MotorR_pwm(-50);
+  //MotorL_pwm(50);
+  int16_t speedR = 0;
+  int16_t speedL = 0;
 
   uint32_t sinValue = 45 * 50;
   uint8_t state = 0;
+  int lastSpeedL = 0, lastSpeedR = 0;
   while(1){
     sinValue++;
-    //int speedL = -CLAMP(getMotorR(), -200, 200);
-    //int speedR = -CLAMP(getMotorL(), -200, 200);
-    //MotorL_pwm(speedL*10);
-    //MotorR_pwm(speedR*10);
-    //counterTemp = HAL_GetTick();
-    if ((sinValue) % (1000) == 0) {
-      //state = !state;
+    if ((sinValue) % (200) == 0) {
+      state = !state;
       //Led_Set(state);
       //Console_Log("otter!\n\r");
-      //Buzzer_OneBeep();
-      //char str[200];
-      //memset(&str[0], 0, sizeof(str));
-      //sprintf(str, "%i;%i;%i;%i;%i;%i\n\r", captured_value[0], captured_value[1], captured_value[2], captured_value[3], captured_value[4], captured_value[5]);
-      //HAL_IWDG_Refresh(&hiwdg);
-      //MotorR_pwm(CLAMP((((captured_value[1]-500)-(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
-      //HAL_IWDG_Refresh(&hiwdg);
-      //MotorL_pwm(CLAMP((((captured_value[1]-500)+(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
+      char str[200];
+      memset(&str[0], 0, sizeof(str));
+      sprintf(str, "%i;%i;%i;%i;%i;%i\n\r", captured_value[0], captured_value[1], captured_value[2], captured_value[3], captured_value[4], captured_value[5]);
+      int readR = -(CLAMP((((captured_value[1]-500)-(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
+      int readL = -(CLAMP((((captured_value[1]-500)+(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
+
+      int16_t tempL = speedL;
+      speedL -=  tempL / 3.0;
+      speedL += readL / 3.0;
+
+      int16_t tempR = speedR;
+      speedR -=  tempR / 3.0;
+      speedR += readR / 3.0;
+
+
+      if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50) && timeout < 1000) {
+        MotorR_pwm(speedR);
+        MotorL_pwm(speedL);
+      }
+      lastSpeedL = speedL;
+      lastSpeedR = speedR;
       //MotorR_pwm(-250);
       //MotorL_pwm(250);
-      //Console_Log(str);
+      Console_Log(str);
+    }
+    timeout++;
+
+    if (timeout > 1000) {
+      MotorR_pwm(0);
+      MotorL_pwm(0);
     }
 
+    counterTemp = HAL_GetTick();
+
+    if(IS_Button()) {
+      while(IS_Button()) {
+        HAL_IWDG_Refresh(&hiwdg);
+      }
+      Buzzer_OneLongBeep();
+      HAL_Delay(350);
+      Power_Set(0);
+    }
+    /*if ((sinValue) % (500) == 0) {
+      uint16_t distance = CLAMP(ADC_PA3() - 175, 0, 4095);
+      int16_t steering = ADC_PA2() - 2048;
+      int speedL = -CLAMP((distance - 1000) +  (steering / 10.0), -800, 800);
+      int speedR = -CLAMP((distance - 1000) -  (steering / 10.0), -800, 800);
+      if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50)) {
+        if (distance > 850) {
+          MotorL_pwm(speedL);
+          MotorR_pwm(speedR);
+        } else {
+          MotorL_pwm(0);
+          MotorR_pwm(0);
+        }
+      }
+      if (distance > 3000) { // Error, robot too far away!
+        MotorL_pwm(0);
+        MotorR_pwm(0);
+        while(1) {
+          Power_Set(0);
+          HAL_IWDG_Refresh(&hiwdg);
+        }
+      }
+
+      char str[100];
+      memset(&str[0], 0, sizeof(str));
+      sprintf(str, "%i;%i\n\r", getMotorCurrentR(), getMotorCurrentL());
+      Console_Log(str);
 
 
-    //Battery_TASK();
+      lastSpeedL = speedL;
+      lastSpeedR = speedR;
+>>>>>>> GameTrak
+    }*/
+
+
+
+    Battery_TASK();
     //Current_Motor_TASK();
     //sWiiNunchuck_TASK();
     //applcation_TASK();
     //Telemetry_TASK();
 
     //Batteria Scarica?
-    /*if(GET_BatteryAverage() < 31.0){
-      TASK_BATTERY_LOW_VOLTAGE();
-    }*/
+    if(GET_BatteryAverage() < 31.0 || ABS(getMotorCurrentR() * 0.02) > 40.0 || ABS(getMotorCurrentL() * 0.02) > 40.0){
+      MotorL_pwm(0);
+      MotorR_pwm(0);
+      Buzzer_OneLongBeep();
+      HAL_Delay(350);
+      Power_Set(0);
+    }
     //In Carica?
     /*if(IS_Charge()==0){
       WAIT_CHARGE_FINISH();
