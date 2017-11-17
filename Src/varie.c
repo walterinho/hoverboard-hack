@@ -44,6 +44,9 @@ void IS_Charge_init(void){
 void Led_Set(uint8_t stato){
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, (GPIO_PinState)stato);
 }
+void Power_Set(uint8_t stato){
+  HAL_GPIO_WritePin(Power_GPIO_PORT, Power_Pin, (GPIO_PinState)stato);
+}
 void Buzzer_Set(uint8_t stato){
   HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, (GPIO_PinState)stato);
 }
@@ -95,6 +98,10 @@ void Buzzer_OneLongBeep(void){
 uint8_t IS_Charge(void){
   return (uint8_t)HAL_GPIO_ReadPin(IS_CHARGE_GPIO_Port, IS_CHARGE_Pin);
 }
+
+uint8_t IS_Button(void){
+  return (uint8_t)HAL_GPIO_ReadPin(Button_GPIO_Port, Button_Pin);
+}
 //volatile uint32_t tu32;
 void DebugPin_init(void){
   GPIO_InitTypeDef GPIO_InitStruct;
@@ -121,12 +128,29 @@ void Timer_init(void){
   GPIO_InitStruct.Pin = GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+}
+void Button_init(void){
+  GPIO_InitTypeDef GPIO_InitStruct;
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Pin = Power_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(Power_GPIO_PORT, &GPIO_InitStruct);
+
+  GPIO_InitStruct.Pin = Button_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(Button_GPIO_Port, &GPIO_InitStruct);
+//  tu32 = (uint32_t)GPIO_PIN_4 << 16;
+//  tu32 = (uint32_t)GPIO_PIN_5 << 16;
+
 }
 
 void DebugPin4_ON(void){

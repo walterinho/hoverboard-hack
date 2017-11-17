@@ -387,9 +387,9 @@ void mL_BLDCMotor(void){
   mL_BHigh__OFF();
   mL_CHigh__OFF();
 
-  if(motorL.stop){
+  /*if(motorL.stop){
     return;
-  }
+  }*/
 
   if(motorL.reverse!=0){
     switch (motorL.newhallpos){
