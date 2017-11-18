@@ -162,8 +162,8 @@ int main(void)
     if ((sinValue) % (500) == 0) {
       uint16_t distance = CLAMP(ADC_PA3() - 175, 0, 4095);
       int16_t steering = ADC_PA2() - 2048;
-      int speedL = -CLAMP((distance - 1000) +  (steering / 10.0), -800, 800);
-      int speedR = -CLAMP((distance - 1000) -  (steering / 10.0), -800, 800);
+      int speedL = -CLAMP((distance - 1000) +  CLAMP((steering / 10.0), -50, 50), -800, 800);
+      int speedR = -CLAMP((distance - 1000) -  CLAMP((steering / 10.0), -50, 50), -800, 800);
       if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50)) {
         if (distance > 850) {
           MotorL_pwm(speedL);
@@ -184,7 +184,7 @@ int main(void)
 
       char str[100];
       memset(&str[0], 0, sizeof(str));
-      sprintf(str, "%i;%i\n\r", getMotorCurrentR(), getMotorCurrentL());
+      sprintf(str, "%i;%i\n\r", distance, steering);
       Console_Log(str);
 
 
