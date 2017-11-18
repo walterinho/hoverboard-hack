@@ -1,0 +1,4167 @@
+ARM GAS  /tmp/cctZXvYy.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"application.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.GET_BatteryAverage,"ax",%progbits
+  20              		.align	2
+  21              		.global	GET_BatteryAverage
+  22              		.thumb
+  23              		.thumb_func
+  25              	GET_BatteryAverage:
+  26              	.LFB64:
+  27              		.file 1 "./Src/application.c"
+   1:./Src/application.c **** #include "application.h"
+   2:./Src/application.c **** #include "motor_L.h"
+   3:./Src/application.c **** #include "motor_R.h"
+   4:./Src/application.c **** #include "i2c.h"
+   5:./Src/application.c **** #include "ADC_L.h"
+   6:./Src/application.c **** #include "ADC_R.h"
+   7:./Src/application.c **** #include "varie.h"
+   8:./Src/application.c **** #include "telemetry.h"
+   9:./Src/application.c **** #include <stdlib.h>
+  10:./Src/application.c **** 
+  11:./Src/application.c **** extern IWDG_HandleTypeDef hiwdg;
+  12:./Src/application.c **** 
+  13:./Src/application.c **** volatile __IO struct APPLICATION_dati app;
+  14:./Src/application.c **** volatile __IO struct BATTERY_dati battery_dati;
+  15:./Src/application.c **** extern volatile __IO struct WII_JOYdati wii_JOYdati;
+  16:./Src/application.c **** extern struct TELEMETRY_dati telemetry;
+  17:./Src/application.c **** 
+  18:./Src/application.c **** float GET_BatteryAverage(void){
+  28              		.loc 1 18 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  19:./Src/application.c ****   return battery_dati.VBatt;
+  33              		.loc 1 19 0
+  34 0000 014B     		ldr	r3, .L2
+  35 0002 1868     		ldr	r0, [r3]	@ float
+  20:./Src/application.c **** }
+  36              		.loc 1 20 0
+  37 0004 7047     		bx	lr
+  38              	.L3:
+ARM GAS  /tmp/cctZXvYy.s 			page 2
+
+
+  39 0006 00BF     		.align	2
+  40              	.L2:
+  41 0008 00000000 		.word	battery_dati
+  42              		.cfi_endproc
+  43              	.LFE64:
+  45              		.section	.text.TASK_BATTERY_LOW_VOLTAGE,"ax",%progbits
+  46              		.align	2
+  47              		.global	TASK_BATTERY_LOW_VOLTAGE
+  48              		.thumb
+  49              		.thumb_func
+  51              	TASK_BATTERY_LOW_VOLTAGE:
+  52              	.LFB65:
+  21:./Src/application.c **** void TASK_BATTERY_LOW_VOLTAGE(void){
+  53              		.loc 1 21 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57 0000 08B5     		push	{r3, lr}
+  58              	.LCFI0:
+  59              		.cfi_def_cfa_offset 8
+  60              		.cfi_offset 3, -8
+  61              		.cfi_offset 14, -4
+  22:./Src/application.c ****   if((HAL_GetTick() - battery_dati.time_lowvoltage) > 600000){          //Ogni 10 min BEEP
+  62              		.loc 1 22 0
+  63 0002 FFF7FEFF 		bl	HAL_GetTick
+  64              	.LVL0:
+  65 0006 064B     		ldr	r3, .L7
+  66 0008 1B69     		ldr	r3, [r3, #16]
+  67 000a C01A     		subs	r0, r0, r3
+  68 000c 054B     		ldr	r3, .L7+4
+  69 000e 9842     		cmp	r0, r3
+  70 0010 05D9     		bls	.L4
+  23:./Src/application.c ****     battery_dati.time_lowvoltage = HAL_GetTick();
+  71              		.loc 1 23 0
+  72 0012 FFF7FEFF 		bl	HAL_GetTick
+  73              	.LVL1:
+  74 0016 024B     		ldr	r3, .L7
+  75 0018 1861     		str	r0, [r3, #16]
+  24:./Src/application.c **** 
+  25:./Src/application.c ****     Buzzer_OneLongBeep();
+  76              		.loc 1 25 0
+  77 001a FFF7FEFF 		bl	Buzzer_OneLongBeep
+  78              	.LVL2:
+  79              	.L4:
+  80 001e 08BD     		pop	{r3, pc}
+  81              	.L8:
+  82              		.align	2
+  83              	.L7:
+  84 0020 00000000 		.word	battery_dati
+  85 0024 C0270900 		.word	600000
+  86              		.cfi_endproc
+  87              	.LFE65:
+  89              		.section	.text.applcation_init,"ax",%progbits
+  90              		.align	2
+  91              		.global	applcation_init
+  92              		.thumb
+  93              		.thumb_func
+ARM GAS  /tmp/cctZXvYy.s 			page 3
+
+
+  95              	applcation_init:
+  96              	.LFB67:
+  26:./Src/application.c ****   }
+  27:./Src/application.c **** }
+  28:./Src/application.c **** void WAIT_CHARGE_FINISH(void){
+  29:./Src/application.c ****   uint32_t timerBatteryC;
+  30:./Src/application.c **** 
+  31:./Src/application.c ****   Led_Set(1);
+  32:./Src/application.c ****   MotorR_stop();
+  33:./Src/application.c ****   MotorL_stop();
+  34:./Src/application.c ****   HAL_IWDG_Refresh(&hiwdg);   //819mS
+  35:./Src/application.c ****   Buzzer_OneLongBeep();
+  36:./Src/application.c ****   HAL_IWDG_Refresh(&hiwdg);   //819mS
+  37:./Src/application.c ****   Buzzer_OneLongBeep();
+  38:./Src/application.c ****   timerBatteryC = HAL_GetTick();
+  39:./Src/application.c **** 
+  40:./Src/application.c ****   while(IS_Charge()==0){
+  41:./Src/application.c ****     HAL_IWDG_Refresh(&hiwdg);   //819mS
+  42:./Src/application.c ****     HAL_Delay(250);
+  43:./Src/application.c ****     Battery_TASK();
+  44:./Src/application.c ****     if(GET_BatteryAverage() < 41.250){
+  45:./Src/application.c ****       timerBatteryC = HAL_GetTick();
+  46:./Src/application.c ****     }
+  47:./Src/application.c ****     if((HAL_GetTick() - timerBatteryC) > 20000){ //600000       x 20Sec, batteria sopra i 42Volt, a
+  48:./Src/application.c ****       Buzzer_OneLongBeep();
+  49:./Src/application.c ****       HAL_IWDG_Refresh(&hiwdg);   //819mS
+  50:./Src/application.c ****     }
+  51:./Src/application.c ****   }
+  52:./Src/application.c ****   Led_Set(0);
+  53:./Src/application.c ****   applcation_init();
+  54:./Src/application.c **** }
+  55:./Src/application.c **** 
+  56:./Src/application.c **** void applcation_init(void){
+  97              		.loc 1 56 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101 0000 70B5     		push	{r4, r5, r6, lr}
+ 102              	.LCFI1:
+ 103              		.cfi_def_cfa_offset 16
+ 104              		.cfi_offset 4, -16
+ 105              		.cfi_offset 5, -12
+ 106              		.cfi_offset 6, -8
+ 107              		.cfi_offset 14, -4
+  57:./Src/application.c ****   app.stato = app_init;
+ 108              		.loc 1 57 0
+ 109 0002 0B4C     		ldr	r4, .L11
+ 110 0004 0026     		movs	r6, #0
+ 111 0006 2670     		strb	r6, [r4]
+  58:./Src/application.c ****   MotorR_stop();
+ 112              		.loc 1 58 0
+ 113 0008 FFF7FEFF 		bl	MotorR_stop
+ 114              	.LVL3:
+  59:./Src/application.c ****   MotorL_stop();
+ 115              		.loc 1 59 0
+ 116 000c FFF7FEFF 		bl	MotorL_stop
+ 117              	.LVL4:
+ARM GAS  /tmp/cctZXvYy.s 			page 4
+
+
+  60:./Src/application.c ****   battery_dati.time_batt = HAL_GetTick();
+ 118              		.loc 1 60 0
+ 119 0010 FFF7FEFF 		bl	HAL_GetTick
+ 120              	.LVL5:
+ 121 0014 074D     		ldr	r5, .L11+4
+ 122 0016 6860     		str	r0, [r5, #4]
+  61:./Src/application.c ****   battery_dati.time_lowvoltage = HAL_GetTick();
+ 123              		.loc 1 61 0
+ 124 0018 FFF7FEFF 		bl	HAL_GetTick
+ 125              	.LVL6:
+ 126 001c 2861     		str	r0, [r5, #16]
+  62:./Src/application.c ****   battery_dati.somma_batt = 1400;
+ 127              		.loc 1 62 0
+ 128 001e 4FF4AF63 		mov	r3, #1400
+ 129 0022 AB60     		str	r3, [r5, #8]
+  63:./Src/application.c ****   battery_dati.counter_media = 0;
+ 130              		.loc 1 63 0
+ 131 0024 2E73     		strb	r6, [r5, #12]
+  64:./Src/application.c ****   app.cruise_soft_run_nohand = 0.0;
+ 132              		.loc 1 64 0
+ 133 0026 0023     		movs	r3, #0
+ 134 0028 A361     		str	r3, [r4, #24]	@ float
+  65:./Src/application.c **** 
+  66:./Src/application.c ****   app.faccY=0.0;
+ 135              		.loc 1 66 0
+ 136 002a 6362     		str	r3, [r4, #36]	@ float
+  67:./Src/application.c ****   app.faccX=0.0;
+ 137              		.loc 1 67 0
+ 138 002c A362     		str	r3, [r4, #40]	@ float
+ 139 002e 70BD     		pop	{r4, r5, r6, pc}
+ 140              	.L12:
+ 141              		.align	2
+ 142              	.L11:
+ 143 0030 00000000 		.word	app
+ 144 0034 00000000 		.word	battery_dati
+ 145              		.cfi_endproc
+ 146              	.LFE67:
+ 148              		.global	__aeabi_ui2f
+ 149              		.global	__aeabi_fsub
+ 150              		.global	__aeabi_fcmpge
+ 151              		.global	__aeabi_fcmpgt
+ 152              		.global	__aeabi_fcmplt
+ 153              		.section	.text.normalize_y,"ax",%progbits
+ 154              		.align	2
+ 155              		.global	normalize_y
+ 156              		.thumb
+ 157              		.thumb_func
+ 159              	normalize_y:
+ 160              	.LFB69:
+  68:./Src/application.c **** }
+  69:./Src/application.c **** 
+  70:./Src/application.c **** void applcation_TASK(void){
+  71:./Src/application.c ****   uint8_t letture,temp8;
+  72:./Src/application.c ****   float tempf1,tempf2;
+  73:./Src/application.c **** 
+  74:./Src/application.c ****   switch(app.stato){
+  75:./Src/application.c ****     case app_init:
+ARM GAS  /tmp/cctZXvYy.s 			page 5
+
+
+  76:./Src/application.c ****       MotorR_stop();
+  77:./Src/application.c ****       MotorL_stop();
+  78:./Src/application.c ****       //Aspetta Center joystick e calcola la media
+  79:./Src/application.c ****       app.center_media_X = 0.0;
+  80:./Src/application.c ****       app.center_media_Y = 0.0;
+  81:./Src/application.c ****       letture = 0;
+  82:./Src/application.c ****       wii_JOYdati.done = 0;
+  83:./Src/application.c ****       do{
+  84:./Src/application.c ****         HAL_IWDG_Refresh(&hiwdg);   //819mS
+  85:./Src/application.c **** 
+  86:./Src/application.c ****         while(wii_JOYdati.done==0){WiiNunchuck_TASK();}
+  87:./Src/application.c ****         wii_JOYdati.done = 0;
+  88:./Src/application.c ****         if((wii_JOYdati.ay < 129) && (wii_JOYdati.ay > 124)){
+  89:./Src/application.c ****           letture++;
+  90:./Src/application.c ****           temp8 = wii_JOYdati.ay;
+  91:./Src/application.c ****           app.center_media_Y = app.center_media_Y + ((float)temp8);
+  92:./Src/application.c ****         }else{
+  93:./Src/application.c ****           letture = 0;
+  94:./Src/application.c ****           app.center_media_Y = 0.0;
+  95:./Src/application.c ****         }
+  96:./Src/application.c ****       }while(letture < 50);
+  97:./Src/application.c ****       app.center_media_Y = app.center_media_Y / 50.0;
+  98:./Src/application.c ****       letture = 0;
+  99:./Src/application.c ****       wii_JOYdati.done = 0;
+ 100:./Src/application.c ****       do{
+ 101:./Src/application.c ****         HAL_IWDG_Refresh(&hiwdg);   //819mS
+ 102:./Src/application.c **** 
+ 103:./Src/application.c ****         while(wii_JOYdati.done==0){WiiNunchuck_TASK();}
+ 104:./Src/application.c ****         wii_JOYdati.done = 0;
+ 105:./Src/application.c ****         if((wii_JOYdati.ax < 129) && (wii_JOYdati.ax > 124)){
+ 106:./Src/application.c ****           letture++;
+ 107:./Src/application.c ****           temp8 = wii_JOYdati.ax;
+ 108:./Src/application.c ****           app.center_media_X = app.center_media_X + ((float)temp8);
+ 109:./Src/application.c ****         }else{
+ 110:./Src/application.c ****           letture = 0;
+ 111:./Src/application.c ****           app.center_media_X = 0.0;
+ 112:./Src/application.c ****         }
+ 113:./Src/application.c ****       }while(letture < 50);
+ 114:./Src/application.c ****       app.center_media_X = app.center_media_X / 50.0;
+ 115:./Src/application.c **** 
+ 116:./Src/application.c ****       accelleration_XY_Reset();
+ 117:./Src/application.c **** 
+ 118:./Src/application.c ****       app.tsoft_run = HAL_GetTick();
+ 119:./Src/application.c ****       app.stato = app_soft_run;
+ 120:./Src/application.c ****       MotorR_start();
+ 121:./Src/application.c ****       MotorL_start();
+ 122:./Src/application.c **** 
+ 123:./Src/application.c ****       Buzzer_OneShortBeep();
+ 124:./Src/application.c **** 
+ 125:./Src/application.c ****     break;
+ 126:./Src/application.c **** 
+ 127:./Src/application.c ****     case app_soft_run:
+ 128:./Src/application.c ****      //INDOOR LIMIT 30; -30
+ 129:./Src/application.c ****       app.ayn = normalize_y(wii_JOYdati.ay);
+ 130:./Src/application.c ****       app.axn = normalize_x(wii_JOYdati.ax);
+ 131:./Src/application.c **** 
+ 132:./Src/application.c ****       //scala x soft run
+ARM GAS  /tmp/cctZXvYy.s 			page 6
+
+
+ 133:./Src/application.c ****       tempf1 = app.ayn;
+ 134:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 135:./Src/application.c ****       app.ayn = scale_y(tempf1, tempf2);
+ 136:./Src/application.c ****       tempf1 = app.axn;
+ 137:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 138:./Src/application.c ****       app.axn = scale_x(tempf1, tempf2);
+ 139:./Src/application.c **** 
+ 140:./Src/application.c ****       app.ayn = accellerationY(app.ayn);
+ 141:./Src/application.c ****       app.axn = accellerationX(app.axn);
+ 142:./Src/application.c **** 
+ 143:./Src/application.c ****       tempf1 = app.ayn;
+ 144:./Src/application.c ****       tempf2 = app.axn;
+ 145:./Src/application.c **** 
+ 146:./Src/application.c ****       go_motor(tempf1, tempf2, battery_dati.VBatt, 0);
+ 147:./Src/application.c **** 
+ 148:./Src/application.c ****       //soft_run_nohand
+ 149:./Src/application.c ****       temp8 = wii_JOYdati.ay;
+ 150:./Src/application.c ****       if((wii_JOYdati.bz == 0)&&((((float)temp8 - app.center_media_Y) > 4.0))&&(telemetry.dataREADY
+ 151:./Src/application.c ****         if((HAL_GetTick() - app.tsoft_run)>=1000){
+ 152:./Src/application.c ****             app.cruise_soft_run_nohand = 0.0;
+ 153:./Src/application.c ****             app.stato = app_soft_run_nohand;
+ 154:./Src/application.c ****             app.tcruise_decrement = HAL_GetTick();
+ 155:./Src/application.c ****             Buzzer_OneShortBeep();
+ 156:./Src/application.c ****         }
+ 157:./Src/application.c ****       }else{
+ 158:./Src/application.c ****         app.tsoft_run = HAL_GetTick();
+ 159:./Src/application.c ****       }
+ 160:./Src/application.c ****       //Android APP ?
+ 161:./Src/application.c ****       if(telemetry.dataREADY_JOYSTICK){
+ 162:./Src/application.c ****         telemetry.dataREADY_JOYSTICK  = 0;
+ 163:./Src/application.c ****         if(telemetry.dataLast_Command == 'R'){
+ 164:./Src/application.c ****           app.stato = app_soft_ANDROIDAPP;
+ 165:./Src/application.c ****           app.tAndroidAPP = HAL_GetTick();
+ 166:./Src/application.c ****           accelleration_XY_Reset();
+ 167:./Src/application.c ****         }
+ 168:./Src/application.c ****         telemetry.dataLast_Command = 0;
+ 169:./Src/application.c ****       }
+ 170:./Src/application.c ****       //Hard RUN joystick press 'c' switch
+ 171:./Src/application.c ****       if((wii_JOYdati.bc == 0)&&(wii_JOYdati.bz == 1)&&(telemetry.dataREADY_JOYSTICK==0)){
+ 172:./Src/application.c ****           app.stato = app_hard_run;
+ 173:./Src/application.c ****           //accelleration_XY_Reset();     //??????
+ 174:./Src/application.c ****       }
+ 175:./Src/application.c ****     break;
+ 176:./Src/application.c **** 
+ 177:./Src/application.c ****     case app_hard_run:
+ 178:./Src/application.c ****      //OUTDOOR LIMIT FULL
+ 179:./Src/application.c ****       app.ayn = normalize_y(wii_JOYdati.ay);
+ 180:./Src/application.c ****       app.axn = normalize_x(wii_JOYdati.ax);
+ 181:./Src/application.c **** 
+ 182:./Src/application.c ****       //scala x soft run
+ 183:./Src/application.c ****       tempf1 = app.ayn * 0.90;
+ 184:./Src/application.c ****       app.ayn = tempf1;
+ 185:./Src/application.c ****       tempf2 = app.axn * 0.90;
+ 186:./Src/application.c ****       //tempf2 = battery_dati.VBatt;
+ 187:./Src/application.c ****       app.axn = tempf2;
+ 188:./Src/application.c **** 
+ 189:./Src/application.c ****       app.ayn = accellerationYHARD(app.ayn);
+ARM GAS  /tmp/cctZXvYy.s 			page 7
+
+
+ 190:./Src/application.c ****       app.axn = accellerationXHARD(app.axn);
+ 191:./Src/application.c **** 
+ 192:./Src/application.c ****       tempf1 = app.ayn;
+ 193:./Src/application.c ****       tempf2 = app.axn;
+ 194:./Src/application.c ****       if(tempf1 < 0){
+ 195:./Src/application.c ****         tempf1 = 0;
+ 196:./Src/application.c ****       }
+ 197:./Src/application.c ****       go_motor(tempf1, tempf2, battery_dati.VBatt, 1);
+ 198:./Src/application.c **** 
+ 199:./Src/application.c ****       //Soft RUN joystick press 'c' switch
+ 200:./Src/application.c ****       if(wii_JOYdati.bc == 1){
+ 201:./Src/application.c ****           //MotorR_stop();
+ 202:./Src/application.c ****           //MotorL_stop();
+ 203:./Src/application.c ****           //accelleration_XY_Reset();     //??????
+ 204:./Src/application.c ****           app.stato = app_soft_run;
+ 205:./Src/application.c ****       }
+ 206:./Src/application.c ****     break;
+ 207:./Src/application.c **** 
+ 208:./Src/application.c ****     case app_soft_run_nohand:
+ 209:./Src/application.c ****       app.ayn = normalize_y(wii_JOYdati.ay);
+ 210:./Src/application.c ****       app.axn = normalize_x(wii_JOYdati.ax);
+ 211:./Src/application.c **** 
+ 212:./Src/application.c ****       //scala x soft run
+ 213:./Src/application.c ****       tempf1 = app.ayn;
+ 214:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 215:./Src/application.c ****       app.ayn = scale_y(tempf1, tempf2);
+ 216:./Src/application.c ****       tempf1 = app.axn;
+ 217:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 218:./Src/application.c ****       app.axn = scale_x(tempf1, tempf2);
+ 219:./Src/application.c **** 
+ 220:./Src/application.c ****       app.ayn = accellerationY(app.ayn);
+ 221:./Src/application.c ****       app.axn = accellerationX(app.axn);
+ 222:./Src/application.c **** 
+ 223:./Src/application.c ****       //Attiva cruise control
+ 224:./Src/application.c ****       if(app.ayn > 5.0){
+ 225:./Src/application.c ****         tempf1 = app.cruise_soft_run_nohand;
+ 226:./Src/application.c ****         if((app.ayn - 5.0) > tempf1){
+ 227:./Src/application.c ****           app.cruise_soft_run_nohand = app.ayn - 5.0;
+ 228:./Src/application.c ****         }
+ 229:./Src/application.c ****       }
+ 230:./Src/application.c ****        //Decrementa Cruise
+ 231:./Src/application.c ****       if((app.ayn < -5.0)&&(app.ayn > -23.0)){
+ 232:./Src/application.c ****         //con time step
+ 233:./Src/application.c ****         if((HAL_GetTick() - app.tcruise_decrement)>250){
+ 234:./Src/application.c ****           tempf1 = app.ayn / 10.0;
+ 235:./Src/application.c ****           app.cruise_soft_run_nohand = app.cruise_soft_run_nohand + tempf1;                //STEP D
+ 236:./Src/application.c ****           if(app.cruise_soft_run_nohand < 0.0){
+ 237:./Src/application.c ****             app.cruise_soft_run_nohand = 0.0;
+ 238:./Src/application.c ****           }
+ 239:./Src/application.c ****           app.tcruise_decrement = HAL_GetTick();
+ 240:./Src/application.c ****         }
+ 241:./Src/application.c ****       }
+ 242:./Src/application.c ****       //Stop Cruise
+ 243:./Src/application.c ****       if(app.ayn <= -23.0){
+ 244:./Src/application.c ****         go_motor(0, 0, battery_dati.VBatt,0);
+ 245:./Src/application.c ****         MotorR_stop();
+ 246:./Src/application.c ****         MotorL_stop();
+ARM GAS  /tmp/cctZXvYy.s 			page 8
+
+
+ 247:./Src/application.c ****         accelleration_XY_Reset();
+ 248:./Src/application.c ****         app.cruise_soft_run_nohand = 0.0;
+ 249:./Src/application.c ****         app.stato = app_init;
+ 250:./Src/application.c ****         break;
+ 251:./Src/application.c ****       }
+ 252:./Src/application.c ****       tempf1 = app.cruise_soft_run_nohand;
+ 253:./Src/application.c ****       tempf2 = app.axn;
+ 254:./Src/application.c ****       go_motor(tempf1, tempf2, battery_dati.VBatt,0);
+ 255:./Src/application.c ****     break;
+ 256:./Src/application.c **** 
+ 257:./Src/application.c ****     case app_soft_ANDROIDAPP:
+ 258:./Src/application.c ****      //ANDROID APP
+ 259:./Src/application.c ****       if(telemetry.dataREADY_JOYSTICK){
+ 260:./Src/application.c ****         telemetry.dataREADY_JOYSTICK  = 0;
+ 261:./Src/application.c ****         app.tAndroidAPP = HAL_GetTick();
+ 262:./Src/application.c ****         if(telemetry.dataLast_Command == 'F'){
+ 263:./Src/application.c ****           MotorR_stop();
+ 264:./Src/application.c ****           MotorL_stop();
+ 265:./Src/application.c ****           accelleration_XY_Reset();
+ 266:./Src/application.c ****           app.cruise_soft_run_nohand = 0.0;
+ 267:./Src/application.c ****           app.stato = app_init;
+ 268:./Src/application.c ****           telemetry.dataLast_Command = 0;
+ 269:./Src/application.c ****           break;
+ 270:./Src/application.c ****         }
+ 271:./Src/application.c ****       }
+ 272:./Src/application.c ****       if((HAL_GetTick() - app.tAndroidAPP)>500){    //Se non ricevi risposta dalla APP esci dalla m
+ 273:./Src/application.c ****         go_motor(0, 0, battery_dati.VBatt,0);
+ 274:./Src/application.c ****         MotorR_stop();
+ 275:./Src/application.c ****         MotorL_stop();
+ 276:./Src/application.c ****         app.cruise_soft_run_nohand = 0.0;
+ 277:./Src/application.c ****         app.stato = app_init;
+ 278:./Src/application.c ****         break;
+ 279:./Src/application.c ****       }
+ 280:./Src/application.c **** 
+ 281:./Src/application.c **** 
+ 282:./Src/application.c ****       app.ayn = (float)telemetry.joyy;
+ 283:./Src/application.c ****       app.axn = (float)telemetry.joyx;
+ 284:./Src/application.c ****       if(app.ayn > 300.0){
+ 285:./Src/application.c ****         app.ayn = 300.0;
+ 286:./Src/application.c ****       }
+ 287:./Src/application.c ****       if(app.axn > 300.0){
+ 288:./Src/application.c ****         app.axn = 300.0;
+ 289:./Src/application.c ****       }
+ 290:./Src/application.c ****       if(app.ayn < 0.0){
+ 291:./Src/application.c ****         app.ayn = 0.0;
+ 292:./Src/application.c ****       }
+ 293:./Src/application.c ****       if(app.axn < 0){
+ 294:./Src/application.c ****         app.axn = 0.0;
+ 295:./Src/application.c ****       }
+ 296:./Src/application.c **** 
+ 297:./Src/application.c ****       app.ayn = app.ayn - 75.0;
+ 298:./Src/application.c ****       app.axn = app.axn - 75.0;
+ 299:./Src/application.c **** 
+ 300:./Src/application.c ****       //scala x soft run
+ 301:./Src/application.c ****       tempf1 = app.ayn;
+ 302:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 303:./Src/application.c ****       app.ayn = scale_y(tempf1, tempf2);
+ARM GAS  /tmp/cctZXvYy.s 			page 9
+
+
+ 304:./Src/application.c ****       tempf1 = app.axn;
+ 305:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 306:./Src/application.c ****       app.axn = scale_x(tempf1, tempf2);
+ 307:./Src/application.c **** 
+ 308:./Src/application.c ****       app.ayn = accellerationY(app.ayn);
+ 309:./Src/application.c ****       app.axn = accellerationX(app.axn);
+ 310:./Src/application.c ****       tempf1 = app.ayn;
+ 311:./Src/application.c ****       tempf2 = app.axn;
+ 312:./Src/application.c ****       go_motor(tempf1, tempf2, battery_dati.VBatt,0);
+ 313:./Src/application.c ****     break;
+ 314:./Src/application.c **** 
+ 315:./Src/application.c ****     default:
+ 316:./Src/application.c ****         MotorR_stop();
+ 317:./Src/application.c ****         MotorL_stop();
+ 318:./Src/application.c ****         app.stato = app_init;
+ 319:./Src/application.c ****     break;
+ 320:./Src/application.c **** 
+ 321:./Src/application.c ****   }
+ 322:./Src/application.c **** 
+ 323:./Src/application.c **** }
+ 324:./Src/application.c **** 
+ 325:./Src/application.c **** 
+ 326:./Src/application.c **** 
+ 327:./Src/application.c **** 
+ 328:./Src/application.c **** 
+ 329:./Src/application.c **** 
+ 330:./Src/application.c **** 
+ 331:./Src/application.c **** 
+ 332:./Src/application.c **** 
+ 333:./Src/application.c **** 
+ 334:./Src/application.c **** 
+ 335:./Src/application.c **** 
+ 336:./Src/application.c **** 
+ 337:./Src/application.c **** 
+ 338:./Src/application.c **** 
+ 339:./Src/application.c **** 
+ 340:./Src/application.c **** 
+ 341:./Src/application.c **** 
+ 342:./Src/application.c **** float normalize_y(uint8_t y){
+ 161              		.loc 1 342 0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              	.LVL7:
+ 166 0000 10B5     		push	{r4, lr}
+ 167              	.LCFI2:
+ 168              		.cfi_def_cfa_offset 8
+ 169              		.cfi_offset 4, -8
+ 170              		.cfi_offset 14, -4
+ 171              	.LVL8:
+ 343:./Src/application.c ****   float ayn;
+ 344:./Src/application.c ****       ayn = 0.0;
+ 345:./Src/application.c ****       ayn = (float)((float)y - app.center_media_Y);
+ 172              		.loc 1 345 0
+ 173 0002 FFF7FEFF 		bl	__aeabi_ui2f
+ 174              	.LVL9:
+ 175 0006 0D4B     		ldr	r3, .L22
+ARM GAS  /tmp/cctZXvYy.s 			page 10
+
+
+ 176 0008 196A     		ldr	r1, [r3, #32]	@ float
+ 177 000a FFF7FEFF 		bl	__aeabi_fsub
+ 178              	.LVL10:
+ 179 000e 0446     		mov	r4, r0
+ 180              	.LVL11:
+ 346:./Src/application.c ****       //Limit
+ 347:./Src/application.c ****       if(ayn >= 0.0){
+ 181              		.loc 1 347 0
+ 182 0010 0021     		movs	r1, #0
+ 183 0012 FFF7FEFF 		bl	__aeabi_fcmpge
+ 184              	.LVL12:
+ 185 0016 28B1     		cbz	r0, .L20
+ 348:./Src/application.c ****         //0 ~ 100
+ 349:./Src/application.c ****         if(ayn > 100.0){
+ 186              		.loc 1 349 0
+ 187 0018 0949     		ldr	r1, .L22+4
+ 188 001a 2046     		mov	r0, r4
+ 189 001c FFF7FEFF 		bl	__aeabi_fcmpgt
+ 190              	.LVL13:
+ 191 0020 30B9     		cbnz	r0, .L17
+ 192 0022 08E0     		b	.L16
+ 193              	.L20:
+ 350:./Src/application.c ****           ayn = 100.0;
+ 351:./Src/application.c ****         }
+ 352:./Src/application.c ****       }else{
+ 353:./Src/application.c ****         //0 ~ -100
+ 354:./Src/application.c ****         if(ayn < -100.0){
+ 194              		.loc 1 354 0
+ 195 0024 0749     		ldr	r1, .L22+8
+ 196 0026 2046     		mov	r0, r4
+ 197 0028 FFF7FEFF 		bl	__aeabi_fcmplt
+ 198              	.LVL14:
+ 199 002c 10B9     		cbnz	r0, .L18
+ 200 002e 02E0     		b	.L16
+ 201              	.L17:
+ 350:./Src/application.c ****           ayn = 100.0;
+ 202              		.loc 1 350 0
+ 203 0030 034C     		ldr	r4, .L22+4
+ 204              	.LVL15:
+ 205 0032 00E0     		b	.L16
+ 206              	.LVL16:
+ 207              	.L18:
+ 355:./Src/application.c ****           ayn = -100.0;
+ 208              		.loc 1 355 0
+ 209 0034 034C     		ldr	r4, .L22+8
+ 210              	.LVL17:
+ 211              	.L16:
+ 356:./Src/application.c ****         }
+ 357:./Src/application.c ****       }
+ 358:./Src/application.c ****   return ayn;
+ 359:./Src/application.c **** }
+ 212              		.loc 1 359 0
+ 213 0036 2046     		mov	r0, r4
+ 214 0038 10BD     		pop	{r4, pc}
+ 215              	.LVL18:
+ 216              	.L23:
+ 217 003a 00BF     		.align	2
+ARM GAS  /tmp/cctZXvYy.s 			page 11
+
+
+ 218              	.L22:
+ 219 003c 00000000 		.word	app
+ 220 0040 0000C842 		.word	1120403456
+ 221 0044 0000C8C2 		.word	-1027080192
+ 222              		.cfi_endproc
+ 223              	.LFE69:
+ 225              		.section	.text.normalize_x,"ax",%progbits
+ 226              		.align	2
+ 227              		.global	normalize_x
+ 228              		.thumb
+ 229              		.thumb_func
+ 231              	normalize_x:
+ 232              	.LFB70:
+ 360:./Src/application.c **** 
+ 361:./Src/application.c **** float normalize_x(uint8_t x){
+ 233              		.loc 1 361 0
+ 234              		.cfi_startproc
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237              	.LVL19:
+ 238 0000 10B5     		push	{r4, lr}
+ 239              	.LCFI3:
+ 240              		.cfi_def_cfa_offset 8
+ 241              		.cfi_offset 4, -8
+ 242              		.cfi_offset 14, -4
+ 243              	.LVL20:
+ 362:./Src/application.c ****   float axn;
+ 363:./Src/application.c ****       axn = 0.0;
+ 364:./Src/application.c ****       axn = (float)((float)x - app.center_media_X);
+ 244              		.loc 1 364 0
+ 245 0002 FFF7FEFF 		bl	__aeabi_ui2f
+ 246              	.LVL21:
+ 247 0006 0D4B     		ldr	r3, .L33
+ 248 0008 D969     		ldr	r1, [r3, #28]	@ float
+ 249 000a FFF7FEFF 		bl	__aeabi_fsub
+ 250              	.LVL22:
+ 251 000e 0446     		mov	r4, r0
+ 252              	.LVL23:
+ 365:./Src/application.c ****       //Limit
+ 366:./Src/application.c **** 
+ 367:./Src/application.c ****       if(axn >= 0.0){
+ 253              		.loc 1 367 0
+ 254 0010 0021     		movs	r1, #0
+ 255 0012 FFF7FEFF 		bl	__aeabi_fcmpge
+ 256              	.LVL24:
+ 257 0016 28B1     		cbz	r0, .L31
+ 368:./Src/application.c ****         //0 ~ 100
+ 369:./Src/application.c ****         if(axn > 100.0){
+ 258              		.loc 1 369 0
+ 259 0018 0949     		ldr	r1, .L33+4
+ 260 001a 2046     		mov	r0, r4
+ 261 001c FFF7FEFF 		bl	__aeabi_fcmpgt
+ 262              	.LVL25:
+ 263 0020 30B9     		cbnz	r0, .L28
+ 264 0022 08E0     		b	.L27
+ 265              	.L31:
+ 370:./Src/application.c ****           axn = 100.0;
+ARM GAS  /tmp/cctZXvYy.s 			page 12
+
+
+ 371:./Src/application.c ****         }
+ 372:./Src/application.c ****       }else{
+ 373:./Src/application.c ****         //0 ~ -100
+ 374:./Src/application.c ****         if(axn < -100.0){
+ 266              		.loc 1 374 0
+ 267 0024 0749     		ldr	r1, .L33+8
+ 268 0026 2046     		mov	r0, r4
+ 269 0028 FFF7FEFF 		bl	__aeabi_fcmplt
+ 270              	.LVL26:
+ 271 002c 10B9     		cbnz	r0, .L29
+ 272 002e 02E0     		b	.L27
+ 273              	.L28:
+ 370:./Src/application.c ****           axn = 100.0;
+ 274              		.loc 1 370 0
+ 275 0030 034C     		ldr	r4, .L33+4
+ 276              	.LVL27:
+ 277 0032 00E0     		b	.L27
+ 278              	.LVL28:
+ 279              	.L29:
+ 375:./Src/application.c ****           axn = -100.0;
+ 280              		.loc 1 375 0
+ 281 0034 034C     		ldr	r4, .L33+8
+ 282              	.LVL29:
+ 283              	.L27:
+ 376:./Src/application.c ****         }
+ 377:./Src/application.c ****       }
+ 378:./Src/application.c ****   return axn;
+ 379:./Src/application.c **** }
+ 284              		.loc 1 379 0
+ 285 0036 2046     		mov	r0, r4
+ 286 0038 10BD     		pop	{r4, pc}
+ 287              	.LVL30:
+ 288              	.L34:
+ 289 003a 00BF     		.align	2
+ 290              	.L33:
+ 291 003c 00000000 		.word	app
+ 292 0040 0000C842 		.word	1120403456
+ 293 0044 0000C8C2 		.word	-1027080192
+ 294              		.cfi_endproc
+ 295              	.LFE70:
+ 297              		.section	.text.get_powerMax,"ax",%progbits
+ 298              		.align	2
+ 299              		.global	get_powerMax
+ 300              		.thumb
+ 301              		.thumb_func
+ 303              	get_powerMax:
+ 304              	.LFB73:
+ 380:./Src/application.c **** 
+ 381:./Src/application.c **** float scale_y(float y, float Vbatt){
+ 382:./Src/application.c ****   float ayn;
+ 383:./Src/application.c ****   ayn = 0.0;
+ 384:./Src/application.c ****       ayn = y * get_powerMax(Vbatt); //0.30000;
+ 385:./Src/application.c ****   return ayn;
+ 386:./Src/application.c **** }
+ 387:./Src/application.c **** 
+ 388:./Src/application.c **** float scale_x(float x, float Vbatt){
+ 389:./Src/application.c ****   float axn;
+ARM GAS  /tmp/cctZXvYy.s 			page 13
+
+
+ 390:./Src/application.c ****   axn = 0.0;
+ 391:./Src/application.c ****       axn = x * get_powerMax(Vbatt); //0.30000;
+ 392:./Src/application.c ****   return axn;
+ 393:./Src/application.c **** }
+ 394:./Src/application.c ****                                   //Vbatt,      Power max
+ 395:./Src/application.c **** const float Battery_power[][10] = {{40.0,       60.0/100.0},    //30% max potenza
+ 396:./Src/application.c ****                                   {38.0,        60.0/100.0},
+ 397:./Src/application.c ****                                   {37.0,        61.0/100.0},
+ 398:./Src/application.c ****                                   {36.0,        62.0/100.0},
+ 399:./Src/application.c ****                                   {35.0,        65.0/100.0},
+ 400:./Src/application.c ****                                   {34.0,        65.0/100.0},
+ 401:./Src/application.c ****                                   {33.0,        67.0/100.0},
+ 402:./Src/application.c ****                                   {32.0,        67.0/100.0},
+ 403:./Src/application.c ****                                   {31.0,        67.0/100.0},
+ 404:./Src/application.c ****                                   {30.0,        67.0/100.0}};
+ 405:./Src/application.c **** float get_powerMax(float Vbattery){
+ 305              		.loc 1 405 0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309              	.LVL31:
+ 310 0000 10B5     		push	{r4, lr}
+ 311              	.LCFI4:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 4, -8
+ 314              		.cfi_offset 14, -4
+ 315 0002 0446     		mov	r4, r0
+ 406:./Src/application.c ****   if(Vbattery >= Battery_power[0][0]){
+ 316              		.loc 1 406 0
+ 317 0004 1549     		ldr	r1, .L47
+ 318 0006 FFF7FEFF 		bl	__aeabi_fcmpge
+ 319              	.LVL32:
+ 320 000a D0B9     		cbnz	r0, .L38
+ 407:./Src/application.c ****     return Battery_power[0][1];
+ 408:./Src/application.c ****   }else if(Vbattery >= Battery_power[1][0]){
+ 321              		.loc 1 408 0
+ 322 000c 1449     		ldr	r1, .L47+4
+ 323 000e 2046     		mov	r0, r4
+ 324 0010 FFF7FEFF 		bl	__aeabi_fcmpge
+ 325              	.LVL33:
+ 326 0014 B8B9     		cbnz	r0, .L39
+ 409:./Src/application.c ****     return Battery_power[1][1];
+ 410:./Src/application.c ****   }else if(Vbattery >= Battery_power[2][0]){
+ 327              		.loc 1 410 0
+ 328 0016 1349     		ldr	r1, .L47+8
+ 329 0018 2046     		mov	r0, r4
+ 330 001a FFF7FEFF 		bl	__aeabi_fcmpge
+ 331              	.LVL34:
+ 332 001e A0B9     		cbnz	r0, .L40
+ 411:./Src/application.c ****     return Battery_power[2][1];
+ 412:./Src/application.c ****   }else if(Vbattery >= Battery_power[3][0]){
+ 333              		.loc 1 412 0
+ 334 0020 1149     		ldr	r1, .L47+12
+ 335 0022 2046     		mov	r0, r4
+ 336 0024 FFF7FEFF 		bl	__aeabi_fcmpge
+ 337              	.LVL35:
+ 338 0028 88B9     		cbnz	r0, .L41
+ARM GAS  /tmp/cctZXvYy.s 			page 14
+
+
+ 413:./Src/application.c ****     return Battery_power[3][1];
+ 414:./Src/application.c ****   }else if(Vbattery >= Battery_power[4][0]){
+ 339              		.loc 1 414 0
+ 340 002a 1049     		ldr	r1, .L47+16
+ 341 002c 2046     		mov	r0, r4
+ 342 002e FFF7FEFF 		bl	__aeabi_fcmpge
+ 343              	.LVL36:
+ 344 0032 70B9     		cbnz	r0, .L42
+ 415:./Src/application.c ****     return Battery_power[4][1];
+ 416:./Src/application.c ****   }else if(Vbattery >= Battery_power[5][0]){
+ 345              		.loc 1 416 0
+ 346 0034 0E49     		ldr	r1, .L47+20
+ 347 0036 2046     		mov	r0, r4
+ 348 0038 FFF7FEFF 		bl	__aeabi_fcmpge
+ 349              	.LVL37:
+ 350 003c 58B1     		cbz	r0, .L45
+ 417:./Src/application.c ****     return Battery_power[5][1];
+ 351              		.loc 1 417 0
+ 352 003e 0D48     		ldr	r0, .L47+24
+ 353 0040 10BD     		pop	{r4, pc}
+ 354              	.LVL38:
+ 355              	.L38:
+ 407:./Src/application.c ****   }else if(Vbattery >= Battery_power[1][0]){
+ 356              		.loc 1 407 0
+ 357 0042 0D48     		ldr	r0, .L47+28
+ 358 0044 10BD     		pop	{r4, pc}
+ 359              	.LVL39:
+ 360              	.L39:
+ 409:./Src/application.c ****   }else if(Vbattery >= Battery_power[2][0]){
+ 361              		.loc 1 409 0
+ 362 0046 0C48     		ldr	r0, .L47+28
+ 363 0048 10BD     		pop	{r4, pc}
+ 364              	.LVL40:
+ 365              	.L40:
+ 411:./Src/application.c ****   }else if(Vbattery >= Battery_power[3][0]){
+ 366              		.loc 1 411 0
+ 367 004a 0C48     		ldr	r0, .L47+32
+ 368 004c 10BD     		pop	{r4, pc}
+ 369              	.LVL41:
+ 370              	.L41:
+ 413:./Src/application.c ****   }else if(Vbattery >= Battery_power[4][0]){
+ 371              		.loc 1 413 0
+ 372 004e 0C48     		ldr	r0, .L47+36
+ 373 0050 10BD     		pop	{r4, pc}
+ 374              	.LVL42:
+ 375              	.L42:
+ 415:./Src/application.c ****   }else if(Vbattery >= Battery_power[5][0]){
+ 376              		.loc 1 415 0
+ 377 0052 0848     		ldr	r0, .L47+24
+ 378 0054 10BD     		pop	{r4, pc}
+ 379              	.LVL43:
+ 380              	.L45:
+ 418:./Src/application.c ****   }else if(Vbattery >= Battery_power[6][0]){
+ 419:./Src/application.c ****     return Battery_power[6][1];
+ 381              		.loc 1 419 0
+ 382 0056 0B48     		ldr	r0, .L47+40
+ 420:./Src/application.c ****   }else if(Vbattery >= Battery_power[7][0]){
+ARM GAS  /tmp/cctZXvYy.s 			page 15
+
+
+ 421:./Src/application.c ****     return Battery_power[7][1];
+ 422:./Src/application.c ****   }else if(Vbattery >= Battery_power[8][0]){
+ 423:./Src/application.c ****     return Battery_power[8][1];
+ 424:./Src/application.c ****   }else if(Vbattery >= Battery_power[9][0]){
+ 425:./Src/application.c ****     return Battery_power[9][1];
+ 426:./Src/application.c ****   }else{
+ 427:./Src/application.c ****     return Battery_power[9][1];
+ 428:./Src/application.c ****   }
+ 429:./Src/application.c **** }
+ 383              		.loc 1 429 0
+ 384 0058 10BD     		pop	{r4, pc}
+ 385              	.LVL44:
+ 386              	.L48:
+ 387 005a 00BF     		.align	2
+ 388              	.L47:
+ 389 005c 00002042 		.word	1109393408
+ 390 0060 00001842 		.word	1108869120
+ 391 0064 00001442 		.word	1108606976
+ 392 0068 00001042 		.word	1108344832
+ 393 006c 00000C42 		.word	1108082688
+ 394 0070 00000842 		.word	1107820544
+ 395 0074 6666263F 		.word	1059481190
+ 396 0078 9A99193F 		.word	1058642330
+ 397 007c F6281C3F 		.word	1058810102
+ 398 0080 52B81E3F 		.word	1058977874
+ 399 0084 1F852B3F 		.word	1059816735
+ 400              		.cfi_endproc
+ 401              	.LFE73:
+ 403              		.global	__aeabi_fmul
+ 404              		.section	.text.scale_y,"ax",%progbits
+ 405              		.align	2
+ 406              		.global	scale_y
+ 407              		.thumb
+ 408              		.thumb_func
+ 410              	scale_y:
+ 411              	.LFB71:
+ 381:./Src/application.c ****   float ayn;
+ 412              		.loc 1 381 0
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 0
+ 415              		@ frame_needed = 0, uses_anonymous_args = 0
+ 416              	.LVL45:
+ 417 0000 10B5     		push	{r4, lr}
+ 418              	.LCFI5:
+ 419              		.cfi_def_cfa_offset 8
+ 420              		.cfi_offset 4, -8
+ 421              		.cfi_offset 14, -4
+ 422 0002 0446     		mov	r4, r0
+ 423              	.LVL46:
+ 384:./Src/application.c ****   return ayn;
+ 424              		.loc 1 384 0
+ 425 0004 0846     		mov	r0, r1
+ 426              	.LVL47:
+ 427 0006 FFF7FEFF 		bl	get_powerMax
+ 428              	.LVL48:
+ 429 000a 2146     		mov	r1, r4
+ 430 000c FFF7FEFF 		bl	__aeabi_fmul
+ARM GAS  /tmp/cctZXvYy.s 			page 16
+
+
+ 431              	.LVL49:
+ 386:./Src/application.c **** 
+ 432              		.loc 1 386 0
+ 433 0010 10BD     		pop	{r4, pc}
+ 434              		.cfi_endproc
+ 435              	.LFE71:
+ 437 0012 00BF     		.section	.text.scale_x,"ax",%progbits
+ 438              		.align	2
+ 439              		.global	scale_x
+ 440              		.thumb
+ 441              		.thumb_func
+ 443              	scale_x:
+ 444              	.LFB72:
+ 388:./Src/application.c ****   float axn;
+ 445              		.loc 1 388 0
+ 446              		.cfi_startproc
+ 447              		@ args = 0, pretend = 0, frame = 0
+ 448              		@ frame_needed = 0, uses_anonymous_args = 0
+ 449              	.LVL50:
+ 450 0000 10B5     		push	{r4, lr}
+ 451              	.LCFI6:
+ 452              		.cfi_def_cfa_offset 8
+ 453              		.cfi_offset 4, -8
+ 454              		.cfi_offset 14, -4
+ 455 0002 0446     		mov	r4, r0
+ 456              	.LVL51:
+ 391:./Src/application.c ****   return axn;
+ 457              		.loc 1 391 0
+ 458 0004 0846     		mov	r0, r1
+ 459              	.LVL52:
+ 460 0006 FFF7FEFF 		bl	get_powerMax
+ 461              	.LVL53:
+ 462 000a 2146     		mov	r1, r4
+ 463 000c FFF7FEFF 		bl	__aeabi_fmul
+ 464              	.LVL54:
+ 393:./Src/application.c ****                                   //Vbatt,      Power max
+ 465              		.loc 1 393 0
+ 466 0010 10BD     		pop	{r4, pc}
+ 467              		.cfi_endproc
+ 468              	.LFE72:
+ 470 0012 00BF     		.section	.text.accelleration_XY_Reset,"ax",%progbits
+ 471              		.align	2
+ 472              		.global	accelleration_XY_Reset
+ 473              		.thumb
+ 474              		.thumb_func
+ 476              	accelleration_XY_Reset:
+ 477              	.LFB74:
+ 430:./Src/application.c **** 
+ 431:./Src/application.c **** void accelleration_XY_Reset(void){
+ 478              		.loc 1 431 0
+ 479              		.cfi_startproc
+ 480              		@ args = 0, pretend = 0, frame = 0
+ 481              		@ frame_needed = 0, uses_anonymous_args = 0
+ 482              		@ link register save eliminated.
+ 432:./Src/application.c ****   app.faccY = 0.0;
+ 483              		.loc 1 432 0
+ 484 0000 024B     		ldr	r3, .L54
+ARM GAS  /tmp/cctZXvYy.s 			page 17
+
+
+ 485 0002 0022     		movs	r2, #0
+ 486 0004 5A62     		str	r2, [r3, #36]	@ float
+ 433:./Src/application.c ****   app.faccX = 0.0;
+ 487              		.loc 1 433 0
+ 488 0006 9A62     		str	r2, [r3, #40]	@ float
+ 489 0008 7047     		bx	lr
+ 490              	.L55:
+ 491 000a 00BF     		.align	2
+ 492              	.L54:
+ 493 000c 00000000 		.word	app
+ 494              		.cfi_endproc
+ 495              	.LFE74:
+ 497              		.global	__aeabi_f2d
+ 498              		.global	__aeabi_dadd
+ 499              		.global	__aeabi_d2f
+ 500              		.global	__aeabi_dsub
+ 501              		.section	.text.accellerationY,"ax",%progbits
+ 502              		.align	2
+ 503              		.global	accellerationY
+ 504              		.thumb
+ 505              		.thumb_func
+ 507              	accellerationY:
+ 508              	.LFB75:
+ 434:./Src/application.c **** }
+ 435:./Src/application.c **** 
+ 436:./Src/application.c **** float accellerationY(float value){
+ 509              		.loc 1 436 0
+ 510              		.cfi_startproc
+ 511              		@ args = 0, pretend = 0, frame = 0
+ 512              		@ frame_needed = 0, uses_anonymous_args = 0
+ 513              	.LVL55:
+ 514 0000 70B5     		push	{r4, r5, r6, lr}
+ 515              	.LCFI7:
+ 516              		.cfi_def_cfa_offset 16
+ 517              		.cfi_offset 4, -16
+ 518              		.cfi_offset 5, -12
+ 519              		.cfi_offset 6, -8
+ 520              		.cfi_offset 14, -4
+ 521 0002 0446     		mov	r4, r0
+ 437:./Src/application.c ****   /* value -> -1000 0 +1000 */
+ 438:./Src/application.c ****   float tval;
+ 439:./Src/application.c **** 
+ 440:./Src/application.c ****   tval = app.faccY;
+ 522              		.loc 1 440 0
+ 523 0004 1C4B     		ldr	r3, .L68+8
+ 524 0006 5D6A     		ldr	r5, [r3, #36]	@ float
+ 525              	.LVL56:
+ 441:./Src/application.c **** 
+ 442:./Src/application.c ****   //EXPEIMENT
+ 443:./Src/application.c ****   if(value > tval){
+ 526              		.loc 1 443 0
+ 527 0008 0146     		mov	r1, r0
+ 528 000a 2846     		mov	r0, r5
+ 529              	.LVL57:
+ 530 000c FFF7FEFF 		bl	__aeabi_fcmplt
+ 531              	.LVL58:
+ 532 0010 88B1     		cbz	r0, .L57
+ARM GAS  /tmp/cctZXvYy.s 			page 18
+
+
+ 444:./Src/application.c ****     app.faccY = app.faccY + ACCELLERATION_CONSTANT;
+ 533              		.loc 1 444 0
+ 534 0012 194E     		ldr	r6, .L68+8
+ 535 0014 706A     		ldr	r0, [r6, #36]	@ float
+ 536 0016 FFF7FEFF 		bl	__aeabi_f2d
+ 537              	.LVL59:
+ 538 001a 15A3     		adr	r3, .L68
+ 539 001c D3E90023 		ldrd	r2, [r3]
+ 540 0020 FFF7FEFF 		bl	__aeabi_dadd
+ 541              	.LVL60:
+ 542 0024 FFF7FEFF 		bl	__aeabi_d2f
+ 543              	.LVL61:
+ 544 0028 7062     		str	r0, [r6, #36]	@ float
+ 445:./Src/application.c ****     //limit
+ 446:./Src/application.c ****     if(app.faccY > value){
+ 545              		.loc 1 446 0
+ 546 002a 716A     		ldr	r1, [r6, #36]	@ float
+ 547 002c 2046     		mov	r0, r4
+ 548 002e FFF7FEFF 		bl	__aeabi_fcmplt
+ 549              	.LVL62:
+ 550 0032 00B1     		cbz	r0, .L57
+ 447:./Src/application.c ****       app.faccY = (float)value;
+ 551              		.loc 1 447 0
+ 552 0034 7462     		str	r4, [r6, #36]	@ float
+ 553              	.L57:
+ 448:./Src/application.c ****     }
+ 449:./Src/application.c ****   }
+ 450:./Src/application.c ****   if(value < tval){
+ 554              		.loc 1 450 0
+ 555 0036 2146     		mov	r1, r4
+ 556 0038 2846     		mov	r0, r5
+ 557 003a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 558              	.LVL63:
+ 559 003e 88B1     		cbz	r0, .L60
+ 451:./Src/application.c ****     app.faccY = app.faccY - ACCELLERATION_CONSTANT;
+ 560              		.loc 1 451 0
+ 561 0040 0D4D     		ldr	r5, .L68+8
+ 562              	.LVL64:
+ 563 0042 686A     		ldr	r0, [r5, #36]	@ float
+ 564 0044 FFF7FEFF 		bl	__aeabi_f2d
+ 565              	.LVL65:
+ 566 0048 09A3     		adr	r3, .L68
+ 567 004a D3E90023 		ldrd	r2, [r3]
+ 568 004e FFF7FEFF 		bl	__aeabi_dsub
+ 569              	.LVL66:
+ 570 0052 FFF7FEFF 		bl	__aeabi_d2f
+ 571              	.LVL67:
+ 572 0056 6862     		str	r0, [r5, #36]	@ float
+ 452:./Src/application.c ****     //limit
+ 453:./Src/application.c ****     if(app.faccY < value){
+ 573              		.loc 1 453 0
+ 574 0058 696A     		ldr	r1, [r5, #36]	@ float
+ 575 005a 2046     		mov	r0, r4
+ 576 005c FFF7FEFF 		bl	__aeabi_fcmpgt
+ 577              	.LVL68:
+ 578 0060 00B1     		cbz	r0, .L60
+ 454:./Src/application.c ****       app.faccY = (float)value;
+ARM GAS  /tmp/cctZXvYy.s 			page 19
+
+
+ 579              		.loc 1 454 0
+ 580 0062 6C62     		str	r4, [r5, #36]	@ float
+ 581              	.L60:
+ 455:./Src/application.c ****     }
+ 456:./Src/application.c ****   }
+ 457:./Src/application.c **** 
+ 458:./Src/application.c ****   /* //ORIGINAL
+ 459:./Src/application.c ****   if(value > 0.0){
+ 460:./Src/application.c ****     if(value > tval){
+ 461:./Src/application.c ****       //Accelleration
+ 462:./Src/application.c ****       if(tval < 0.0){
+ 463:./Src/application.c ****         app.faccY = 0.0;
+ 464:./Src/application.c ****       }else{
+ 465:./Src/application.c ****         app.faccY = app.faccY + ACCELLERATION_CONSTANT;
+ 466:./Src/application.c ****         //limit
+ 467:./Src/application.c ****         if(app.faccY > value){
+ 468:./Src/application.c ****           app.faccY = (float)value;
+ 469:./Src/application.c ****         }
+ 470:./Src/application.c ****       }
+ 471:./Src/application.c ****     }else if(value < tval){
+ 472:./Src/application.c ****         app.faccY = (float)value;
+ 473:./Src/application.c ****     }else{
+ 474:./Src/application.c ****         app.faccY = (float)value;
+ 475:./Src/application.c ****     }
+ 476:./Src/application.c ****   }else if(value < 0){
+ 477:./Src/application.c ****     if(value < tval){
+ 478:./Src/application.c ****       //Accelleration
+ 479:./Src/application.c ****       if(tval > 0){
+ 480:./Src/application.c ****         app.faccY = 0.0;
+ 481:./Src/application.c ****       }else{
+ 482:./Src/application.c ****         app.faccY = app.faccY - ACCELLERATION_CONSTANT;
+ 483:./Src/application.c ****         //limit
+ 484:./Src/application.c ****         if(app.faccY < value){
+ 485:./Src/application.c ****           app.faccY = (float)value;
+ 486:./Src/application.c ****         }
+ 487:./Src/application.c ****       }
+ 488:./Src/application.c ****     }else if(value > tval){
+ 489:./Src/application.c ****         app.faccY = (float)value;
+ 490:./Src/application.c ****     }else{
+ 491:./Src/application.c ****         app.faccY = (float)value;
+ 492:./Src/application.c ****     }
+ 493:./Src/application.c ****   }else{
+ 494:./Src/application.c ****     app.faccY = (float)value;
+ 495:./Src/application.c ****   }*/
+ 496:./Src/application.c **** 
+ 497:./Src/application.c ****   tval = app.faccY;
+ 582              		.loc 1 497 0
+ 583 0064 044B     		ldr	r3, .L68+8
+ 584 0066 586A     		ldr	r0, [r3, #36]	@ float
+ 585              	.LVL69:
+ 498:./Src/application.c **** 
+ 499:./Src/application.c ****   return tval;
+ 500:./Src/application.c **** }
+ 586              		.loc 1 500 0
+ 587 0068 70BD     		pop	{r4, r5, r6, pc}
+ 588              	.LVL70:
+ 589              	.L69:
+ARM GAS  /tmp/cctZXvYy.s 			page 20
+
+
+ 590 006a 00BFAFF3 		.align	3
+ 590      0080
+ 591              	.L68:
+ 592 0070 33333333 		.word	858993459
+ 593 0074 3333E33F 		.word	1071854387
+ 594 0078 00000000 		.word	app
+ 595              		.cfi_endproc
+ 596              	.LFE75:
+ 598              		.section	.text.accellerationX,"ax",%progbits
+ 599              		.align	2
+ 600              		.global	accellerationX
+ 601              		.thumb
+ 602              		.thumb_func
+ 604              	accellerationX:
+ 605              	.LFB76:
+ 501:./Src/application.c **** 
+ 502:./Src/application.c **** float accellerationX(float value){
+ 606              		.loc 1 502 0
+ 607              		.cfi_startproc
+ 608              		@ args = 0, pretend = 0, frame = 0
+ 609              		@ frame_needed = 0, uses_anonymous_args = 0
+ 610              	.LVL71:
+ 611 0000 70B5     		push	{r4, r5, r6, lr}
+ 612              	.LCFI8:
+ 613              		.cfi_def_cfa_offset 16
+ 614              		.cfi_offset 4, -16
+ 615              		.cfi_offset 5, -12
+ 616              		.cfi_offset 6, -8
+ 617              		.cfi_offset 14, -4
+ 618 0002 0446     		mov	r4, r0
+ 503:./Src/application.c ****   /* value -> -1000 0 +1000 */
+ 504:./Src/application.c ****   float tval;
+ 505:./Src/application.c **** 
+ 506:./Src/application.c ****   tval = app.faccX;
+ 619              		.loc 1 506 0
+ 620 0004 1C4B     		ldr	r3, .L82+8
+ 621 0006 9D6A     		ldr	r5, [r3, #40]	@ float
+ 622              	.LVL72:
+ 507:./Src/application.c **** 
+ 508:./Src/application.c ****   //EXPERIMENT
+ 509:./Src/application.c ****   if(value > tval){
+ 623              		.loc 1 509 0
+ 624 0008 0146     		mov	r1, r0
+ 625 000a 2846     		mov	r0, r5
+ 626              	.LVL73:
+ 627 000c FFF7FEFF 		bl	__aeabi_fcmplt
+ 628              	.LVL74:
+ 629 0010 88B1     		cbz	r0, .L71
+ 510:./Src/application.c ****     app.faccX = app.faccX + ACCELLERATION_CONSTANT;
+ 630              		.loc 1 510 0
+ 631 0012 194E     		ldr	r6, .L82+8
+ 632 0014 B06A     		ldr	r0, [r6, #40]	@ float
+ 633 0016 FFF7FEFF 		bl	__aeabi_f2d
+ 634              	.LVL75:
+ 635 001a 15A3     		adr	r3, .L82
+ 636 001c D3E90023 		ldrd	r2, [r3]
+ 637 0020 FFF7FEFF 		bl	__aeabi_dadd
+ARM GAS  /tmp/cctZXvYy.s 			page 21
+
+
+ 638              	.LVL76:
+ 639 0024 FFF7FEFF 		bl	__aeabi_d2f
+ 640              	.LVL77:
+ 641 0028 B062     		str	r0, [r6, #40]	@ float
+ 511:./Src/application.c ****     //limit
+ 512:./Src/application.c ****     if(app.faccX > value){
+ 642              		.loc 1 512 0
+ 643 002a B16A     		ldr	r1, [r6, #40]	@ float
+ 644 002c 2046     		mov	r0, r4
+ 645 002e FFF7FEFF 		bl	__aeabi_fcmplt
+ 646              	.LVL78:
+ 647 0032 00B1     		cbz	r0, .L71
+ 513:./Src/application.c ****       app.faccX = (float)value;
+ 648              		.loc 1 513 0
+ 649 0034 B462     		str	r4, [r6, #40]	@ float
+ 650              	.L71:
+ 514:./Src/application.c ****     }
+ 515:./Src/application.c ****   }
+ 516:./Src/application.c ****   if(value < tval){
+ 651              		.loc 1 516 0
+ 652 0036 2146     		mov	r1, r4
+ 653 0038 2846     		mov	r0, r5
+ 654 003a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 655              	.LVL79:
+ 656 003e 88B1     		cbz	r0, .L74
+ 517:./Src/application.c ****     app.faccX = app.faccX - ACCELLERATION_CONSTANT;
+ 657              		.loc 1 517 0
+ 658 0040 0D4D     		ldr	r5, .L82+8
+ 659              	.LVL80:
+ 660 0042 A86A     		ldr	r0, [r5, #40]	@ float
+ 661 0044 FFF7FEFF 		bl	__aeabi_f2d
+ 662              	.LVL81:
+ 663 0048 09A3     		adr	r3, .L82
+ 664 004a D3E90023 		ldrd	r2, [r3]
+ 665 004e FFF7FEFF 		bl	__aeabi_dsub
+ 666              	.LVL82:
+ 667 0052 FFF7FEFF 		bl	__aeabi_d2f
+ 668              	.LVL83:
+ 669 0056 A862     		str	r0, [r5, #40]	@ float
+ 518:./Src/application.c ****     //limit
+ 519:./Src/application.c ****     if(app.faccX < value){
+ 670              		.loc 1 519 0
+ 671 0058 A96A     		ldr	r1, [r5, #40]	@ float
+ 672 005a 2046     		mov	r0, r4
+ 673 005c FFF7FEFF 		bl	__aeabi_fcmpgt
+ 674              	.LVL84:
+ 675 0060 00B1     		cbz	r0, .L74
+ 520:./Src/application.c ****       app.faccX = (float)value;
+ 676              		.loc 1 520 0
+ 677 0062 AC62     		str	r4, [r5, #40]	@ float
+ 678              	.L74:
+ 521:./Src/application.c ****     }
+ 522:./Src/application.c ****   }
+ 523:./Src/application.c ****   /* ORIGINAL
+ 524:./Src/application.c ****   if(value > 0){
+ 525:./Src/application.c ****     if(value > tval){
+ 526:./Src/application.c ****       //Accelleration
+ARM GAS  /tmp/cctZXvYy.s 			page 22
+
+
+ 527:./Src/application.c ****       if(tval < 0.0){
+ 528:./Src/application.c ****         app.faccX = 0.0;
+ 529:./Src/application.c ****       }else{
+ 530:./Src/application.c ****         app.faccX = app.faccX + ACCELLERATION_CONSTANT;
+ 531:./Src/application.c ****         //limit
+ 532:./Src/application.c ****         if(app.faccX > value){
+ 533:./Src/application.c ****           app.faccX = (float)value;
+ 534:./Src/application.c ****         }
+ 535:./Src/application.c ****       }
+ 536:./Src/application.c ****     }else if(value < tval){
+ 537:./Src/application.c ****         app.faccX = (float)value;
+ 538:./Src/application.c ****     }else{
+ 539:./Src/application.c ****         app.faccX = (float)value;
+ 540:./Src/application.c ****     }
+ 541:./Src/application.c ****   }else if(value < 0){
+ 542:./Src/application.c ****     if(value < tval){
+ 543:./Src/application.c ****       //Accelleration
+ 544:./Src/application.c ****       if(tval > 0.0){
+ 545:./Src/application.c ****         app.faccX = 0.0;
+ 546:./Src/application.c ****       }else{
+ 547:./Src/application.c ****         app.faccX = app.faccX - ACCELLERATION_CONSTANT;
+ 548:./Src/application.c ****         //limit
+ 549:./Src/application.c ****         if(app.faccX < value){
+ 550:./Src/application.c ****           app.faccX = (float)value;
+ 551:./Src/application.c ****         }
+ 552:./Src/application.c ****       }
+ 553:./Src/application.c ****     }else if(value > tval){
+ 554:./Src/application.c ****         app.faccX = (float)value;
+ 555:./Src/application.c ****     }else{
+ 556:./Src/application.c ****         app.faccX = (float)value;
+ 557:./Src/application.c ****     }
+ 558:./Src/application.c ****   }else{
+ 559:./Src/application.c ****     app.faccX = (float)value;
+ 560:./Src/application.c ****   }
+ 561:./Src/application.c **** */
+ 562:./Src/application.c ****   tval = app.faccX;
+ 679              		.loc 1 562 0
+ 680 0064 044B     		ldr	r3, .L82+8
+ 681 0066 986A     		ldr	r0, [r3, #40]	@ float
+ 682              	.LVL85:
+ 563:./Src/application.c **** 
+ 564:./Src/application.c ****   return tval;
+ 565:./Src/application.c **** }
+ 683              		.loc 1 565 0
+ 684 0068 70BD     		pop	{r4, r5, r6, pc}
+ 685              	.LVL86:
+ 686              	.L83:
+ 687 006a 00BFAFF3 		.align	3
+ 687      0080
+ 688              	.L82:
+ 689 0070 33333333 		.word	858993459
+ 690 0074 3333E33F 		.word	1071854387
+ 691 0078 00000000 		.word	app
+ 692              		.cfi_endproc
+ 693              	.LFE76:
+ 695              		.section	.text.accellerationYHARD,"ax",%progbits
+ 696              		.align	2
+ARM GAS  /tmp/cctZXvYy.s 			page 23
+
+
+ 697              		.global	accellerationYHARD
+ 698              		.thumb
+ 699              		.thumb_func
+ 701              	accellerationYHARD:
+ 702              	.LFB77:
+ 566:./Src/application.c **** 
+ 567:./Src/application.c **** float accellerationYHARD(float value){
+ 703              		.loc 1 567 0
+ 704              		.cfi_startproc
+ 705              		@ args = 0, pretend = 0, frame = 0
+ 706              		@ frame_needed = 0, uses_anonymous_args = 0
+ 707              	.LVL87:
+ 708 0000 70B5     		push	{r4, r5, r6, lr}
+ 709              	.LCFI9:
+ 710              		.cfi_def_cfa_offset 16
+ 711              		.cfi_offset 4, -16
+ 712              		.cfi_offset 5, -12
+ 713              		.cfi_offset 6, -8
+ 714              		.cfi_offset 14, -4
+ 715 0002 0446     		mov	r4, r0
+ 568:./Src/application.c ****   /* value -> -1000 0 +1000 */
+ 569:./Src/application.c ****   float tval;
+ 570:./Src/application.c **** 
+ 571:./Src/application.c ****   tval = app.faccY;
+ 716              		.loc 1 571 0
+ 717 0004 1C4B     		ldr	r3, .L96+8
+ 718 0006 5D6A     		ldr	r5, [r3, #36]	@ float
+ 719              	.LVL88:
+ 572:./Src/application.c **** 
+ 573:./Src/application.c ****   //EXPEIMENT
+ 574:./Src/application.c ****   if(value > tval){
+ 720              		.loc 1 574 0
+ 721 0008 0146     		mov	r1, r0
+ 722 000a 2846     		mov	r0, r5
+ 723              	.LVL89:
+ 724 000c FFF7FEFF 		bl	__aeabi_fcmplt
+ 725              	.LVL90:
+ 726 0010 88B1     		cbz	r0, .L85
+ 575:./Src/application.c ****     app.faccY = app.faccY + ACCELLERATION_CONSTANT_HARD;
+ 727              		.loc 1 575 0
+ 728 0012 194E     		ldr	r6, .L96+8
+ 729 0014 706A     		ldr	r0, [r6, #36]	@ float
+ 730 0016 FFF7FEFF 		bl	__aeabi_f2d
+ 731              	.LVL91:
+ 732 001a 15A3     		adr	r3, .L96
+ 733 001c D3E90023 		ldrd	r2, [r3]
+ 734 0020 FFF7FEFF 		bl	__aeabi_dadd
+ 735              	.LVL92:
+ 736 0024 FFF7FEFF 		bl	__aeabi_d2f
+ 737              	.LVL93:
+ 738 0028 7062     		str	r0, [r6, #36]	@ float
+ 576:./Src/application.c ****     //limit
+ 577:./Src/application.c ****     if(app.faccY > value){
+ 739              		.loc 1 577 0
+ 740 002a 716A     		ldr	r1, [r6, #36]	@ float
+ 741 002c 2046     		mov	r0, r4
+ 742 002e FFF7FEFF 		bl	__aeabi_fcmplt
+ARM GAS  /tmp/cctZXvYy.s 			page 24
+
+
+ 743              	.LVL94:
+ 744 0032 00B1     		cbz	r0, .L85
+ 578:./Src/application.c ****       app.faccY = (float)value;
+ 745              		.loc 1 578 0
+ 746 0034 7462     		str	r4, [r6, #36]	@ float
+ 747              	.L85:
+ 579:./Src/application.c ****     }
+ 580:./Src/application.c ****   }
+ 581:./Src/application.c ****   if(value < tval){
+ 748              		.loc 1 581 0
+ 749 0036 2146     		mov	r1, r4
+ 750 0038 2846     		mov	r0, r5
+ 751 003a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 752              	.LVL95:
+ 753 003e 88B1     		cbz	r0, .L88
+ 582:./Src/application.c ****     app.faccY = app.faccY - ACCELLERATION_CONSTANT_HARD;
+ 754              		.loc 1 582 0
+ 755 0040 0D4D     		ldr	r5, .L96+8
+ 756              	.LVL96:
+ 757 0042 686A     		ldr	r0, [r5, #36]	@ float
+ 758 0044 FFF7FEFF 		bl	__aeabi_f2d
+ 759              	.LVL97:
+ 760 0048 09A3     		adr	r3, .L96
+ 761 004a D3E90023 		ldrd	r2, [r3]
+ 762 004e FFF7FEFF 		bl	__aeabi_dsub
+ 763              	.LVL98:
+ 764 0052 FFF7FEFF 		bl	__aeabi_d2f
+ 765              	.LVL99:
+ 766 0056 6862     		str	r0, [r5, #36]	@ float
+ 583:./Src/application.c ****     //limit
+ 584:./Src/application.c ****     if(app.faccY < value){
+ 767              		.loc 1 584 0
+ 768 0058 696A     		ldr	r1, [r5, #36]	@ float
+ 769 005a 2046     		mov	r0, r4
+ 770 005c FFF7FEFF 		bl	__aeabi_fcmpgt
+ 771              	.LVL100:
+ 772 0060 00B1     		cbz	r0, .L88
+ 585:./Src/application.c ****       app.faccY = (float)value;
+ 773              		.loc 1 585 0
+ 774 0062 6C62     		str	r4, [r5, #36]	@ float
+ 775              	.L88:
+ 586:./Src/application.c ****     }
+ 587:./Src/application.c ****   }
+ 588:./Src/application.c ****   tval = app.faccY;
+ 776              		.loc 1 588 0
+ 777 0064 044B     		ldr	r3, .L96+8
+ 778 0066 586A     		ldr	r0, [r3, #36]	@ float
+ 779              	.LVL101:
+ 589:./Src/application.c ****   return tval;
+ 590:./Src/application.c **** }
+ 780              		.loc 1 590 0
+ 781 0068 70BD     		pop	{r4, r5, r6, pc}
+ 782              	.LVL102:
+ 783              	.L97:
+ 784 006a 00BFAFF3 		.align	3
+ 784      0080
+ 785              	.L96:
+ARM GAS  /tmp/cctZXvYy.s 			page 25
+
+
+ 786 0070 B81E85EB 		.word	-343597384
+ 787 0074 51B89E3F 		.word	1067366481
+ 788 0078 00000000 		.word	app
+ 789              		.cfi_endproc
+ 790              	.LFE77:
+ 792              		.section	.text.accellerationXHARD,"ax",%progbits
+ 793              		.align	2
+ 794              		.global	accellerationXHARD
+ 795              		.thumb
+ 796              		.thumb_func
+ 798              	accellerationXHARD:
+ 799              	.LFB78:
+ 591:./Src/application.c **** float accellerationXHARD(float value){
+ 800              		.loc 1 591 0
+ 801              		.cfi_startproc
+ 802              		@ args = 0, pretend = 0, frame = 0
+ 803              		@ frame_needed = 0, uses_anonymous_args = 0
+ 804              	.LVL103:
+ 805 0000 70B5     		push	{r4, r5, r6, lr}
+ 806              	.LCFI10:
+ 807              		.cfi_def_cfa_offset 16
+ 808              		.cfi_offset 4, -16
+ 809              		.cfi_offset 5, -12
+ 810              		.cfi_offset 6, -8
+ 811              		.cfi_offset 14, -4
+ 812 0002 0446     		mov	r4, r0
+ 592:./Src/application.c ****   /* value -> -1000 0 +1000 */
+ 593:./Src/application.c ****   float tval;
+ 594:./Src/application.c **** 
+ 595:./Src/application.c ****   tval = app.faccX;
+ 813              		.loc 1 595 0
+ 814 0004 1C4B     		ldr	r3, .L110+8
+ 815 0006 9D6A     		ldr	r5, [r3, #40]	@ float
+ 816              	.LVL104:
+ 596:./Src/application.c **** 
+ 597:./Src/application.c ****   //EXPERIMENT
+ 598:./Src/application.c ****   if(value > tval){
+ 817              		.loc 1 598 0
+ 818 0008 0146     		mov	r1, r0
+ 819 000a 2846     		mov	r0, r5
+ 820              	.LVL105:
+ 821 000c FFF7FEFF 		bl	__aeabi_fcmplt
+ 822              	.LVL106:
+ 823 0010 88B1     		cbz	r0, .L99
+ 599:./Src/application.c ****     app.faccX = app.faccX + ACCELLERATION_CONSTANT_HARD;
+ 824              		.loc 1 599 0
+ 825 0012 194E     		ldr	r6, .L110+8
+ 826 0014 B06A     		ldr	r0, [r6, #40]	@ float
+ 827 0016 FFF7FEFF 		bl	__aeabi_f2d
+ 828              	.LVL107:
+ 829 001a 15A3     		adr	r3, .L110
+ 830 001c D3E90023 		ldrd	r2, [r3]
+ 831 0020 FFF7FEFF 		bl	__aeabi_dadd
+ 832              	.LVL108:
+ 833 0024 FFF7FEFF 		bl	__aeabi_d2f
+ 834              	.LVL109:
+ 835 0028 B062     		str	r0, [r6, #40]	@ float
+ARM GAS  /tmp/cctZXvYy.s 			page 26
+
+
+ 600:./Src/application.c ****     //limit
+ 601:./Src/application.c ****     if(app.faccX > value){
+ 836              		.loc 1 601 0
+ 837 002a B16A     		ldr	r1, [r6, #40]	@ float
+ 838 002c 2046     		mov	r0, r4
+ 839 002e FFF7FEFF 		bl	__aeabi_fcmplt
+ 840              	.LVL110:
+ 841 0032 00B1     		cbz	r0, .L99
+ 602:./Src/application.c ****       app.faccX = (float)value;
+ 842              		.loc 1 602 0
+ 843 0034 B462     		str	r4, [r6, #40]	@ float
+ 844              	.L99:
+ 603:./Src/application.c ****     }
+ 604:./Src/application.c ****   }
+ 605:./Src/application.c ****   if(value < tval){
+ 845              		.loc 1 605 0
+ 846 0036 2146     		mov	r1, r4
+ 847 0038 2846     		mov	r0, r5
+ 848 003a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 849              	.LVL111:
+ 850 003e 88B1     		cbz	r0, .L102
+ 606:./Src/application.c ****     app.faccX = app.faccX - ACCELLERATION_CONSTANT_HARD;
+ 851              		.loc 1 606 0
+ 852 0040 0D4D     		ldr	r5, .L110+8
+ 853              	.LVL112:
+ 854 0042 A86A     		ldr	r0, [r5, #40]	@ float
+ 855 0044 FFF7FEFF 		bl	__aeabi_f2d
+ 856              	.LVL113:
+ 857 0048 09A3     		adr	r3, .L110
+ 858 004a D3E90023 		ldrd	r2, [r3]
+ 859 004e FFF7FEFF 		bl	__aeabi_dsub
+ 860              	.LVL114:
+ 861 0052 FFF7FEFF 		bl	__aeabi_d2f
+ 862              	.LVL115:
+ 863 0056 A862     		str	r0, [r5, #40]	@ float
+ 607:./Src/application.c ****     //limit
+ 608:./Src/application.c ****     if(app.faccX < value){
+ 864              		.loc 1 608 0
+ 865 0058 A96A     		ldr	r1, [r5, #40]	@ float
+ 866 005a 2046     		mov	r0, r4
+ 867 005c FFF7FEFF 		bl	__aeabi_fcmpgt
+ 868              	.LVL116:
+ 869 0060 00B1     		cbz	r0, .L102
+ 609:./Src/application.c ****       app.faccX = (float)value;
+ 870              		.loc 1 609 0
+ 871 0062 AC62     		str	r4, [r5, #40]	@ float
+ 872              	.L102:
+ 610:./Src/application.c ****     }
+ 611:./Src/application.c ****   }
+ 612:./Src/application.c ****   tval = app.faccX;
+ 873              		.loc 1 612 0
+ 874 0064 044B     		ldr	r3, .L110+8
+ 875 0066 986A     		ldr	r0, [r3, #40]	@ float
+ 876              	.LVL117:
+ 613:./Src/application.c **** 
+ 614:./Src/application.c ****   return tval;
+ 615:./Src/application.c **** }
+ARM GAS  /tmp/cctZXvYy.s 			page 27
+
+
+ 877              		.loc 1 615 0
+ 878 0068 70BD     		pop	{r4, r5, r6, pc}
+ 879              	.LVL118:
+ 880              	.L111:
+ 881 006a 00BFAFF3 		.align	3
+ 881      0080
+ 882              	.L110:
+ 883 0070 B81E85EB 		.word	-343597384
+ 884 0074 51B89E3F 		.word	1067366481
+ 885 0078 00000000 		.word	app
+ 886              		.cfi_endproc
+ 887              	.LFE78:
+ 889              		.global	__aeabi_ui2d
+ 890              		.global	__aeabi_ddiv
+ 891              		.global	__aeabi_d2uiz
+ 892              		.global	__aeabi_i2d
+ 893              		.global	__aeabi_dmul
+ 894              		.section	.text.Battery_TASK,"ax",%progbits
+ 895              		.align	2
+ 896              		.global	Battery_TASK
+ 897              		.thumb
+ 898              		.thumb_func
+ 900              	Battery_TASK:
+ 901              	.LFB79:
+ 616:./Src/application.c **** 
+ 617:./Src/application.c **** 
+ 618:./Src/application.c **** 
+ 619:./Src/application.c **** // BATTERY TASK
+ 620:./Src/application.c **** /*
+ 621:./Src/application.c **** void Battery_TASK(void){
+ 622:./Src/application.c ****   if((HAL_GetTick() - battery_dati.time_batt)>200){
+ 623:./Src/application.c ****     battery_dati.time_batt = HAL_GetTick();
+ 624:./Src/application.c **** 
+ 625:./Src/application.c ****    battery_dati.somma_batt = battery_dati.somma_batt  + ADC_BATTERY();
+ 626:./Src/application.c ****    battery_dati.counter_media++;
+ 627:./Src/application.c ****    if(battery_dati.counter_media >= 30){
+ 628:./Src/application.c ****     battery_dati.counter_media = 0;
+ 629:./Src/application.c **** 
+ 630:./Src/application.c ****       //Batteria media valore
+ 631:./Src/application.c ****       battery_dati.VBatt = (float)battery_dati.somma_batt / 30.0;
+ 632:./Src/application.c ****       battery_dati.VBatt = battery_dati.VBatt * ADC_BATTERY_VOLT;
+ 633:./Src/application.c **** 
+ 634:./Src/application.c ****       battery_dati.somma_batt = 0;
+ 635:./Src/application.c ****    }
+ 636:./Src/application.c ****   }
+ 637:./Src/application.c **** }
+ 638:./Src/application.c **** */
+ 639:./Src/application.c **** 
+ 640:./Src/application.c **** //http://stackoverflow.com/questions/10990618/calculate-rolling-moving-average-in-c/10990656#109906
+ 641:./Src/application.c **** //ROLLING ACERAGE
+ 642:./Src/application.c **** void Battery_TASK(void){
+ 902              		.loc 1 642 0
+ 903              		.cfi_startproc
+ 904              		@ args = 0, pretend = 0, frame = 0
+ 905              		@ frame_needed = 0, uses_anonymous_args = 0
+ 906 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 907              	.LCFI11:
+ARM GAS  /tmp/cctZXvYy.s 			page 28
+
+
+ 908              		.cfi_def_cfa_offset 24
+ 909              		.cfi_offset 3, -24
+ 910              		.cfi_offset 4, -20
+ 911              		.cfi_offset 5, -16
+ 912              		.cfi_offset 6, -12
+ 913              		.cfi_offset 7, -8
+ 914              		.cfi_offset 14, -4
+ 643:./Src/application.c ****   uint32_t temp32;
+ 644:./Src/application.c ****   if((HAL_GetTick() - battery_dati.time_batt)>200){
+ 915              		.loc 1 644 0
+ 916 0002 FFF7FEFF 		bl	HAL_GetTick
+ 917              	.LVL119:
+ 918 0006 204B     		ldr	r3, .L115+8
+ 919 0008 5B68     		ldr	r3, [r3, #4]
+ 920 000a C01A     		subs	r0, r0, r3
+ 921 000c C828     		cmp	r0, #200
+ 922 000e 36D9     		bls	.L112
+ 645:./Src/application.c ****     battery_dati.time_batt = HAL_GetTick();
+ 923              		.loc 1 645 0
+ 924 0010 FFF7FEFF 		bl	HAL_GetTick
+ 925              	.LVL120:
+ 926 0014 1C4C     		ldr	r4, .L115+8
+ 927 0016 6060     		str	r0, [r4, #4]
+ 646:./Src/application.c **** 
+ 647:./Src/application.c ****     temp32 = battery_dati.somma_batt;
+ 928              		.loc 1 647 0
+ 929 0018 A068     		ldr	r0, [r4, #8]
+ 930              	.LVL121:
+ 648:./Src/application.c ****     battery_dati.somma_batt -=  temp32 / 10.0;
+ 931              		.loc 1 648 0
+ 932 001a A568     		ldr	r5, [r4, #8]
+ 933 001c FFF7FEFF 		bl	__aeabi_ui2d
+ 934              	.LVL122:
+ 935 0020 0022     		movs	r2, #0
+ 936 0022 1A4B     		ldr	r3, .L115+12
+ 937 0024 FFF7FEFF 		bl	__aeabi_ddiv
+ 938              	.LVL123:
+ 939 0028 0646     		mov	r6, r0
+ 940 002a 0F46     		mov	r7, r1
+ 941 002c 2846     		mov	r0, r5
+ 942 002e FFF7FEFF 		bl	__aeabi_ui2d
+ 943              	.LVL124:
+ 944 0032 3246     		mov	r2, r6
+ 945 0034 3B46     		mov	r3, r7
+ 946 0036 FFF7FEFF 		bl	__aeabi_dsub
+ 947              	.LVL125:
+ 948 003a FFF7FEFF 		bl	__aeabi_d2uiz
+ 949              	.LVL126:
+ 950 003e A060     		str	r0, [r4, #8]
+ 649:./Src/application.c ****     battery_dati.somma_batt += ADC_BATTERY() / 10.0;
+ 951              		.loc 1 649 0
+ 952 0040 FFF7FEFF 		bl	ADC_BATTERY
+ 953              	.LVL127:
+ 954 0044 FFF7FEFF 		bl	__aeabi_i2d
+ 955              	.LVL128:
+ 956 0048 0022     		movs	r2, #0
+ 957 004a 104B     		ldr	r3, .L115+12
+ARM GAS  /tmp/cctZXvYy.s 			page 29
+
+
+ 958 004c FFF7FEFF 		bl	__aeabi_ddiv
+ 959              	.LVL129:
+ 960 0050 0646     		mov	r6, r0
+ 961 0052 0F46     		mov	r7, r1
+ 962 0054 A068     		ldr	r0, [r4, #8]
+ 963 0056 FFF7FEFF 		bl	__aeabi_ui2d
+ 964              	.LVL130:
+ 965 005a 3246     		mov	r2, r6
+ 966 005c 3B46     		mov	r3, r7
+ 967 005e FFF7FEFF 		bl	__aeabi_dadd
+ 968              	.LVL131:
+ 969 0062 FFF7FEFF 		bl	__aeabi_d2uiz
+ 970              	.LVL132:
+ 971 0066 A060     		str	r0, [r4, #8]
+ 650:./Src/application.c **** 
+ 651:./Src/application.c ****       //Batteria media valore
+ 652:./Src/application.c ****    battery_dati.VBatt = battery_dati.somma_batt * ADC_BATTERY_VOLT;
+ 972              		.loc 1 652 0
+ 973 0068 A068     		ldr	r0, [r4, #8]
+ 974 006a FFF7FEFF 		bl	__aeabi_ui2d
+ 975              	.LVL133:
+ 976 006e 04A3     		adr	r3, .L115
+ 977 0070 D3E90023 		ldrd	r2, [r3]
+ 978 0074 FFF7FEFF 		bl	__aeabi_dmul
+ 979              	.LVL134:
+ 980 0078 FFF7FEFF 		bl	__aeabi_d2f
+ 981              	.LVL135:
+ 982 007c 2060     		str	r0, [r4]	@ float
+ 983              	.L112:
+ 984 007e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 985              	.L116:
+ 986              		.align	3
+ 987              	.L115:
+ 988 0080 F5E4E827 		.word	669574389
+ 989 0084 181C9B3F 		.word	1067129880
+ 990 0088 00000000 		.word	battery_dati
+ 991 008c 00002440 		.word	1076101120
+ 992              		.cfi_endproc
+ 993              	.LFE79:
+ 995              		.section	.text.WAIT_CHARGE_FINISH,"ax",%progbits
+ 996              		.align	2
+ 997              		.global	WAIT_CHARGE_FINISH
+ 998              		.thumb
+ 999              		.thumb_func
+ 1001              	WAIT_CHARGE_FINISH:
+ 1002              	.LFB66:
+  28:./Src/application.c ****   uint32_t timerBatteryC;
+ 1003              		.loc 1 28 0
+ 1004              		.cfi_startproc
+ 1005              		@ args = 0, pretend = 0, frame = 0
+ 1006              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1007 0000 10B5     		push	{r4, lr}
+ 1008              	.LCFI12:
+ 1009              		.cfi_def_cfa_offset 8
+ 1010              		.cfi_offset 4, -8
+ 1011              		.cfi_offset 14, -4
+  31:./Src/application.c ****   MotorR_stop();
+ARM GAS  /tmp/cctZXvYy.s 			page 30
+
+
+ 1012              		.loc 1 31 0
+ 1013 0002 0120     		movs	r0, #1
+ 1014 0004 FFF7FEFF 		bl	Led_Set
+ 1015              	.LVL136:
+  32:./Src/application.c ****   MotorL_stop();
+ 1016              		.loc 1 32 0
+ 1017 0008 FFF7FEFF 		bl	MotorR_stop
+ 1018              	.LVL137:
+  33:./Src/application.c ****   HAL_IWDG_Refresh(&hiwdg);   //819mS
+ 1019              		.loc 1 33 0
+ 1020 000c FFF7FEFF 		bl	MotorL_stop
+ 1021              	.LVL138:
+  34:./Src/application.c ****   Buzzer_OneLongBeep();
+ 1022              		.loc 1 34 0
+ 1023 0010 1A4C     		ldr	r4, .L125
+ 1024 0012 2046     		mov	r0, r4
+ 1025 0014 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 1026              	.LVL139:
+  35:./Src/application.c ****   HAL_IWDG_Refresh(&hiwdg);   //819mS
+ 1027              		.loc 1 35 0
+ 1028 0018 FFF7FEFF 		bl	Buzzer_OneLongBeep
+ 1029              	.LVL140:
+  36:./Src/application.c ****   Buzzer_OneLongBeep();
+ 1030              		.loc 1 36 0
+ 1031 001c 2046     		mov	r0, r4
+ 1032 001e FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 1033              	.LVL141:
+  37:./Src/application.c ****   timerBatteryC = HAL_GetTick();
+ 1034              		.loc 1 37 0
+ 1035 0022 FFF7FEFF 		bl	Buzzer_OneLongBeep
+ 1036              	.LVL142:
+  38:./Src/application.c **** 
+ 1037              		.loc 1 38 0
+ 1038 0026 FFF7FEFF 		bl	HAL_GetTick
+ 1039              	.LVL143:
+ 1040 002a 0446     		mov	r4, r0
+ 1041              	.LVL144:
+  40:./Src/application.c ****     HAL_IWDG_Refresh(&hiwdg);   //819mS
+ 1042              		.loc 1 40 0
+ 1043 002c 1CE0     		b	.L118
+ 1044              	.LVL145:
+ 1045              	.L122:
+  41:./Src/application.c ****     HAL_Delay(250);
+ 1046              		.loc 1 41 0
+ 1047 002e 1348     		ldr	r0, .L125
+ 1048 0030 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 1049              	.LVL146:
+  42:./Src/application.c ****     Battery_TASK();
+ 1050              		.loc 1 42 0
+ 1051 0034 FA20     		movs	r0, #250
+ 1052 0036 FFF7FEFF 		bl	HAL_Delay
+ 1053              	.LVL147:
+  43:./Src/application.c ****     if(GET_BatteryAverage() < 41.250){
+ 1054              		.loc 1 43 0
+ 1055 003a FFF7FEFF 		bl	Battery_TASK
+ 1056              	.LVL148:
+  44:./Src/application.c ****       timerBatteryC = HAL_GetTick();
+ARM GAS  /tmp/cctZXvYy.s 			page 31
+
+
+ 1057              		.loc 1 44 0
+ 1058 003e FFF7FEFF 		bl	GET_BatteryAverage
+ 1059              	.LVL149:
+ 1060 0042 0F49     		ldr	r1, .L125+4
+ 1061 0044 FFF7FEFF 		bl	__aeabi_fcmplt
+ 1062              	.LVL150:
+ 1063 0048 10B1     		cbz	r0, .L119
+  45:./Src/application.c ****     }
+ 1064              		.loc 1 45 0
+ 1065 004a FFF7FEFF 		bl	HAL_GetTick
+ 1066              	.LVL151:
+ 1067 004e 0446     		mov	r4, r0
+ 1068              	.LVL152:
+ 1069              	.L119:
+  47:./Src/application.c ****       Buzzer_OneLongBeep();
+ 1070              		.loc 1 47 0
+ 1071 0050 FFF7FEFF 		bl	HAL_GetTick
+ 1072              	.LVL153:
+ 1073 0054 001B     		subs	r0, r0, r4
+ 1074 0056 44F62063 		movw	r3, #20000
+ 1075 005a 9842     		cmp	r0, r3
+ 1076 005c 04D9     		bls	.L118
+  48:./Src/application.c ****       HAL_IWDG_Refresh(&hiwdg);   //819mS
+ 1077              		.loc 1 48 0
+ 1078 005e FFF7FEFF 		bl	Buzzer_OneLongBeep
+ 1079              	.LVL154:
+  49:./Src/application.c ****     }
+ 1080              		.loc 1 49 0
+ 1081 0062 0648     		ldr	r0, .L125
+ 1082 0064 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 1083              	.LVL155:
+ 1084              	.L118:
+  40:./Src/application.c ****     HAL_IWDG_Refresh(&hiwdg);   //819mS
+ 1085              		.loc 1 40 0
+ 1086 0068 FFF7FEFF 		bl	IS_Charge
+ 1087              	.LVL156:
+ 1088 006c 0028     		cmp	r0, #0
+ 1089 006e DED0     		beq	.L122
+  52:./Src/application.c ****   applcation_init();
+ 1090              		.loc 1 52 0
+ 1091 0070 0020     		movs	r0, #0
+ 1092 0072 FFF7FEFF 		bl	Led_Set
+ 1093              	.LVL157:
+  53:./Src/application.c **** }
+ 1094              		.loc 1 53 0
+ 1095 0076 FFF7FEFF 		bl	applcation_init
+ 1096              	.LVL158:
+ 1097 007a 10BD     		pop	{r4, pc}
+ 1098              	.LVL159:
+ 1099              	.L126:
+ 1100              		.align	2
+ 1101              	.L125:
+ 1102 007c 00000000 		.word	hiwdg
+ 1103 0080 00002542 		.word	1109721088
+ 1104              		.cfi_endproc
+ 1105              	.LFE66:
+ 1107              		.section	.text.Current_Motor_TASK,"ax",%progbits
+ARM GAS  /tmp/cctZXvYy.s 			page 32
+
+
+ 1108              		.align	2
+ 1109              		.global	Current_Motor_TASK
+ 1110              		.thumb
+ 1111              		.thumb_func
+ 1113              	Current_Motor_TASK:
+ 1114              	.LFB80:
+ 653:./Src/application.c **** 
+ 654:./Src/application.c ****   }
+ 655:./Src/application.c **** }
+ 656:./Src/application.c **** 
+ 657:./Src/application.c **** 
+ 658:./Src/application.c **** 
+ 659:./Src/application.c **** 
+ 660:./Src/application.c **** // CURRENT MOTOR TASK
+ 661:./Src/application.c **** /*
+ 662:./Src/application.c **** void Current_Motor_TASK(void){
+ 663:./Src/application.c ****   if((HAL_GetTick() - app.Current_time_measure)>100){
+ 664:./Src/application.c ****     app.Current_time_measure = HAL_GetTick();
+ 665:./Src/application.c **** 
+ 666:./Src/application.c ****    app.somma_current_m_L = app.somma_current_m_L  + ADC_MOTOR_LEFT();
+ 667:./Src/application.c ****    app.somma_current_m_R = app.somma_current_m_R  + ADC_MOTOR_RIGHT();
+ 668:./Src/application.c **** 
+ 669:./Src/application.c ****    app.current_counter_media++;
+ 670:./Src/application.c ****    if(app.current_counter_media >= 10){
+ 671:./Src/application.c ****     app.current_counter_media = 0;
+ 672:./Src/application.c **** 
+ 673:./Src/application.c ****       //Current media valore
+ 674:./Src/application.c ****       app.Current_M_LEFT = (float)app.somma_current_m_L / 10.0;
+ 675:./Src/application.c ****       app.Current_M_RIGHT = (float)app.somma_current_m_R / 10.0;
+ 676:./Src/application.c **** 
+ 677:./Src/application.c ****       if(app.Current_M_RIGHT < ADC_MOTOR_R_CENTER){
+ 678:./Src/application.c ****         app.Current_M_RIGHT = 0.0;
+ 679:./Src/application.c ****       }else{
+ 680:./Src/application.c ****         app.Current_M_RIGHT = ((app.Current_M_RIGHT  - ADC_MOTOR_R_CENTER) * MOTOR_R_AMP_CONV_AMP);
+ 681:./Src/application.c ****       }
+ 682:./Src/application.c ****       if(app.Current_M_LEFT < ADC_MOTOR_L_CENTER){
+ 683:./Src/application.c ****         app.Current_M_LEFT = 0.0;
+ 684:./Src/application.c ****       }else{
+ 685:./Src/application.c ****         app.Current_M_LEFT = ((app.Current_M_LEFT  - ADC_MOTOR_L_CENTER) * MOTOR_L_AMP_CONV_AMP);
+ 686:./Src/application.c ****       }
+ 687:./Src/application.c **** 
+ 688:./Src/application.c ****       app.somma_current_m_L = 0;
+ 689:./Src/application.c ****       app.somma_current_m_R = 0;
+ 690:./Src/application.c ****    }
+ 691:./Src/application.c ****   }
+ 692:./Src/application.c **** }
+ 693:./Src/application.c **** */
+ 694:./Src/application.c **** //ROLLING ACERAGE
+ 695:./Src/application.c **** void Current_Motor_TASK(void){
+ 1115              		.loc 1 695 0
+ 1116              		.cfi_startproc
+ 1117              		@ args = 0, pretend = 0, frame = 0
+ 1118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1119 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1120              	.LCFI13:
+ 1121              		.cfi_def_cfa_offset 24
+ 1122              		.cfi_offset 3, -24
+ARM GAS  /tmp/cctZXvYy.s 			page 33
+
+
+ 1123              		.cfi_offset 4, -20
+ 1124              		.cfi_offset 5, -16
+ 1125              		.cfi_offset 6, -12
+ 1126              		.cfi_offset 7, -8
+ 1127              		.cfi_offset 14, -4
+ 696:./Src/application.c ****   uint32_t temp32;
+ 697:./Src/application.c ****   app.somma_current_m_L = 5;
+ 1128              		.loc 1 697 0
+ 1129 0002 4F4C     		ldr	r4, .L139+16
+ 1130 0004 0523     		movs	r3, #5
+ 1131 0006 6363     		str	r3, [r4, #52]
+ 698:./Src/application.c ****   app.somma_current_m_R = 5;
+ 1132              		.loc 1 698 0
+ 1133 0008 A363     		str	r3, [r4, #56]
+ 699:./Src/application.c ****   if((HAL_GetTick() - app.Current_time_measure)>100){
+ 1134              		.loc 1 699 0
+ 1135 000a FFF7FEFF 		bl	HAL_GetTick
+ 1136              	.LVL160:
+ 1137 000e 236B     		ldr	r3, [r4, #48]
+ 1138 0010 C01A     		subs	r0, r0, r3
+ 1139 0012 6428     		cmp	r0, #100
+ 1140 0014 40F28B80 		bls	.L127
+ 700:./Src/application.c ****     app.Current_time_measure = HAL_GetTick();
+ 1141              		.loc 1 700 0
+ 1142 0018 FFF7FEFF 		bl	HAL_GetTick
+ 1143              	.LVL161:
+ 1144 001c 2063     		str	r0, [r4, #48]
+ 701:./Src/application.c **** 
+ 702:./Src/application.c ****     temp32 = app.somma_current_m_L;
+ 1145              		.loc 1 702 0
+ 1146 001e 606B     		ldr	r0, [r4, #52]
+ 1147              	.LVL162:
+ 703:./Src/application.c ****     app.somma_current_m_L -=  temp32 / 5.0;
+ 1148              		.loc 1 703 0
+ 1149 0020 656B     		ldr	r5, [r4, #52]
+ 1150 0022 FFF7FEFF 		bl	__aeabi_ui2d
+ 1151              	.LVL163:
+ 1152 0026 0022     		movs	r2, #0
+ 1153 0028 464B     		ldr	r3, .L139+20
+ 1154 002a FFF7FEFF 		bl	__aeabi_ddiv
+ 1155              	.LVL164:
+ 1156 002e 0646     		mov	r6, r0
+ 1157 0030 0F46     		mov	r7, r1
+ 1158 0032 2846     		mov	r0, r5
+ 1159 0034 FFF7FEFF 		bl	__aeabi_ui2d
+ 1160              	.LVL165:
+ 1161 0038 3246     		mov	r2, r6
+ 1162 003a 3B46     		mov	r3, r7
+ 1163 003c FFF7FEFF 		bl	__aeabi_dsub
+ 1164              	.LVL166:
+ 1165 0040 FFF7FEFF 		bl	__aeabi_d2uiz
+ 1166              	.LVL167:
+ 1167 0044 6063     		str	r0, [r4, #52]
+ 704:./Src/application.c ****     app.somma_current_m_L += ADC_MOTOR_LEFT() / 5.0;
+ 1168              		.loc 1 704 0
+ 1169 0046 FFF7FEFF 		bl	ADC_MOTOR_LEFT
+ 1170              	.LVL168:
+ARM GAS  /tmp/cctZXvYy.s 			page 34
+
+
+ 1171 004a FFF7FEFF 		bl	__aeabi_i2d
+ 1172              	.LVL169:
+ 1173 004e 0022     		movs	r2, #0
+ 1174 0050 3C4B     		ldr	r3, .L139+20
+ 1175 0052 FFF7FEFF 		bl	__aeabi_ddiv
+ 1176              	.LVL170:
+ 1177 0056 0646     		mov	r6, r0
+ 1178 0058 0F46     		mov	r7, r1
+ 1179 005a 606B     		ldr	r0, [r4, #52]
+ 1180 005c FFF7FEFF 		bl	__aeabi_ui2d
+ 1181              	.LVL171:
+ 1182 0060 3246     		mov	r2, r6
+ 1183 0062 3B46     		mov	r3, r7
+ 1184 0064 FFF7FEFF 		bl	__aeabi_dadd
+ 1185              	.LVL172:
+ 1186 0068 FFF7FEFF 		bl	__aeabi_d2uiz
+ 1187              	.LVL173:
+ 1188 006c 6063     		str	r0, [r4, #52]
+ 705:./Src/application.c **** 
+ 706:./Src/application.c ****     temp32 = app.somma_current_m_R;
+ 1189              		.loc 1 706 0
+ 1190 006e A06B     		ldr	r0, [r4, #56]
+ 1191              	.LVL174:
+ 707:./Src/application.c ****     app.somma_current_m_R -=  temp32 / 5.0;
+ 1192              		.loc 1 707 0
+ 1193 0070 A56B     		ldr	r5, [r4, #56]
+ 1194 0072 FFF7FEFF 		bl	__aeabi_ui2d
+ 1195              	.LVL175:
+ 1196 0076 0022     		movs	r2, #0
+ 1197 0078 324B     		ldr	r3, .L139+20
+ 1198 007a FFF7FEFF 		bl	__aeabi_ddiv
+ 1199              	.LVL176:
+ 1200 007e 0646     		mov	r6, r0
+ 1201 0080 0F46     		mov	r7, r1
+ 1202 0082 2846     		mov	r0, r5
+ 1203 0084 FFF7FEFF 		bl	__aeabi_ui2d
+ 1204              	.LVL177:
+ 1205 0088 3246     		mov	r2, r6
+ 1206 008a 3B46     		mov	r3, r7
+ 1207 008c FFF7FEFF 		bl	__aeabi_dsub
+ 1208              	.LVL178:
+ 1209 0090 FFF7FEFF 		bl	__aeabi_d2uiz
+ 1210              	.LVL179:
+ 1211 0094 A063     		str	r0, [r4, #56]
+ 708:./Src/application.c ****     app.somma_current_m_R += ADC_MOTOR_RIGHT() / 5.0;
+ 1212              		.loc 1 708 0
+ 1213 0096 FFF7FEFF 		bl	ADC_MOTOR_RIGHT
+ 1214              	.LVL180:
+ 1215 009a FFF7FEFF 		bl	__aeabi_i2d
+ 1216              	.LVL181:
+ 1217 009e 0022     		movs	r2, #0
+ 1218 00a0 284B     		ldr	r3, .L139+20
+ 1219 00a2 FFF7FEFF 		bl	__aeabi_ddiv
+ 1220              	.LVL182:
+ 1221 00a6 0646     		mov	r6, r0
+ 1222 00a8 0F46     		mov	r7, r1
+ 1223 00aa A06B     		ldr	r0, [r4, #56]
+ARM GAS  /tmp/cctZXvYy.s 			page 35
+
+
+ 1224 00ac FFF7FEFF 		bl	__aeabi_ui2d
+ 1225              	.LVL183:
+ 1226 00b0 3246     		mov	r2, r6
+ 1227 00b2 3B46     		mov	r3, r7
+ 1228 00b4 FFF7FEFF 		bl	__aeabi_dadd
+ 1229              	.LVL184:
+ 1230 00b8 FFF7FEFF 		bl	__aeabi_d2uiz
+ 1231              	.LVL185:
+ 1232 00bc A063     		str	r0, [r4, #56]
+ 709:./Src/application.c **** 
+ 710:./Src/application.c **** 
+ 711:./Src/application.c **** 
+ 712:./Src/application.c ****    //Current media valore
+ 713:./Src/application.c ****     app.Current_M_LEFT = (float)app.somma_current_m_L;
+ 1233              		.loc 1 713 0
+ 1234 00be 606B     		ldr	r0, [r4, #52]
+ 1235 00c0 FFF7FEFF 		bl	__aeabi_ui2f
+ 1236              	.LVL186:
+ 1237 00c4 2064     		str	r0, [r4, #64]	@ float
+ 714:./Src/application.c ****     app.Current_M_RIGHT = (float)app.somma_current_m_R;
+ 1238              		.loc 1 714 0
+ 1239 00c6 A06B     		ldr	r0, [r4, #56]
+ 1240 00c8 FFF7FEFF 		bl	__aeabi_ui2f
+ 1241              	.LVL187:
+ 1242 00cc 6064     		str	r0, [r4, #68]	@ float
+ 715:./Src/application.c **** 
+ 716:./Src/application.c ****     if(app.Current_M_RIGHT < ADC_MOTOR_R_CENTER){
+ 1243              		.loc 1 716 0
+ 1244 00ce 606C     		ldr	r0, [r4, #68]	@ float
+ 1245 00d0 1D49     		ldr	r1, .L139+24
+ 1246 00d2 FFF7FEFF 		bl	__aeabi_fcmplt
+ 1247              	.LVL188:
+ 1248 00d6 10B1     		cbz	r0, .L136
+ 717:./Src/application.c ****       app.Current_M_RIGHT = 0.0;
+ 1249              		.loc 1 717 0
+ 1250 00d8 0022     		movs	r2, #0
+ 1251 00da 6264     		str	r2, [r4, #68]	@ float
+ 1252 00dc 0EE0     		b	.L131
+ 1253              	.L136:
+ 718:./Src/application.c ****     }else{
+ 719:./Src/application.c ****       app.Current_M_RIGHT = ((app.Current_M_RIGHT  - ADC_MOTOR_R_CENTER) * MOTOR_R_AMP_CONV_AMP);
+ 1254              		.loc 1 719 0
+ 1255 00de 184C     		ldr	r4, .L139+16
+ 1256 00e0 606C     		ldr	r0, [r4, #68]	@ float
+ 1257 00e2 1949     		ldr	r1, .L139+24
+ 1258 00e4 FFF7FEFF 		bl	__aeabi_fsub
+ 1259              	.LVL189:
+ 1260 00e8 FFF7FEFF 		bl	__aeabi_f2d
+ 1261              	.LVL190:
+ 1262 00ec 10A3     		adr	r3, .L139
+ 1263 00ee D3E90023 		ldrd	r2, [r3]
+ 1264 00f2 FFF7FEFF 		bl	__aeabi_dmul
+ 1265              	.LVL191:
+ 1266 00f6 FFF7FEFF 		bl	__aeabi_d2f
+ 1267              	.LVL192:
+ 1268 00fa 6064     		str	r0, [r4, #68]	@ float
+ 1269              	.L131:
+ARM GAS  /tmp/cctZXvYy.s 			page 36
+
+
+ 720:./Src/application.c ****     }
+ 721:./Src/application.c ****     if(app.Current_M_LEFT < ADC_MOTOR_L_CENTER){
+ 1270              		.loc 1 721 0
+ 1271 00fc 104B     		ldr	r3, .L139+16
+ 1272 00fe 186C     		ldr	r0, [r3, #64]	@ float
+ 1273 0100 1149     		ldr	r1, .L139+24
+ 1274 0102 FFF7FEFF 		bl	__aeabi_fcmplt
+ 1275              	.LVL193:
+ 1276 0106 18B1     		cbz	r0, .L137
+ 722:./Src/application.c ****       app.Current_M_LEFT = 0.0;
+ 1277              		.loc 1 722 0
+ 1278 0108 0022     		movs	r2, #0
+ 1279 010a 0D4B     		ldr	r3, .L139+16
+ 1280 010c 1A64     		str	r2, [r3, #64]	@ float
+ 1281 010e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1282              	.L137:
+ 723:./Src/application.c ****     }else{
+ 724:./Src/application.c ****       app.Current_M_LEFT = ((app.Current_M_LEFT  - ADC_MOTOR_L_CENTER) * MOTOR_L_AMP_CONV_AMP);
+ 1283              		.loc 1 724 0
+ 1284 0110 0B4C     		ldr	r4, .L139+16
+ 1285 0112 206C     		ldr	r0, [r4, #64]	@ float
+ 1286 0114 0C49     		ldr	r1, .L139+24
+ 1287 0116 FFF7FEFF 		bl	__aeabi_fsub
+ 1288              	.LVL194:
+ 1289 011a FFF7FEFF 		bl	__aeabi_f2d
+ 1290              	.LVL195:
+ 1291 011e 06A3     		adr	r3, .L139+8
+ 1292 0120 D3E90023 		ldrd	r2, [r3]
+ 1293 0124 FFF7FEFF 		bl	__aeabi_dmul
+ 1294              	.LVL196:
+ 1295 0128 FFF7FEFF 		bl	__aeabi_d2f
+ 1296              	.LVL197:
+ 1297 012c 2064     		str	r0, [r4, #64]	@ float
+ 1298              	.L127:
+ 1299 012e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1300              	.L140:
+ 1301              		.align	3
+ 1302              	.L139:
+ 1303 0130 D2131C3D 		.word	1025250258
+ 1304 0134 C1D1933F 		.word	1066652097
+ 1305 0138 B4FA5241 		.word	1095957172
+ 1306 013c AB2F953F 		.word	1066741675
+ 1307 0140 00000000 		.word	app
+ 1308 0144 00001440 		.word	1075052544
+ 1309 0148 0040E944 		.word	1156136960
+ 1310              		.cfi_endproc
+ 1311              	.LFE80:
+ 1313              		.section	.text.getMotorCurrentR,"ax",%progbits
+ 1314              		.align	2
+ 1315              		.global	getMotorCurrentR
+ 1316              		.thumb
+ 1317              		.thumb_func
+ 1319              	getMotorCurrentR:
+ 1320              	.LFB81:
+ 725:./Src/application.c ****     }
+ 726:./Src/application.c **** 
+ 727:./Src/application.c **** 
+ARM GAS  /tmp/cctZXvYy.s 			page 37
+
+
+ 728:./Src/application.c ****   }
+ 729:./Src/application.c **** }
+ 730:./Src/application.c **** 
+ 731:./Src/application.c **** int16_t getMotorCurrentR(){
+ 1321              		.loc 1 731 0
+ 1322              		.cfi_startproc
+ 1323              		@ args = 0, pretend = 0, frame = 0
+ 1324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1325 0000 08B5     		push	{r3, lr}
+ 1326              	.LCFI14:
+ 1327              		.cfi_def_cfa_offset 8
+ 1328              		.cfi_offset 3, -8
+ 1329              		.cfi_offset 14, -4
+ 732:./Src/application.c ****   return (ADC_MOTOR_RIGHT()  - ADC_MOTOR_R_CENTER);
+ 1330              		.loc 1 732 0
+ 1331 0002 FFF7FEFF 		bl	ADC_MOTOR_RIGHT
+ 1332              	.LVL198:
+ 1333 0006 A0F24A70 		subw	r0, r0, #1866
+ 733:./Src/application.c **** }
+ 1334              		.loc 1 733 0
+ 1335 000a 00B2     		sxth	r0, r0
+ 1336 000c 08BD     		pop	{r3, pc}
+ 1337              		.cfi_endproc
+ 1338              	.LFE81:
+ 1340 000e 00BF     		.section	.text.getMotorCurrentL,"ax",%progbits
+ 1341              		.align	2
+ 1342              		.global	getMotorCurrentL
+ 1343              		.thumb
+ 1344              		.thumb_func
+ 1346              	getMotorCurrentL:
+ 1347              	.LFB82:
+ 734:./Src/application.c **** int16_t getMotorCurrentL(){
+ 1348              		.loc 1 734 0
+ 1349              		.cfi_startproc
+ 1350              		@ args = 0, pretend = 0, frame = 0
+ 1351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1352 0000 08B5     		push	{r3, lr}
+ 1353              	.LCFI15:
+ 1354              		.cfi_def_cfa_offset 8
+ 1355              		.cfi_offset 3, -8
+ 1356              		.cfi_offset 14, -4
+ 735:./Src/application.c ****   return (ADC_MOTOR_LEFT()  - ADC_MOTOR_L_CENTER);
+ 1357              		.loc 1 735 0
+ 1358 0002 FFF7FEFF 		bl	ADC_MOTOR_LEFT
+ 1359              	.LVL199:
+ 1360 0006 A0F24A70 		subw	r0, r0, #1866
+ 736:./Src/application.c **** }
+ 1361              		.loc 1 736 0
+ 1362 000a 00B2     		sxth	r0, r0
+ 1363 000c 08BD     		pop	{r3, pc}
+ 1364              		.cfi_endproc
+ 1365              	.LFE82:
+ 1367              		.global	__aeabi_f2iz
+ 1368              		.global	__aeabi_i2f
+ 1369              		.global	__aeabi_fadd
+ 1370              		.global	__aeabi_fdiv
+ 1371              		.global	__aeabi_d2iz
+ARM GAS  /tmp/cctZXvYy.s 			page 38
+
+
+ 1372 000e 00BF     		.section	.text.go_motor,"ax",%progbits
+ 1373              		.align	2
+ 1374              		.global	go_motor
+ 1375              		.thumb
+ 1376              		.thumb_func
+ 1378              	go_motor:
+ 1379              	.LFB83:
+ 737:./Src/application.c **** 
+ 738:./Src/application.c **** 
+ 739:./Src/application.c **** //  MOTOR
+ 740:./Src/application.c **** 
+ 741:./Src/application.c **** /*
+ 742:./Src/application.c **** void go_motor(float throttle, float steering, float Vbatt){
+ 743:./Src/application.c ****   float limitSup, limitInf ;
+ 744:./Src/application.c **** 
+ 745:./Src/application.c ****   limitSup = 1000.0 * get_powerMax(Vbatt);
+ 746:./Src/application.c ****   limitInf = limitSup * -1;
+ 747:./Src/application.c **** 
+ 748:./Src/application.c ****       if(throttle>0.0){
+ 749:./Src/application.c ****         if(throttle > 20){
+ 750:./Src/application.c ****           app.motATS=(int8_t)(throttle+(steering * 0.333));
+ 751:./Src/application.c ****           app.motBTS=(int8_t)(throttle-(steering * 0.333));
+ 752:./Src/application.c ****         }else if((throttle > 15)){
+ 753:./Src/application.c ****           app.motATS=(int8_t)(throttle+(steering * 0.5));
+ 754:./Src/application.c ****           app.motBTS=(int8_t)(throttle-(steering * 0.5));
+ 755:./Src/application.c ****         }else{
+ 756:./Src/application.c ****           app.motATS=(int8_t)(throttle+(steering));
+ 757:./Src/application.c ****           app.motBTS=(int8_t)(throttle-(steering));
+ 758:./Src/application.c ****         }
+ 759:./Src/application.c ****       }else if(throttle<0.0){
+ 760:./Src/application.c ****           app.motATS=(int8_t)(throttle+(steering));
+ 761:./Src/application.c ****           app.motBTS=(int8_t)(throttle-(steering));
+ 762:./Src/application.c ****       }else{
+ 763:./Src/application.c ****           app.motATS=(int8_t)steering;
+ 764:./Src/application.c ****           app.motBTS=(int8_t)((steering)*-1);
+ 765:./Src/application.c ****       }
+ 766:./Src/application.c **** 
+ 767:./Src/application.c ****     //printf("%d ; %d\r\n",motATS,motBTS);
+ 768:./Src/application.c **** 
+ 769:./Src/application.c ****       if(app.motATS >= 0){
+ 770:./Src/application.c ****         //0 ~ 100
+ 771:./Src/application.c ****         if(app.motATS > limitSup){
+ 772:./Src/application.c ****           app.motATS = (int16_t)limitSup;
+ 773:./Src/application.c ****         }
+ 774:./Src/application.c ****         MotorR_pwm(app.motATS);
+ 775:./Src/application.c ****       }else{
+ 776:./Src/application.c ****         //0 ~ -100
+ 777:./Src/application.c ****         if(app.motATS < limitInf){
+ 778:./Src/application.c ****           app.motATS = (int16_t)limitInf;
+ 779:./Src/application.c ****         }
+ 780:./Src/application.c ****         //app.motATS = app.motATS * -1;
+ 781:./Src/application.c ****         MotorR_pwm(app.motATS);
+ 782:./Src/application.c ****       }
+ 783:./Src/application.c **** 
+ 784:./Src/application.c ****       if(app.motBTS >= 0){
+ 785:./Src/application.c ****         //0 ~ 100
+ 786:./Src/application.c ****         if(app.motBTS > limitSup){
+ARM GAS  /tmp/cctZXvYy.s 			page 39
+
+
+ 787:./Src/application.c ****           app.motBTS = (int16_t)limitSup;
+ 788:./Src/application.c ****         }
+ 789:./Src/application.c ****         MotorL_pwm(app.motBTS );
+ 790:./Src/application.c ****       }else{
+ 791:./Src/application.c ****         //0 ~ -100
+ 792:./Src/application.c ****         if(app.motBTS < limitInf){
+ 793:./Src/application.c ****           app.motBTS = (int16_t)limitInf;
+ 794:./Src/application.c ****         }
+ 795:./Src/application.c ****         //MOTOR_VALUE.motBTS = MOTOR_VALUE.motBTS * -1;
+ 796:./Src/application.c ****         MotorL_pwm(app.motBTS );
+ 797:./Src/application.c ****       }
+ 798:./Src/application.c **** }
+ 799:./Src/application.c **** */
+ 800:./Src/application.c **** 
+ 801:./Src/application.c **** // EXPERIMENT
+ 802:./Src/application.c **** // http://www.impulseadventure.com/elec/robot-differential-steering.html
+ 803:./Src/application.c **** void go_motor(float throttle, float steering, float Vbatt, uint8_t fullpower){
+ 1380              		.loc 1 803 0
+ 1381              		.cfi_startproc
+ 1382              		@ args = 0, pretend = 0, frame = 8
+ 1383              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1384              	.LVL200:
+ 1385 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 1386              	.LCFI16:
+ 1387              		.cfi_def_cfa_offset 36
+ 1388              		.cfi_offset 4, -36
+ 1389              		.cfi_offset 5, -32
+ 1390              		.cfi_offset 6, -28
+ 1391              		.cfi_offset 7, -24
+ 1392              		.cfi_offset 8, -20
+ 1393              		.cfi_offset 9, -16
+ 1394              		.cfi_offset 10, -12
+ 1395              		.cfi_offset 11, -8
+ 1396              		.cfi_offset 14, -4
+ 1397 0004 83B0     		sub	sp, sp, #12
+ 1398              	.LCFI17:
+ 1399              		.cfi_def_cfa_offset 48
+ 1400 0006 0646     		mov	r6, r0
+ 1401 0008 0C46     		mov	r4, r1
+ 804:./Src/application.c ****   float limitSup, limitInf ;
+ 805:./Src/application.c **** 
+ 806:./Src/application.c ****   if(fullpower==0){
+ 1402              		.loc 1 806 0
+ 1403 000a 4BB9     		cbnz	r3, .L164
+ 807:./Src/application.c ****     limitSup = 1000.0 * get_powerMax(Vbatt);
+ 1404              		.loc 1 807 0
+ 1405 000c 1046     		mov	r0, r2
+ 1406              	.LVL201:
+ 1407 000e FFF7FEFF 		bl	get_powerMax
+ 1408              	.LVL202:
+ 1409 0012 8C49     		ldr	r1, .L175
+ 1410 0014 FFF7FEFF 		bl	__aeabi_fmul
+ 1411              	.LVL203:
+ 1412 0018 0546     		mov	r5, r0
+ 1413              	.LVL204:
+ 808:./Src/application.c ****     limitInf = limitSup * -1;
+ 1414              		.loc 1 808 0
+ARM GAS  /tmp/cctZXvYy.s 			page 40
+
+
+ 1415 001a 00F1004A 		add	r10, r0, #-2147483648
+ 1416              	.LVL205:
+ 1417 001e 02E0     		b	.L146
+ 1418              	.LVL206:
+ 1419              	.L164:
+ 809:./Src/application.c ****   }else{
+ 810:./Src/application.c ****     limitSup = 1000.0;
+ 811:./Src/application.c ****     limitInf = limitSup * -1;
+ 1420              		.loc 1 811 0
+ 1421 0020 DFF834A2 		ldr	r10, .L175+20
+ 810:./Src/application.c ****     limitInf = limitSup * -1;
+ 1422              		.loc 1 810 0
+ 1423 0024 874D     		ldr	r5, .L175
+ 1424              	.LVL207:
+ 1425              	.L146:
+ 812:./Src/application.c ****   }
+ 813:./Src/application.c **** 
+ 814:./Src/application.c **** // INPUTS
+ 815:./Src/application.c **** int     nJoyX;              // Joystick X input                     (-128..+127)
+ 816:./Src/application.c **** int     nJoyY;              // Joystick Y input                     (-128..+127)
+ 817:./Src/application.c **** 
+ 818:./Src/application.c **** // OUTPUTS
+ 819:./Src/application.c **** int     nMotMixL;           // Motor (left)  mixed output           (-128..+127)
+ 820:./Src/application.c **** int     nMotMixR;           // Motor (right) mixed output           (-128..+127)
+ 821:./Src/application.c **** 
+ 822:./Src/application.c **** // CONFIG
+ 823:./Src/application.c **** // - fPivYLimt  : The threshold at which the pivot action starts
+ 824:./Src/application.c **** //                This threshold is measured in units on the Y-axis
+ 825:./Src/application.c **** //                away from the X-axis (Y=0). A greater value will assign
+ 826:./Src/application.c **** //                more of the joystick's range to pivot actions.
+ 827:./Src/application.c **** //                Allowable range: (0..+127)
+ 828:./Src/application.c **** float fPivYLimit = 85.0;
+ 829:./Src/application.c **** 
+ 830:./Src/application.c **** // TEMP VARIABLES
+ 831:./Src/application.c **** float   nMotPremixL;    // Motor (left)  premixed output        (-128..+127)
+ 832:./Src/application.c **** float   nMotPremixR;    // Motor (right) premixed output        (-128..+127)
+ 833:./Src/application.c **** int     nPivSpeed;      // Pivot Speed                          (-128..+127)
+ 834:./Src/application.c **** float   fPivScale;      // Balance scale b/w drive and pivot    (   0..1   )
+ 835:./Src/application.c **** 
+ 836:./Src/application.c **** 
+ 837:./Src/application.c **** nJoyY = (int)throttle;
+ 1426              		.loc 1 837 0
+ 1427 0026 3046     		mov	r0, r6
+ 1428 0028 FFF7FEFF 		bl	__aeabi_f2iz
+ 1429              	.LVL208:
+ 1430 002c 0646     		mov	r6, r0
+ 1431              	.LVL209:
+ 838:./Src/application.c **** nJoyX = (int)steering;
+ 1432              		.loc 1 838 0
+ 1433 002e 2046     		mov	r0, r4
+ 1434              	.LVL210:
+ 1435 0030 FFF7FEFF 		bl	__aeabi_f2iz
+ 1436              	.LVL211:
+ 1437 0034 0446     		mov	r4, r0
+ 1438              	.LVL212:
+ 839:./Src/application.c **** 
+ 840:./Src/application.c **** 
+ARM GAS  /tmp/cctZXvYy.s 			page 41
+
+
+ 841:./Src/application.c **** 
+ 842:./Src/application.c **** // Calculate Drive Turn output due to Joystick X input
+ 843:./Src/application.c **** if (nJoyY >= 0) {
+ 1439              		.loc 1 843 0
+ 1440 0036 002E     		cmp	r6, #0
+ 1441 0038 15DB     		blt	.L147
+ 844:./Src/application.c ****   // Forward
+ 845:./Src/application.c ****   nMotPremixL = (nJoyX>=0)? limitSup : (limitSup + nJoyX);
+ 1442              		.loc 1 845 0
+ 1443 003a 0028     		cmp	r0, #0
+ 1444 003c 07DA     		bge	.L165
+ 1445              		.loc 1 845 0 is_stmt 0 discriminator 1
+ 1446 003e FFF7FEFF 		bl	__aeabi_i2f
+ 1447              	.LVL213:
+ 1448 0042 0146     		mov	r1, r0
+ 1449 0044 2846     		mov	r0, r5
+ 1450 0046 FFF7FEFF 		bl	__aeabi_fadd
+ 1451              	.LVL214:
+ 1452 004a 8146     		mov	r9, r0
+ 1453 004c 00E0     		b	.L148
+ 1454              	.LVL215:
+ 1455              	.L165:
+ 1456              		.loc 1 845 0
+ 1457 004e A946     		mov	r9, r5
+ 1458              	.LVL216:
+ 1459              	.L148:
+ 846:./Src/application.c ****   nMotPremixR = (nJoyX>=0)? (limitSup - nJoyX) : limitSup;
+ 1460              		.loc 1 846 0 is_stmt 1 discriminator 4
+ 1461 0050 002C     		cmp	r4, #0
+ 1462 0052 1EDB     		blt	.L166
+ 1463              		.loc 1 846 0 is_stmt 0 discriminator 1
+ 1464 0054 2046     		mov	r0, r4
+ 1465 0056 FFF7FEFF 		bl	__aeabi_i2f
+ 1466              	.LVL217:
+ 1467 005a 0146     		mov	r1, r0
+ 1468 005c 2846     		mov	r0, r5
+ 1469 005e FFF7FEFF 		bl	__aeabi_fsub
+ 1470              	.LVL218:
+ 1471 0062 8046     		mov	r8, r0
+ 1472 0064 18E0     		b	.L149
+ 1473              	.LVL219:
+ 1474              	.L147:
+ 847:./Src/application.c **** } else {
+ 848:./Src/application.c ****   // Reverse
+ 849:./Src/application.c ****   nMotPremixL = (nJoyX>=0)? (limitSup - nJoyX) : limitSup;
+ 1475              		.loc 1 849 0 is_stmt 1
+ 1476 0066 0028     		cmp	r0, #0
+ 1477 0068 07DB     		blt	.L167
+ 1478              		.loc 1 849 0 is_stmt 0 discriminator 1
+ 1479 006a FFF7FEFF 		bl	__aeabi_i2f
+ 1480              	.LVL220:
+ 1481 006e 0146     		mov	r1, r0
+ 1482 0070 2846     		mov	r0, r5
+ 1483 0072 FFF7FEFF 		bl	__aeabi_fsub
+ 1484              	.LVL221:
+ 1485 0076 8146     		mov	r9, r0
+ 1486 0078 00E0     		b	.L150
+ARM GAS  /tmp/cctZXvYy.s 			page 42
+
+
+ 1487              	.LVL222:
+ 1488              	.L167:
+ 1489              		.loc 1 849 0
+ 1490 007a A946     		mov	r9, r5
+ 1491              	.LVL223:
+ 1492              	.L150:
+ 850:./Src/application.c ****   nMotPremixR = (nJoyX>=0)? limitSup : (limitSup + nJoyX);
+ 1493              		.loc 1 850 0 is_stmt 1 discriminator 4
+ 1494 007c 002C     		cmp	r4, #0
+ 1495 007e 0ADA     		bge	.L168
+ 1496              		.loc 1 850 0 is_stmt 0 discriminator 1
+ 1497 0080 2046     		mov	r0, r4
+ 1498 0082 FFF7FEFF 		bl	__aeabi_i2f
+ 1499              	.LVL224:
+ 1500 0086 0146     		mov	r1, r0
+ 1501 0088 2846     		mov	r0, r5
+ 1502 008a FFF7FEFF 		bl	__aeabi_fadd
+ 1503              	.LVL225:
+ 1504 008e 8046     		mov	r8, r0
+ 1505 0090 02E0     		b	.L149
+ 1506              	.L166:
+ 846:./Src/application.c ****   nMotPremixR = (nJoyX>=0)? (limitSup - nJoyX) : limitSup;
+ 1507              		.loc 1 846 0 is_stmt 1
+ 1508 0092 A846     		mov	r8, r5
+ 1509 0094 00E0     		b	.L149
+ 1510              	.L168:
+ 1511              		.loc 1 850 0
+ 1512 0096 A846     		mov	r8, r5
+ 1513              	.L149:
+ 1514              	.LVL226:
+ 851:./Src/application.c **** }
+ 852:./Src/application.c **** 
+ 853:./Src/application.c **** // Scale Drive output due to Joystick Y input (throttle)
+ 854:./Src/application.c **** nMotPremixL = nMotPremixL * nJoyY/100.0;
+ 1515              		.loc 1 854 0
+ 1516 0098 3046     		mov	r0, r6
+ 1517 009a FFF7FEFF 		bl	__aeabi_i2f
+ 1518              	.LVL227:
+ 1519 009e 0746     		mov	r7, r0
+ 1520 00a0 0146     		mov	r1, r0
+ 1521 00a2 4846     		mov	r0, r9
+ 1522 00a4 FFF7FEFF 		bl	__aeabi_fmul
+ 1523              	.LVL228:
+ 1524 00a8 6749     		ldr	r1, .L175+4
+ 1525 00aa FFF7FEFF 		bl	__aeabi_fdiv
+ 1526              	.LVL229:
+ 1527 00ae 8346     		mov	fp, r0
+ 1528              	.LVL230:
+ 855:./Src/application.c **** nMotPremixR = nMotPremixR * nJoyY/100.0;
+ 1529              		.loc 1 855 0
+ 1530 00b0 3946     		mov	r1, r7
+ 1531 00b2 4046     		mov	r0, r8
+ 1532              	.LVL231:
+ 1533 00b4 FFF7FEFF 		bl	__aeabi_fmul
+ 1534              	.LVL232:
+ 1535 00b8 6349     		ldr	r1, .L175+4
+ 1536 00ba FFF7FEFF 		bl	__aeabi_fdiv
+ARM GAS  /tmp/cctZXvYy.s 			page 43
+
+
+ 1537              	.LVL233:
+ 1538 00be 0746     		mov	r7, r0
+ 1539              	.LVL234:
+ 856:./Src/application.c **** 
+ 857:./Src/application.c **** // Now calculate pivot amount
+ 858:./Src/application.c **** // - Strength of pivot (nPivSpeed) based on Joystick X input
+ 859:./Src/application.c **** // - Blending of pivot vs drive (fPivScale) based on Joystick Y input
+ 860:./Src/application.c **** nPivSpeed = nJoyX*3; //************************************
+ 1540              		.loc 1 860 0
+ 1541 00c0 04EB4404 		add	r4, r4, r4, lsl #1
+ 1542              	.LVL235:
+ 861:./Src/application.c **** fPivScale = (abs(nJoyY)>fPivYLimit)? 0.0 : (1.0 - abs(nJoyY)/fPivYLimit);
+ 1543              		.loc 1 861 0
+ 1544 00c4 86EAE670 		eor	r0, r6, r6, asr #31
+ 1545              	.LVL236:
+ 1546 00c8 A0EBE670 		sub	r0, r0, r6, asr #31
+ 1547 00cc FFF7FEFF 		bl	__aeabi_i2f
+ 1548              	.LVL237:
+ 1549 00d0 0646     		mov	r6, r0
+ 1550              	.LVL238:
+ 1551 00d2 5E49     		ldr	r1, .L175+8
+ 1552 00d4 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1553              	.LVL239:
+ 1554 00d8 78B9     		cbnz	r0, .L169
+ 1555              		.loc 1 861 0 is_stmt 0 discriminator 2
+ 1556 00da 5C49     		ldr	r1, .L175+8
+ 1557 00dc 3046     		mov	r0, r6
+ 1558 00de FFF7FEFF 		bl	__aeabi_fdiv
+ 1559              	.LVL240:
+ 1560 00e2 FFF7FEFF 		bl	__aeabi_f2d
+ 1561              	.LVL241:
+ 1562 00e6 0246     		mov	r2, r0
+ 1563 00e8 0B46     		mov	r3, r1
+ 1564 00ea 0020     		movs	r0, #0
+ 1565 00ec 5849     		ldr	r1, .L175+12
+ 1566 00ee FFF7FEFF 		bl	__aeabi_dsub
+ 1567              	.LVL242:
+ 1568 00f2 FFF7FEFF 		bl	__aeabi_d2f
+ 1569              	.LVL243:
+ 1570 00f6 0646     		mov	r6, r0
+ 1571 00f8 00E0     		b	.L151
+ 1572              	.L169:
+ 1573              		.loc 1 861 0
+ 1574 00fa 0026     		movs	r6, #0
+ 1575              	.L151:
+ 1576              	.LVL244:
+ 862:./Src/application.c **** 
+ 863:./Src/application.c **** // Calculate final mix of Drive and Pivot
+ 864:./Src/application.c **** nMotMixL = (int)((1.0-fPivScale)*nMotPremixL + fPivScale*( nPivSpeed));
+ 1577              		.loc 1 864 0 is_stmt 1 discriminator 4
+ 1578 00fc 3046     		mov	r0, r6
+ 1579 00fe FFF7FEFF 		bl	__aeabi_f2d
+ 1580              	.LVL245:
+ 1581 0102 0246     		mov	r2, r0
+ 1582 0104 0B46     		mov	r3, r1
+ 1583 0106 0020     		movs	r0, #0
+ 1584 0108 5149     		ldr	r1, .L175+12
+ARM GAS  /tmp/cctZXvYy.s 			page 44
+
+
+ 1585 010a FFF7FEFF 		bl	__aeabi_dsub
+ 1586              	.LVL246:
+ 1587 010e 8046     		mov	r8, r0
+ 1588 0110 8946     		mov	r9, r1
+ 1589 0112 5846     		mov	r0, fp
+ 1590 0114 FFF7FEFF 		bl	__aeabi_f2d
+ 1591              	.LVL247:
+ 1592 0118 4246     		mov	r2, r8
+ 1593 011a 4B46     		mov	r3, r9
+ 1594 011c FFF7FEFF 		bl	__aeabi_dmul
+ 1595              	.LVL248:
+ 1596 0120 CDE90001 		strd	r0, [sp]
+ 1597 0124 2046     		mov	r0, r4
+ 1598 0126 FFF7FEFF 		bl	__aeabi_i2f
+ 1599              	.LVL249:
+ 1600 012a 3146     		mov	r1, r6
+ 1601 012c FFF7FEFF 		bl	__aeabi_fmul
+ 1602              	.LVL250:
+ 1603 0130 FFF7FEFF 		bl	__aeabi_f2d
+ 1604              	.LVL251:
+ 1605 0134 DDE90023 		ldrd	r2, [sp]
+ 1606 0138 FFF7FEFF 		bl	__aeabi_dadd
+ 1607              	.LVL252:
+ 1608 013c FFF7FEFF 		bl	__aeabi_d2iz
+ 1609              	.LVL253:
+ 1610 0140 8346     		mov	fp, r0
+ 1611              	.LVL254:
+ 865:./Src/application.c **** nMotMixR = (int)((1.0-fPivScale)*nMotPremixR + fPivScale*(-nPivSpeed));
+ 1612              		.loc 1 865 0 discriminator 4
+ 1613 0142 3846     		mov	r0, r7
+ 1614              	.LVL255:
+ 1615 0144 FFF7FEFF 		bl	__aeabi_f2d
+ 1616              	.LVL256:
+ 1617 0148 4246     		mov	r2, r8
+ 1618 014a 4B46     		mov	r3, r9
+ 1619 014c FFF7FEFF 		bl	__aeabi_dmul
+ 1620              	.LVL257:
+ 1621 0150 8046     		mov	r8, r0
+ 1622 0152 8946     		mov	r9, r1
+ 1623 0154 6042     		negs	r0, r4
+ 1624 0156 FFF7FEFF 		bl	__aeabi_i2f
+ 1625              	.LVL258:
+ 1626 015a 3146     		mov	r1, r6
+ 1627 015c FFF7FEFF 		bl	__aeabi_fmul
+ 1628              	.LVL259:
+ 1629 0160 FFF7FEFF 		bl	__aeabi_f2d
+ 1630              	.LVL260:
+ 1631 0164 4246     		mov	r2, r8
+ 1632 0166 4B46     		mov	r3, r9
+ 1633 0168 FFF7FEFF 		bl	__aeabi_dadd
+ 1634              	.LVL261:
+ 1635 016c FFF7FEFF 		bl	__aeabi_d2iz
+ 1636              	.LVL262:
+ 866:./Src/application.c **** 
+ 867:./Src/application.c **** 
+ 868:./Src/application.c **** 
+ 869:./Src/application.c **** /*
+ARM GAS  /tmp/cctZXvYy.s 			page 45
+
+
+ 870:./Src/application.c **** if((nMotMixL>0)&&(nMotMixR>0)){
+ 871:./Src/application.c ****   app.motATS = nMotMixL + FRICTION;
+ 872:./Src/application.c ****   app.motBTS = nMotMixR + FRICTION;
+ 873:./Src/application.c **** }else if ((nMotMixL<0)&&(nMotMixR<0)){
+ 874:./Src/application.c ****   app.motATS = nMotMixL - FRICTION;
+ 875:./Src/application.c ****   app.motBTS = nMotMixR - FRICTION;
+ 876:./Src/application.c **** }else{
+ 877:./Src/application.c ****   if((nMotMixL>0)&&(nMotMixR<0)){
+ 878:./Src/application.c ****     app.motATS = nMotMixL + FRICTION;
+ 879:./Src/application.c ****     app.motBTS = nMotMixR - FRICTION + FRICTION/2;
+ 880:./Src/application.c ****   }else if((nMotMixL<0)&&(nMotMixR>0)){
+ 881:./Src/application.c ****     app.motBTS = nMotMixR + FRICTION;
+ 882:./Src/application.c ****     app.motATS = nMotMixL - FRICTION  + FRICTION/2;
+ 883:./Src/application.c ****   }else{
+ 884:./Src/application.c ****     app.motATS = nMotMixL;
+ 885:./Src/application.c ****     app.motBTS = nMotMixR;
+ 886:./Src/application.c ****   }
+ 887:./Src/application.c **** }
+ 888:./Src/application.c **** */
+ 889:./Src/application.c **** 
+ 890:./Src/application.c **** app.motATS = nMotMixL;
+ 1637              		.loc 1 890 0 discriminator 4
+ 1638 0170 0FFA8BFB 		sxth	fp, fp
+ 1639              	.LVL263:
+ 1640 0174 374B     		ldr	r3, .L175+16
+ 1641 0176 A3F82CB0 		strh	fp, [r3, #44]	@ movhi
+ 891:./Src/application.c **** app.motBTS = nMotMixR;
+ 1642              		.loc 1 891 0 discriminator 4
+ 1643 017a 00B2     		sxth	r0, r0
+ 1644              	.LVL264:
+ 1645 017c D885     		strh	r0, [r3, #46]	@ movhi
+ 892:./Src/application.c **** 
+ 893:./Src/application.c ****       if(app.motATS >= 0){
+ 1646              		.loc 1 893 0 discriminator 4
+ 1647 017e 9B8D     		ldrh	r3, [r3, #44]
+ 1648 0180 13F4004F 		tst	r3, #32768
+ 1649 0184 15D1     		bne	.L152
+ 894:./Src/application.c ****         //0 ~ 100
+ 895:./Src/application.c ****         if(app.motATS > limitSup){
+ 1650              		.loc 1 895 0
+ 1651 0186 334B     		ldr	r3, .L175+16
+ 1652 0188 988D     		ldrh	r0, [r3, #44]
+ 1653 018a 00B2     		sxth	r0, r0
+ 1654 018c FFF7FEFF 		bl	__aeabi_i2f
+ 1655              	.LVL265:
+ 1656 0190 0146     		mov	r1, r0
+ 1657 0192 2846     		mov	r0, r5
+ 1658 0194 FFF7FEFF 		bl	__aeabi_fcmplt
+ 1659              	.LVL266:
+ 1660 0198 28B1     		cbz	r0, .L153
+ 896:./Src/application.c ****           app.motATS = (int16_t)limitSup;
+ 1661              		.loc 1 896 0
+ 1662 019a 2846     		mov	r0, r5
+ 1663 019c FFF7FEFF 		bl	__aeabi_f2iz
+ 1664              	.LVL267:
+ 1665 01a0 00B2     		sxth	r0, r0
+ 1666 01a2 2C4B     		ldr	r3, .L175+16
+ARM GAS  /tmp/cctZXvYy.s 			page 46
+
+
+ 1667 01a4 9885     		strh	r0, [r3, #44]	@ movhi
+ 1668              	.L153:
+ 897:./Src/application.c ****         }
+ 898:./Src/application.c ****         MotorR_pwm(app.motATS);
+ 1669              		.loc 1 898 0
+ 1670 01a6 2B4B     		ldr	r3, .L175+16
+ 1671 01a8 988D     		ldrh	r0, [r3, #44]
+ 1672 01aa 00B2     		sxth	r0, r0
+ 1673 01ac FFF7FEFF 		bl	MotorR_pwm
+ 1674              	.LVL268:
+ 1675 01b0 14E0     		b	.L155
+ 1676              	.L152:
+ 899:./Src/application.c ****       }else{
+ 900:./Src/application.c ****         //0 ~ -100
+ 901:./Src/application.c ****         if(app.motATS < limitInf){
+ 1677              		.loc 1 901 0
+ 1678 01b2 284B     		ldr	r3, .L175+16
+ 1679 01b4 988D     		ldrh	r0, [r3, #44]
+ 1680 01b6 00B2     		sxth	r0, r0
+ 1681 01b8 FFF7FEFF 		bl	__aeabi_i2f
+ 1682              	.LVL269:
+ 1683 01bc 0146     		mov	r1, r0
+ 1684 01be 5046     		mov	r0, r10
+ 1685 01c0 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1686              	.LVL270:
+ 1687 01c4 28B1     		cbz	r0, .L156
+ 902:./Src/application.c ****           app.motATS = (int16_t)limitInf;
+ 1688              		.loc 1 902 0
+ 1689 01c6 5046     		mov	r0, r10
+ 1690 01c8 FFF7FEFF 		bl	__aeabi_f2iz
+ 1691              	.LVL271:
+ 1692 01cc 00B2     		sxth	r0, r0
+ 1693 01ce 214B     		ldr	r3, .L175+16
+ 1694 01d0 9885     		strh	r0, [r3, #44]	@ movhi
+ 1695              	.L156:
+ 903:./Src/application.c ****         }
+ 904:./Src/application.c ****         //app.motATS = app.motATS * -1;
+ 905:./Src/application.c ****         MotorR_pwm(app.motATS);
+ 1696              		.loc 1 905 0
+ 1697 01d2 204B     		ldr	r3, .L175+16
+ 1698 01d4 988D     		ldrh	r0, [r3, #44]
+ 1699 01d6 00B2     		sxth	r0, r0
+ 1700 01d8 FFF7FEFF 		bl	MotorR_pwm
+ 1701              	.LVL272:
+ 1702              	.L155:
+ 906:./Src/application.c ****       }
+ 907:./Src/application.c **** 
+ 908:./Src/application.c ****       if(app.motBTS >= 0){
+ 1703              		.loc 1 908 0
+ 1704 01dc 1D4B     		ldr	r3, .L175+16
+ 1705 01de DB8D     		ldrh	r3, [r3, #46]
+ 1706 01e0 13F4004F 		tst	r3, #32768
+ 1707 01e4 15D1     		bne	.L158
+ 909:./Src/application.c ****         //0 ~ 100
+ 910:./Src/application.c ****         if(app.motBTS > limitSup){
+ 1708              		.loc 1 910 0
+ 1709 01e6 1B4B     		ldr	r3, .L175+16
+ARM GAS  /tmp/cctZXvYy.s 			page 47
+
+
+ 1710 01e8 D88D     		ldrh	r0, [r3, #46]
+ 1711 01ea 00B2     		sxth	r0, r0
+ 1712 01ec FFF7FEFF 		bl	__aeabi_i2f
+ 1713              	.LVL273:
+ 1714 01f0 0146     		mov	r1, r0
+ 1715 01f2 2846     		mov	r0, r5
+ 1716 01f4 FFF7FEFF 		bl	__aeabi_fcmplt
+ 1717              	.LVL274:
+ 1718 01f8 28B1     		cbz	r0, .L159
+ 911:./Src/application.c ****           app.motBTS = (int16_t)limitSup;
+ 1719              		.loc 1 911 0
+ 1720 01fa 2846     		mov	r0, r5
+ 1721 01fc FFF7FEFF 		bl	__aeabi_f2iz
+ 1722              	.LVL275:
+ 1723 0200 00B2     		sxth	r0, r0
+ 1724 0202 144B     		ldr	r3, .L175+16
+ 1725 0204 D885     		strh	r0, [r3, #46]	@ movhi
+ 1726              	.L159:
+ 912:./Src/application.c ****         }
+ 913:./Src/application.c ****         MotorL_pwm(app.motBTS );
+ 1727              		.loc 1 913 0
+ 1728 0206 134B     		ldr	r3, .L175+16
+ 1729 0208 D88D     		ldrh	r0, [r3, #46]
+ 1730 020a 00B2     		sxth	r0, r0
+ 1731 020c FFF7FEFF 		bl	MotorL_pwm
+ 1732              	.LVL276:
+ 1733 0210 14E0     		b	.L145
+ 1734              	.L158:
+ 914:./Src/application.c ****       }else{
+ 915:./Src/application.c ****         //0 ~ -100
+ 916:./Src/application.c ****         if(app.motBTS < limitInf){
+ 1735              		.loc 1 916 0
+ 1736 0212 104B     		ldr	r3, .L175+16
+ 1737 0214 D88D     		ldrh	r0, [r3, #46]
+ 1738 0216 00B2     		sxth	r0, r0
+ 1739 0218 FFF7FEFF 		bl	__aeabi_i2f
+ 1740              	.LVL277:
+ 1741 021c 0146     		mov	r1, r0
+ 1742 021e 5046     		mov	r0, r10
+ 1743 0220 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1744              	.LVL278:
+ 1745 0224 28B1     		cbz	r0, .L162
+ 917:./Src/application.c ****           app.motBTS = (int16_t)limitInf;
+ 1746              		.loc 1 917 0
+ 1747 0226 5046     		mov	r0, r10
+ 1748 0228 FFF7FEFF 		bl	__aeabi_f2iz
+ 1749              	.LVL279:
+ 1750 022c 00B2     		sxth	r0, r0
+ 1751 022e 094B     		ldr	r3, .L175+16
+ 1752 0230 D885     		strh	r0, [r3, #46]	@ movhi
+ 1753              	.L162:
+ 918:./Src/application.c ****         }
+ 919:./Src/application.c ****         //MOTOR_VALUE.motBTS = MOTOR_VALUE.motBTS * -1;
+ 920:./Src/application.c ****         MotorL_pwm(app.motBTS );
+ 1754              		.loc 1 920 0
+ 1755 0232 084B     		ldr	r3, .L175+16
+ 1756 0234 D88D     		ldrh	r0, [r3, #46]
+ARM GAS  /tmp/cctZXvYy.s 			page 48
+
+
+ 1757 0236 00B2     		sxth	r0, r0
+ 1758 0238 FFF7FEFF 		bl	MotorL_pwm
+ 1759              	.LVL280:
+ 1760              	.L145:
+ 921:./Src/application.c ****       }
+ 922:./Src/application.c **** }
+ 1761              		.loc 1 922 0
+ 1762 023c 03B0     		add	sp, sp, #12
+ 1763              	.LCFI18:
+ 1764              		.cfi_def_cfa_offset 36
+ 1765              		@ sp needed
+ 1766 023e BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 1767              	.LVL281:
+ 1768              	.L176:
+ 1769 0242 00BF     		.align	2
+ 1770              	.L175:
+ 1771 0244 00007A44 		.word	1148846080
+ 1772 0248 0000C842 		.word	1120403456
+ 1773 024c 0000AA42 		.word	1118437376
+ 1774 0250 0000F03F 		.word	1072693248
+ 1775 0254 00000000 		.word	app
+ 1776 0258 00007AC4 		.word	-998637568
+ 1777              		.cfi_endproc
+ 1778              	.LFE83:
+ 1780              		.global	__aeabi_dcmpgt
+ 1781              		.global	__aeabi_fcmple
+ 1782              		.section	.text.applcation_TASK,"ax",%progbits
+ 1783              		.align	2
+ 1784              		.global	applcation_TASK
+ 1785              		.thumb
+ 1786              		.thumb_func
+ 1788              	applcation_TASK:
+ 1789              	.LFB68:
+  70:./Src/application.c ****   uint8_t letture,temp8;
+ 1790              		.loc 1 70 0
+ 1791              		.cfi_startproc
+ 1792              		@ args = 0, pretend = 0, frame = 0
+ 1793              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1794 0000 70B5     		push	{r4, r5, r6, lr}
+ 1795              	.LCFI19:
+ 1796              		.cfi_def_cfa_offset 16
+ 1797              		.cfi_offset 4, -16
+ 1798              		.cfi_offset 5, -12
+ 1799              		.cfi_offset 6, -8
+ 1800              		.cfi_offset 14, -4
+  74:./Src/application.c ****     case app_init:
+ 1801              		.loc 1 74 0
+ 1802 0002 A54B     		ldr	r3, .L236+8
+ 1803 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1804 0006 DBB2     		uxtb	r3, r3
+ 1805 0008 042B     		cmp	r3, #4
+ 1806 000a 00F25F82 		bhi	.L178
+ 1807 000e DFE813F0 		tbh	[pc, r3, lsl #1]
+ 1808              	.L180:
+ 1809 0012 0500     		.2byte	(.L179-.L180)/2
+ 1810 0014 8300     		.2byte	(.L181-.L180)/2
+ 1811 0016 FD00     		.2byte	(.L182-.L180)/2
+ARM GAS  /tmp/cctZXvYy.s 			page 49
+
+
+ 1812 0018 4F01     		.2byte	(.L183-.L180)/2
+ 1813 001a D401     		.2byte	(.L184-.L180)/2
+ 1814              		.p2align 1
+ 1815              	.L179:
+  76:./Src/application.c ****       MotorL_stop();
+ 1816              		.loc 1 76 0
+ 1817 001c FFF7FEFF 		bl	MotorR_stop
+ 1818              	.LVL282:
+  77:./Src/application.c ****       //Aspetta Center joystick e calcola la media
+ 1819              		.loc 1 77 0
+ 1820 0020 FFF7FEFF 		bl	MotorL_stop
+ 1821              	.LVL283:
+  79:./Src/application.c ****       app.center_media_Y = 0.0;
+ 1822              		.loc 1 79 0
+ 1823 0024 9C4B     		ldr	r3, .L236+8
+ 1824 0026 0022     		movs	r2, #0
+ 1825 0028 DA61     		str	r2, [r3, #28]	@ float
+  80:./Src/application.c ****       letture = 0;
+ 1826              		.loc 1 80 0
+ 1827 002a 1A62     		str	r2, [r3, #32]	@ float
+ 1828              	.LVL284:
+  82:./Src/application.c ****       do{
+ 1829              		.loc 1 82 0
+ 1830 002c 0024     		movs	r4, #0
+ 1831 002e 9B4B     		ldr	r3, .L236+12
+ 1832 0030 1C71     		strb	r4, [r3, #4]
+ 1833              	.LVL285:
+ 1834              	.L189:
+  84:./Src/application.c **** 
+ 1835              		.loc 1 84 0
+ 1836 0032 9B48     		ldr	r0, .L236+16
+ 1837 0034 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 1838              	.LVL286:
+  86:./Src/application.c ****         wii_JOYdati.done = 0;
+ 1839              		.loc 1 86 0
+ 1840 0038 01E0     		b	.L185
+ 1841              	.L186:
+  86:./Src/application.c ****         wii_JOYdati.done = 0;
+ 1842              		.loc 1 86 0 is_stmt 0 discriminator 2
+ 1843 003a FFF7FEFF 		bl	WiiNunchuck_TASK
+ 1844              	.LVL287:
+ 1845              	.L185:
+  86:./Src/application.c ****         wii_JOYdati.done = 0;
+ 1846              		.loc 1 86 0 discriminator 1
+ 1847 003e 974B     		ldr	r3, .L236+12
+ 1848 0040 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1849 0042 13F0FF0F 		tst	r3, #255
+ 1850 0046 F8D0     		beq	.L186
+  87:./Src/application.c ****         if((wii_JOYdati.ay < 129) && (wii_JOYdati.ay > 124)){
+ 1851              		.loc 1 87 0 is_stmt 1
+ 1852 0048 944B     		ldr	r3, .L236+12
+ 1853 004a 0022     		movs	r2, #0
+ 1854 004c 1A71     		strb	r2, [r3, #4]
+  88:./Src/application.c ****           letture++;
+ 1855              		.loc 1 88 0
+ 1856 004e 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 1857 0050 DBB2     		uxtb	r3, r3
+ARM GAS  /tmp/cctZXvYy.s 			page 50
+
+
+ 1858 0052 802B     		cmp	r3, #128
+ 1859 0054 12D8     		bhi	.L187
+  88:./Src/application.c ****           letture++;
+ 1860              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 1861 0056 914B     		ldr	r3, .L236+12
+ 1862 0058 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 1863 005a DBB2     		uxtb	r3, r3
+ 1864 005c 7C2B     		cmp	r3, #124
+ 1865 005e 0DD9     		bls	.L187
+  89:./Src/application.c ****           temp8 = wii_JOYdati.ay;
+ 1866              		.loc 1 89 0 is_stmt 1
+ 1867 0060 0134     		adds	r4, r4, #1
+ 1868              	.LVL288:
+ 1869 0062 E4B2     		uxtb	r4, r4
+ 1870              	.LVL289:
+  90:./Src/application.c ****           app.center_media_Y = app.center_media_Y + ((float)temp8);
+ 1871              		.loc 1 90 0
+ 1872 0064 8D4B     		ldr	r3, .L236+12
+ 1873 0066 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
+ 1874              	.LVL290:
+  91:./Src/application.c ****         }else{
+ 1875              		.loc 1 91 0
+ 1876 0068 8B4D     		ldr	r5, .L236+8
+ 1877 006a 2E6A     		ldr	r6, [r5, #32]	@ float
+ 1878 006c FFF7FEFF 		bl	__aeabi_ui2f
+ 1879              	.LVL291:
+ 1880 0070 0146     		mov	r1, r0
+ 1881 0072 3046     		mov	r0, r6
+ 1882 0074 FFF7FEFF 		bl	__aeabi_fadd
+ 1883              	.LVL292:
+ 1884 0078 2862     		str	r0, [r5, #32]	@ float
+ 1885 007a 03E0     		b	.L188
+ 1886              	.L187:
+ 1887              	.LVL293:
+  94:./Src/application.c ****         }
+ 1888              		.loc 1 94 0
+ 1889 007c 0022     		movs	r2, #0
+ 1890 007e 864B     		ldr	r3, .L236+8
+ 1891 0080 1A62     		str	r2, [r3, #32]	@ float
+  93:./Src/application.c ****           app.center_media_Y = 0.0;
+ 1892              		.loc 1 93 0
+ 1893 0082 0024     		movs	r4, #0
+ 1894              	.LVL294:
+ 1895              	.L188:
+  96:./Src/application.c ****       app.center_media_Y = app.center_media_Y / 50.0;
+ 1896              		.loc 1 96 0
+ 1897 0084 312C     		cmp	r4, #49
+ 1898 0086 D4D9     		bls	.L189
+  97:./Src/application.c ****       letture = 0;
+ 1899              		.loc 1 97 0
+ 1900 0088 834C     		ldr	r4, .L236+8
+ 1901              	.LVL295:
+ 1902 008a 206A     		ldr	r0, [r4, #32]	@ float
+ 1903 008c 8549     		ldr	r1, .L236+20
+ 1904 008e FFF7FEFF 		bl	__aeabi_fdiv
+ 1905              	.LVL296:
+ 1906 0092 2062     		str	r0, [r4, #32]	@ float
+ARM GAS  /tmp/cctZXvYy.s 			page 51
+
+
+ 1907              	.LVL297:
+  99:./Src/application.c ****       do{
+ 1908              		.loc 1 99 0
+ 1909 0094 0024     		movs	r4, #0
+ 1910 0096 814B     		ldr	r3, .L236+12
+ 1911 0098 1C71     		strb	r4, [r3, #4]
+ 1912              	.LVL298:
+ 1913              	.L194:
+ 101:./Src/application.c **** 
+ 1914              		.loc 1 101 0
+ 1915 009a 8148     		ldr	r0, .L236+16
+ 1916 009c FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 1917              	.LVL299:
+ 103:./Src/application.c ****         wii_JOYdati.done = 0;
+ 1918              		.loc 1 103 0
+ 1919 00a0 01E0     		b	.L190
+ 1920              	.L191:
+ 103:./Src/application.c ****         wii_JOYdati.done = 0;
+ 1921              		.loc 1 103 0 is_stmt 0 discriminator 2
+ 1922 00a2 FFF7FEFF 		bl	WiiNunchuck_TASK
+ 1923              	.LVL300:
+ 1924              	.L190:
+ 103:./Src/application.c ****         wii_JOYdati.done = 0;
+ 1925              		.loc 1 103 0 discriminator 1
+ 1926 00a6 7D4B     		ldr	r3, .L236+12
+ 1927 00a8 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1928 00aa 13F0FF0F 		tst	r3, #255
+ 1929 00ae F8D0     		beq	.L191
+ 104:./Src/application.c ****         if((wii_JOYdati.ax < 129) && (wii_JOYdati.ax > 124)){
+ 1930              		.loc 1 104 0 is_stmt 1
+ 1931 00b0 7A4B     		ldr	r3, .L236+12
+ 1932 00b2 0022     		movs	r2, #0
+ 1933 00b4 1A71     		strb	r2, [r3, #4]
+ 105:./Src/application.c ****           letture++;
+ 1934              		.loc 1 105 0
+ 1935 00b6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1936 00b8 DBB2     		uxtb	r3, r3
+ 1937 00ba 802B     		cmp	r3, #128
+ 1938 00bc 12D8     		bhi	.L192
+ 105:./Src/application.c ****           letture++;
+ 1939              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 1940 00be 774B     		ldr	r3, .L236+12
+ 1941 00c0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1942 00c2 DBB2     		uxtb	r3, r3
+ 1943 00c4 7C2B     		cmp	r3, #124
+ 1944 00c6 0DD9     		bls	.L192
+ 106:./Src/application.c ****           temp8 = wii_JOYdati.ax;
+ 1945              		.loc 1 106 0 is_stmt 1
+ 1946 00c8 0134     		adds	r4, r4, #1
+ 1947              	.LVL301:
+ 1948 00ca E4B2     		uxtb	r4, r4
+ 1949              	.LVL302:
+ 107:./Src/application.c ****           app.center_media_X = app.center_media_X + ((float)temp8);
+ 1950              		.loc 1 107 0
+ 1951 00cc 734B     		ldr	r3, .L236+12
+ 1952 00ce 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 1953              	.LVL303:
+ARM GAS  /tmp/cctZXvYy.s 			page 52
+
+
+ 108:./Src/application.c ****         }else{
+ 1954              		.loc 1 108 0
+ 1955 00d0 714D     		ldr	r5, .L236+8
+ 1956 00d2 EE69     		ldr	r6, [r5, #28]	@ float
+ 1957 00d4 FFF7FEFF 		bl	__aeabi_ui2f
+ 1958              	.LVL304:
+ 1959 00d8 0146     		mov	r1, r0
+ 1960 00da 3046     		mov	r0, r6
+ 1961 00dc FFF7FEFF 		bl	__aeabi_fadd
+ 1962              	.LVL305:
+ 1963 00e0 E861     		str	r0, [r5, #28]	@ float
+ 1964 00e2 03E0     		b	.L193
+ 1965              	.L192:
+ 1966              	.LVL306:
+ 111:./Src/application.c ****         }
+ 1967              		.loc 1 111 0
+ 1968 00e4 0022     		movs	r2, #0
+ 1969 00e6 6C4B     		ldr	r3, .L236+8
+ 1970 00e8 DA61     		str	r2, [r3, #28]	@ float
+ 110:./Src/application.c ****           app.center_media_X = 0.0;
+ 1971              		.loc 1 110 0
+ 1972 00ea 0024     		movs	r4, #0
+ 1973              	.LVL307:
+ 1974              	.L193:
+ 113:./Src/application.c ****       app.center_media_X = app.center_media_X / 50.0;
+ 1975              		.loc 1 113 0
+ 1976 00ec 312C     		cmp	r4, #49
+ 1977 00ee D4D9     		bls	.L194
+ 114:./Src/application.c **** 
+ 1978              		.loc 1 114 0
+ 1979 00f0 694C     		ldr	r4, .L236+8
+ 1980              	.LVL308:
+ 1981 00f2 E069     		ldr	r0, [r4, #28]	@ float
+ 1982 00f4 6B49     		ldr	r1, .L236+20
+ 1983 00f6 FFF7FEFF 		bl	__aeabi_fdiv
+ 1984              	.LVL309:
+ 1985 00fa E061     		str	r0, [r4, #28]	@ float
+ 116:./Src/application.c **** 
+ 1986              		.loc 1 116 0
+ 1987 00fc FFF7FEFF 		bl	accelleration_XY_Reset
+ 1988              	.LVL310:
+ 118:./Src/application.c ****       app.stato = app_soft_run;
+ 1989              		.loc 1 118 0
+ 1990 0100 FFF7FEFF 		bl	HAL_GetTick
+ 1991              	.LVL311:
+ 1992 0104 6060     		str	r0, [r4, #4]
+ 119:./Src/application.c ****       MotorR_start();
+ 1993              		.loc 1 119 0
+ 1994 0106 0123     		movs	r3, #1
+ 1995 0108 2370     		strb	r3, [r4]
+ 120:./Src/application.c ****       MotorL_start();
+ 1996              		.loc 1 120 0
+ 1997 010a FFF7FEFF 		bl	MotorR_start
+ 1998              	.LVL312:
+ 121:./Src/application.c **** 
+ 1999              		.loc 1 121 0
+ 2000 010e FFF7FEFF 		bl	MotorL_start
+ARM GAS  /tmp/cctZXvYy.s 			page 53
+
+
+ 2001              	.LVL313:
+ 123:./Src/application.c **** 
+ 2002              		.loc 1 123 0
+ 2003 0112 FFF7FEFF 		bl	Buzzer_OneShortBeep
+ 2004              	.LVL314:
+ 125:./Src/application.c **** 
+ 2005              		.loc 1 125 0
+ 2006 0116 70BD     		pop	{r4, r5, r6, pc}
+ 2007              	.L181:
+ 129:./Src/application.c ****       app.axn = normalize_x(wii_JOYdati.ax);
+ 2008              		.loc 1 129 0
+ 2009 0118 604D     		ldr	r5, .L236+12
+ 2010 011a 6878     		ldrb	r0, [r5, #1]	@ zero_extendqisi2
+ 2011 011c FFF7FEFF 		bl	normalize_y
+ 2012              	.LVL315:
+ 2013 0120 5D4C     		ldr	r4, .L236+8
+ 2014 0122 A060     		str	r0, [r4, #8]	@ float
+ 130:./Src/application.c **** 
+ 2015              		.loc 1 130 0
+ 2016 0124 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 2017 0126 FFF7FEFF 		bl	normalize_x
+ 2018              	.LVL316:
+ 2019 012a E060     		str	r0, [r4, #12]	@ float
+ 133:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 2020              		.loc 1 133 0
+ 2021 012c A068     		ldr	r0, [r4, #8]	@ float
+ 2022              	.LVL317:
+ 134:./Src/application.c ****       app.ayn = scale_y(tempf1, tempf2);
+ 2023              		.loc 1 134 0
+ 2024 012e 5E4E     		ldr	r6, .L236+24
+ 2025 0130 3168     		ldr	r1, [r6]	@ float
+ 2026              	.LVL318:
+ 135:./Src/application.c ****       tempf1 = app.axn;
+ 2027              		.loc 1 135 0
+ 2028 0132 FFF7FEFF 		bl	scale_y
+ 2029              	.LVL319:
+ 2030 0136 A060     		str	r0, [r4, #8]	@ float
+ 136:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 2031              		.loc 1 136 0
+ 2032 0138 E068     		ldr	r0, [r4, #12]	@ float
+ 2033              	.LVL320:
+ 137:./Src/application.c ****       app.axn = scale_x(tempf1, tempf2);
+ 2034              		.loc 1 137 0
+ 2035 013a 3168     		ldr	r1, [r6]	@ float
+ 2036              	.LVL321:
+ 138:./Src/application.c **** 
+ 2037              		.loc 1 138 0
+ 2038 013c FFF7FEFF 		bl	scale_x
+ 2039              	.LVL322:
+ 2040 0140 E060     		str	r0, [r4, #12]	@ float
+ 140:./Src/application.c ****       app.axn = accellerationX(app.axn);
+ 2041              		.loc 1 140 0
+ 2042 0142 A068     		ldr	r0, [r4, #8]	@ float
+ 2043 0144 FFF7FEFF 		bl	accellerationY
+ 2044              	.LVL323:
+ 2045 0148 A060     		str	r0, [r4, #8]	@ float
+ 141:./Src/application.c **** 
+ARM GAS  /tmp/cctZXvYy.s 			page 54
+
+
+ 2046              		.loc 1 141 0
+ 2047 014a E068     		ldr	r0, [r4, #12]	@ float
+ 2048 014c FFF7FEFF 		bl	accellerationX
+ 2049              	.LVL324:
+ 2050 0150 E060     		str	r0, [r4, #12]	@ float
+ 143:./Src/application.c ****       tempf2 = app.axn;
+ 2051              		.loc 1 143 0
+ 2052 0152 A068     		ldr	r0, [r4, #8]	@ float
+ 2053              	.LVL325:
+ 144:./Src/application.c **** 
+ 2054              		.loc 1 144 0
+ 2055 0154 E168     		ldr	r1, [r4, #12]	@ float
+ 2056              	.LVL326:
+ 146:./Src/application.c **** 
+ 2057              		.loc 1 146 0
+ 2058 0156 3268     		ldr	r2, [r6]	@ float
+ 2059 0158 0023     		movs	r3, #0
+ 2060 015a FFF7FEFF 		bl	go_motor
+ 2061              	.LVL327:
+ 149:./Src/application.c ****       if((wii_JOYdati.bz == 0)&&((((float)temp8 - app.center_media_Y) > 4.0))&&(telemetry.dataREADY
+ 2062              		.loc 1 149 0
+ 2063 015e 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 2064 0160 D8B2     		uxtb	r0, r3
+ 2065              	.LVL328:
+ 150:./Src/application.c ****         if((HAL_GetTick() - app.tsoft_run)>=1000){
+ 2066              		.loc 1 150 0
+ 2067 0162 EB78     		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 2068 0164 13F0FF0F 		tst	r3, #255
+ 2069 0168 1FD1     		bne	.L196
+ 150:./Src/application.c ****         if((HAL_GetTick() - app.tsoft_run)>=1000){
+ 2070              		.loc 1 150 0 is_stmt 0 discriminator 1
+ 2071 016a FFF7FEFF 		bl	__aeabi_ui2f
+ 2072              	.LVL329:
+ 2073 016e 216A     		ldr	r1, [r4, #32]	@ float
+ 2074 0170 FFF7FEFF 		bl	__aeabi_fsub
+ 2075              	.LVL330:
+ 2076 0174 4FF08141 		mov	r1, #1082130432
+ 2077 0178 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 2078              	.LVL331:
+ 2079 017c A8B1     		cbz	r0, .L196
+ 150:./Src/application.c ****         if((HAL_GetTick() - app.tsoft_run)>=1000){
+ 2080              		.loc 1 150 0 discriminator 2
+ 2081 017e 4B4B     		ldr	r3, .L236+28
+ 2082 0180 5B7D     		ldrb	r3, [r3, #21]	@ zero_extendqisi2
+ 2083 0182 13F0FF0F 		tst	r3, #255
+ 2084 0186 10D1     		bne	.L196
+ 151:./Src/application.c ****             app.cruise_soft_run_nohand = 0.0;
+ 2085              		.loc 1 151 0 is_stmt 1
+ 2086 0188 FFF7FEFF 		bl	HAL_GetTick
+ 2087              	.LVL332:
+ 2088 018c 6368     		ldr	r3, [r4, #4]
+ 2089 018e C01A     		subs	r0, r0, r3
+ 2090 0190 B0F57A7F 		cmp	r0, #1000
+ 2091 0194 0DD3     		bcc	.L198
+ 152:./Src/application.c ****             app.stato = app_soft_run_nohand;
+ 2092              		.loc 1 152 0
+ 2093 0196 0023     		movs	r3, #0
+ARM GAS  /tmp/cctZXvYy.s 			page 55
+
+
+ 2094 0198 A361     		str	r3, [r4, #24]	@ float
+ 153:./Src/application.c ****             app.tcruise_decrement = HAL_GetTick();
+ 2095              		.loc 1 153 0
+ 2096 019a 0323     		movs	r3, #3
+ 2097 019c 2370     		strb	r3, [r4]
+ 154:./Src/application.c ****             Buzzer_OneShortBeep();
+ 2098              		.loc 1 154 0
+ 2099 019e FFF7FEFF 		bl	HAL_GetTick
+ 2100              	.LVL333:
+ 2101 01a2 2061     		str	r0, [r4, #16]
+ 155:./Src/application.c ****         }
+ 2102              		.loc 1 155 0
+ 2103 01a4 FFF7FEFF 		bl	Buzzer_OneShortBeep
+ 2104              	.LVL334:
+ 2105 01a8 03E0     		b	.L198
+ 2106              	.L196:
+ 158:./Src/application.c ****       }
+ 2107              		.loc 1 158 0
+ 2108 01aa FFF7FEFF 		bl	HAL_GetTick
+ 2109              	.LVL335:
+ 2110 01ae 3A4B     		ldr	r3, .L236+8
+ 2111 01b0 5860     		str	r0, [r3, #4]
+ 2112              	.L198:
+ 161:./Src/application.c ****         telemetry.dataREADY_JOYSTICK  = 0;
+ 2113              		.loc 1 161 0
+ 2114 01b2 3E4B     		ldr	r3, .L236+28
+ 2115 01b4 5B7D     		ldrb	r3, [r3, #21]	@ zero_extendqisi2
+ 2116 01b6 13F0FF0F 		tst	r3, #255
+ 2117 01ba 11D0     		beq	.L199
+ 162:./Src/application.c ****         if(telemetry.dataLast_Command == 'R'){
+ 2118              		.loc 1 162 0
+ 2119 01bc 3B4B     		ldr	r3, .L236+28
+ 2120 01be 0022     		movs	r2, #0
+ 2121 01c0 5A75     		strb	r2, [r3, #21]
+ 163:./Src/application.c ****           app.stato = app_soft_ANDROIDAPP;
+ 2122              		.loc 1 163 0
+ 2123 01c2 9B7D     		ldrb	r3, [r3, #22]	@ zero_extendqisi2
+ 2124 01c4 DBB2     		uxtb	r3, r3
+ 2125 01c6 522B     		cmp	r3, #82
+ 2126 01c8 07D1     		bne	.L200
+ 164:./Src/application.c ****           app.tAndroidAPP = HAL_GetTick();
+ 2127              		.loc 1 164 0
+ 2128 01ca 334C     		ldr	r4, .L236+8
+ 2129 01cc 0423     		movs	r3, #4
+ 2130 01ce 2370     		strb	r3, [r4]
+ 165:./Src/application.c ****           accelleration_XY_Reset();
+ 2131              		.loc 1 165 0
+ 2132 01d0 FFF7FEFF 		bl	HAL_GetTick
+ 2133              	.LVL336:
+ 2134 01d4 6061     		str	r0, [r4, #20]
+ 166:./Src/application.c ****         }
+ 2135              		.loc 1 166 0
+ 2136 01d6 FFF7FEFF 		bl	accelleration_XY_Reset
+ 2137              	.LVL337:
+ 2138              	.L200:
+ 168:./Src/application.c ****       }
+ 2139              		.loc 1 168 0
+ARM GAS  /tmp/cctZXvYy.s 			page 56
+
+
+ 2140 01da 0022     		movs	r2, #0
+ 2141 01dc 334B     		ldr	r3, .L236+28
+ 2142 01de 9A75     		strb	r2, [r3, #22]
+ 2143              	.L199:
+ 171:./Src/application.c ****           app.stato = app_hard_run;
+ 2144              		.loc 1 171 0
+ 2145 01e0 2E4B     		ldr	r3, .L236+12
+ 2146 01e2 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 2147 01e4 13F0FF0F 		tst	r3, #255
+ 2148 01e8 40F07781 		bne	.L177
+ 171:./Src/application.c ****           app.stato = app_hard_run;
+ 2149              		.loc 1 171 0 is_stmt 0 discriminator 1
+ 2150 01ec 2B4B     		ldr	r3, .L236+12
+ 2151 01ee DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 2152 01f0 DBB2     		uxtb	r3, r3
+ 2153 01f2 012B     		cmp	r3, #1
+ 2154 01f4 40F07181 		bne	.L177
+ 171:./Src/application.c ****           app.stato = app_hard_run;
+ 2155              		.loc 1 171 0 discriminator 2
+ 2156 01f8 2C4B     		ldr	r3, .L236+28
+ 2157 01fa 5B7D     		ldrb	r3, [r3, #21]	@ zero_extendqisi2
+ 2158 01fc 13F0FF0F 		tst	r3, #255
+ 2159 0200 40F06B81 		bne	.L177
+ 172:./Src/application.c ****           //accelleration_XY_Reset();     //??????
+ 2160              		.loc 1 172 0 is_stmt 1
+ 2161 0204 0222     		movs	r2, #2
+ 2162 0206 244B     		ldr	r3, .L236+8
+ 2163 0208 1A70     		strb	r2, [r3]
+ 2164 020a 70BD     		pop	{r4, r5, r6, pc}
+ 2165              	.L182:
+ 179:./Src/application.c ****       app.axn = normalize_x(wii_JOYdati.ax);
+ 2166              		.loc 1 179 0
+ 2167 020c 234D     		ldr	r5, .L236+12
+ 2168 020e 6878     		ldrb	r0, [r5, #1]	@ zero_extendqisi2
+ 2169 0210 FFF7FEFF 		bl	normalize_y
+ 2170              	.LVL338:
+ 2171 0214 204C     		ldr	r4, .L236+8
+ 2172 0216 A060     		str	r0, [r4, #8]	@ float
+ 180:./Src/application.c **** 
+ 2173              		.loc 1 180 0
+ 2174 0218 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 2175 021a FFF7FEFF 		bl	normalize_x
+ 2176              	.LVL339:
+ 2177 021e E060     		str	r0, [r4, #12]	@ float
+ 183:./Src/application.c ****       app.ayn = tempf1;
+ 2178              		.loc 1 183 0
+ 2179 0220 A068     		ldr	r0, [r4, #8]	@ float
+ 2180 0222 FFF7FEFF 		bl	__aeabi_f2d
+ 2181              	.LVL340:
+ 2182 0226 1AA3     		adr	r3, .L236
+ 2183 0228 D3E90023 		ldrd	r2, [r3]
+ 2184 022c FFF7FEFF 		bl	__aeabi_dmul
+ 2185              	.LVL341:
+ 2186 0230 FFF7FEFF 		bl	__aeabi_d2f
+ 2187              	.LVL342:
+ 184:./Src/application.c ****       tempf2 = app.axn * 0.90;
+ 2188              		.loc 1 184 0
+ARM GAS  /tmp/cctZXvYy.s 			page 57
+
+
+ 2189 0234 A060     		str	r0, [r4, #8]	@ float
+ 185:./Src/application.c ****       //tempf2 = battery_dati.VBatt;
+ 2190              		.loc 1 185 0
+ 2191 0236 E068     		ldr	r0, [r4, #12]	@ float
+ 2192              	.LVL343:
+ 2193 0238 FFF7FEFF 		bl	__aeabi_f2d
+ 2194              	.LVL344:
+ 2195 023c 14A3     		adr	r3, .L236
+ 2196 023e D3E90023 		ldrd	r2, [r3]
+ 2197 0242 FFF7FEFF 		bl	__aeabi_dmul
+ 2198              	.LVL345:
+ 2199 0246 FFF7FEFF 		bl	__aeabi_d2f
+ 2200              	.LVL346:
+ 187:./Src/application.c **** 
+ 2201              		.loc 1 187 0
+ 2202 024a E060     		str	r0, [r4, #12]	@ float
+ 189:./Src/application.c ****       app.axn = accellerationXHARD(app.axn);
+ 2203              		.loc 1 189 0
+ 2204 024c A068     		ldr	r0, [r4, #8]	@ float
+ 2205              	.LVL347:
+ 2206 024e FFF7FEFF 		bl	accellerationYHARD
+ 2207              	.LVL348:
+ 2208 0252 A060     		str	r0, [r4, #8]	@ float
+ 190:./Src/application.c **** 
+ 2209              		.loc 1 190 0
+ 2210 0254 E068     		ldr	r0, [r4, #12]	@ float
+ 2211 0256 FFF7FEFF 		bl	accellerationXHARD
+ 2212              	.LVL349:
+ 2213 025a E060     		str	r0, [r4, #12]	@ float
+ 192:./Src/application.c ****       tempf2 = app.axn;
+ 2214              		.loc 1 192 0
+ 2215 025c A568     		ldr	r5, [r4, #8]	@ float
+ 2216              	.LVL350:
+ 193:./Src/application.c ****       if(tempf1 < 0){
+ 2217              		.loc 1 193 0
+ 2218 025e E468     		ldr	r4, [r4, #12]	@ float
+ 2219              	.LVL351:
+ 194:./Src/application.c ****         tempf1 = 0;
+ 2220              		.loc 1 194 0
+ 2221 0260 0021     		movs	r1, #0
+ 2222 0262 2846     		mov	r0, r5
+ 2223 0264 FFF7FEFF 		bl	__aeabi_fcmplt
+ 2224              	.LVL352:
+ 2225 0268 00B1     		cbz	r0, .L201
+ 195:./Src/application.c ****       }
+ 2226              		.loc 1 195 0
+ 2227 026a 0025     		movs	r5, #0
+ 2228              	.LVL353:
+ 2229              	.L201:
+ 197:./Src/application.c **** 
+ 2230              		.loc 1 197 0
+ 2231 026c 0E4B     		ldr	r3, .L236+24
+ 2232 026e 1A68     		ldr	r2, [r3]	@ float
+ 2233 0270 0123     		movs	r3, #1
+ 2234 0272 2146     		mov	r1, r4
+ 2235 0274 2846     		mov	r0, r5
+ 2236 0276 FFF7FEFF 		bl	go_motor
+ARM GAS  /tmp/cctZXvYy.s 			page 58
+
+
+ 2237              	.LVL354:
+ 200:./Src/application.c ****           //MotorR_stop();
+ 2238              		.loc 1 200 0
+ 2239 027a 084B     		ldr	r3, .L236+12
+ 2240 027c 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 2241 027e DBB2     		uxtb	r3, r3
+ 2242 0280 012B     		cmp	r3, #1
+ 2243 0282 40F02A81 		bne	.L177
+ 204:./Src/application.c ****       }
+ 2244              		.loc 1 204 0
+ 2245 0286 0122     		movs	r2, #1
+ 2246 0288 034B     		ldr	r3, .L236+8
+ 2247 028a 1A70     		strb	r2, [r3]
+ 2248 028c 70BD     		pop	{r4, r5, r6, pc}
+ 2249              	.LVL355:
+ 2250              	.L237:
+ 2251 028e 00BF     		.align	3
+ 2252              	.L236:
+ 2253 0290 CDCCCCCC 		.word	-858993459
+ 2254 0294 CCCCEC3F 		.word	1072483532
+ 2255 0298 00000000 		.word	app
+ 2256 029c 00000000 		.word	wii_JOYdati
+ 2257 02a0 00000000 		.word	hiwdg
+ 2258 02a4 00004842 		.word	1112014848
+ 2259 02a8 00000000 		.word	battery_dati
+ 2260 02ac 00000000 		.word	telemetry
+ 2261              	.L183:
+ 209:./Src/application.c ****       app.axn = normalize_x(wii_JOYdati.ax);
+ 2262              		.loc 1 209 0
+ 2263 02b0 8A4D     		ldr	r5, .L238
+ 2264 02b2 6878     		ldrb	r0, [r5, #1]	@ zero_extendqisi2
+ 2265 02b4 FFF7FEFF 		bl	normalize_y
+ 2266              	.LVL356:
+ 2267 02b8 894C     		ldr	r4, .L238+4
+ 2268 02ba A060     		str	r0, [r4, #8]	@ float
+ 210:./Src/application.c **** 
+ 2269              		.loc 1 210 0
+ 2270 02bc 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 2271 02be FFF7FEFF 		bl	normalize_x
+ 2272              	.LVL357:
+ 2273 02c2 E060     		str	r0, [r4, #12]	@ float
+ 213:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 2274              		.loc 1 213 0
+ 2275 02c4 A068     		ldr	r0, [r4, #8]	@ float
+ 2276              	.LVL358:
+ 214:./Src/application.c ****       app.ayn = scale_y(tempf1, tempf2);
+ 2277              		.loc 1 214 0
+ 2278 02c6 874D     		ldr	r5, .L238+8
+ 2279 02c8 2968     		ldr	r1, [r5]	@ float
+ 2280              	.LVL359:
+ 215:./Src/application.c ****       tempf1 = app.axn;
+ 2281              		.loc 1 215 0
+ 2282 02ca FFF7FEFF 		bl	scale_y
+ 2283              	.LVL360:
+ 2284 02ce A060     		str	r0, [r4, #8]	@ float
+ 216:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 2285              		.loc 1 216 0
+ARM GAS  /tmp/cctZXvYy.s 			page 59
+
+
+ 2286 02d0 E068     		ldr	r0, [r4, #12]	@ float
+ 2287              	.LVL361:
+ 217:./Src/application.c ****       app.axn = scale_x(tempf1, tempf2);
+ 2288              		.loc 1 217 0
+ 2289 02d2 2968     		ldr	r1, [r5]	@ float
+ 2290              	.LVL362:
+ 218:./Src/application.c **** 
+ 2291              		.loc 1 218 0
+ 2292 02d4 FFF7FEFF 		bl	scale_x
+ 2293              	.LVL363:
+ 2294 02d8 E060     		str	r0, [r4, #12]	@ float
+ 220:./Src/application.c ****       app.axn = accellerationX(app.axn);
+ 2295              		.loc 1 220 0
+ 2296 02da A068     		ldr	r0, [r4, #8]	@ float
+ 2297 02dc FFF7FEFF 		bl	accellerationY
+ 2298              	.LVL364:
+ 2299 02e0 A060     		str	r0, [r4, #8]	@ float
+ 221:./Src/application.c **** 
+ 2300              		.loc 1 221 0
+ 2301 02e2 E068     		ldr	r0, [r4, #12]	@ float
+ 2302 02e4 FFF7FEFF 		bl	accellerationX
+ 2303              	.LVL365:
+ 2304 02e8 E060     		str	r0, [r4, #12]	@ float
+ 224:./Src/application.c ****         tempf1 = app.cruise_soft_run_nohand;
+ 2305              		.loc 1 224 0
+ 2306 02ea A068     		ldr	r0, [r4, #8]	@ float
+ 2307 02ec 7E49     		ldr	r1, .L238+12
+ 2308 02ee FFF7FEFF 		bl	__aeabi_fcmpgt
+ 2309              	.LVL366:
+ 2310 02f2 C8B1     		cbz	r0, .L202
+ 225:./Src/application.c ****         if((app.ayn - 5.0) > tempf1){
+ 2311              		.loc 1 225 0
+ 2312 02f4 A669     		ldr	r6, [r4, #24]	@ float
+ 2313              	.LVL367:
+ 226:./Src/application.c ****           app.cruise_soft_run_nohand = app.ayn - 5.0;
+ 2314              		.loc 1 226 0
+ 2315 02f6 A068     		ldr	r0, [r4, #8]	@ float
+ 2316 02f8 FFF7FEFF 		bl	__aeabi_f2d
+ 2317              	.LVL368:
+ 2318 02fc 0022     		movs	r2, #0
+ 2319 02fe 7B4B     		ldr	r3, .L238+16
+ 2320 0300 FFF7FEFF 		bl	__aeabi_dsub
+ 2321              	.LVL369:
+ 2322 0304 0446     		mov	r4, r0
+ 2323 0306 0D46     		mov	r5, r1
+ 2324 0308 3046     		mov	r0, r6
+ 2325 030a FFF7FEFF 		bl	__aeabi_f2d
+ 2326              	.LVL370:
+ 2327 030e 0246     		mov	r2, r0
+ 2328 0310 0B46     		mov	r3, r1
+ 2329 0312 2046     		mov	r0, r4
+ 2330 0314 2946     		mov	r1, r5
+ 2331 0316 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 2332              	.LVL371:
+ 2333 031a 28B1     		cbz	r0, .L202
+ 227:./Src/application.c ****         }
+ 2334              		.loc 1 227 0
+ARM GAS  /tmp/cctZXvYy.s 			page 60
+
+
+ 2335 031c 704C     		ldr	r4, .L238+4
+ 2336 031e A068     		ldr	r0, [r4, #8]	@ float
+ 2337 0320 7149     		ldr	r1, .L238+12
+ 2338 0322 FFF7FEFF 		bl	__aeabi_fsub
+ 2339              	.LVL372:
+ 2340 0326 A061     		str	r0, [r4, #24]	@ float
+ 2341              	.LVL373:
+ 2342              	.L202:
+ 231:./Src/application.c ****         //con time step
+ 2343              		.loc 1 231 0
+ 2344 0328 6D4B     		ldr	r3, .L238+4
+ 2345 032a 9868     		ldr	r0, [r3, #8]	@ float
+ 2346 032c 7049     		ldr	r1, .L238+20
+ 2347 032e FFF7FEFF 		bl	__aeabi_fcmplt
+ 2348              	.LVL374:
+ 2349 0332 00B3     		cbz	r0, .L205
+ 231:./Src/application.c ****         //con time step
+ 2350              		.loc 1 231 0 is_stmt 0 discriminator 1
+ 2351 0334 6A4B     		ldr	r3, .L238+4
+ 2352 0336 9868     		ldr	r0, [r3, #8]	@ float
+ 2353 0338 6E49     		ldr	r1, .L238+24
+ 2354 033a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 2355              	.LVL375:
+ 2356 033e D0B1     		cbz	r0, .L205
+ 233:./Src/application.c ****           tempf1 = app.ayn / 10.0;
+ 2357              		.loc 1 233 0 is_stmt 1
+ 2358 0340 FFF7FEFF 		bl	HAL_GetTick
+ 2359              	.LVL376:
+ 2360 0344 664B     		ldr	r3, .L238+4
+ 2361 0346 1B69     		ldr	r3, [r3, #16]
+ 2362 0348 C01A     		subs	r0, r0, r3
+ 2363 034a FA28     		cmp	r0, #250
+ 2364 034c 13D9     		bls	.L205
+ 234:./Src/application.c ****           app.cruise_soft_run_nohand = app.cruise_soft_run_nohand + tempf1;                //STEP D
+ 2365              		.loc 1 234 0
+ 2366 034e 644C     		ldr	r4, .L238+4
+ 2367 0350 A068     		ldr	r0, [r4, #8]	@ float
+ 2368 0352 6949     		ldr	r1, .L238+28
+ 2369 0354 FFF7FEFF 		bl	__aeabi_fdiv
+ 2370              	.LVL377:
+ 235:./Src/application.c ****           if(app.cruise_soft_run_nohand < 0.0){
+ 2371              		.loc 1 235 0
+ 2372 0358 A169     		ldr	r1, [r4, #24]	@ float
+ 2373 035a FFF7FEFF 		bl	__aeabi_fadd
+ 2374              	.LVL378:
+ 2375 035e A061     		str	r0, [r4, #24]	@ float
+ 236:./Src/application.c ****             app.cruise_soft_run_nohand = 0.0;
+ 2376              		.loc 1 236 0
+ 2377 0360 A069     		ldr	r0, [r4, #24]	@ float
+ 2378 0362 0021     		movs	r1, #0
+ 2379 0364 FFF7FEFF 		bl	__aeabi_fcmplt
+ 2380              	.LVL379:
+ 2381 0368 08B1     		cbz	r0, .L208
+ 237:./Src/application.c ****           }
+ 2382              		.loc 1 237 0
+ 2383 036a 0022     		movs	r2, #0
+ 2384 036c A261     		str	r2, [r4, #24]	@ float
+ARM GAS  /tmp/cctZXvYy.s 			page 61
+
+
+ 2385              	.L208:
+ 239:./Src/application.c ****         }
+ 2386              		.loc 1 239 0
+ 2387 036e FFF7FEFF 		bl	HAL_GetTick
+ 2388              	.LVL380:
+ 2389 0372 5B4B     		ldr	r3, .L238+4
+ 2390 0374 1861     		str	r0, [r3, #16]
+ 2391              	.L205:
+ 243:./Src/application.c ****         go_motor(0, 0, battery_dati.VBatt,0);
+ 2392              		.loc 1 243 0
+ 2393 0376 5A4B     		ldr	r3, .L238+4
+ 2394 0378 9868     		ldr	r0, [r3, #8]	@ float
+ 2395 037a 5E49     		ldr	r1, .L238+24
+ 2396 037c FFF7FEFF 		bl	__aeabi_fcmple
+ 2397              	.LVL381:
+ 2398 0380 90B1     		cbz	r0, .L234
+ 244:./Src/application.c ****         MotorR_stop();
+ 2399              		.loc 1 244 0
+ 2400 0382 584B     		ldr	r3, .L238+8
+ 2401 0384 1A68     		ldr	r2, [r3]	@ float
+ 2402 0386 0024     		movs	r4, #0
+ 2403 0388 0023     		movs	r3, #0
+ 2404 038a 2146     		mov	r1, r4
+ 2405 038c 2046     		mov	r0, r4
+ 2406 038e FFF7FEFF 		bl	go_motor
+ 2407              	.LVL382:
+ 245:./Src/application.c ****         MotorL_stop();
+ 2408              		.loc 1 245 0
+ 2409 0392 FFF7FEFF 		bl	MotorR_stop
+ 2410              	.LVL383:
+ 246:./Src/application.c ****         accelleration_XY_Reset();
+ 2411              		.loc 1 246 0
+ 2412 0396 FFF7FEFF 		bl	MotorL_stop
+ 2413              	.LVL384:
+ 247:./Src/application.c ****         app.cruise_soft_run_nohand = 0.0;
+ 2414              		.loc 1 247 0
+ 2415 039a FFF7FEFF 		bl	accelleration_XY_Reset
+ 2416              	.LVL385:
+ 248:./Src/application.c ****         app.stato = app_init;
+ 2417              		.loc 1 248 0
+ 2418 039e 504B     		ldr	r3, .L238+4
+ 2419 03a0 9C61     		str	r4, [r3, #24]	@ float
+ 249:./Src/application.c ****         break;
+ 2420              		.loc 1 249 0
+ 2421 03a2 0022     		movs	r2, #0
+ 2422 03a4 1A70     		strb	r2, [r3]
+ 250:./Src/application.c ****       }
+ 2423              		.loc 1 250 0
+ 2424 03a6 70BD     		pop	{r4, r5, r6, pc}
+ 2425              	.L234:
+ 252:./Src/application.c ****       tempf2 = app.axn;
+ 2426              		.loc 1 252 0
+ 2427 03a8 4D4B     		ldr	r3, .L238+4
+ 2428 03aa 9869     		ldr	r0, [r3, #24]	@ float
+ 2429              	.LVL386:
+ 253:./Src/application.c ****       go_motor(tempf1, tempf2, battery_dati.VBatt,0);
+ 2430              		.loc 1 253 0
+ARM GAS  /tmp/cctZXvYy.s 			page 62
+
+
+ 2431 03ac D968     		ldr	r1, [r3, #12]	@ float
+ 2432              	.LVL387:
+ 254:./Src/application.c ****     break;
+ 2433              		.loc 1 254 0
+ 2434 03ae 4D4B     		ldr	r3, .L238+8
+ 2435 03b0 1A68     		ldr	r2, [r3]	@ float
+ 2436 03b2 0023     		movs	r3, #0
+ 2437 03b4 FFF7FEFF 		bl	go_motor
+ 2438              	.LVL388:
+ 255:./Src/application.c **** 
+ 2439              		.loc 1 255 0
+ 2440 03b8 70BD     		pop	{r4, r5, r6, pc}
+ 2441              	.L184:
+ 259:./Src/application.c ****         telemetry.dataREADY_JOYSTICK  = 0;
+ 2442              		.loc 1 259 0
+ 2443 03ba 504B     		ldr	r3, .L238+32
+ 2444 03bc 5B7D     		ldrb	r3, [r3, #21]	@ zero_extendqisi2
+ 2445 03be 13F0FF0F 		tst	r3, #255
+ 2446 03c2 17D0     		beq	.L212
+ 260:./Src/application.c ****         app.tAndroidAPP = HAL_GetTick();
+ 2447              		.loc 1 260 0
+ 2448 03c4 4D4C     		ldr	r4, .L238+32
+ 2449 03c6 0023     		movs	r3, #0
+ 2450 03c8 6375     		strb	r3, [r4, #21]
+ 261:./Src/application.c ****         if(telemetry.dataLast_Command == 'F'){
+ 2451              		.loc 1 261 0
+ 2452 03ca FFF7FEFF 		bl	HAL_GetTick
+ 2453              	.LVL389:
+ 2454 03ce 444B     		ldr	r3, .L238+4
+ 2455 03d0 5861     		str	r0, [r3, #20]
+ 262:./Src/application.c ****           MotorR_stop();
+ 2456              		.loc 1 262 0
+ 2457 03d2 A37D     		ldrb	r3, [r4, #22]	@ zero_extendqisi2
+ 2458 03d4 DBB2     		uxtb	r3, r3
+ 2459 03d6 462B     		cmp	r3, #70
+ 2460 03d8 0CD1     		bne	.L212
+ 263:./Src/application.c ****           MotorL_stop();
+ 2461              		.loc 1 263 0
+ 2462 03da FFF7FEFF 		bl	MotorR_stop
+ 2463              	.LVL390:
+ 264:./Src/application.c ****           accelleration_XY_Reset();
+ 2464              		.loc 1 264 0
+ 2465 03de FFF7FEFF 		bl	MotorL_stop
+ 2466              	.LVL391:
+ 265:./Src/application.c ****           app.cruise_soft_run_nohand = 0.0;
+ 2467              		.loc 1 265 0
+ 2468 03e2 FFF7FEFF 		bl	accelleration_XY_Reset
+ 2469              	.LVL392:
+ 266:./Src/application.c ****           app.stato = app_init;
+ 2470              		.loc 1 266 0
+ 2471 03e6 3E4A     		ldr	r2, .L238+4
+ 2472 03e8 0023     		movs	r3, #0
+ 2473 03ea 9361     		str	r3, [r2, #24]	@ float
+ 267:./Src/application.c ****           telemetry.dataLast_Command = 0;
+ 2474              		.loc 1 267 0
+ 2475 03ec 0023     		movs	r3, #0
+ 2476 03ee 1370     		strb	r3, [r2]
+ARM GAS  /tmp/cctZXvYy.s 			page 63
+
+
+ 268:./Src/application.c ****           break;
+ 2477              		.loc 1 268 0
+ 2478 03f0 A375     		strb	r3, [r4, #22]
+ 269:./Src/application.c ****         }
+ 2479              		.loc 1 269 0
+ 2480 03f2 70BD     		pop	{r4, r5, r6, pc}
+ 2481              	.L212:
+ 272:./Src/application.c ****         go_motor(0, 0, battery_dati.VBatt,0);
+ 2482              		.loc 1 272 0
+ 2483 03f4 FFF7FEFF 		bl	HAL_GetTick
+ 2484              	.LVL393:
+ 2485 03f8 394B     		ldr	r3, .L238+4
+ 2486 03fa 5B69     		ldr	r3, [r3, #20]
+ 2487 03fc C01A     		subs	r0, r0, r3
+ 2488 03fe B0F5FA7F 		cmp	r0, #500
+ 2489 0402 10D9     		bls	.L213
+ 273:./Src/application.c ****         MotorR_stop();
+ 2490              		.loc 1 273 0
+ 2491 0404 374B     		ldr	r3, .L238+8
+ 2492 0406 1A68     		ldr	r2, [r3]	@ float
+ 2493 0408 0024     		movs	r4, #0
+ 2494 040a 0023     		movs	r3, #0
+ 2495 040c 2146     		mov	r1, r4
+ 2496 040e 2046     		mov	r0, r4
+ 2497 0410 FFF7FEFF 		bl	go_motor
+ 2498              	.LVL394:
+ 274:./Src/application.c ****         MotorL_stop();
+ 2499              		.loc 1 274 0
+ 2500 0414 FFF7FEFF 		bl	MotorR_stop
+ 2501              	.LVL395:
+ 275:./Src/application.c ****         app.cruise_soft_run_nohand = 0.0;
+ 2502              		.loc 1 275 0
+ 2503 0418 FFF7FEFF 		bl	MotorL_stop
+ 2504              	.LVL396:
+ 276:./Src/application.c ****         app.stato = app_init;
+ 2505              		.loc 1 276 0
+ 2506 041c 304B     		ldr	r3, .L238+4
+ 2507 041e 9C61     		str	r4, [r3, #24]	@ float
+ 277:./Src/application.c ****         break;
+ 2508              		.loc 1 277 0
+ 2509 0420 0022     		movs	r2, #0
+ 2510 0422 1A70     		strb	r2, [r3]
+ 278:./Src/application.c ****       }
+ 2511              		.loc 1 278 0
+ 2512 0424 70BD     		pop	{r4, r5, r6, pc}
+ 2513              	.L213:
+ 282:./Src/application.c ****       app.axn = (float)telemetry.joyx;
+ 2514              		.loc 1 282 0
+ 2515 0426 354D     		ldr	r5, .L238+32
+ 2516 0428 688B     		ldrh	r0, [r5, #26]
+ 2517 042a 00B2     		sxth	r0, r0
+ 2518 042c FFF7FEFF 		bl	__aeabi_i2f
+ 2519              	.LVL397:
+ 2520 0430 2B4C     		ldr	r4, .L238+4
+ 2521 0432 A060     		str	r0, [r4, #8]	@ float
+ 283:./Src/application.c ****       if(app.ayn > 300.0){
+ 2522              		.loc 1 283 0
+ARM GAS  /tmp/cctZXvYy.s 			page 64
+
+
+ 2523 0434 288B     		ldrh	r0, [r5, #24]
+ 2524 0436 00B2     		sxth	r0, r0
+ 2525 0438 FFF7FEFF 		bl	__aeabi_i2f
+ 2526              	.LVL398:
+ 2527 043c E060     		str	r0, [r4, #12]	@ float
+ 284:./Src/application.c ****         app.ayn = 300.0;
+ 2528              		.loc 1 284 0
+ 2529 043e A068     		ldr	r0, [r4, #8]	@ float
+ 2530 0440 2F49     		ldr	r1, .L238+36
+ 2531 0442 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 2532              	.LVL399:
+ 2533 0446 08B1     		cbz	r0, .L214
+ 285:./Src/application.c ****       }
+ 2534              		.loc 1 285 0
+ 2535 0448 2D4A     		ldr	r2, .L238+36
+ 2536 044a A260     		str	r2, [r4, #8]	@ float
+ 2537              	.L214:
+ 287:./Src/application.c ****         app.axn = 300.0;
+ 2538              		.loc 1 287 0
+ 2539 044c 244B     		ldr	r3, .L238+4
+ 2540 044e D868     		ldr	r0, [r3, #12]	@ float
+ 2541 0450 2B49     		ldr	r1, .L238+36
+ 2542 0452 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 2543              	.LVL400:
+ 2544 0456 10B1     		cbz	r0, .L216
+ 288:./Src/application.c ****       }
+ 2545              		.loc 1 288 0
+ 2546 0458 294A     		ldr	r2, .L238+36
+ 2547 045a 214B     		ldr	r3, .L238+4
+ 2548 045c DA60     		str	r2, [r3, #12]	@ float
+ 2549              	.L216:
+ 290:./Src/application.c ****         app.ayn = 0.0;
+ 2550              		.loc 1 290 0
+ 2551 045e 204B     		ldr	r3, .L238+4
+ 2552 0460 9868     		ldr	r0, [r3, #8]	@ float
+ 2553 0462 0021     		movs	r1, #0
+ 2554 0464 FFF7FEFF 		bl	__aeabi_fcmplt
+ 2555              	.LVL401:
+ 2556 0468 10B1     		cbz	r0, .L218
+ 291:./Src/application.c ****       }
+ 2557              		.loc 1 291 0
+ 2558 046a 0022     		movs	r2, #0
+ 2559 046c 1C4B     		ldr	r3, .L238+4
+ 2560 046e 9A60     		str	r2, [r3, #8]	@ float
+ 2561              	.L218:
+ 293:./Src/application.c ****         app.axn = 0.0;
+ 2562              		.loc 1 293 0
+ 2563 0470 1B4B     		ldr	r3, .L238+4
+ 2564 0472 D868     		ldr	r0, [r3, #12]	@ float
+ 2565 0474 0021     		movs	r1, #0
+ 2566 0476 FFF7FEFF 		bl	__aeabi_fcmplt
+ 2567              	.LVL402:
+ 2568 047a 10B1     		cbz	r0, .L220
+ 294:./Src/application.c ****       }
+ 2569              		.loc 1 294 0
+ 2570 047c 0022     		movs	r2, #0
+ 2571 047e 184B     		ldr	r3, .L238+4
+ARM GAS  /tmp/cctZXvYy.s 			page 65
+
+
+ 2572 0480 DA60     		str	r2, [r3, #12]	@ float
+ 2573              	.L220:
+ 297:./Src/application.c ****       app.axn = app.axn - 75.0;
+ 2574              		.loc 1 297 0
+ 2575 0482 174C     		ldr	r4, .L238+4
+ 2576 0484 A068     		ldr	r0, [r4, #8]	@ float
+ 2577 0486 1F49     		ldr	r1, .L238+40
+ 2578 0488 FFF7FEFF 		bl	__aeabi_fsub
+ 2579              	.LVL403:
+ 2580 048c A060     		str	r0, [r4, #8]	@ float
+ 298:./Src/application.c **** 
+ 2581              		.loc 1 298 0
+ 2582 048e E068     		ldr	r0, [r4, #12]	@ float
+ 2583 0490 1C49     		ldr	r1, .L238+40
+ 2584 0492 FFF7FEFF 		bl	__aeabi_fsub
+ 2585              	.LVL404:
+ 2586 0496 E060     		str	r0, [r4, #12]	@ float
+ 301:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 2587              		.loc 1 301 0
+ 2588 0498 A068     		ldr	r0, [r4, #8]	@ float
+ 2589              	.LVL405:
+ 302:./Src/application.c ****       app.ayn = scale_y(tempf1, tempf2);
+ 2590              		.loc 1 302 0
+ 2591 049a 124D     		ldr	r5, .L238+8
+ 2592 049c 2968     		ldr	r1, [r5]	@ float
+ 2593              	.LVL406:
+ 303:./Src/application.c ****       tempf1 = app.axn;
+ 2594              		.loc 1 303 0
+ 2595 049e FFF7FEFF 		bl	scale_y
+ 2596              	.LVL407:
+ 2597 04a2 A060     		str	r0, [r4, #8]	@ float
+ 304:./Src/application.c ****       tempf2 = battery_dati.VBatt;
+ 2598              		.loc 1 304 0
+ 2599 04a4 E068     		ldr	r0, [r4, #12]	@ float
+ 2600              	.LVL408:
+ 305:./Src/application.c ****       app.axn = scale_x(tempf1, tempf2);
+ 2601              		.loc 1 305 0
+ 2602 04a6 2968     		ldr	r1, [r5]	@ float
+ 2603              	.LVL409:
+ 306:./Src/application.c **** 
+ 2604              		.loc 1 306 0
+ 2605 04a8 FFF7FEFF 		bl	scale_x
+ 2606              	.LVL410:
+ 2607 04ac E060     		str	r0, [r4, #12]	@ float
+ 308:./Src/application.c ****       app.axn = accellerationX(app.axn);
+ 2608              		.loc 1 308 0
+ 2609 04ae A068     		ldr	r0, [r4, #8]	@ float
+ 2610 04b0 FFF7FEFF 		bl	accellerationY
+ 2611              	.LVL411:
+ 2612 04b4 A060     		str	r0, [r4, #8]	@ float
+ 309:./Src/application.c ****       tempf1 = app.ayn;
+ 2613              		.loc 1 309 0
+ 2614 04b6 E068     		ldr	r0, [r4, #12]	@ float
+ 2615 04b8 FFF7FEFF 		bl	accellerationX
+ 2616              	.LVL412:
+ 2617 04bc E060     		str	r0, [r4, #12]	@ float
+ 310:./Src/application.c ****       tempf2 = app.axn;
+ARM GAS  /tmp/cctZXvYy.s 			page 66
+
+
+ 2618              		.loc 1 310 0
+ 2619 04be A068     		ldr	r0, [r4, #8]	@ float
+ 2620              	.LVL413:
+ 311:./Src/application.c ****       go_motor(tempf1, tempf2, battery_dati.VBatt,0);
+ 2621              		.loc 1 311 0
+ 2622 04c0 E168     		ldr	r1, [r4, #12]	@ float
+ 2623              	.LVL414:
+ 312:./Src/application.c ****     break;
+ 2624              		.loc 1 312 0
+ 2625 04c2 2A68     		ldr	r2, [r5]	@ float
+ 2626 04c4 0023     		movs	r3, #0
+ 2627 04c6 FFF7FEFF 		bl	go_motor
+ 2628              	.LVL415:
+ 313:./Src/application.c **** 
+ 2629              		.loc 1 313 0
+ 2630 04ca 70BD     		pop	{r4, r5, r6, pc}
+ 2631              	.L178:
+ 316:./Src/application.c ****         MotorL_stop();
+ 2632              		.loc 1 316 0
+ 2633 04cc FFF7FEFF 		bl	MotorR_stop
+ 2634              	.LVL416:
+ 317:./Src/application.c ****         app.stato = app_init;
+ 2635              		.loc 1 317 0
+ 2636 04d0 FFF7FEFF 		bl	MotorL_stop
+ 2637              	.LVL417:
+ 318:./Src/application.c ****     break;
+ 2638              		.loc 1 318 0
+ 2639 04d4 0022     		movs	r2, #0
+ 2640 04d6 024B     		ldr	r3, .L238+4
+ 2641 04d8 1A70     		strb	r2, [r3]
+ 2642              	.L177:
+ 2643 04da 70BD     		pop	{r4, r5, r6, pc}
+ 2644              	.L239:
+ 2645              		.align	2
+ 2646              	.L238:
+ 2647 04dc 00000000 		.word	wii_JOYdati
+ 2648 04e0 00000000 		.word	app
+ 2649 04e4 00000000 		.word	battery_dati
+ 2650 04e8 0000A040 		.word	1084227584
+ 2651 04ec 00001440 		.word	1075052544
+ 2652 04f0 0000A0C0 		.word	-1063256064
+ 2653 04f4 0000B8C1 		.word	-1044905984
+ 2654 04f8 00002041 		.word	1092616192
+ 2655 04fc 00000000 		.word	telemetry
+ 2656 0500 00009643 		.word	1133903872
+ 2657 0504 00009642 		.word	1117126656
+ 2658              		.cfi_endproc
+ 2659              	.LFE68:
+ 2661              		.global	Battery_power
+ 2662              		.comm	battery_dati,20,4
+ 2663              		.comm	app,72,4
+ 2664              		.section	.rodata.Battery_power,"a",%progbits
+ 2665              		.align	2
+ 2668              	Battery_power:
+ 2669 0000 00002042 		.word	1109393408
+ 2670 0004 9A99193F 		.word	1058642330
+ 2671 0008 00000000 		.space	32
+ARM GAS  /tmp/cctZXvYy.s 			page 67
+
+
+ 2671      00000000 
+ 2671      00000000 
+ 2671      00000000 
+ 2671      00000000 
+ 2672 0028 00001842 		.word	1108869120
+ 2673 002c 9A99193F 		.word	1058642330
+ 2674 0030 00000000 		.space	32
+ 2674      00000000 
+ 2674      00000000 
+ 2674      00000000 
+ 2674      00000000 
+ 2675 0050 00001442 		.word	1108606976
+ 2676 0054 F6281C3F 		.word	1058810102
+ 2677 0058 00000000 		.space	32
+ 2677      00000000 
+ 2677      00000000 
+ 2677      00000000 
+ 2677      00000000 
+ 2678 0078 00001042 		.word	1108344832
+ 2679 007c 52B81E3F 		.word	1058977874
+ 2680 0080 00000000 		.space	32
+ 2680      00000000 
+ 2680      00000000 
+ 2680      00000000 
+ 2680      00000000 
+ 2681 00a0 00000C42 		.word	1108082688
+ 2682 00a4 6666263F 		.word	1059481190
+ 2683 00a8 00000000 		.space	32
+ 2683      00000000 
+ 2683      00000000 
+ 2683      00000000 
+ 2683      00000000 
+ 2684 00c8 00000842 		.word	1107820544
+ 2685 00cc 6666263F 		.word	1059481190
+ 2686 00d0 00000000 		.space	32
+ 2686      00000000 
+ 2686      00000000 
+ 2686      00000000 
+ 2686      00000000 
+ 2687 00f0 00000442 		.word	1107558400
+ 2688 00f4 1F852B3F 		.word	1059816735
+ 2689 00f8 00000000 		.space	32
+ 2689      00000000 
+ 2689      00000000 
+ 2689      00000000 
+ 2689      00000000 
+ 2690 0118 00000042 		.word	1107296256
+ 2691 011c 1F852B3F 		.word	1059816735
+ 2692 0120 00000000 		.space	32
+ 2692      00000000 
+ 2692      00000000 
+ 2692      00000000 
+ 2692      00000000 
+ 2693 0140 0000F841 		.word	1106771968
+ 2694 0144 1F852B3F 		.word	1059816735
+ 2695 0148 00000000 		.space	32
+ 2695      00000000 
+ARM GAS  /tmp/cctZXvYy.s 			page 68
+
+
+ 2695      00000000 
+ 2695      00000000 
+ 2695      00000000 
+ 2696 0168 0000F041 		.word	1106247680
+ 2697 016c 1F852B3F 		.word	1059816735
+ 2698 0170 00000000 		.space	32
+ 2698      00000000 
+ 2698      00000000 
+ 2698      00000000 
+ 2698      00000000 
+ 2699              		.text
+ 2700              	.Letext0:
+ 2701              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 2702              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 2703              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 2704              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 2705              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h"
+ 2706              		.file 7 "./Inc/application.h"
+ 2707              		.file 8 "./Inc/i2c.h"
+ 2708              		.file 9 "./Inc/telemetry.h"
+ 2709              		.file 10 "./Drivers/CMSIS/Include/core_cm3.h"
+ 2710              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 2711              		.file 12 "./Inc/varie.h"
+ 2712              		.file 13 "./Inc/motor_R.h"
+ 2713              		.file 14 "./Inc/motor_L.h"
+ 2714              		.file 15 "./Inc/ADC_R.h"
+ 2715              		.file 16 "./Inc/ADC_L.h"
+ARM GAS  /tmp/cctZXvYy.s 			page 69
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 application.c
+     /tmp/cctZXvYy.s:20     .text.GET_BatteryAverage:00000000 $t
+     /tmp/cctZXvYy.s:25     .text.GET_BatteryAverage:00000000 GET_BatteryAverage
+     /tmp/cctZXvYy.s:41     .text.GET_BatteryAverage:00000008 $d
+                            *COM*:00000014 battery_dati
+     /tmp/cctZXvYy.s:46     .text.TASK_BATTERY_LOW_VOLTAGE:00000000 $t
+     /tmp/cctZXvYy.s:51     .text.TASK_BATTERY_LOW_VOLTAGE:00000000 TASK_BATTERY_LOW_VOLTAGE
+     /tmp/cctZXvYy.s:84     .text.TASK_BATTERY_LOW_VOLTAGE:00000020 $d
+     /tmp/cctZXvYy.s:90     .text.applcation_init:00000000 $t
+     /tmp/cctZXvYy.s:95     .text.applcation_init:00000000 applcation_init
+     /tmp/cctZXvYy.s:143    .text.applcation_init:00000030 $d
+                            *COM*:00000048 app
+     /tmp/cctZXvYy.s:154    .text.normalize_y:00000000 $t
+     /tmp/cctZXvYy.s:159    .text.normalize_y:00000000 normalize_y
+     /tmp/cctZXvYy.s:219    .text.normalize_y:0000003c $d
+     /tmp/cctZXvYy.s:226    .text.normalize_x:00000000 $t
+     /tmp/cctZXvYy.s:231    .text.normalize_x:00000000 normalize_x
+     /tmp/cctZXvYy.s:291    .text.normalize_x:0000003c $d
+     /tmp/cctZXvYy.s:298    .text.get_powerMax:00000000 $t
+     /tmp/cctZXvYy.s:303    .text.get_powerMax:00000000 get_powerMax
+     /tmp/cctZXvYy.s:389    .text.get_powerMax:0000005c $d
+     /tmp/cctZXvYy.s:405    .text.scale_y:00000000 $t
+     /tmp/cctZXvYy.s:410    .text.scale_y:00000000 scale_y
+     /tmp/cctZXvYy.s:438    .text.scale_x:00000000 $t
+     /tmp/cctZXvYy.s:443    .text.scale_x:00000000 scale_x
+     /tmp/cctZXvYy.s:471    .text.accelleration_XY_Reset:00000000 $t
+     /tmp/cctZXvYy.s:476    .text.accelleration_XY_Reset:00000000 accelleration_XY_Reset
+     /tmp/cctZXvYy.s:493    .text.accelleration_XY_Reset:0000000c $d
+     /tmp/cctZXvYy.s:502    .text.accellerationY:00000000 $t
+     /tmp/cctZXvYy.s:507    .text.accellerationY:00000000 accellerationY
+     /tmp/cctZXvYy.s:592    .text.accellerationY:00000070 $d
+     /tmp/cctZXvYy.s:599    .text.accellerationX:00000000 $t
+     /tmp/cctZXvYy.s:604    .text.accellerationX:00000000 accellerationX
+     /tmp/cctZXvYy.s:689    .text.accellerationX:00000070 $d
+     /tmp/cctZXvYy.s:696    .text.accellerationYHARD:00000000 $t
+     /tmp/cctZXvYy.s:701    .text.accellerationYHARD:00000000 accellerationYHARD
+     /tmp/cctZXvYy.s:786    .text.accellerationYHARD:00000070 $d
+     /tmp/cctZXvYy.s:793    .text.accellerationXHARD:00000000 $t
+     /tmp/cctZXvYy.s:798    .text.accellerationXHARD:00000000 accellerationXHARD
+     /tmp/cctZXvYy.s:883    .text.accellerationXHARD:00000070 $d
+     /tmp/cctZXvYy.s:895    .text.Battery_TASK:00000000 $t
+     /tmp/cctZXvYy.s:900    .text.Battery_TASK:00000000 Battery_TASK
+     /tmp/cctZXvYy.s:988    .text.Battery_TASK:00000080 $d
+     /tmp/cctZXvYy.s:996    .text.WAIT_CHARGE_FINISH:00000000 $t
+     /tmp/cctZXvYy.s:1001   .text.WAIT_CHARGE_FINISH:00000000 WAIT_CHARGE_FINISH
+     /tmp/cctZXvYy.s:1102   .text.WAIT_CHARGE_FINISH:0000007c $d
+     /tmp/cctZXvYy.s:1108   .text.Current_Motor_TASK:00000000 $t
+     /tmp/cctZXvYy.s:1113   .text.Current_Motor_TASK:00000000 Current_Motor_TASK
+     /tmp/cctZXvYy.s:1303   .text.Current_Motor_TASK:00000130 $d
+     /tmp/cctZXvYy.s:1314   .text.getMotorCurrentR:00000000 $t
+     /tmp/cctZXvYy.s:1319   .text.getMotorCurrentR:00000000 getMotorCurrentR
+     /tmp/cctZXvYy.s:1341   .text.getMotorCurrentL:00000000 $t
+     /tmp/cctZXvYy.s:1346   .text.getMotorCurrentL:00000000 getMotorCurrentL
+     /tmp/cctZXvYy.s:1373   .text.go_motor:00000000 $t
+     /tmp/cctZXvYy.s:1378   .text.go_motor:00000000 go_motor
+     /tmp/cctZXvYy.s:1771   .text.go_motor:00000244 $d
+ARM GAS  /tmp/cctZXvYy.s 			page 70
+
+
+     /tmp/cctZXvYy.s:1783   .text.applcation_TASK:00000000 $t
+     /tmp/cctZXvYy.s:1788   .text.applcation_TASK:00000000 applcation_TASK
+     /tmp/cctZXvYy.s:1809   .text.applcation_TASK:00000012 $d
+     /tmp/cctZXvYy.s:1814   .text.applcation_TASK:0000001c $t
+     /tmp/cctZXvYy.s:2253   .text.applcation_TASK:00000290 $d
+     /tmp/cctZXvYy.s:2263   .text.applcation_TASK:000002b0 $t
+     /tmp/cctZXvYy.s:2647   .text.applcation_TASK:000004dc $d
+     /tmp/cctZXvYy.s:2668   .rodata.Battery_power:00000000 Battery_power
+     /tmp/cctZXvYy.s:2665   .rodata.Battery_power:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GetTick
+Buzzer_OneLongBeep
+MotorR_stop
+MotorL_stop
+__aeabi_ui2f
+__aeabi_fsub
+__aeabi_fcmpge
+__aeabi_fcmpgt
+__aeabi_fcmplt
+__aeabi_fmul
+__aeabi_f2d
+__aeabi_dadd
+__aeabi_d2f
+__aeabi_dsub
+__aeabi_ui2d
+__aeabi_ddiv
+__aeabi_d2uiz
+__aeabi_i2d
+__aeabi_dmul
+ADC_BATTERY
+Led_Set
+HAL_IWDG_Refresh
+HAL_Delay
+IS_Charge
+hiwdg
+ADC_MOTOR_LEFT
+ADC_MOTOR_RIGHT
+__aeabi_f2iz
+__aeabi_i2f
+__aeabi_fadd
+__aeabi_fdiv
+__aeabi_d2iz
+MotorR_pwm
+MotorL_pwm
+__aeabi_dcmpgt
+__aeabi_fcmple
+WiiNunchuck_TASK
+MotorR_start
+MotorL_start
+Buzzer_OneShortBeep
+wii_JOYdati
+telemetry

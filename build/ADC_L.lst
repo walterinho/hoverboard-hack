@@ -1,0 +1,496 @@
+ARM GAS  /tmp/cc6qgnRK.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ADC_L.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ADC_L_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	ADC_L_init
+  22              		.thumb
+  23              		.thumb_func
+  25              	ADC_L_init:
+  26              	.LFB64:
+  27              		.file 1 "./Src/ADC_L.c"
+   1:./Src/ADC_L.c **** #include "ADC_L.h"
+   2:./Src/ADC_L.c **** 
+   3:./Src/ADC_L.c **** 
+   4:./Src/ADC_L.c **** ADC_HandleTypeDef hadc3;
+   5:./Src/ADC_L.c **** DMA_HandleTypeDef hdma_adc3;
+   6:./Src/ADC_L.c **** 
+   7:./Src/ADC_L.c **** volatile __IO struct ADC_Ldati adc_Ldati;
+   8:./Src/ADC_L.c **** 
+   9:./Src/ADC_L.c **** // ----------------------PUBLIC----------------------
+  10:./Src/ADC_L.c **** void ADC_L_init(void){
+  28              		.loc 1 10 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  37 0002 84B0     		sub	sp, sp, #16
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40              	.LBB2:
+  11:./Src/ADC_L.c ****  ADC_ChannelConfTypeDef sConfig;
+  12:./Src/ADC_L.c ****  
+  13:./Src/ADC_L.c ****   __HAL_RCC_DMA2_CLK_ENABLE();
+  41              		.loc 1 13 0
+  42 0004 1D4B     		ldr	r3, .L5
+  43 0006 5A69     		ldr	r2, [r3, #20]
+  44 0008 42F00202 		orr	r2, r2, #2
+  45 000c 5A61     		str	r2, [r3, #20]
+ARM GAS  /tmp/cc6qgnRK.s 			page 2
+
+
+  46 000e 5B69     		ldr	r3, [r3, #20]
+  47 0010 03F00203 		and	r3, r3, #2
+  48 0014 0093     		str	r3, [sp]
+  49 0016 009B     		ldr	r3, [sp]
+  50              	.LBE2:
+  14:./Src/ADC_L.c ****   /* DMA2_Channel4_5_IRQn interrupt configuration */
+  15:./Src/ADC_L.c ****   HAL_NVIC_SetPriority(DMA2_Channel4_5_IRQn, 0, 0);
+  51              		.loc 1 15 0
+  52 0018 0022     		movs	r2, #0
+  53 001a 1146     		mov	r1, r2
+  54 001c 3B20     		movs	r0, #59
+  55 001e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  56              	.LVL0:
+  16:./Src/ADC_L.c ****   HAL_NVIC_EnableIRQ(DMA2_Channel4_5_IRQn);
+  57              		.loc 1 16 0
+  58 0022 3B20     		movs	r0, #59
+  59 0024 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  60              	.LVL1:
+  17:./Src/ADC_L.c ****   
+  18:./Src/ADC_L.c ****   hadc3.Instance = ADC3;
+  61              		.loc 1 18 0
+  62 0028 1548     		ldr	r0, .L5+4
+  63 002a 164B     		ldr	r3, .L5+8
+  64 002c 0360     		str	r3, [r0]
+  19:./Src/ADC_L.c ****   hadc3.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  65              		.loc 1 19 0
+  66 002e 0023     		movs	r3, #0
+  67 0030 8360     		str	r3, [r0, #8]
+  20:./Src/ADC_L.c ****   hadc3.Init.ContinuousConvMode = DISABLE;
+  68              		.loc 1 20 0
+  69 0032 C360     		str	r3, [r0, #12]
+  21:./Src/ADC_L.c ****   hadc3.Init.DiscontinuousConvMode = DISABLE;
+  70              		.loc 1 21 0
+  71 0034 4361     		str	r3, [r0, #20]
+  22:./Src/ADC_L.c ****   hadc3.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  72              		.loc 1 22 0
+  73 0036 4FF46022 		mov	r2, #917504
+  74 003a C261     		str	r2, [r0, #28]
+  23:./Src/ADC_L.c ****   hadc3.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  75              		.loc 1 23 0
+  76 003c 4360     		str	r3, [r0, #4]
+  24:./Src/ADC_L.c ****   hadc3.Init.NbrOfConversion = 1;
+  77              		.loc 1 24 0
+  78 003e 0123     		movs	r3, #1
+  79 0040 0361     		str	r3, [r0, #16]
+  25:./Src/ADC_L.c ****   if (HAL_ADC_Init(&hadc3) != HAL_OK)
+  80              		.loc 1 25 0
+  81 0042 FFF7FEFF 		bl	HAL_ADC_Init
+  82              	.LVL2:
+  83 0046 08B1     		cbz	r0, .L2
+  26:./Src/ADC_L.c ****   {
+  27:./Src/ADC_L.c ****     Error_Handler();
+  84              		.loc 1 27 0
+  85 0048 FFF7FEFF 		bl	Error_Handler
+  86              	.LVL3:
+  87              	.L2:
+  28:./Src/ADC_L.c ****   }
+ARM GAS  /tmp/cc6qgnRK.s 			page 3
+
+
+  29:./Src/ADC_L.c ****   /*
+  30:./Src/ADC_L.c ****   sConfig.Channel = ADC_CHANNEL_10;
+  31:./Src/ADC_L.c ****   sConfig.Rank = 1;
+  32:./Src/ADC_L.c ****   sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  33:./Src/ADC_L.c ****   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  34:./Src/ADC_L.c ****   {
+  35:./Src/ADC_L.c ****     Error_Handler();
+  36:./Src/ADC_L.c ****   }
+  37:./Src/ADC_L.c **** */
+  38:./Src/ADC_L.c ****     /**Configure Regular Channel 
+  39:./Src/ADC_L.c ****     */
+  40:./Src/ADC_L.c ****   sConfig.Channel = ADC_CHANNEL_10;
+  88              		.loc 1 40 0
+  89 004c 0A23     		movs	r3, #10
+  90 004e 0193     		str	r3, [sp, #4]
+  41:./Src/ADC_L.c ****     sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  91              		.loc 1 41 0
+  92 0050 0023     		movs	r3, #0
+  93 0052 0393     		str	r3, [sp, #12]
+  42:./Src/ADC_L.c ****   sConfig.Rank = 1;
+  94              		.loc 1 42 0
+  95 0054 0123     		movs	r3, #1
+  96 0056 0293     		str	r3, [sp, #8]
+  43:./Src/ADC_L.c ****   if (HAL_ADC_ConfigChannel(&hadc3, &sConfig) != HAL_OK)
+  97              		.loc 1 43 0
+  98 0058 01A9     		add	r1, sp, #4
+  99 005a 0948     		ldr	r0, .L5+4
+ 100 005c FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 101              	.LVL4:
+ 102 0060 08B1     		cbz	r0, .L3
+  44:./Src/ADC_L.c ****   {
+  45:./Src/ADC_L.c ****     Error_Handler();
+ 103              		.loc 1 45 0
+ 104 0062 FFF7FEFF 		bl	Error_Handler
+ 105              	.LVL5:
+ 106              	.L3:
+  46:./Src/ADC_L.c ****   }
+  47:./Src/ADC_L.c ****   HAL_ADC_Start(&hadc3);
+ 107              		.loc 1 47 0
+ 108 0066 064C     		ldr	r4, .L5+4
+ 109 0068 2046     		mov	r0, r4
+ 110 006a FFF7FEFF 		bl	HAL_ADC_Start
+ 111              	.LVL6:
+  48:./Src/ADC_L.c ****   HAL_ADC_Start_DMA(&hadc3, (uint32_t*)adc_Ldati.data, 1);
+ 112              		.loc 1 48 0
+ 113 006e 0122     		movs	r2, #1
+ 114 0070 0549     		ldr	r1, .L5+12
+ 115 0072 2046     		mov	r0, r4
+ 116 0074 FFF7FEFF 		bl	HAL_ADC_Start_DMA
+ 117              	.LVL7:
+  49:./Src/ADC_L.c **** }
+ 118              		.loc 1 49 0
+ 119 0078 04B0     		add	sp, sp, #16
+ 120              	.LCFI2:
+ 121              		.cfi_def_cfa_offset 8
+ 122              		@ sp needed
+ 123 007a 10BD     		pop	{r4, pc}
+ARM GAS  /tmp/cc6qgnRK.s 			page 4
+
+
+ 124              	.L6:
+ 125              		.align	2
+ 126              	.L5:
+ 127 007c 00100240 		.word	1073876992
+ 128 0080 00000000 		.word	hadc3
+ 129 0084 003C0140 		.word	1073822720
+ 130 0088 00000000 		.word	adc_Ldati
+ 131              		.cfi_endproc
+ 132              	.LFE64:
+ 134              		.global	__aeabi_i2d
+ 135              		.global	__aeabi_dmul
+ 136              		.global	__aeabi_d2f
+ 137              		.section	.text.GET_MOTOR_L_AMP,"ax",%progbits
+ 138              		.align	2
+ 139              		.global	GET_MOTOR_L_AMP
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	GET_MOTOR_L_AMP:
+ 144              	.LFB65:
+  50:./Src/ADC_L.c **** 
+  51:./Src/ADC_L.c **** // ------------NORMALIZATE----------------
+  52:./Src/ADC_L.c **** float GET_MOTOR_L_AMP(void){  
+ 145              		.loc 1 52 0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149 0000 10B5     		push	{r4, lr}
+ 150              	.LCFI3:
+ 151              		.cfi_def_cfa_offset 8
+ 152              		.cfi_offset 4, -8
+ 153              		.cfi_offset 14, -4
+  53:./Src/ADC_L.c ****   HAL_NVIC_DisableIRQ(DMA2_Channel4_5_IRQn);  
+ 154              		.loc 1 53 0
+ 155 0002 3B20     		movs	r0, #59
+ 156 0004 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 157              	.LVL8:
+  54:./Src/ADC_L.c ****   uint16_t data = adc_Ldati.data[0];
+ 158              		.loc 1 54 0
+ 159 0008 0D4B     		ldr	r3, .L11+8
+ 160 000a 1C88     		ldrh	r4, [r3]
+ 161 000c A4B2     		uxth	r4, r4
+ 162              	.LVL9:
+  55:./Src/ADC_L.c ****   HAL_NVIC_EnableIRQ(DMA2_Channel4_5_IRQn);
+ 163              		.loc 1 55 0
+ 164 000e 3B20     		movs	r0, #59
+ 165 0010 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 166              	.LVL10:
+  56:./Src/ADC_L.c ****   if(data<ADC_MOTOR_L_CENTER){
+ 167              		.loc 1 56 0
+ 168 0014 40F24973 		movw	r3, #1865
+ 169 0018 9C42     		cmp	r4, r3
+ 170 001a 0BD9     		bls	.L9
+  57:./Src/ADC_L.c ****     return 0.0;
+  58:./Src/ADC_L.c ****   }
+  59:./Src/ADC_L.c ****   return (data - ADC_MOTOR_L_CENTER) * MOTOR_L_AMP_CONV_AMP;
+ 171              		.loc 1 59 0
+ 172 001c A4F24A70 		subw	r0, r4, #1866
+ARM GAS  /tmp/cc6qgnRK.s 			page 5
+
+
+ 173 0020 FFF7FEFF 		bl	__aeabi_i2d
+ 174              	.LVL11:
+ 175 0024 04A3     		adr	r3, .L11
+ 176 0026 D3E90023 		ldrd	r2, [r3]
+ 177 002a FFF7FEFF 		bl	__aeabi_dmul
+ 178              	.LVL12:
+ 179 002e FFF7FEFF 		bl	__aeabi_d2f
+ 180              	.LVL13:
+ 181 0032 10BD     		pop	{r4, pc}
+ 182              	.LVL14:
+ 183              	.L9:
+  57:./Src/ADC_L.c ****     return 0.0;
+ 184              		.loc 1 57 0
+ 185 0034 0020     		movs	r0, #0
+  60:./Src/ADC_L.c **** }
+ 186              		.loc 1 60 0
+ 187 0036 10BD     		pop	{r4, pc}
+ 188              	.LVL15:
+ 189              	.L12:
+ 190              		.align	3
+ 191              	.L11:
+ 192 0038 B4FA5241 		.word	1095957172
+ 193 003c AB2F953F 		.word	1066741675
+ 194 0040 00000000 		.word	adc_Ldati
+ 195              		.cfi_endproc
+ 196              	.LFE65:
+ 198              		.section	.text.ADC_L_ResetFlag,"ax",%progbits
+ 199              		.align	2
+ 200              		.global	ADC_L_ResetFlag
+ 201              		.thumb
+ 202              		.thumb_func
+ 204              	ADC_L_ResetFlag:
+ 205              	.LFB66:
+  61:./Src/ADC_L.c **** 
+  62:./Src/ADC_L.c **** // ------------RAW----------------
+  63:./Src/ADC_L.c **** void ADC_L_ResetFlag(void){
+ 206              		.loc 1 63 0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210 0000 08B5     		push	{r3, lr}
+ 211              	.LCFI4:
+ 212              		.cfi_def_cfa_offset 8
+ 213              		.cfi_offset 3, -8
+ 214              		.cfi_offset 14, -4
+  64:./Src/ADC_L.c ****   HAL_NVIC_DisableIRQ(DMA2_Channel4_5_IRQn);  
+ 215              		.loc 1 64 0
+ 216 0002 3B20     		movs	r0, #59
+ 217 0004 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 218              	.LVL16:
+  65:./Src/ADC_L.c ****   adc_Ldati.convflag = 0;
+ 219              		.loc 1 65 0
+ 220 0008 0022     		movs	r2, #0
+ 221 000a 034B     		ldr	r3, .L15
+ 222 000c 9A71     		strb	r2, [r3, #6]
+  66:./Src/ADC_L.c ****   HAL_NVIC_EnableIRQ(DMA2_Channel4_5_IRQn);  
+ 223              		.loc 1 66 0
+ARM GAS  /tmp/cc6qgnRK.s 			page 6
+
+
+ 224 000e 3B20     		movs	r0, #59
+ 225 0010 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 226              	.LVL17:
+ 227 0014 08BD     		pop	{r3, pc}
+ 228              	.L16:
+ 229 0016 00BF     		.align	2
+ 230              	.L15:
+ 231 0018 00000000 		.word	adc_Ldati
+ 232              		.cfi_endproc
+ 233              	.LFE66:
+ 235              		.section	.text.ADC_MOTOR_LEFT_IS_CONV,"ax",%progbits
+ 236              		.align	2
+ 237              		.global	ADC_MOTOR_LEFT_IS_CONV
+ 238              		.thumb
+ 239              		.thumb_func
+ 241              	ADC_MOTOR_LEFT_IS_CONV:
+ 242              	.LFB67:
+  67:./Src/ADC_L.c **** }
+  68:./Src/ADC_L.c **** uint8_t ADC_MOTOR_LEFT_IS_CONV(void){
+ 243              		.loc 1 68 0
+ 244              		.cfi_startproc
+ 245              		@ args = 0, pretend = 0, frame = 0
+ 246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 247 0000 10B5     		push	{r4, lr}
+ 248              	.LCFI5:
+ 249              		.cfi_def_cfa_offset 8
+ 250              		.cfi_offset 4, -8
+ 251              		.cfi_offset 14, -4
+ 252              	.LVL18:
+  69:./Src/ADC_L.c ****   uint8_t data=0;
+  70:./Src/ADC_L.c ****   HAL_NVIC_DisableIRQ(DMA2_Channel4_5_IRQn);  
+ 253              		.loc 1 70 0
+ 254 0002 3B20     		movs	r0, #59
+ 255 0004 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 256              	.LVL19:
+  71:./Src/ADC_L.c ****   data = adc_Ldati.convflag;
+ 257              		.loc 1 71 0
+ 258 0008 034B     		ldr	r3, .L19
+ 259 000a 9C79     		ldrb	r4, [r3, #6]	@ zero_extendqisi2
+ 260 000c E4B2     		uxtb	r4, r4
+ 261              	.LVL20:
+  72:./Src/ADC_L.c ****   HAL_NVIC_EnableIRQ(DMA2_Channel4_5_IRQn);  
+ 262              		.loc 1 72 0
+ 263 000e 3B20     		movs	r0, #59
+ 264 0010 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 265              	.LVL21:
+  73:./Src/ADC_L.c ****   return data;    
+  74:./Src/ADC_L.c **** }
+ 266              		.loc 1 74 0
+ 267 0014 2046     		mov	r0, r4
+ 268 0016 10BD     		pop	{r4, pc}
+ 269              	.LVL22:
+ 270              	.L20:
+ 271              		.align	2
+ 272              	.L19:
+ 273 0018 00000000 		.word	adc_Ldati
+ 274              		.cfi_endproc
+ARM GAS  /tmp/cc6qgnRK.s 			page 7
+
+
+ 275              	.LFE67:
+ 277              		.section	.text.ADC_MOTOR_LEFT,"ax",%progbits
+ 278              		.align	2
+ 279              		.global	ADC_MOTOR_LEFT
+ 280              		.thumb
+ 281              		.thumb_func
+ 283              	ADC_MOTOR_LEFT:
+ 284              	.LFB68:
+  75:./Src/ADC_L.c **** uint16_t ADC_MOTOR_LEFT(void){
+ 285              		.loc 1 75 0
+ 286              		.cfi_startproc
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289 0000 10B5     		push	{r4, lr}
+ 290              	.LCFI6:
+ 291              		.cfi_def_cfa_offset 8
+ 292              		.cfi_offset 4, -8
+ 293              		.cfi_offset 14, -4
+ 294              	.LVL23:
+  76:./Src/ADC_L.c ****   uint16_t data=0;
+  77:./Src/ADC_L.c ****   HAL_NVIC_DisableIRQ(DMA2_Channel4_5_IRQn);  
+ 295              		.loc 1 77 0
+ 296 0002 3B20     		movs	r0, #59
+ 297 0004 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 298              	.LVL24:
+  78:./Src/ADC_L.c ****   data = adc_Ldati.data[0];
+ 299              		.loc 1 78 0
+ 300 0008 034B     		ldr	r3, .L23
+ 301 000a 1C88     		ldrh	r4, [r3]
+ 302 000c A4B2     		uxth	r4, r4
+ 303              	.LVL25:
+  79:./Src/ADC_L.c ****   HAL_NVIC_EnableIRQ(DMA2_Channel4_5_IRQn);  
+ 304              		.loc 1 79 0
+ 305 000e 3B20     		movs	r0, #59
+ 306 0010 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 307              	.LVL26:
+  80:./Src/ADC_L.c ****   return data;    
+  81:./Src/ADC_L.c **** }
+ 308              		.loc 1 81 0
+ 309 0014 2046     		mov	r0, r4
+ 310 0016 10BD     		pop	{r4, pc}
+ 311              	.LVL27:
+ 312              	.L24:
+ 313              		.align	2
+ 314              	.L23:
+ 315 0018 00000000 		.word	adc_Ldati
+ 316              		.cfi_endproc
+ 317              	.LFE68:
+ 319              		.section	.text.ADC_L_callback,"ax",%progbits
+ 320              		.align	2
+ 321              		.global	ADC_L_callback
+ 322              		.thumb
+ 323              		.thumb_func
+ 325              	ADC_L_callback:
+ 326              	.LFB69:
+  82:./Src/ADC_L.c **** 
+  83:./Src/ADC_L.c **** // ----------------------PRIVATE----------------------
+ARM GAS  /tmp/cc6qgnRK.s 			page 8
+
+
+  84:./Src/ADC_L.c **** void ADC_L_callback(void){
+ 327              		.loc 1 84 0
+ 328              		.cfi_startproc
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331              		@ link register save eliminated.
+  85:./Src/ADC_L.c ****   adc_Ldati.convflag = 1;
+ 332              		.loc 1 85 0
+ 333 0000 0122     		movs	r2, #1
+ 334 0002 014B     		ldr	r3, .L26
+ 335 0004 9A71     		strb	r2, [r3, #6]
+ 336 0006 7047     		bx	lr
+ 337              	.L27:
+ 338              		.align	2
+ 339              	.L26:
+ 340 0008 00000000 		.word	adc_Ldati
+ 341              		.cfi_endproc
+ 342              	.LFE69:
+ 344              		.comm	adc_Ldati,8,4
+ 345              		.comm	hdma_adc3,56,4
+ 346              		.comm	hadc3,48,4
+ 347              		.text
+ 348              	.Letext0:
+ 349              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 350              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 351              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 352              		.file 5 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 353              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 354              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 355              		.file 8 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
+ 356              		.file 9 "./Inc/ADC_L.h"
+ 357              		.file 10 "./Drivers/CMSIS/Include/core_cm3.h"
+ 358              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ARM GAS  /tmp/cc6qgnRK.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADC_L.c
+     /tmp/cc6qgnRK.s:20     .text.ADC_L_init:00000000 $t
+     /tmp/cc6qgnRK.s:25     .text.ADC_L_init:00000000 ADC_L_init
+     /tmp/cc6qgnRK.s:127    .text.ADC_L_init:0000007c $d
+                            *COM*:00000030 hadc3
+                            *COM*:00000008 adc_Ldati
+     /tmp/cc6qgnRK.s:138    .text.GET_MOTOR_L_AMP:00000000 $t
+     /tmp/cc6qgnRK.s:143    .text.GET_MOTOR_L_AMP:00000000 GET_MOTOR_L_AMP
+     /tmp/cc6qgnRK.s:192    .text.GET_MOTOR_L_AMP:00000038 $d
+     /tmp/cc6qgnRK.s:199    .text.ADC_L_ResetFlag:00000000 $t
+     /tmp/cc6qgnRK.s:204    .text.ADC_L_ResetFlag:00000000 ADC_L_ResetFlag
+     /tmp/cc6qgnRK.s:231    .text.ADC_L_ResetFlag:00000018 $d
+     /tmp/cc6qgnRK.s:236    .text.ADC_MOTOR_LEFT_IS_CONV:00000000 $t
+     /tmp/cc6qgnRK.s:241    .text.ADC_MOTOR_LEFT_IS_CONV:00000000 ADC_MOTOR_LEFT_IS_CONV
+     /tmp/cc6qgnRK.s:273    .text.ADC_MOTOR_LEFT_IS_CONV:00000018 $d
+     /tmp/cc6qgnRK.s:278    .text.ADC_MOTOR_LEFT:00000000 $t
+     /tmp/cc6qgnRK.s:283    .text.ADC_MOTOR_LEFT:00000000 ADC_MOTOR_LEFT
+     /tmp/cc6qgnRK.s:315    .text.ADC_MOTOR_LEFT:00000018 $d
+     /tmp/cc6qgnRK.s:320    .text.ADC_L_callback:00000000 $t
+     /tmp/cc6qgnRK.s:325    .text.ADC_L_callback:00000000 ADC_L_callback
+     /tmp/cc6qgnRK.s:340    .text.ADC_L_callback:00000008 $d
+                            *COM*:00000038 hdma_adc3
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_ADC_Init
+Error_Handler
+HAL_ADC_ConfigChannel
+HAL_ADC_Start
+HAL_ADC_Start_DMA
+__aeabi_i2d
+__aeabi_dmul
+__aeabi_d2f
+HAL_NVIC_DisableIRQ
