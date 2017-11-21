@@ -51,6 +51,7 @@ VARIE
 #include "pid.h"
 #include "application.h"
 #include "telemetry.h"
+#include "hd44780.h"
 #include <math.h>
 
 // copied from STMBL
@@ -95,6 +96,8 @@ volatile __IO uint8_t bufferTX[100],ai2cBuffer[10];
 int32_t speed;
 */
 volatile __IO uint32_t counterTemp,counterTempTT;
+LCD_PCF8574_HandleTypeDef lcd;
+extern I2C_HandleTypeDef hi2c2;
 
 int main(void)
 {
@@ -110,6 +113,7 @@ int main(void)
 
 
   Telemetry_init();
+  MX_I2C2_Init();
 
   Buzzer_init();
   Led_init();
@@ -139,6 +143,25 @@ int main(void)
   Led_Set(1);
   Buzzer_TwoBeep();
   HAL_Delay(350);
+
+
+
+  lcd.pcf8574.PCF_I2C_ADDRESS = 7;
+	lcd.pcf8574.PCF_I2C_TIMEOUT = 1000;
+	lcd.pcf8574.i2c = hi2c2;
+	lcd.NUMBER_OF_LINES = NUMBER_OF_LINES_2;
+	lcd.type = TYPE0;
+
+	if(LCD_Init(&lcd)!=LCD_OK){
+		// error occured
+		while(1);
+	}
+
+	LCD_ClearDisplay(&lcd);
+	LCD_SetLocation(&lcd, 0, 0);
+	LCD_WriteString(&lcd, "pi:");
+	LCD_SetLocation(&lcd, 0, 1);
+	LCD_WriteString(&lcd, "e:");
 
   MotorR_start();
   MotorL_start();

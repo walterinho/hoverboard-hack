@@ -38,7 +38,7 @@ Application \
 Application/MAKEFILE
 
 # firmware library path
-PERIFLIB_PATH = 
+PERIFLIB_PATH =
 
 # Build path
 BUILD_DIR = build
@@ -79,7 +79,9 @@ C_SOURCES =  \
 ./Src/delay.c \
 ./Src/application.c \
 ./Src/main.c \
-./Src/stm32f1xx_hal_msp.c  
+./Src/stm32f1xx_hal_msp.c \
+./Src/hd44780.c \
+./Src/pcf8574.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -89,7 +91,7 @@ startup_stm32f103xe.s
 ######################################
 # firmware library
 ######################################
-PERIFLIB_SOURCES = 
+PERIFLIB_SOURCES =
 
 
 #######################################
@@ -104,7 +106,7 @@ AR = $(BINPATH)/$(PREFIX)ar
 SZ = $(BINPATH)/$(PREFIX)size
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
- 
+
 #######################################
 # CFLAGS
 #######################################
@@ -122,7 +124,7 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 
 # macros for gcc
 # AS defines
-AS_DEFS = 
+AS_DEFS =
 
 # C defines
 C_DEFS =  \
@@ -131,7 +133,7 @@ C_DEFS =  \
 
 
 # AS includes
-AS_INCLUDES = 
+AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
@@ -181,7 +183,7 @@ vpath %.c $(sort $(dir $(C_SOURCES)))
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
-$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
+$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
@@ -193,19 +195,19 @@ $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
 
 $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(HEX) $< $@
-	
+
 $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(BIN) $< $@	
-	
+	$(BIN) $< $@
+
 $(BUILD_DIR):
-	mkdir $@		
+	mkdir $@
 
 #######################################
 # clean up
 #######################################
 clean:
 	-rm -fR .dep $(BUILD_DIR)
-  
+
 #######################################
 # dependencies
 #######################################
