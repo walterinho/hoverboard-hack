@@ -40,4 +40,4 @@ This firmware also features some bare minimum protection functions like undervol
 
 ##### GameTrak
 
-This firmware allows you to connect the sensor unit of a GameTrak PS2 controller to the ADC channels PA2 & 3. Use the potentiometers for x and z as voltage dividers (3V3 VREF) and connect them to PA2 & PA3. Also a great template for your own projects that require USART & ADC readout of some type of analog sensor (like a joystick). Same protection features as PPM.
+This firmware allows you to connect the sensor unit of a GameTrak PS2 controller to the ADC channels PA2 & 3. Use the potentiometers for x and z as voltage dividers (3V3 VREF) and connect them to PA2 & PA3. Also a great template for your own projects that require USART & ADC readout of some type of analog sensor (like a joystick). Same protection features as PPM. I2C LCD support to show data like battery gauge is WIP.
