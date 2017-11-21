@@ -1,7 +1,9 @@
 ## Hoverboard-Board-Hack
 
 This repo contains open source firmware for generic Hoverboard Mainboards.
-the firmware you can find here allows you to use your Hoverboard Hardware (like the Mainboard, Motors and Battery) for cool projects like driving armchairs, person-tracking transportation robots and ervry other application you can imagine that requires controlling the Motors.
+the firmware you can find here allows you to use your Hoverboard Hardware (like the Mainboard, Motors and Battery) for cool projects like driving armchairs, person-tracking transportation robots and every other application you can imagine that requires controlling the Motors.
+
+---
 
 #### Hardware
 ![otter](https://raw.githubusercontent.com/NiklasFauth/Hoverboard-Board-Hack/master/schema.jpg)
@@ -9,10 +11,14 @@ the firmware you can find here allows you to use your Hoverboard Hardware (like 
 The original Hardware supports two 4-pin cables that originally were connected to the two sensor boards. They break out GND, 12/15V and USART2&3 of the Hoverboard mainboard.
 Both USART2 & 3 can be used for UART and I2C, PA2&3 can be used as 12bit ADCs.
 
+---
+
 #### Flashing
-To build the firmware, just type "make". Make sure you have specified your gcc-arm-none-eabi binary location in the Makefile. Right to the STM32, there is a debugging header with GND, 3V3, SWD and SCL. Connect these to your SWD programmer, like the ST-Link found on many STM devboards.
+To build the firmware, just type "make". Make sure you have specified your gcc-arm-none-eabi binary location in the Makefile. Right to the STM32, there is a debugging header with GND, 3V3, SWDIO and SWCLK. Connect these to your SWD programmer, like the ST-Link found on many STM devboards.
 
 Make sure you hold the powerbutton or connect a jumper to the power button pins while flashing the firmware, as the STM might release the power latch and switches itself off during flashing.
+
+---
 
 #### Examples
 
@@ -34,4 +40,4 @@ This firmware also features some bare minimum protection functions like undervol
 
 ##### GameTrak
 
-This firmware allows you to connect the sensor unit of a GameTrak PS2 controller to the ADC channels PA2 & 3. Use the potentiometers for x and z as voltage dividers (3V3 VREF) and connect them to PA2 & PA3. Also a great template for your own projects that require almost all peripherals like USART & ADC readout of some type of analog sensor (like a joystick). Some protection features as PPM.
+This firmware allows you to connect the sensor unit of a GameTrak PS2 controller to the ADC channels PA2 & 3. Use the potentiometers for x and z as voltage dividers (3V3 VREF) and connect them to PA2 & PA3. Also a great template for your own projects that require USART & ADC readout of some type of analog sensor (like a joystick). Same protection features as PPM.
