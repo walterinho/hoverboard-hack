@@ -34,9 +34,13 @@ Simply connect a USB-USART adapter to GND; PA2 and PA3 and give it a try.
 
 PPM allows you to connect a radio control with PPM sum signal output and use it to directly control and steer the motors. Channel 0 is used for motor current scaling, Ch 1&2 for speed / direction. You can change that as you want in the main.c fiile.
 
-Connect your RC receiver to GND and 12V (if is supports 12V input voltage, else use a separate voltage regulator) and the PPM sum signal to PA3. The firmware also streams out the received channel values on USART3 / 115200 baud for debugging reasons.
+Connect your RC receiver to GND and 12V (if is supports 12V input voltage, else use a separate voltage regulator or use the hall sensors rail) and the PPM sum signal to PA3. The firmware also streams out the received channel values on USART3 / 115200 baud for debugging reasons.
+
+A 510 Ohm resistor and a 10pF ceramic cap in parallel with the PPM input (directly soldered between PA3 and GND on the pcb) improves noise rejection significantly.
 
 This firmware also features some bare minimum protection functions like undervoltage protection (32V) and overcurrent limit (40A / motor).
+
+
 
 ##### GameTrak
 
