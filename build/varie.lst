@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 1
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 1
+>>>>>>> GameTrak
 
 
    1              		.syntax unified
@@ -58,7 +62,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
   34              		.cfi_def_cfa_offset 8
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 2
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 2
+>>>>>>> GameTrak
 
 
   37 0002 86B0     		sub	sp, sp, #24
@@ -118,7 +126,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
   81 003c 00100240 		.word	1073876992
   82 0040 000C0140 		.word	1073810432
   83              		.cfi_endproc
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 3
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 3
+>>>>>>> GameTrak
 
 
   84              	.LFE65:
@@ -178,7 +190,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  130              		.loc 1 42 0
  131 002e 07B0     		add	sp, sp, #28
  132              	.LCFI5:
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 4
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 4
+>>>>>>> GameTrak
 
 
  133              		.cfi_def_cfa_offset 4
@@ -238,7 +254,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  186              		.cfi_startproc
  187              		@ args = 0, pretend = 0, frame = 0
  188              		@ frame_needed = 0, uses_anonymous_args = 0
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 5
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 5
+>>>>>>> GameTrak
 
 
  189              	.LVL6:
@@ -298,7 +318,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  241              	.LFE69:
  243              		.section	.text.Buzzer_init,"ax",%progbits
  244              		.align	2
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 6
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 6
+>>>>>>> GameTrak
 
 
  245              		.global	Buzzer_init
@@ -358,7 +382,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  293 0032 2846     		mov	r0, r5
  294 0034 FFF7FEFF 		bl	HAL_GPIO_Init
  295              	.LVL13:
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 7
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 7
+>>>>>>> GameTrak
 
 
   17:./Src/varie.c ****   Buzzer_Set(1);
@@ -418,7 +446,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  345              	.L27:
   55:./Src/varie.c ****     Buzzer_Set(1);
  346              		.loc 1 55 0 discriminator 3
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 8
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 8
+>>>>>>> GameTrak
 
 
  347 0006 0120     		movs	r0, #1
@@ -478,7 +510,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
   62:./Src/varie.c **** }
   63:./Src/varie.c **** void Buzzer_TwoBeep(void){
  395              		.loc 1 63 0
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 9
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 9
+>>>>>>> GameTrak
 
 
  396              		.cfi_startproc
@@ -538,7 +574,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  442              	.L34:
  443              	.LVL36:
  444              	.LBB8:
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 10
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 10
+>>>>>>> GameTrak
 
 
   65:./Src/varie.c ****       Buzzer_Set(1);
@@ -598,7 +638,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  491              	.LCFI14:
  492              		.cfi_def_cfa_offset 8
  493              		.cfi_offset 4, -8
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 11
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 11
+>>>>>>> GameTrak
 
 
  494              		.cfi_offset 14, -4
@@ -658,7 +702,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  538              	.L43:
  539 0034 00000000 		.word	hiwdg
  540              		.cfi_endproc
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 12
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 12
+>>>>>>> GameTrak
 
 
  541              	.LFE72:
@@ -718,7 +766,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  588 0024 0134     		adds	r4, r4, #1
  589              	.LVL59:
  590              	.L46:
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 13
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 13
+>>>>>>> GameTrak
 
 
   88:./Src/varie.c ****     Buzzer_Set(1);
@@ -778,7 +830,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  640              		.align	2
  641              		.global	IS_Button
  642              		.thumb
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 14
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 14
+>>>>>>> GameTrak
 
 
  643              		.thumb_func
@@ -838,7 +894,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  692 0004 144B     		ldr	r3, .L61
  693 0006 9A69     		ldr	r2, [r3, #24]
  694 0008 42F01002 		orr	r2, r2, #16
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 15
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 15
+>>>>>>> GameTrak
 
 
  695 000c 9A61     		str	r2, [r3, #24]
@@ -898,7 +958,11 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  119:./Src/varie.c **** 
  120:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_4 << 16;
  121:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_5 << 16;
+<<<<<<< HEAD
 ARM GAS  /tmp/ccsR2N0b.s 			page 16
+=======
+ARM GAS  /tmp/ccLUSv5Y.s 			page 16
+>>>>>>> GameTrak
 
 
  122:./Src/varie.c **** 
@@ -937,6 +1001,7 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  770              	.LCFI22:
  771              		.cfi_def_cfa_offset 24
  126:./Src/varie.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+<<<<<<< HEAD
  127:./Src/varie.c ****   /*Configure GPIO pin : PA3 */
  128:./Src/varie.c ****   GPIO_InitStruct.Pin = GPIO_PIN_3;
  772              		.loc 1 128 0
@@ -959,11 +1024,33 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  785 0014 6946     		mov	r1, sp
  786 0016 0848     		ldr	r0, .L65+4
 ARM GAS  /tmp/ccsR2N0b.s 			page 17
+=======
+ 127:./Src/varie.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+ 775              		.loc 1 127 0
+ 776 0004 0F4B     		ldr	r3, .L65
+ 777 0006 9A69     		ldr	r2, [r3, #24]
+ 778 0008 42F00402 		orr	r2, r2, #4
+ 779 000c 9A61     		str	r2, [r3, #24]
+ 780 000e 9B69     		ldr	r3, [r3, #24]
+ 781 0010 03F00403 		and	r3, r3, #4
+ 782 0014 0193     		str	r3, [sp, #4]
+ 783 0016 019B     		ldr	r3, [sp, #4]
+ 784              	.LBE12:
+ 128:./Src/varie.c ****   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+ 785              		.loc 1 128 0
+ 786 0018 0224     		movs	r4, #2
+ 787 001a 0494     		str	r4, [sp, #16]
+ 129:./Src/varie.c ****   GPIO_InitStruct.Pin = Power_Pin;
+ 788              		.loc 1 129 0
+ 789 001c 2023     		movs	r3, #32
+ARM GAS  /tmp/ccLUSv5Y.s 			page 17
+>>>>>>> GameTrak
 
 
  787 0018 FFF7FEFF 		bl	HAL_GPIO_Init
  788              	.LVL68:
  133:./Src/varie.c **** 
+<<<<<<< HEAD
  134:./Src/varie.c ****   /* EXTI interrupt init*/
  135:./Src/varie.c ****   HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
  789              		.loc 1 135 0
@@ -1210,10 +1297,167 @@ ARM GAS  /tmp/ccsR2N0b.s 			page 1
  998              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  999              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
 ARM GAS  /tmp/ccsR2N0b.s 			page 22
+=======
+ 134:./Src/varie.c ****   GPIO_InitStruct.Pin = Button_Pin;
+ 802              		.loc 1 134 0
+ 803 0030 0294     		str	r4, [sp, #8]
+ 135:./Src/varie.c ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+ 804              		.loc 1 135 0
+ 805 0032 0023     		movs	r3, #0
+ 806 0034 0393     		str	r3, [sp, #12]
+ 136:./Src/varie.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 807              		.loc 1 136 0
+ 808 0036 0493     		str	r3, [sp, #16]
+ 137:./Src/varie.c ****   HAL_GPIO_Init(Button_GPIO_Port, &GPIO_InitStruct);
+ 809              		.loc 1 137 0
+ 810 0038 02A9     		add	r1, sp, #8
+ 811 003a 2846     		mov	r0, r5
+ 812 003c FFF7FEFF 		bl	HAL_GPIO_Init
+ 813              	.LVL69:
+ 138:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_4 << 16;
+ 139:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_5 << 16;
+ 140:./Src/varie.c **** 
+ 141:./Src/varie.c **** }
+ 814              		.loc 1 141 0
+ 815 0040 07B0     		add	sp, sp, #28
+ 816              	.LCFI23:
+ 817              		.cfi_def_cfa_offset 12
+ 818              		@ sp needed
+ 819 0042 30BD     		pop	{r4, r5, pc}
+ 820              	.L66:
+ 821              		.align	2
+ 822              	.L65:
+ 823 0044 00100240 		.word	1073876992
+ 824 0048 00080140 		.word	1073809408
+ 825              		.cfi_endproc
+ 826              	.LFE77:
+ 828              		.section	.text.DebugPin4_ON,"ax",%progbits
+ 829              		.align	2
+ 830              		.global	DebugPin4_ON
+ 831              		.thumb
+ 832              		.thumb_func
+ 834              	DebugPin4_ON:
+ 835              	.LFB78:
+ 142:./Src/varie.c **** void DebugPin4_ON(void){
+ARM GAS  /tmp/ccLUSv5Y.s 			page 18
+
+
+ 836              		.loc 1 142 0
+ 837              		.cfi_startproc
+ 838              		@ args = 0, pretend = 0, frame = 0
+ 839              		@ frame_needed = 0, uses_anonymous_args = 0
+ 840              		@ link register save eliminated.
+ 143:./Src/varie.c ****   GPIOC->BSRR = GPIO_PIN_4;
+ 841              		.loc 1 143 0
+ 842 0000 1022     		movs	r2, #16
+ 843 0002 014B     		ldr	r3, .L68
+ 844 0004 1A61     		str	r2, [r3, #16]
+ 845 0006 7047     		bx	lr
+ 846              	.L69:
+ 847              		.align	2
+ 848              	.L68:
+ 849 0008 00100140 		.word	1073811456
+ 850              		.cfi_endproc
+ 851              	.LFE78:
+ 853              		.section	.text.DebugPin4_OFF,"ax",%progbits
+ 854              		.align	2
+ 855              		.global	DebugPin4_OFF
+ 856              		.thumb
+ 857              		.thumb_func
+ 859              	DebugPin4_OFF:
+ 860              	.LFB79:
+ 144:./Src/varie.c **** }
+ 145:./Src/varie.c **** void DebugPin4_OFF(void){
+ 861              		.loc 1 145 0
+ 862              		.cfi_startproc
+ 863              		@ args = 0, pretend = 0, frame = 0
+ 864              		@ frame_needed = 0, uses_anonymous_args = 0
+ 865              		@ link register save eliminated.
+ 146:./Src/varie.c ****   GPIOC->BSRR = 0x00100000;
+ 866              		.loc 1 146 0
+ 867 0000 4FF48012 		mov	r2, #1048576
+ 868 0004 014B     		ldr	r3, .L71
+ 869 0006 1A61     		str	r2, [r3, #16]
+ 870 0008 7047     		bx	lr
+ 871              	.L72:
+ 872 000a 00BF     		.align	2
+ 873              	.L71:
+ 874 000c 00100140 		.word	1073811456
+ 875              		.cfi_endproc
+ 876              	.LFE79:
+ 878              		.section	.text.DebugPin5_ON,"ax",%progbits
+ 879              		.align	2
+ 880              		.global	DebugPin5_ON
+ 881              		.thumb
+ 882              		.thumb_func
+ 884              	DebugPin5_ON:
+ 885              	.LFB80:
+ 147:./Src/varie.c **** }
+ 148:./Src/varie.c **** void DebugPin5_ON(void){
+ 886              		.loc 1 148 0
+ 887              		.cfi_startproc
+ 888              		@ args = 0, pretend = 0, frame = 0
+ 889              		@ frame_needed = 0, uses_anonymous_args = 0
+ 890              		@ link register save eliminated.
+ARM GAS  /tmp/ccLUSv5Y.s 			page 19
+
+
+ 149:./Src/varie.c ****   GPIOC->BSRR = GPIO_PIN_5;
+ 891              		.loc 1 149 0
+ 892 0000 2022     		movs	r2, #32
+ 893 0002 014B     		ldr	r3, .L74
+ 894 0004 1A61     		str	r2, [r3, #16]
+ 895 0006 7047     		bx	lr
+ 896              	.L75:
+ 897              		.align	2
+ 898              	.L74:
+ 899 0008 00100140 		.word	1073811456
+ 900              		.cfi_endproc
+ 901              	.LFE80:
+ 903              		.section	.text.DebugPin5_OFF,"ax",%progbits
+ 904              		.align	2
+ 905              		.global	DebugPin5_OFF
+ 906              		.thumb
+ 907              		.thumb_func
+ 909              	DebugPin5_OFF:
+ 910              	.LFB81:
+ 150:./Src/varie.c **** }
+ 151:./Src/varie.c **** void DebugPin5_OFF(void){
+ 911              		.loc 1 151 0
+ 912              		.cfi_startproc
+ 913              		@ args = 0, pretend = 0, frame = 0
+ 914              		@ frame_needed = 0, uses_anonymous_args = 0
+ 915              		@ link register save eliminated.
+ 152:./Src/varie.c ****   GPIOC->BSRR = 0x00200000;
+ 916              		.loc 1 152 0
+ 917 0000 4FF40012 		mov	r2, #2097152
+ 918 0004 014B     		ldr	r3, .L77
+ 919 0006 1A61     		str	r2, [r3, #16]
+ 920 0008 7047     		bx	lr
+ 921              	.L78:
+ 922 000a 00BF     		.align	2
+ 923              	.L77:
+ 924 000c 00100140 		.word	1073811456
+ 925              		.cfi_endproc
+ 926              	.LFE81:
+ 928              		.text
+ 929              	.Letext0:
+ 930              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 931              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 932              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 933              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 934              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 935              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h"
+ 936              		.file 8 "./Drivers/CMSIS/Include/core_cm3.h"
+ 937              		.file 9 "./Inc/delay.h"
+ 938              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  /tmp/ccLUSv5Y.s 			page 20
+>>>>>>> GameTrak
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 varie.c
+<<<<<<< HEAD
      /tmp/ccsR2N0b.s:20     .text.Led_init:00000000 $t
      /tmp/ccsR2N0b.s:25     .text.Led_init:00000000 Led_init
      /tmp/ccsR2N0b.s:81     .text.Led_init:0000003c $d
@@ -1270,6 +1514,64 @@ DEFINED SYMBOLS
      /tmp/ccsR2N0b.s:959    .text.DebugPin5_ON:00000008 $d
      /tmp/ccsR2N0b.s:964    .text.DebugPin5_OFF:00000000 $t
 ARM GAS  /tmp/ccsR2N0b.s 			page 23
+=======
+     /tmp/ccLUSv5Y.s:20     .text.Led_init:00000000 $t
+     /tmp/ccLUSv5Y.s:25     .text.Led_init:00000000 Led_init
+     /tmp/ccLUSv5Y.s:81     .text.Led_init:0000003c $d
+     /tmp/ccLUSv5Y.s:87     .text.IS_Charge_init:00000000 $t
+     /tmp/ccLUSv5Y.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
+     /tmp/ccLUSv5Y.s:139    .text.IS_Charge_init:00000034 $d
+     /tmp/ccLUSv5Y.s:145    .text.Led_Set:00000000 $t
+     /tmp/ccLUSv5Y.s:150    .text.Led_Set:00000000 Led_Set
+     /tmp/ccLUSv5Y.s:173    .text.Led_Set:00000010 $d
+     /tmp/ccLUSv5Y.s:178    .text.Power_Set:00000000 $t
+     /tmp/ccLUSv5Y.s:183    .text.Power_Set:00000000 Power_Set
+     /tmp/ccLUSv5Y.s:206    .text.Power_Set:00000010 $d
+     /tmp/ccLUSv5Y.s:211    .text.Buzzer_Set:00000000 $t
+     /tmp/ccLUSv5Y.s:216    .text.Buzzer_Set:00000000 Buzzer_Set
+     /tmp/ccLUSv5Y.s:239    .text.Buzzer_Set:00000010 $d
+     /tmp/ccLUSv5Y.s:244    .text.Buzzer_init:00000000 $t
+     /tmp/ccLUSv5Y.s:249    .text.Buzzer_init:00000000 Buzzer_init
+     /tmp/ccLUSv5Y.s:317    .text.Buzzer_init:00000050 $d
+     /tmp/ccLUSv5Y.s:323    .text.Buzzer_OneBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:328    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
+     /tmp/ccLUSv5Y.s:383    .text.Buzzer_OneBeep:00000034 $d
+     /tmp/ccLUSv5Y.s:388    .text.Buzzer_TwoBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:393    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
+     /tmp/ccLUSv5Y.s:474    .text.Buzzer_TwoBeep:00000048 $d
+     /tmp/ccLUSv5Y.s:479    .text.Buzzer_OneShortBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:484    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
+     /tmp/ccLUSv5Y.s:539    .text.Buzzer_OneShortBeep:00000034 $d
+     /tmp/ccLUSv5Y.s:544    .text.Buzzer_OneLongBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:549    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
+     /tmp/ccLUSv5Y.s:604    .text.Buzzer_OneLongBeep:00000034 $d
+     /tmp/ccLUSv5Y.s:609    .text.IS_Charge:00000000 $t
+     /tmp/ccLUSv5Y.s:614    .text.IS_Charge:00000000 IS_Charge
+     /tmp/ccLUSv5Y.s:635    .text.IS_Charge:00000010 $d
+     /tmp/ccLUSv5Y.s:640    .text.IS_Button:00000000 $t
+     /tmp/ccLUSv5Y.s:645    .text.IS_Button:00000000 IS_Button
+     /tmp/ccLUSv5Y.s:666    .text.IS_Button:0000000c $d
+     /tmp/ccLUSv5Y.s:671    .text.DebugPin_init:00000000 $t
+     /tmp/ccLUSv5Y.s:676    .text.DebugPin_init:00000000 DebugPin_init
+     /tmp/ccLUSv5Y.s:748    .text.DebugPin_init:00000058 $d
+     /tmp/ccLUSv5Y.s:754    .text.Button_init:00000000 $t
+     /tmp/ccLUSv5Y.s:759    .text.Button_init:00000000 Button_init
+     /tmp/ccLUSv5Y.s:823    .text.Button_init:00000044 $d
+     /tmp/ccLUSv5Y.s:829    .text.DebugPin4_ON:00000000 $t
+     /tmp/ccLUSv5Y.s:834    .text.DebugPin4_ON:00000000 DebugPin4_ON
+     /tmp/ccLUSv5Y.s:849    .text.DebugPin4_ON:00000008 $d
+     /tmp/ccLUSv5Y.s:854    .text.DebugPin4_OFF:00000000 $t
+     /tmp/ccLUSv5Y.s:859    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
+     /tmp/ccLUSv5Y.s:874    .text.DebugPin4_OFF:0000000c $d
+     /tmp/ccLUSv5Y.s:879    .text.DebugPin5_ON:00000000 $t
+     /tmp/ccLUSv5Y.s:884    .text.DebugPin5_ON:00000000 DebugPin5_ON
+     /tmp/ccLUSv5Y.s:899    .text.DebugPin5_ON:00000008 $d
+     /tmp/ccLUSv5Y.s:904    .text.DebugPin5_OFF:00000000 $t
+     /tmp/ccLUSv5Y.s:909    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
+     /tmp/ccLUSv5Y.s:924    .text.DebugPin5_OFF:0000000c $d
+                     .debug_frame:00000010 $d
+ARM GAS  /tmp/ccLUSv5Y.s 			page 21
+>>>>>>> GameTrak
 
 
      /tmp/ccsR2N0b.s:969    .text.DebugPin5_OFF:00000000 DebugPin5_OFF

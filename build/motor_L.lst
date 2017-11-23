@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 1
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 1
+>>>>>>> GameTrak
 
 
    1              		.syntax unified
@@ -58,7 +62,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
   29:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
   30:./Src/motor_L.c ****   motorL.stop = 0;
   31:./Src/motor_L.c ****   mL_BLDCMotor();
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 2
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 2
+>>>>>>> GameTrak
 
 
   32:./Src/motor_L.c **** }
@@ -118,7 +126,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
   86:./Src/motor_L.c ****   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   87:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_5);
   88:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_6);
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 3
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 3
+>>>>>>> GameTrak
 
 
   89:./Src/motor_L.c ****   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_7);
@@ -178,7 +190,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  143:./Src/motor_L.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
  144:./Src/motor_L.c ****   {
  145:./Src/motor_L.c ****     Error_Handler();
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 4
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 4
+>>>>>>> GameTrak
 
 
  146:./Src/motor_L.c ****   }
@@ -238,7 +254,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  200:./Src/motor_L.c **** 
  201:./Src/motor_L.c ****     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);         //CH2
  202:./Src/motor_L.c ****     HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_2);      //CH2N
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 5
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 5
+>>>>>>> GameTrak
 
 
  203:./Src/motor_L.c ****     mL_B__OFF();
@@ -298,7 +318,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  257:./Src/motor_L.c ****   // Common configuration for all channels
  258:./Src/motor_L.c ****   sConfigOC.OCMode      = TIM_OCMODE_PWM1; // TIM_OCMODE_PWM2;
  259:./Src/motor_L.c ****   sConfigOC.OCFastMode  = TIM_OCFAST_DISABLE; // TIM_OCFAST_DISABLE;
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 6
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 6
+>>>>>>> GameTrak
 
 
  260:./Src/motor_L.c ****   sConfigOC.OCPolarity  = TIM_OCPOLARITY_HIGH; //TIM_OCPOLARITY_LOW;//TIM_OCPOLARITY_HIGH; //TIM_OC
@@ -358,7 +382,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
   43 0006 9A69     		ldr	r2, [r3, #24]
   44 0008 42F00802 		orr	r2, r2, #8
   45 000c 9A61     		str	r2, [r3, #24]
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 7
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 7
+>>>>>>> GameTrak
 
 
   46 000e 9B69     		ldr	r3, [r3, #24]
@@ -418,7 +446,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
   88 0048 00003110 		.word	271646720
   89 004c 000C0140 		.word	1073810432
   90              		.cfi_endproc
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 8
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 8
+>>>>>>> GameTrak
 
 
   91              	.LFE69:
@@ -478,7 +510,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  143              		.section	.text.mL_Low_CH2_ON,"ax",%progbits
  144              		.align	2
  145              		.global	mL_Low_CH2_ON
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 9
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 9
+>>>>>>> GameTrak
 
 
  146              		.thumb
@@ -538,7 +574,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  197              		.thumb_func
  199              	mL_Low_CH3_ON:
  200              	.LFB74:
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 10
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 10
+>>>>>>> GameTrak
 
 
  325:./Src/motor_L.c **** }
@@ -598,7 +638,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  333:./Src/motor_L.c **** 
  334:./Src/motor_L.c **** void mL_AHigh__ON(void){
  251              		.loc 1 334 0
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 11
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 11
+>>>>>>> GameTrak
 
 
  252              		.cfi_startproc
@@ -658,7 +702,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  306              	.LFB78:
  339:./Src/motor_L.c **** }
  340:./Src/motor_L.c **** void mL_BHigh__ON(void){
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 12
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 12
+>>>>>>> GameTrak
 
 
  307              		.loc 1 340 0
@@ -718,7 +766,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  361              	mL_CHigh__ON:
  362              	.LFB80:
  345:./Src/motor_L.c **** }
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 13
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 13
+>>>>>>> GameTrak
 
 
  346:./Src/motor_L.c **** void mL_CHigh__ON(void){
@@ -778,7 +830,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  415              		.thumb_func
  417              	mL_PWM_Set_Ch1:
  418              	.LFB82:
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 14
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 14
+>>>>>>> GameTrak
 
 
  351:./Src/motor_L.c **** }
@@ -838,7 +894,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  464 0002 1B68     		ldr	r3, [r3]
  465 0004 03FB00F0 		mul	r0, r3, r0
  466              	.LVL7:
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 15
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 15
+>>>>>>> GameTrak
 
 
  467 0008 044B     		ldr	r3, .L45+4
@@ -898,7 +958,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  517 001c D34D6210 		.word	274877907
  518 0020 00000000 		.word	htim8
  519              		.cfi_endproc
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 16
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 16
+>>>>>>> GameTrak
 
 
  520              	.LFE84:
@@ -958,7 +1022,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
   75:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
  571              		.loc 1 75 0
  572              		.cfi_startproc
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 17
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 17
+>>>>>>> GameTrak
 
 
  573              		@ args = 0, pretend = 0, frame = 0
@@ -1018,7 +1086,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  616              		.loc 1 87 0
  617 0036 064B     		ldr	r3, .L55+4
  618 0038 2022     		movs	r2, #32
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 18
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 18
+>>>>>>> GameTrak
 
 
  619 003a 5A61     		str	r2, [r3, #20]
@@ -1078,7 +1150,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  669 000a 42F40052 		orr	r2, r2, #8192
  670 000e 9A61     		str	r2, [r3, #24]
  671 0010 9A69     		ldr	r2, [r3, #24]
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 19
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 19
+>>>>>>> GameTrak
 
 
  672 0012 02F40052 		and	r2, r2, #8192
@@ -1138,7 +1214,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  721 006c 9B69     		ldr	r3, [r3, #24]
  722 006e 03F01003 		and	r3, r3, #16
  723 0072 0593     		str	r3, [sp, #20]
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 20
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 20
+>>>>>>> GameTrak
 
 
  724 0074 059B     		ldr	r3, [sp, #20]
@@ -1198,7 +1278,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  766 00b6 FFF7FEFF 		bl	HAL_GPIO_Init
  767              	.LVL29:
  230:./Src/motor_L.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 21
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 21
+>>>>>>> GameTrak
 
 
  768              		.loc 1 230 0
@@ -1258,7 +1342,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  249:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_ENABLE; //TIM_OSSI_DISABLE;
  808              		.loc 1 249 0
  809 00f0 0894     		str	r4, [sp, #32]
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 22
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 22
+>>>>>>> GameTrak
 
 
  250:./Src/motor_L.c ****   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_ENABLE; //TIM_OSSR_DISABLE;
@@ -1318,7 +1406,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  850 012e 0DA9     		add	r1, sp, #52
  851 0130 2846     		mov	r0, r5
  852 0132 FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 23
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 23
+>>>>>>> GameTrak
 
 
  853              	.LVL34:
@@ -1378,7 +1470,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  896 0174 FFF7FEFF 		bl	mL_AHigh__OFF
  897              	.LVL44:
  285:./Src/motor_L.c ****   mL_CHigh__OFF();
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 24
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 24
+>>>>>>> GameTrak
 
 
  898              		.loc 1 285 0
@@ -1438,7 +1534,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  948              		@ frame_needed = 0, uses_anonymous_args = 0
  949 0000 08B5     		push	{r3, lr}
  950              	.LCFI7:
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 25
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 25
+>>>>>>> GameTrak
 
 
  951              		.cfi_def_cfa_offset 8
@@ -1498,7 +1598,11 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  994              	.LCFI8:
  995              		.cfi_def_cfa_offset 8
  996              		.cfi_offset 4, -8
+<<<<<<< HEAD
 ARM GAS  /tmp/cckcgNsq.s 			page 26
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 26
+>>>>>>> GameTrak
 
 
  997              		.cfi_offset 14, -4
@@ -1550,6 +1654,7 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1029 0036 42D0     		beq	.L67
  395:./Src/motor_L.c ****     switch (motorL.newhallpos){
  1030              		.loc 1 395 0
+<<<<<<< HEAD
  1031 0038 A389     		ldrh	r3, [r4, #12]
  1032 003a 9BB2     		uxth	r3, r3
  1033 003c 602B     		cmp	r3, #96
@@ -1563,6 +1668,21 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
 
  1039 0048 0FD0     		beq	.L72
  1040 004a 36E0     		b	.L68
+=======
+ 1031 0036 A389     		ldrh	r3, [r4, #12]
+ 1032 0038 9BB2     		uxth	r3, r3
+ 1033 003a 602B     		cmp	r3, #96
+ 1034 003c 16D0     		beq	.L69
+ 1035 003e 04D8     		bhi	.L70
+ 1036 0040 202B     		cmp	r3, #32
+ 1037 0042 09D0     		beq	.L71
+ 1038 0044 402B     		cmp	r3, #64
+ARM GAS  /tmp/cc3FW3nI.s 			page 27
+
+
+ 1039 0046 0CD0     		beq	.L72
+ 1040 0048 24E0     		b	.L68
+>>>>>>> GameTrak
  1041              	.L70:
  1042 004c A02B     		cmp	r3, #160
  1043 004e 24D0     		beq	.L73
@@ -1575,6 +1695,7 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  396:./Src/motor_L.c ****       case (0x0020):               //1
  397:./Src/motor_L.c ****         motorL.hallpos = 0;
  1050              		.loc 1 397 0
+<<<<<<< HEAD
  1051 005a 0022     		movs	r2, #0
  1052 005c 544B     		ldr	r3, .L90+4
  1053 005e DA73     		strb	r2, [r3, #15]
@@ -1639,6 +1760,65 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1093              		.loc 1 413 0
  1094 0090 FFF7FEFF 		bl	mL_Low_CH1_ON
  1095              	.LVL64:
+=======
+ 1051 0058 FFF7FEFF 		bl	mL_AHigh__ON
+ 1052              	.LVL58:
+ 398:./Src/motor_L.c ****         mL_Low_CH2_ON();
+ 1053              		.loc 1 398 0
+ 1054 005c FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1055              	.LVL59:
+ 399:./Src/motor_L.c ****       break;
+ 1056              		.loc 1 399 0
+ 1057 0060 10BD     		pop	{r4, pc}
+ 1058              	.L72:
+ 400:./Src/motor_L.c ****       case (0x0040):               //2
+ 401:./Src/motor_L.c ****         mL_BHigh__ON();
+ 1059              		.loc 1 401 0
+ 1060 0062 FFF7FEFF 		bl	mL_BHigh__ON
+ 1061              	.LVL60:
+ 402:./Src/motor_L.c ****         mL_Low_CH3_ON();    
+ 1062              		.loc 1 402 0
+ 1063 0066 FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1064              	.LVL61:
+ 403:./Src/motor_L.c ****       break;
+ 1065              		.loc 1 403 0
+ 1066 006a 10BD     		pop	{r4, pc}
+ 1067              	.L69:
+ 404:./Src/motor_L.c ****       case (0x0060):               //3
+ 405:./Src/motor_L.c ****         mL_AHigh__ON();
+ 1068              		.loc 1 405 0
+ 1069 006c FFF7FEFF 		bl	mL_AHigh__ON
+ 1070              	.LVL62:
+ 406:./Src/motor_L.c ****         mL_Low_CH3_ON();    
+ 1071              		.loc 1 406 0
+ 1072 0070 FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1073              	.LVL63:
+ 407:./Src/motor_L.c ****       break;
+ 1074              		.loc 1 407 0
+ 1075 0074 10BD     		pop	{r4, pc}
+ 1076              	.L75:
+ 408:./Src/motor_L.c ****       case (0x0080):              //4
+ 409:./Src/motor_L.c ****         mL_Low_CH1_ON();    
+ 1077              		.loc 1 409 0
+ 1078 0076 FFF7FEFF 		bl	mL_Low_CH1_ON
+ 1079              	.LVL64:
+ 410:./Src/motor_L.c ****         mL_CHigh__ON();
+ 1080              		.loc 1 410 0
+ARM GAS  /tmp/cc3FW3nI.s 			page 28
+
+
+ 1081 007a FFF7FEFF 		bl	mL_CHigh__ON
+ 1082              	.LVL65:
+ 411:./Src/motor_L.c ****       break;
+ 1083              		.loc 1 411 0
+ 1084 007e 10BD     		pop	{r4, pc}
+ 1085              	.L73:
+ 412:./Src/motor_L.c ****       case (0x00A0):              //5
+ 413:./Src/motor_L.c ****         mL_Low_CH2_ON();    
+ 1086              		.loc 1 413 0
+ 1087 0080 FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1088              	.LVL66:
+>>>>>>> GameTrak
  414:./Src/motor_L.c ****         mL_CHigh__ON();
  1096              		.loc 1 414 0
  1097 0094 FFF7FEFF 		bl	mL_CHigh__ON
@@ -1711,6 +1891,12 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
   20:./Drivers/CMSIS/Include/cmsis_gcc.h ****    *
   21:./Drivers/CMSIS/Include/cmsis_gcc.h ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   22:./Drivers/CMSIS/Include/cmsis_gcc.h ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+<<<<<<< HEAD
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 29
+
+
+>>>>>>> GameTrak
   23:./Drivers/CMSIS/Include/cmsis_gcc.h ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
   24:./Drivers/CMSIS/Include/cmsis_gcc.h ****    ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
   25:./Drivers/CMSIS/Include/cmsis_gcc.h ****    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
@@ -1771,6 +1957,12 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
   77:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the Control Register.
   78:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Control Register value
   79:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+<<<<<<< HEAD
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 30
+
+
+>>>>>>> GameTrak
   80:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_CONTROL(void)
   81:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
   82:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
@@ -1831,6 +2023,12 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  134:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_xPSR(void)
  135:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
  136:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+<<<<<<< HEAD
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 31
+
+
+>>>>>>> GameTrak
  137:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  138:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
  139:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
@@ -1891,6 +2089,12 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  191:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
  192:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  193:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
+<<<<<<< HEAD
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 32
+
+
+>>>>>>> GameTrak
  194:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  195:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Priority Mask
  196:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current state of the priority mask bit from the Priority Mask Register.
@@ -1951,6 +2155,12 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  248:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_BASEPRI(void)
  249:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
  250:./Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+<<<<<<< HEAD
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 33
+
+
+>>>>>>> GameTrak
  251:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  252:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, basepri" : "=r" (result) );
  253:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
@@ -2011,6 +2221,12 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  305:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  306:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  307:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if       (__CORTEX_M == 0x04U) || (__CORTEX_M == 0x07U)
+<<<<<<< HEAD
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 34
+
+
+>>>>>>> GameTrak
  308:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  309:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  310:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get FPSCR
@@ -2071,6 +2287,12 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  362:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=l" (r)
  363:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "l" (r)
  364:./Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+<<<<<<< HEAD
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 35
+
+
+>>>>>>> GameTrak
  365:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=r" (r)
  366:./Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "r" (r)
  367:./Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -2082,6 +2304,7 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  373:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE void __NOP(void)
  374:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
  375:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("nop");
+<<<<<<< HEAD
  1131              		.loc 2 375 0
  1132              		.syntax unified
  1133              	@ 375 "./Drivers/CMSIS/Include/cmsis_gcc.h" 1
@@ -2348,6 +2571,157 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1329              		.thumb_func
  1331              	MotorL_start:
  1332              	.LFB65:
+=======
+ 1107              		.loc 2 375 0
+ 1108              		.syntax unified
+ 1109              	@ 375 "./Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1110 0094 00BF     		nop
+ 1111              	@ 0 "" 2
+ 1112              		.thumb
+ 1113              		.syntax unified
+ 1114 0096 10BD     		pop	{r4, pc}
+ 1115              	.L67:
+ 1116              	.LBE13:
+ 1117              	.LBE12:
+ 420:./Src/motor_L.c ****       default:
+ 421:./Src/motor_L.c ****         __NOP();
+ 422:./Src/motor_L.c ****       break;      
+ 423:./Src/motor_L.c ****     }    
+ 424:./Src/motor_L.c ****   }else{
+ 425:./Src/motor_L.c ****     switch (motorL.newhallpos){
+ 1118              		.loc 1 425 0
+ 1119 0098 194B     		ldr	r3, .L85+4
+ 1120 009a 9B89     		ldrh	r3, [r3, #12]
+ 1121 009c 9BB2     		uxth	r3, r3
+ 1122 009e 602B     		cmp	r3, #96
+ 1123 00a0 16D0     		beq	.L77
+ 1124 00a2 04D8     		bhi	.L78
+ 1125 00a4 202B     		cmp	r3, #32
+ 1126 00a6 09D0     		beq	.L79
+ 1127 00a8 402B     		cmp	r3, #64
+ 1128 00aa 0CD0     		beq	.L80
+ 1129 00ac 24E0     		b	.L76
+ 1130              	.L78:
+ 1131 00ae A02B     		cmp	r3, #160
+ 1132 00b0 18D0     		beq	.L81
+ 1133 00b2 C02B     		cmp	r3, #192
+ 1134 00b4 1BD0     		beq	.L82
+ 1135 00b6 802B     		cmp	r3, #128
+ 1136 00b8 1ED1     		bne	.L76
+ 1137 00ba 0EE0     		b	.L83
+ 1138              	.L79:
+ 426:./Src/motor_L.c ****       case (0x0020):               //1
+ 427:./Src/motor_L.c ****         mL_Low_CH1_ON();
+ 1139              		.loc 1 427 0
+ 1140 00bc FFF7FEFF 		bl	mL_Low_CH1_ON
+ 1141              	.LVL70:
+ 428:./Src/motor_L.c ****         mL_BHigh__ON();
+ 1142              		.loc 1 428 0
+ 1143 00c0 FFF7FEFF 		bl	mL_BHigh__ON
+ARM GAS  /tmp/cc3FW3nI.s 			page 36
+
+
+ 1144              	.LVL71:
+ 429:./Src/motor_L.c ****       break;
+ 1145              		.loc 1 429 0
+ 1146 00c4 10BD     		pop	{r4, pc}
+ 1147              	.L80:
+ 430:./Src/motor_L.c ****       case (0x0040):               //2
+ 431:./Src/motor_L.c ****         mL_Low_CH2_ON();
+ 1148              		.loc 1 431 0
+ 1149 00c6 FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1150              	.LVL72:
+ 432:./Src/motor_L.c ****         mL_CHigh__ON();        
+ 1151              		.loc 1 432 0
+ 1152 00ca FFF7FEFF 		bl	mL_CHigh__ON
+ 1153              	.LVL73:
+ 433:./Src/motor_L.c ****       break;
+ 1154              		.loc 1 433 0
+ 1155 00ce 10BD     		pop	{r4, pc}
+ 1156              	.L77:
+ 434:./Src/motor_L.c ****       case (0x0060):               //3
+ 435:./Src/motor_L.c ****         mL_Low_CH1_ON();        
+ 1157              		.loc 1 435 0
+ 1158 00d0 FFF7FEFF 		bl	mL_Low_CH1_ON
+ 1159              	.LVL74:
+ 436:./Src/motor_L.c ****         mL_CHigh__ON();
+ 1160              		.loc 1 436 0
+ 1161 00d4 FFF7FEFF 		bl	mL_CHigh__ON
+ 1162              	.LVL75:
+ 437:./Src/motor_L.c ****       break;
+ 1163              		.loc 1 437 0
+ 1164 00d8 10BD     		pop	{r4, pc}
+ 1165              	.L83:
+ 438:./Src/motor_L.c ****       case (0x0080):              //4
+ 439:./Src/motor_L.c ****         mL_AHigh__ON();
+ 1166              		.loc 1 439 0
+ 1167 00da FFF7FEFF 		bl	mL_AHigh__ON
+ 1168              	.LVL76:
+ 440:./Src/motor_L.c ****         mL_Low_CH3_ON();        
+ 1169              		.loc 1 440 0
+ 1170 00de FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1171              	.LVL77:
+ 441:./Src/motor_L.c ****       break;
+ 1172              		.loc 1 441 0
+ 1173 00e2 10BD     		pop	{r4, pc}
+ 1174              	.L81:
+ 442:./Src/motor_L.c ****       case (0x00A0):              //5
+ 443:./Src/motor_L.c ****         mL_BHigh__ON();
+ 1175              		.loc 1 443 0
+ 1176 00e4 FFF7FEFF 		bl	mL_BHigh__ON
+ 1177              	.LVL78:
+ 444:./Src/motor_L.c ****         mL_Low_CH3_ON();        
+ 1178              		.loc 1 444 0
+ 1179 00e8 FFF7FEFF 		bl	mL_Low_CH3_ON
+ 1180              	.LVL79:
+ 445:./Src/motor_L.c ****       break;
+ 1181              		.loc 1 445 0
+ 1182 00ec 10BD     		pop	{r4, pc}
+ 1183              	.L82:
+ARM GAS  /tmp/cc3FW3nI.s 			page 37
+
+
+ 446:./Src/motor_L.c ****       case (0x00C0):              //6
+ 447:./Src/motor_L.c ****         mL_AHigh__ON();
+ 1184              		.loc 1 447 0
+ 1185 00ee FFF7FEFF 		bl	mL_AHigh__ON
+ 1186              	.LVL80:
+ 448:./Src/motor_L.c ****         mL_Low_CH2_ON();        
+ 1187              		.loc 1 448 0
+ 1188 00f2 FFF7FEFF 		bl	mL_Low_CH2_ON
+ 1189              	.LVL81:
+ 449:./Src/motor_L.c ****       break;  
+ 1190              		.loc 1 449 0
+ 1191 00f6 10BD     		pop	{r4, pc}
+ 1192              	.L76:
+ 1193              	.LBB14:
+ 1194              	.LBB15:
+ 1195              		.loc 2 375 0
+ 1196              		.syntax unified
+ 1197              	@ 375 "./Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1198 00f8 00BF     		nop
+ 1199              	@ 0 "" 2
+ 1200              		.thumb
+ 1201              		.syntax unified
+ 1202              	.L65:
+ 1203 00fa 10BD     		pop	{r4, pc}
+ 1204              	.L86:
+ 1205              		.align	2
+ 1206              	.L85:
+ 1207 00fc 000C0140 		.word	1073810432
+ 1208 0100 00000000 		.word	motorL
+ 1209              	.LBE15:
+ 1210              	.LBE14:
+ 1211              		.cfi_endproc
+ 1212              	.LFE86:
+ 1214              		.section	.text.MotorL_start,"ax",%progbits
+ 1215              		.align	2
+ 1216              		.global	MotorL_start
+ 1217              		.thumb
+ 1218              		.thumb_func
+ 1220              	MotorL_start:
+ 1221              	.LFB65:
+>>>>>>> GameTrak
   23:./Src/motor_L.c ****   mL_PWM_Set_ChALL(0);
  1333              		.loc 1 23 0
  1334              		.cfi_startproc
@@ -2361,10 +2735,20 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1342              		.cfi_offset 5, -8
  1343              		.cfi_offset 14, -4
   24:./Src/motor_L.c ****   motorL.BLDCMotorL_deltavel = 0;
+<<<<<<< HEAD
  1344              		.loc 1 24 0
  1345 0002 0020     		movs	r0, #0
  1346 0004 FFF7FEFF 		bl	mL_PWM_Set_ChALL
  1347              	.LVL82:
+=======
+ 1233              		.loc 1 24 0
+ 1234 0002 0020     		movs	r0, #0
+ 1235 0004 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1236              	.LVL82:
+ARM GAS  /tmp/cc3FW3nI.s 			page 38
+
+
+>>>>>>> GameTrak
   25:./Src/motor_L.c ****   motorL.BLDCMotorL_velRAW = 0;
  1348              		.loc 1 25 0
  1349 0008 094D     		ldr	r5, .L94
@@ -2415,6 +2799,7 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1387              	MotorL_pwm:
  1388              	.LFB66:
   34:./Src/motor_L.c ****   static uint8_t last_motorL=0;
+<<<<<<< HEAD
  1389              		.loc 1 34 0
  1390              		.cfi_startproc
  1391              		@ args = 0, pretend = 0, frame = 0
@@ -2426,6 +2811,22 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1397              		.cfi_offset 4, -8
  1398              		.cfi_offset 14, -4
  1399 0002 0446     		mov	r4, r0
+=======
+ 1278              		.loc 1 34 0
+ 1279              		.cfi_startproc
+ 1280              		@ args = 0, pretend = 0, frame = 0
+ 1281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1282              	.LVL87:
+ 1283 0000 10B5     		push	{r4, lr}
+ 1284              	.LCFI10:
+ 1285              		.cfi_def_cfa_offset 8
+ 1286              		.cfi_offset 4, -8
+ 1287              		.cfi_offset 14, -4
+ARM GAS  /tmp/cc3FW3nI.s 			page 39
+
+
+ 1288 0002 0446     		mov	r4, r0
+>>>>>>> GameTrak
   38:./Src/motor_L.c ****     value_percent = 1000;
  1400              		.loc 1 38 0
  1401 0004 B0F57A7F 		cmp	r0, #1000
@@ -2485,11 +2886,22 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1442 003a 012B     		cmp	r3, #1
  1443 003c 02D1     		bne	.L102
   54:./Src/motor_L.c ****     }
+<<<<<<< HEAD
  1444              		.loc 1 54 0
  1445 003e A0B2     		uxth	r0, r4
  1446 0040 FFF7FEFF 		bl	mL_PWM_Set_ChALL
  1447              	.LVL92:
  1448              	.L102:
+=======
+ARM GAS  /tmp/cc3FW3nI.s 			page 40
+
+
+ 1333              		.loc 1 54 0
+ 1334 003e A0B2     		uxth	r0, r4
+ 1335 0040 FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1336              	.LVL92:
+ 1337              	.L97:
+>>>>>>> GameTrak
   56:./Src/motor_L.c ****      last_motorL = 0;
  1449              		.loc 1 56 0
  1450 0044 0023     		movs	r3, #0
@@ -2543,6 +2955,7 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1487 0078 1A70     		strb	r2, [r3]
  1488              	.L104:
   72:./Src/motor_L.c **** }
+<<<<<<< HEAD
  1489              		.loc 1 72 0
  1490 007a 2046     		mov	r0, r4
  1491 007c FFF7FEFF 		bl	mL_PWM_Set_ChALL
@@ -2729,10 +3142,207 @@ ARM GAS  /tmp/cckcgNsq.s 			page 1
  1646              		.file 13 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  1647              		.file 14 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
 ARM GAS  /tmp/cckcgNsq.s 			page 47
+=======
+ 1378              		.loc 1 72 0
+ 1379 007a 2046     		mov	r0, r4
+ARM GAS  /tmp/cc3FW3nI.s 			page 41
+
+
+ 1380 007c FFF7FEFF 		bl	mL_PWM_Set_ChALL
+ 1381              	.LVL94:
+ 1382 0080 10BD     		pop	{r4, pc}
+ 1383              	.LVL95:
+ 1384              	.L105:
+ 1385 0082 00BF     		.align	2
+ 1386              	.L104:
+ 1387 0084 18FCFFFF 		.word	-1000
+ 1388 0088 00000000 		.word	.LANCHOR0
+ 1389 008c 00000000 		.word	motorL
+ 1390 0090 00000000 		.word	.LANCHOR1
+ 1391              		.cfi_endproc
+ 1392              	.LFE66:
+ 1394              		.section	.text.HALL_L_ISR_Callback,"ax",%progbits
+ 1395              		.align	2
+ 1396              		.global	HALL_L_ISR_Callback
+ 1397              		.thumb
+ 1398              		.thumb_func
+ 1400              	HALL_L_ISR_Callback:
+ 1401              	.LFB87:
+ 450:./Src/motor_L.c ****       default:
+ 451:./Src/motor_L.c ****         __NOP();
+ 452:./Src/motor_L.c ****       break;
+ 453:./Src/motor_L.c ****     }   
+ 454:./Src/motor_L.c ****   }
+ 455:./Src/motor_L.c **** }
+ 456:./Src/motor_L.c **** 
+ 457:./Src/motor_L.c **** 
+ 458:./Src/motor_L.c **** 
+ 459:./Src/motor_L.c **** 
+ 460:./Src/motor_L.c **** 
+ 461:./Src/motor_L.c **** void HALL_L_ISR_Callback(void){
+ 1402              		.loc 1 461 0
+ 1403              		.cfi_startproc
+ 1404              		@ args = 0, pretend = 0, frame = 0
+ 1405              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1406              		@ link register save eliminated.
+ 462:./Src/motor_L.c ****     motorL.BLDCMotorL_count= 1;        //Delay x ritardo x debounce
+ 1407              		.loc 1 462 0
+ 1408 0000 024B     		ldr	r3, .L107
+ 1409 0002 0122     		movs	r2, #1
+ 1410 0004 1A71     		strb	r2, [r3, #4]
+ 463:./Src/motor_L.c ****     motorL.BLDCMotorL_flag = 1;        //Update motor
+ 1411              		.loc 1 463 0
+ 1412 0006 5A71     		strb	r2, [r3, #5]
+ 1413 0008 7047     		bx	lr
+ 1414              	.L108:
+ 1415 000a 00BF     		.align	2
+ 1416              	.L107:
+ 1417 000c 00000000 		.word	motorL
+ 1418              		.cfi_endproc
+ 1419              	.LFE87:
+ 1421              		.section	.text.PWM_L_ISR_Callback,"ax",%progbits
+ 1422              		.align	2
+ 1423              		.global	PWM_L_ISR_Callback
+ 1424              		.thumb
+ 1425              		.thumb_func
+ARM GAS  /tmp/cc3FW3nI.s 			page 42
+
+
+ 1427              	PWM_L_ISR_Callback:
+ 1428              	.LFB88:
+ 464:./Src/motor_L.c **** }
+ 465:./Src/motor_L.c **** 
+ 466:./Src/motor_L.c **** //40uS Interrupt -- 25Khz
+ 467:./Src/motor_L.c **** void PWM_L_ISR_Callback(void){
+ 1429              		.loc 1 467 0
+ 1430              		.cfi_startproc
+ 1431              		@ args = 0, pretend = 0, frame = 0
+ 1432              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1433 0000 08B5     		push	{r3, lr}
+ 1434              	.LCFI11:
+ 1435              		.cfi_def_cfa_offset 8
+ 1436              		.cfi_offset 3, -8
+ 1437              		.cfi_offset 14, -4
+ 468:./Src/motor_L.c ****    if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count==0)){
+ 1438              		.loc 1 468 0
+ 1439 0002 1B4B     		ldr	r3, .L114
+ 1440 0004 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 1441 0006 13F0FF0F 		tst	r3, #255
+ 1442 000a 0ED0     		beq	.L110
+ 1443              		.loc 1 468 0 is_stmt 0 discriminator 1
+ 1444 000c 184B     		ldr	r3, .L114
+ 1445 000e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1446 0010 13F0FF0F 		tst	r3, #255
+ 1447 0014 09D1     		bne	.L110
+ 469:./Src/motor_L.c ****       mL_BLDCMotor();        //5uS
+ 1448              		.loc 1 469 0 is_stmt 1
+ 1449 0016 FFF7FEFF 		bl	mL_BLDCMotor
+ 1450              	.LVL96:
+ 470:./Src/motor_L.c ****       motorL.BLDCMotorL_flag = 0;      
+ 1451              		.loc 1 470 0
+ 1452 001a 154B     		ldr	r3, .L114
+ 1453 001c 0021     		movs	r1, #0
+ 1454 001e 5971     		strb	r1, [r3, #5]
+ 471:./Src/motor_L.c ****       //---
+ 472:./Src/motor_L.c ****       motorL.BLDCMotorL_velRAW = motorL.BLDCMotorL_deltavel;
+ 1455              		.loc 1 472 0
+ 1456 0020 1A89     		ldrh	r2, [r3, #8]
+ 1457 0022 92B2     		uxth	r2, r2
+ 1458 0024 DA80     		strh	r2, [r3, #6]	@ movhi
+ 473:./Src/motor_L.c ****       motorL.BLDCMotorL_deltavel = 0;      
+ 1459              		.loc 1 473 0
+ 1460 0026 1981     		strh	r1, [r3, #8]	@ movhi
+ 1461 0028 0EE0     		b	.L111
+ 1462              	.L110:
+ 474:./Src/motor_L.c ****    }else if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count!=0)){
+ 1463              		.loc 1 474 0
+ 1464 002a 114B     		ldr	r3, .L114
+ 1465 002c 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 1466 002e 13F0FF0F 		tst	r3, #255
+ 1467 0032 09D0     		beq	.L111
+ 1468              		.loc 1 474 0 is_stmt 0 discriminator 1
+ 1469 0034 0E4B     		ldr	r3, .L114
+ 1470 0036 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1471 0038 13F0FF0F 		tst	r3, #255
+ 1472 003c 04D0     		beq	.L111
+ARM GAS  /tmp/cc3FW3nI.s 			page 43
+
+
+ 475:./Src/motor_L.c ****       motorL.BLDCMotorL_count--;
+ 1473              		.loc 1 475 0 is_stmt 1
+ 1474 003e 0C4A     		ldr	r2, .L114
+ 1475 0040 1379     		ldrb	r3, [r2, #4]	@ zero_extendqisi2
+ 1476 0042 013B     		subs	r3, r3, #1
+ 1477 0044 DBB2     		uxtb	r3, r3
+ 1478 0046 1371     		strb	r3, [r2, #4]
+ 1479              	.L111:
+ 476:./Src/motor_L.c ****    }
+ 477:./Src/motor_L.c ****    motorL.BLDCMotorL_deltavel++;       //Calcolo velocita motore inc ogni 40uS
+ 1480              		.loc 1 477 0
+ 1481 0048 094A     		ldr	r2, .L114
+ 1482 004a 1389     		ldrh	r3, [r2, #8]
+ 1483 004c 9BB2     		uxth	r3, r3
+ 1484 004e 0133     		adds	r3, r3, #1
+ 1485 0050 9BB2     		uxth	r3, r3
+ 1486 0052 1381     		strh	r3, [r2, #8]	@ movhi
+ 478:./Src/motor_L.c ****    if(motorL.BLDCMotorL_deltavel>=5000){
+ 1487              		.loc 1 478 0
+ 1488 0054 1389     		ldrh	r3, [r2, #8]
+ 1489 0056 9BB2     		uxth	r3, r3
+ 1490 0058 41F28732 		movw	r2, #4999
+ 1491 005c 9342     		cmp	r3, r2
+ 1492 005e 05D9     		bls	.L109
+ 479:./Src/motor_L.c ****     motorL.BLDCMotorL_deltavel = 5000;
+ 1493              		.loc 1 479 0
+ 1494 0060 034B     		ldr	r3, .L114
+ 1495 0062 41F28832 		movw	r2, #5000
+ 1496 0066 1A81     		strh	r2, [r3, #8]	@ movhi
+ 480:./Src/motor_L.c ****     motorL.BLDCMotorL_velRAW = 0;     //Minima vel, motore fermo
+ 1497              		.loc 1 480 0
+ 1498 0068 0022     		movs	r2, #0
+ 1499 006a DA80     		strh	r2, [r3, #6]	@ movhi
+ 1500              	.L109:
+ 1501 006c 08BD     		pop	{r3, pc}
+ 1502              	.L115:
+ 1503 006e 00BF     		.align	2
+ 1504              	.L114:
+ 1505 0070 00000000 		.word	motorL
+ 1506              		.cfi_endproc
+ 1507              	.LFE88:
+ 1509              		.comm	motorL,16,4
+ 1510              		.comm	htim8,60,4
+ 1511              		.section	.bss.last_motorL.7432,"aw",%nobits
+ 1512              		.set	.LANCHOR0,. + 0
+ 1515              	last_motorL.7432:
+ 1516 0000 00       		.space	1
+ 1517              		.section	.bss.last_motorLStop.7433,"aw",%nobits
+ 1518              		.set	.LANCHOR1,. + 0
+ 1521              	last_motorLStop.7433:
+ 1522 0000 00       		.space	1
+ 1523              		.text
+ 1524              	.Letext0:
+ 1525              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 1526              		.file 4 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 1527              		.file 5 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 1528              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ARM GAS  /tmp/cc3FW3nI.s 			page 44
+
+
+ 1529              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1530              		.file 8 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 1531              		.file 9 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 1532              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h"
+ 1533              		.file 11 "./Inc/motor_L.h"
+ 1534              		.file 12 "./Drivers/CMSIS/Include/core_cm3.h"
+ 1535              		.file 13 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1536              		.file 14 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ARM GAS  /tmp/cc3FW3nI.s 			page 45
+>>>>>>> GameTrak
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 motor_L.c
+<<<<<<< HEAD
      /tmp/cckcgNsq.s:20     .text.mL_HallSensor_init:00000000 $t
      /tmp/cckcgNsq.s:25     .text.mL_HallSensor_init:00000000 mL_HallSensor_init
      /tmp/cckcgNsq.s:87     .text.mL_HallSensor_init:00000044 $d
@@ -2817,6 +3427,92 @@ DEFINED SYMBOLS
      /tmp/cckcgNsq.s:1627   .bss.last_motorL.7435:00000000 $d
      /tmp/cckcgNsq.s:1632   .bss.last_motorLStop.7436:00000000 last_motorLStop.7436
      /tmp/cckcgNsq.s:1633   .bss.last_motorLStop.7436:00000000 $d
+=======
+     /tmp/cc3FW3nI.s:20     .text.mL_HallSensor_init:00000000 $t
+     /tmp/cc3FW3nI.s:25     .text.mL_HallSensor_init:00000000 mL_HallSensor_init
+     /tmp/cc3FW3nI.s:87     .text.mL_HallSensor_init:00000044 $d
+     /tmp/cc3FW3nI.s:94     .text.mL_Low_CH1_ON:00000000 $t
+     /tmp/cc3FW3nI.s:99     .text.mL_Low_CH1_ON:00000000 mL_Low_CH1_ON
+     /tmp/cc3FW3nI.s:114    .text.mL_Low_CH1_ON:0000000c $d
+     /tmp/cc3FW3nI.s:119    .text.mL_Low_CH1_OFF:00000000 $t
+     /tmp/cc3FW3nI.s:124    .text.mL_Low_CH1_OFF:00000000 mL_Low_CH1_OFF
+     /tmp/cc3FW3nI.s:139    .text.mL_Low_CH1_OFF:00000008 $d
+     /tmp/cc3FW3nI.s:144    .text.mL_Low_CH2_ON:00000000 $t
+     /tmp/cc3FW3nI.s:149    .text.mL_Low_CH2_ON:00000000 mL_Low_CH2_ON
+     /tmp/cc3FW3nI.s:164    .text.mL_Low_CH2_ON:0000000c $d
+     /tmp/cc3FW3nI.s:169    .text.mL_Low_CH2_OFF:00000000 $t
+     /tmp/cc3FW3nI.s:174    .text.mL_Low_CH2_OFF:00000000 mL_Low_CH2_OFF
+     /tmp/cc3FW3nI.s:189    .text.mL_Low_CH2_OFF:00000008 $d
+     /tmp/cc3FW3nI.s:194    .text.mL_Low_CH3_ON:00000000 $t
+     /tmp/cc3FW3nI.s:199    .text.mL_Low_CH3_ON:00000000 mL_Low_CH3_ON
+     /tmp/cc3FW3nI.s:214    .text.mL_Low_CH3_ON:0000000c $d
+     /tmp/cc3FW3nI.s:219    .text.mL_Low_CH3_OFF:00000000 $t
+     /tmp/cc3FW3nI.s:224    .text.mL_Low_CH3_OFF:00000000 mL_Low_CH3_OFF
+     /tmp/cc3FW3nI.s:239    .text.mL_Low_CH3_OFF:00000008 $d
+     /tmp/cc3FW3nI.s:244    .text.mL_AHigh__ON:00000000 $t
+     /tmp/cc3FW3nI.s:249    .text.mL_AHigh__ON:00000000 mL_AHigh__ON
+     /tmp/cc3FW3nI.s:266    .text.mL_AHigh__ON:00000010 $d
+                            *COM*:0000003c htim8
+     /tmp/cc3FW3nI.s:271    .text.mL_AHigh__OFF:00000000 $t
+     /tmp/cc3FW3nI.s:276    .text.mL_AHigh__OFF:00000000 mL_AHigh__OFF
+     /tmp/cc3FW3nI.s:295    .text.mL_AHigh__OFF:00000014 $d
+     /tmp/cc3FW3nI.s:300    .text.mL_BHigh__ON:00000000 $t
+     /tmp/cc3FW3nI.s:305    .text.mL_BHigh__ON:00000000 mL_BHigh__ON
+     /tmp/cc3FW3nI.s:322    .text.mL_BHigh__ON:00000010 $d
+     /tmp/cc3FW3nI.s:327    .text.mL_BHigh__OFF:00000000 $t
+     /tmp/cc3FW3nI.s:332    .text.mL_BHigh__OFF:00000000 mL_BHigh__OFF
+     /tmp/cc3FW3nI.s:351    .text.mL_BHigh__OFF:00000014 $d
+     /tmp/cc3FW3nI.s:356    .text.mL_CHigh__ON:00000000 $t
+     /tmp/cc3FW3nI.s:361    .text.mL_CHigh__ON:00000000 mL_CHigh__ON
+     /tmp/cc3FW3nI.s:378    .text.mL_CHigh__ON:00000010 $d
+     /tmp/cc3FW3nI.s:383    .text.mL_CHigh__OFF:00000000 $t
+     /tmp/cc3FW3nI.s:388    .text.mL_CHigh__OFF:00000000 mL_CHigh__OFF
+     /tmp/cc3FW3nI.s:407    .text.mL_CHigh__OFF:00000014 $d
+     /tmp/cc3FW3nI.s:412    .text.mL_PWM_Set_Ch1:00000000 $t
+     /tmp/cc3FW3nI.s:417    .text.mL_PWM_Set_Ch1:00000000 mL_PWM_Set_Ch1
+     /tmp/cc3FW3nI.s:442    .text.mL_PWM_Set_Ch1:00000018 $d
+                            *COM*:00000010 motorL
+     /tmp/cc3FW3nI.s:449    .text.mL_PWM_Set_Ch2:00000000 $t
+     /tmp/cc3FW3nI.s:454    .text.mL_PWM_Set_Ch2:00000000 mL_PWM_Set_Ch2
+     /tmp/cc3FW3nI.s:479    .text.mL_PWM_Set_Ch2:00000018 $d
+     /tmp/cc3FW3nI.s:486    .text.mL_PWM_Set_Ch3:00000000 $t
+     /tmp/cc3FW3nI.s:491    .text.mL_PWM_Set_Ch3:00000000 mL_PWM_Set_Ch3
+     /tmp/cc3FW3nI.s:516    .text.mL_PWM_Set_Ch3:00000018 $d
+     /tmp/cc3FW3nI.s:523    .text.mL_PWM_Set_ChALL:00000000 $t
+     /tmp/cc3FW3nI.s:528    .text.mL_PWM_Set_ChALL:00000000 mL_PWM_Set_ChALL
+     /tmp/cc3FW3nI.s:557    .text.mL_PWM_Set_ChALL:0000001c $d
+     /tmp/cc3FW3nI.s:564    .text.MotorL_stop:00000000 $t
+     /tmp/cc3FW3nI.s:569    .text.MotorL_stop:00000000 MotorL_stop
+ARM GAS  /tmp/cc3FW3nI.s 			page 46
+
+
+     /tmp/cc3FW3nI.s:635    .text.MotorL_stop:0000004c $d
+     /tmp/cc3FW3nI.s:641    .text.MX_TIM8_Init:00000000 $t
+     /tmp/cc3FW3nI.s:646    .text.MX_TIM8_Init:00000000 MX_TIM8_Init
+     /tmp/cc3FW3nI.s:925    .text.MX_TIM8_Init:00000198 $d
+     /tmp/cc3FW3nI.s:938    .text.MotorL_init:00000000 $t
+     /tmp/cc3FW3nI.s:943    .text.MotorL_init:00000000 MotorL_init
+     /tmp/cc3FW3nI.s:977    .text.MotorL_init:0000001c $d
+     /tmp/cc3FW3nI.s:982    .text.mL_BLDCMotor:00000000 $t
+     /tmp/cc3FW3nI.s:987    .text.mL_BLDCMotor:00000000 mL_BLDCMotor
+     /tmp/cc3FW3nI.s:1207   .text.mL_BLDCMotor:000000fc $d
+     /tmp/cc3FW3nI.s:1215   .text.MotorL_start:00000000 $t
+     /tmp/cc3FW3nI.s:1220   .text.MotorL_start:00000000 MotorL_start
+     /tmp/cc3FW3nI.s:1266   .text.MotorL_start:00000030 $d
+     /tmp/cc3FW3nI.s:1271   .text.MotorL_pwm:00000000 $t
+     /tmp/cc3FW3nI.s:1276   .text.MotorL_pwm:00000000 MotorL_pwm
+     /tmp/cc3FW3nI.s:1387   .text.MotorL_pwm:00000084 $d
+     /tmp/cc3FW3nI.s:1395   .text.HALL_L_ISR_Callback:00000000 $t
+     /tmp/cc3FW3nI.s:1400   .text.HALL_L_ISR_Callback:00000000 HALL_L_ISR_Callback
+     /tmp/cc3FW3nI.s:1417   .text.HALL_L_ISR_Callback:0000000c $d
+     /tmp/cc3FW3nI.s:1422   .text.PWM_L_ISR_Callback:00000000 $t
+     /tmp/cc3FW3nI.s:1427   .text.PWM_L_ISR_Callback:00000000 PWM_L_ISR_Callback
+     /tmp/cc3FW3nI.s:1505   .text.PWM_L_ISR_Callback:00000070 $d
+     /tmp/cc3FW3nI.s:1515   .bss.last_motorL.7432:00000000 last_motorL.7432
+     /tmp/cc3FW3nI.s:1516   .bss.last_motorL.7432:00000000 $d
+     /tmp/cc3FW3nI.s:1521   .bss.last_motorLStop.7433:00000000 last_motorLStop.7433
+     /tmp/cc3FW3nI.s:1522   .bss.last_motorLStop.7433:00000000 $d
+>>>>>>> GameTrak
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

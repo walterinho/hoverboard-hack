@@ -42,6 +42,7 @@ VARIE
 */
 #include "main.h"
 #include "stm32f1xx_hal.h"
+#include "eeprom.h"
 #include "motor_L.h"
 #include "motor_R.h"
 #include "varie.h"
@@ -51,6 +52,7 @@ VARIE
 #include "pid.h"
 #include "application.h"
 #include "telemetry.h"
+#include "hd44780.h"
 #include <math.h>
 
 // copied from STMBL
@@ -73,6 +75,11 @@ VARIE
 
 #define PI 3.14159265
 
+/* Virtual address defined by the user: 0xFFFF value is prohibited */
+uint16_t VirtAddVarTab[NB_OF_VAR] = {0x1337};
+uint16_t VarDataTab[NB_OF_VAR] = {0};
+uint16_t VarValue = 0;
+
 /* Private variables ---------------------------------------------------------*/
 
 /* Private function prototypes -----------------------------------------------*/
@@ -88,15 +95,10 @@ extern struct MOTOR_Ldati motorL;
 extern struct MOTOR_Rdati motorR;
 //extern struct COMMAND_data commandsequence;
 
-//TEMP
-/*
-extern volatile __IO struct MOTOR_Rdati motorR;
-volatile __IO uint8_t temp8,temp8case,temp_MOTOR_R_START;
-volatile __IO int32_t temp_SET_SPPED;
-volatile __IO uint8_t bufferTX[100],ai2cBuffer[10];
-int32_t speed;
-*/
 volatile __IO uint32_t counterTemp,counterTempTT;
+LCD_PCF8574_HandleTypeDef lcd;
+extern I2C_HandleTypeDef hi2c2;
+uint16_t saveValue = 0;
 
 TIM_HandleTypeDef htim2;
 
@@ -137,7 +139,32 @@ int main(void)
   Power_Set(1);
 
 
-  Telemetry_init();
+  //Telemetry_init();
+  MX_I2C2_Init();
+
+  /* Unlock the Flash Program Erase controller */
+  HAL_FLASH_Unlock();
+
+  /* EEPROM Init */
+  EE_Init();
+
+
+  lcd.pcf8574.PCF_I2C_ADDRESS = 0x27;
+	lcd.pcf8574.PCF_I2C_TIMEOUT = 1000;
+	lcd.pcf8574.i2c = hi2c2;
+	lcd.NUMBER_OF_LINES = NUMBER_OF_LINES_2;
+	lcd.type = TYPE0;
+
+	if(LCD_Init(&lcd)!=LCD_OK){
+		// error occured
+		while(1);
+	}
+
+	LCD_ClearDisplay(&lcd);
+  LCD_SetLocation(&lcd, 0, 0);
+	LCD_WriteString(&lcd, "TranspOtter V1.1");
+  LCD_SetLocation(&lcd, 0, 1);
+	LCD_WriteString(&lcd, "Initializing...");
 
   Buzzer_init();
   Led_init();
@@ -170,7 +197,7 @@ int main(void)
 
   Led_Set(1);
   Buzzer_TwoBeep();
-  HAL_Delay(350);
+  HAL_Delay(250);
 
   MotorR_start();
   MotorL_start();
@@ -187,9 +214,29 @@ int main(void)
   int16_t speedR = 0;
   int16_t speedL = 0;
 
-  uint32_t sinValue = 45 * 50;
   uint8_t state = 0;
-  int lastSpeedL = 0, lastSpeedR = 0;
+
+  LCD_ClearDisplay(&lcd);
+  HAL_Delay(5);
+  LCD_SetLocation(&lcd, 0, 1);
+	LCD_WriteString(&lcd, "Bat:");
+  LCD_SetLocation(&lcd, 8, 1);
+  LCD_WriteString(&lcd, "V");
+
+  LCD_SetLocation(&lcd, 15, 1);
+  LCD_WriteString(&lcd, "A");
+
+  LCD_SetLocation(&lcd, 0, 0);
+	LCD_WriteString(&lcd, "Len:");
+  LCD_SetLocation(&lcd, 8, 0);
+  LCD_WriteString(&lcd, "m(");
+  LCD_SetLocation(&lcd, 14, 0);
+  LCD_WriteString(&lcd, "m)");
+
+  uint32_t sinValue = 1999;
+
+  int lastSpeedL = 0, lastSpeedR = 0, lastDistance = 0;
+  float setDistance = saveValue / 1000.0;
   while(1){
     sinValue++;
     if ((sinValue) % (200) == 0) {
@@ -231,20 +278,45 @@ int main(void)
     counterTemp = HAL_GetTick();
 
     if(IS_Button()) {
+      MotorL_pwm(0);
+      MotorR_pwm(0);
       while(IS_Button()) {
         HAL_IWDG_Refresh(&hiwdg);
       }
-      Buzzer_OneLongBeep();
-      HAL_Delay(350);
-      Power_Set(0);
+      Buzzer_OneBeep();
+      HAL_Delay(300);
+      if (IS_Button()) {
+        while(IS_Button()) {
+          HAL_IWDG_Refresh(&hiwdg);
+        }
+        Buzzer_OneLongBeep();
+        HAL_Delay(350);
+        Power_Set(0);
+      } else {
+        setDistance += 0.25;
+        if (setDistance > 2.6) {
+          setDistance = 0.25;
+        }
+        saveValue = setDistance * 1000;
+        saveConfig();
+      }
     }
+<<<<<<< HEAD
     /*if ((sinValue) % (500) == 0) {
       uint16_t distance = CLAMP(ADC_PA3() - 175, 0, 4095);
+=======
+
+    if ((sinValue) % (250) == 0) {
+      uint16_t distance = CLAMP(((int)ADC_PA3()) - 180, 0, 4095);
+>>>>>>> GameTrak
       int16_t steering = ADC_PA2() - 2048;
-      int speedL = -CLAMP((distance - 1000) +  (steering / 10.0), -800, 800);
-      int speedR = -CLAMP((distance - 1000) -  (steering / 10.0), -800, 800);
+      int speedL, speedR;
+
+      speedL = -CLAMP((distance - (int)(setDistance * 1345)) +  CLAMP((steering / 10.0), -50, 50), -800, 800);
+      speedR = -CLAMP((distance - (int)(setDistance * 1345)) -  CLAMP((steering / 10.0), -50, 50), -800, 800);
+
       if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50)) {
-        if (distance > 850) {
+        if (distance - (int)(setDistance * 1345) > -200) {
           MotorL_pwm(speedL);
           MotorR_pwm(speedR);
         } else {
@@ -252,25 +324,49 @@ int main(void)
           MotorR_pwm(0);
         }
       }
-      if (distance > 3000) { // Error, robot too far away!
+      if (distance > 3000 && lastDistance > 3000) { // Error, robot too far away!
         MotorL_pwm(0);
         MotorR_pwm(0);
-        while(1) {
-          Power_Set(0);
-          HAL_IWDG_Refresh(&hiwdg);
-        }
+        Buzzer_OneLongBeep();
+        LCD_ClearDisplay(&lcd);
+        HAL_Delay(5);
+        LCD_SetLocation(&lcd, 0, 0);
+      	LCD_WriteString(&lcd, "Emergency Off!");
+        LCD_SetLocation(&lcd, 0, 1);
+      	LCD_WriteString(&lcd, "Keeper to fast.");
+        HAL_Delay(500);
+        HAL_IWDG_Refresh(&hiwdg);
+        HAL_Delay(500);
+        Power_Set(0);
       }
 
-      char str[100];
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "%i;%i\n\r", getMotorCurrentR(), getMotorCurrentL());
-      Console_Log(str);
+      if ((sinValue) % (2000) == 0) {
+        LCD_SetLocation(&lcd, 4, 0);
+        LCD_WriteFloat(&lcd,distance/1345.0,2);
+        LCD_SetLocation(&lcd, 10, 0);
+        LCD_WriteFloat(&lcd,setDistance,2);
+        LCD_SetLocation(&lcd, 4, 1);
+        LCD_WriteFloat(&lcd,GET_BatteryAverage(),1);
+        LCD_SetLocation(&lcd, 11, 1);
+        LCD_WriteFloat(&lcd,MAX(ABS(getMotorCurrentR() * 0.02), ABS(getMotorCurrentL() * 0.02)),2);
+      }
+
+
+      //char str[100];
+      //memset(&str[0], 0, sizeof(str));
+      //sprintf(str, "%i;%i\n\r", distance, steering);
+      //Console_Log(str);
 
 
       lastSpeedL = speedL;
       lastSpeedR = speedR;
+<<<<<<< HEAD
 >>>>>>> GameTrak
     }*/
+=======
+      lastDistance = distance;
+    }
+>>>>>>> GameTrak
 
 
 
@@ -281,11 +377,39 @@ int main(void)
     //Telemetry_TASK();
 
     //Batteria Scarica?
+<<<<<<< HEAD
     if(GET_BatteryAverage() < 31.0 || ABS(getMotorCurrentR() * 0.02) > 45.0 || ABS(getMotorCurrentL() * 0.02) > 45.0){
+=======
+    if(ABS(getMotorCurrentR() * 0.02) > 20.0 || ABS(getMotorCurrentL() * 0.02) > 20.0){
+>>>>>>> GameTrak
       MotorL_pwm(0);
       MotorR_pwm(0);
       Buzzer_OneLongBeep();
-      HAL_Delay(350);
+      LCD_ClearDisplay(&lcd);
+      HAL_Delay(5);
+      LCD_SetLocation(&lcd, 0, 0);
+      LCD_WriteString(&lcd, "Emergency Off!");
+      LCD_SetLocation(&lcd, 0, 1);
+      LCD_WriteString(&lcd, "Overcurrent.");
+      HAL_Delay(500);
+      HAL_IWDG_Refresh(&hiwdg);
+      HAL_Delay(500);
+      Power_Set(0);
+    }
+
+    if(GET_BatteryAverage() < 31.0){
+      MotorL_pwm(0);
+      MotorR_pwm(0);
+      Buzzer_OneLongBeep();
+      LCD_ClearDisplay(&lcd);
+      HAL_Delay(5);
+      LCD_SetLocation(&lcd, 0, 0);
+      LCD_WriteString(&lcd, "Emergency Off!");
+      LCD_SetLocation(&lcd, 0, 1);
+      LCD_WriteString(&lcd, "Battery low.");
+      HAL_Delay(500);
+      HAL_IWDG_Refresh(&hiwdg);
+      HAL_Delay(500);
       Power_Set(0);
     }
     //In Carica?
@@ -301,6 +425,10 @@ int main(void)
 
   }
 
+}
+
+void saveConfig() {
+  EE_WriteVariable(VirtAddVarTab[0], saveValue);
 }
 
 /** System Clock Configuration
