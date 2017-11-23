@@ -112,12 +112,12 @@ void PPM_ISR_Callback() {
   // Dummy loop with 16 bit count wrap around
   uint16_t rc_delay = TIM2->CNT;
   _stop_timer();
-  timeout = 0;
 
-  if (rc_delay > 4000) {
+  if (rc_delay > 3000) {
     rx_count = 0;
   }
   else if (rx_count < 6){
+    timeout = 0;
     captured_value[rx_count] = CLAMP(rc_delay, 1000, 2000) - 1000;
     rx_count++;
   }
@@ -203,12 +203,12 @@ int main(void)
       int readL = -(CLAMP((((captured_value[1]-500)+(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
 
       int16_t tempL = speedL;
-      speedL -=  tempL / 3.0;
-      speedL += readL / 3.0;
+      speedL -=  tempL / 2.0;
+      speedL += readL / 2.0;
 
       int16_t tempR = speedR;
-      speedR -=  tempR / 3.0;
-      speedR += readR / 3.0;
+      speedR -=  tempR / 2.0;
+      speedR += readR / 2.0;
 
 
       if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50) && timeout < 1000) {
@@ -281,7 +281,7 @@ int main(void)
     //Telemetry_TASK();
 
     //Batteria Scarica?
-    if(GET_BatteryAverage() < 31.0 || ABS(getMotorCurrentR() * 0.02) > 40.0 || ABS(getMotorCurrentL() * 0.02) > 40.0){
+    if(GET_BatteryAverage() < 31.0 || ABS(getMotorCurrentR() * 0.02) > 45.0 || ABS(getMotorCurrentL() * 0.02) > 45.0){
       MotorL_pwm(0);
       MotorR_pwm(0);
       Buzzer_OneLongBeep();
