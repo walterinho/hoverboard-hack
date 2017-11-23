@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccY4TO9w.s 			page 1
+ARM GAS  /tmp/ccLUSv5Y.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
   34              		.cfi_def_cfa_offset 8
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccY4TO9w.s 			page 2
+ARM GAS  /tmp/ccLUSv5Y.s 			page 2
 
 
   37 0002 86B0     		sub	sp, sp, #24
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
   81 003c 00100240 		.word	1073876992
   82 0040 000C0140 		.word	1073810432
   83              		.cfi_endproc
-ARM GAS  /tmp/ccY4TO9w.s 			page 3
+ARM GAS  /tmp/ccLUSv5Y.s 			page 3
 
 
   84              	.LFE65:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  130              		.loc 1 42 0
  131 002e 07B0     		add	sp, sp, #28
  132              	.LCFI5:
-ARM GAS  /tmp/ccY4TO9w.s 			page 4
+ARM GAS  /tmp/ccLUSv5Y.s 			page 4
 
 
  133              		.cfi_def_cfa_offset 4
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  186              		.cfi_startproc
  187              		@ args = 0, pretend = 0, frame = 0
  188              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccY4TO9w.s 			page 5
+ARM GAS  /tmp/ccLUSv5Y.s 			page 5
 
 
  189              	.LVL6:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  241              	.LFE69:
  243              		.section	.text.Buzzer_init,"ax",%progbits
  244              		.align	2
-ARM GAS  /tmp/ccY4TO9w.s 			page 6
+ARM GAS  /tmp/ccLUSv5Y.s 			page 6
 
 
  245              		.global	Buzzer_init
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  293 0032 2846     		mov	r0, r5
  294 0034 FFF7FEFF 		bl	HAL_GPIO_Init
  295              	.LVL13:
-ARM GAS  /tmp/ccY4TO9w.s 			page 7
+ARM GAS  /tmp/ccLUSv5Y.s 			page 7
 
 
   17:./Src/varie.c ****   Buzzer_Set(1);
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  345              	.L27:
   55:./Src/varie.c ****     Buzzer_Set(1);
  346              		.loc 1 55 0 discriminator 3
-ARM GAS  /tmp/ccY4TO9w.s 			page 8
+ARM GAS  /tmp/ccLUSv5Y.s 			page 8
 
 
  347 0006 0120     		movs	r0, #1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
   62:./Src/varie.c **** }
   63:./Src/varie.c **** void Buzzer_TwoBeep(void){
  395              		.loc 1 63 0
-ARM GAS  /tmp/ccY4TO9w.s 			page 9
+ARM GAS  /tmp/ccLUSv5Y.s 			page 9
 
 
  396              		.cfi_startproc
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  442              	.L34:
  443              	.LVL36:
  444              	.LBB8:
-ARM GAS  /tmp/ccY4TO9w.s 			page 10
+ARM GAS  /tmp/ccLUSv5Y.s 			page 10
 
 
   65:./Src/varie.c ****       Buzzer_Set(1);
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  491              	.LCFI14:
  492              		.cfi_def_cfa_offset 8
  493              		.cfi_offset 4, -8
-ARM GAS  /tmp/ccY4TO9w.s 			page 11
+ARM GAS  /tmp/ccLUSv5Y.s 			page 11
 
 
  494              		.cfi_offset 14, -4
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  538              	.L43:
  539 0034 00000000 		.word	hiwdg
  540              		.cfi_endproc
-ARM GAS  /tmp/ccY4TO9w.s 			page 12
+ARM GAS  /tmp/ccLUSv5Y.s 			page 12
 
 
  541              	.LFE72:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  588 0024 0134     		adds	r4, r4, #1
  589              	.LVL59:
  590              	.L46:
-ARM GAS  /tmp/ccY4TO9w.s 			page 13
+ARM GAS  /tmp/ccLUSv5Y.s 			page 13
 
 
   88:./Src/varie.c ****     Buzzer_Set(1);
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  640              		.align	2
  641              		.global	IS_Button
  642              		.thumb
-ARM GAS  /tmp/ccY4TO9w.s 			page 14
+ARM GAS  /tmp/ccLUSv5Y.s 			page 14
 
 
  643              		.thumb_func
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  692 0004 144B     		ldr	r3, .L61
  693 0006 9A69     		ldr	r2, [r3, #24]
  694 0008 42F01002 		orr	r2, r2, #16
-ARM GAS  /tmp/ccY4TO9w.s 			page 15
+ARM GAS  /tmp/ccLUSv5Y.s 			page 15
 
 
  695 000c 9A61     		str	r2, [r3, #24]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  119:./Src/varie.c **** 
  120:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_4 << 16;
  121:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_5 << 16;
-ARM GAS  /tmp/ccY4TO9w.s 			page 16
+ARM GAS  /tmp/ccLUSv5Y.s 			page 16
 
 
  122:./Src/varie.c **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  129:./Src/varie.c ****   GPIO_InitStruct.Pin = Power_Pin;
  788              		.loc 1 129 0
  789 001c 2023     		movs	r3, #32
-ARM GAS  /tmp/ccY4TO9w.s 			page 17
+ARM GAS  /tmp/ccLUSv5Y.s 			page 17
 
 
  790 001e 0293     		str	r3, [sp, #8]
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  834              	DebugPin4_ON:
  835              	.LFB78:
  142:./Src/varie.c **** void DebugPin4_ON(void){
-ARM GAS  /tmp/ccY4TO9w.s 			page 18
+ARM GAS  /tmp/ccLUSv5Y.s 			page 18
 
 
  836              		.loc 1 142 0
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  888              		@ args = 0, pretend = 0, frame = 0
  889              		@ frame_needed = 0, uses_anonymous_args = 0
  890              		@ link register save eliminated.
-ARM GAS  /tmp/ccY4TO9w.s 			page 19
+ARM GAS  /tmp/ccLUSv5Y.s 			page 19
 
 
  149:./Src/varie.c ****   GPIOC->BSRR = GPIO_PIN_5;
@@ -1130,67 +1130,67 @@ ARM GAS  /tmp/ccY4TO9w.s 			page 1
  936              		.file 8 "./Drivers/CMSIS/Include/core_cm3.h"
  937              		.file 9 "./Inc/delay.h"
  938              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  /tmp/ccY4TO9w.s 			page 20
+ARM GAS  /tmp/ccLUSv5Y.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 varie.c
-     /tmp/ccY4TO9w.s:20     .text.Led_init:00000000 $t
-     /tmp/ccY4TO9w.s:25     .text.Led_init:00000000 Led_init
-     /tmp/ccY4TO9w.s:81     .text.Led_init:0000003c $d
-     /tmp/ccY4TO9w.s:87     .text.IS_Charge_init:00000000 $t
-     /tmp/ccY4TO9w.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
-     /tmp/ccY4TO9w.s:139    .text.IS_Charge_init:00000034 $d
-     /tmp/ccY4TO9w.s:145    .text.Led_Set:00000000 $t
-     /tmp/ccY4TO9w.s:150    .text.Led_Set:00000000 Led_Set
-     /tmp/ccY4TO9w.s:173    .text.Led_Set:00000010 $d
-     /tmp/ccY4TO9w.s:178    .text.Power_Set:00000000 $t
-     /tmp/ccY4TO9w.s:183    .text.Power_Set:00000000 Power_Set
-     /tmp/ccY4TO9w.s:206    .text.Power_Set:00000010 $d
-     /tmp/ccY4TO9w.s:211    .text.Buzzer_Set:00000000 $t
-     /tmp/ccY4TO9w.s:216    .text.Buzzer_Set:00000000 Buzzer_Set
-     /tmp/ccY4TO9w.s:239    .text.Buzzer_Set:00000010 $d
-     /tmp/ccY4TO9w.s:244    .text.Buzzer_init:00000000 $t
-     /tmp/ccY4TO9w.s:249    .text.Buzzer_init:00000000 Buzzer_init
-     /tmp/ccY4TO9w.s:317    .text.Buzzer_init:00000050 $d
-     /tmp/ccY4TO9w.s:323    .text.Buzzer_OneBeep:00000000 $t
-     /tmp/ccY4TO9w.s:328    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
-     /tmp/ccY4TO9w.s:383    .text.Buzzer_OneBeep:00000034 $d
-     /tmp/ccY4TO9w.s:388    .text.Buzzer_TwoBeep:00000000 $t
-     /tmp/ccY4TO9w.s:393    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
-     /tmp/ccY4TO9w.s:474    .text.Buzzer_TwoBeep:00000048 $d
-     /tmp/ccY4TO9w.s:479    .text.Buzzer_OneShortBeep:00000000 $t
-     /tmp/ccY4TO9w.s:484    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
-     /tmp/ccY4TO9w.s:539    .text.Buzzer_OneShortBeep:00000034 $d
-     /tmp/ccY4TO9w.s:544    .text.Buzzer_OneLongBeep:00000000 $t
-     /tmp/ccY4TO9w.s:549    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
-     /tmp/ccY4TO9w.s:604    .text.Buzzer_OneLongBeep:00000034 $d
-     /tmp/ccY4TO9w.s:609    .text.IS_Charge:00000000 $t
-     /tmp/ccY4TO9w.s:614    .text.IS_Charge:00000000 IS_Charge
-     /tmp/ccY4TO9w.s:635    .text.IS_Charge:00000010 $d
-     /tmp/ccY4TO9w.s:640    .text.IS_Button:00000000 $t
-     /tmp/ccY4TO9w.s:645    .text.IS_Button:00000000 IS_Button
-     /tmp/ccY4TO9w.s:666    .text.IS_Button:0000000c $d
-     /tmp/ccY4TO9w.s:671    .text.DebugPin_init:00000000 $t
-     /tmp/ccY4TO9w.s:676    .text.DebugPin_init:00000000 DebugPin_init
-     /tmp/ccY4TO9w.s:748    .text.DebugPin_init:00000058 $d
-     /tmp/ccY4TO9w.s:754    .text.Button_init:00000000 $t
-     /tmp/ccY4TO9w.s:759    .text.Button_init:00000000 Button_init
-     /tmp/ccY4TO9w.s:823    .text.Button_init:00000044 $d
-     /tmp/ccY4TO9w.s:829    .text.DebugPin4_ON:00000000 $t
-     /tmp/ccY4TO9w.s:834    .text.DebugPin4_ON:00000000 DebugPin4_ON
-     /tmp/ccY4TO9w.s:849    .text.DebugPin4_ON:00000008 $d
-     /tmp/ccY4TO9w.s:854    .text.DebugPin4_OFF:00000000 $t
-     /tmp/ccY4TO9w.s:859    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
-     /tmp/ccY4TO9w.s:874    .text.DebugPin4_OFF:0000000c $d
-     /tmp/ccY4TO9w.s:879    .text.DebugPin5_ON:00000000 $t
-     /tmp/ccY4TO9w.s:884    .text.DebugPin5_ON:00000000 DebugPin5_ON
-     /tmp/ccY4TO9w.s:899    .text.DebugPin5_ON:00000008 $d
-     /tmp/ccY4TO9w.s:904    .text.DebugPin5_OFF:00000000 $t
-     /tmp/ccY4TO9w.s:909    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
-     /tmp/ccY4TO9w.s:924    .text.DebugPin5_OFF:0000000c $d
+     /tmp/ccLUSv5Y.s:20     .text.Led_init:00000000 $t
+     /tmp/ccLUSv5Y.s:25     .text.Led_init:00000000 Led_init
+     /tmp/ccLUSv5Y.s:81     .text.Led_init:0000003c $d
+     /tmp/ccLUSv5Y.s:87     .text.IS_Charge_init:00000000 $t
+     /tmp/ccLUSv5Y.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
+     /tmp/ccLUSv5Y.s:139    .text.IS_Charge_init:00000034 $d
+     /tmp/ccLUSv5Y.s:145    .text.Led_Set:00000000 $t
+     /tmp/ccLUSv5Y.s:150    .text.Led_Set:00000000 Led_Set
+     /tmp/ccLUSv5Y.s:173    .text.Led_Set:00000010 $d
+     /tmp/ccLUSv5Y.s:178    .text.Power_Set:00000000 $t
+     /tmp/ccLUSv5Y.s:183    .text.Power_Set:00000000 Power_Set
+     /tmp/ccLUSv5Y.s:206    .text.Power_Set:00000010 $d
+     /tmp/ccLUSv5Y.s:211    .text.Buzzer_Set:00000000 $t
+     /tmp/ccLUSv5Y.s:216    .text.Buzzer_Set:00000000 Buzzer_Set
+     /tmp/ccLUSv5Y.s:239    .text.Buzzer_Set:00000010 $d
+     /tmp/ccLUSv5Y.s:244    .text.Buzzer_init:00000000 $t
+     /tmp/ccLUSv5Y.s:249    .text.Buzzer_init:00000000 Buzzer_init
+     /tmp/ccLUSv5Y.s:317    .text.Buzzer_init:00000050 $d
+     /tmp/ccLUSv5Y.s:323    .text.Buzzer_OneBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:328    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
+     /tmp/ccLUSv5Y.s:383    .text.Buzzer_OneBeep:00000034 $d
+     /tmp/ccLUSv5Y.s:388    .text.Buzzer_TwoBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:393    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
+     /tmp/ccLUSv5Y.s:474    .text.Buzzer_TwoBeep:00000048 $d
+     /tmp/ccLUSv5Y.s:479    .text.Buzzer_OneShortBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:484    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
+     /tmp/ccLUSv5Y.s:539    .text.Buzzer_OneShortBeep:00000034 $d
+     /tmp/ccLUSv5Y.s:544    .text.Buzzer_OneLongBeep:00000000 $t
+     /tmp/ccLUSv5Y.s:549    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
+     /tmp/ccLUSv5Y.s:604    .text.Buzzer_OneLongBeep:00000034 $d
+     /tmp/ccLUSv5Y.s:609    .text.IS_Charge:00000000 $t
+     /tmp/ccLUSv5Y.s:614    .text.IS_Charge:00000000 IS_Charge
+     /tmp/ccLUSv5Y.s:635    .text.IS_Charge:00000010 $d
+     /tmp/ccLUSv5Y.s:640    .text.IS_Button:00000000 $t
+     /tmp/ccLUSv5Y.s:645    .text.IS_Button:00000000 IS_Button
+     /tmp/ccLUSv5Y.s:666    .text.IS_Button:0000000c $d
+     /tmp/ccLUSv5Y.s:671    .text.DebugPin_init:00000000 $t
+     /tmp/ccLUSv5Y.s:676    .text.DebugPin_init:00000000 DebugPin_init
+     /tmp/ccLUSv5Y.s:748    .text.DebugPin_init:00000058 $d
+     /tmp/ccLUSv5Y.s:754    .text.Button_init:00000000 $t
+     /tmp/ccLUSv5Y.s:759    .text.Button_init:00000000 Button_init
+     /tmp/ccLUSv5Y.s:823    .text.Button_init:00000044 $d
+     /tmp/ccLUSv5Y.s:829    .text.DebugPin4_ON:00000000 $t
+     /tmp/ccLUSv5Y.s:834    .text.DebugPin4_ON:00000000 DebugPin4_ON
+     /tmp/ccLUSv5Y.s:849    .text.DebugPin4_ON:00000008 $d
+     /tmp/ccLUSv5Y.s:854    .text.DebugPin4_OFF:00000000 $t
+     /tmp/ccLUSv5Y.s:859    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
+     /tmp/ccLUSv5Y.s:874    .text.DebugPin4_OFF:0000000c $d
+     /tmp/ccLUSv5Y.s:879    .text.DebugPin5_ON:00000000 $t
+     /tmp/ccLUSv5Y.s:884    .text.DebugPin5_ON:00000000 DebugPin5_ON
+     /tmp/ccLUSv5Y.s:899    .text.DebugPin5_ON:00000008 $d
+     /tmp/ccLUSv5Y.s:904    .text.DebugPin5_OFF:00000000 $t
+     /tmp/ccLUSv5Y.s:909    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
+     /tmp/ccLUSv5Y.s:924    .text.DebugPin5_OFF:0000000c $d
                      .debug_frame:00000010 $d
-ARM GAS  /tmp/ccY4TO9w.s 			page 21
+ARM GAS  /tmp/ccLUSv5Y.s 			page 21
 
 
 

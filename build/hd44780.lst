@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2AMnh8.s 			page 1
+ARM GAS  /tmp/ccxXlOCr.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
   35              		.cfi_def_cfa_offset 8
   36              		.cfi_offset 4, -8
   37              		.cfi_offset 14, -4
-ARM GAS  /tmp/cc2AMnh8.s 			page 2
+ARM GAS  /tmp/ccxXlOCr.s 			page 2
 
 
   38 0002 0446     		mov	r4, r0
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
   35:./Src/hd44780.c **** 
   36:./Src/hd44780.c **** 	if (value) {
   81              		.loc 1 36 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 3
+ARM GAS  /tmp/ccxXlOCr.s 			page 3
 
 
   82 0002 51B1     		cbz	r1, .L6
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
   30:./Src/hd44780.c **** }
  131              		.loc 1 30 0
  132 0002 0722     		movs	r2, #7
-ARM GAS  /tmp/cc2AMnh8.s 			page 4
+ARM GAS  /tmp/ccxXlOCr.s 			page 4
 
 
  133 0004 01F00101 		and	r1, r1, #1
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
   81:./Src/hd44780.c **** 	HAL_Delay(1);
   82:./Src/hd44780.c **** 	LCD_StateWriteBit(handle, 0, LCD_PIN_E);
   83:./Src/hd44780.c **** 	HAL_Delay(1);
-ARM GAS  /tmp/cc2AMnh8.s 			page 5
+ARM GAS  /tmp/ccxXlOCr.s 			page 5
 
 
   84:./Src/hd44780.c **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  168 0010 90F83420 		ldrb	r2, [r0, #52]	@ zero_extendqisi2
  169 0014 1343     		orrs	r3, r3, r2
  170 0016 80F83430 		strb	r3, [r0, #52]
-ARM GAS  /tmp/cc2AMnh8.s 			page 6
+ARM GAS  /tmp/ccxXlOCr.s 			page 6
 
 
  171 001a 0AE0     		b	.L13
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  213 0074 1343     		orrs	r3, r3, r2
  214 0076 80F83430 		strb	r3, [r0, #52]
  215 007a 0AE0     		b	.L17
-ARM GAS  /tmp/cc2AMnh8.s 			page 7
+ARM GAS  /tmp/ccxXlOCr.s 			page 7
 
 
  216              	.L16:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  259              		.thumb
  260              		.thumb_func
  262              	LCD_GetBusyFlag:
-ARM GAS  /tmp/cc2AMnh8.s 			page 8
+ARM GAS  /tmp/ccxXlOCr.s 			page 8
 
 
  263              	.LFB70:
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  307 002e 04F14006 		add	r6, r4, #64
  308 0032 2946     		mov	r1, r5
  309 0034 3046     		mov	r0, r6
-ARM GAS  /tmp/cc2AMnh8.s 			page 9
+ARM GAS  /tmp/ccxXlOCr.s 			page 9
 
 
  310 0036 FFF7FEFF 		bl	PCF8574_Read
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  351 007e 2046     		mov	r0, r4
  352 0080 FFF7FEFF 		bl	LCD_StateWriteBit
  353              	.LVL26:
-ARM GAS  /tmp/cc2AMnh8.s 			page 10
+ARM GAS  /tmp/ccxXlOCr.s 			page 10
 
 
  167:./Src/hd44780.c **** 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  401 0016 0DF10701 		add	r1, sp, #7
  402 001a 2046     		mov	r0, r4
  403 001c FFF7FEFF 		bl	LCD_GetBusyFlag
-ARM GAS  /tmp/cc2AMnh8.s 			page 11
+ARM GAS  /tmp/ccxXlOCr.s 			page 11
 
 
  404              	.LVL32:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  453 000a FFF7FEFF 		bl	LCD_StateWriteBit
  454              	.LVL36:
  175:./Src/hd44780.c **** 	LCD_StateWriteBit(handle, 0, LCD_PIN_RS);
-ARM GAS  /tmp/cc2AMnh8.s 			page 12
+ARM GAS  /tmp/ccxXlOCr.s 			page 12
 
 
  455              		.loc 1 175 0
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  186:./Src/hd44780.c **** 
  187:./Src/hd44780.c **** 	return LCD_OK;
  188:./Src/hd44780.c **** 
-ARM GAS  /tmp/cc2AMnh8.s 			page 13
+ARM GAS  /tmp/ccxXlOCr.s 			page 13
 
 
  189:./Src/hd44780.c **** }
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  546 0022 0121     		movs	r1, #1
  547 0024 2046     		mov	r0, r4
  548 0026 FFF7FEFF 		bl	LCD_StateWriteBit
-ARM GAS  /tmp/cc2AMnh8.s 			page 14
+ARM GAS  /tmp/ccxXlOCr.s 			page 14
 
 
  549              	.LVL50:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  591              		.loc 1 211 0
  592              		.cfi_startproc
  593              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 15
+ARM GAS  /tmp/ccxXlOCr.s 			page 15
 
 
  594              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  231:./Src/hd44780.c **** 	return LCD_OK;
  232:./Src/hd44780.c **** }
  631              		.loc 1 232 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 16
+ARM GAS  /tmp/ccxXlOCr.s 			page 16
 
 
  632 0002 0020     		movs	r0, #0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  680              		.loc 1 225 0 is_stmt 0 discriminator 1
  681 0024 2B5D     		ldrb	r3, [r5, r4]	@ zero_extendqisi2
  682 0026 002B     		cmp	r3, #0
-ARM GAS  /tmp/cc2AMnh8.s 			page 17
+ARM GAS  /tmp/ccxXlOCr.s 			page 17
 
 
  683 0028 EDD1     		bne	.L37
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  735              		.cfi_offset 14, -4
  239:./Src/hd44780.c **** 	handle->D = 1;
  736              		.loc 1 239 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 18
+ARM GAS  /tmp/ccxXlOCr.s 			page 18
 
 
  737 0002 0123     		movs	r3, #1
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  252:./Src/hd44780.c **** 	cmd = cmd | (handle->D << 2);
  253:./Src/hd44780.c **** 	cmd = cmd | (handle->C << 1);
  781              		.loc 1 253 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 19
+ARM GAS  /tmp/ccxXlOCr.s 			page 19
 
 
  782 0006 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  827              		.loc 1 264 0
  828 000a 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
  829 000c 9B00     		lsls	r3, r3, #2
-ARM GAS  /tmp/cc2AMnh8.s 			page 20
+ARM GAS  /tmp/ccxXlOCr.s 			page 20
 
 
  830 000e 43F00803 		orr	r3, r3, #8
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  875              		.loc 1 275 0
  876 000e 03F0FC03 		and	r3, r3, #252
  877              	.LVL93:
-ARM GAS  /tmp/cc2AMnh8.s 			page 21
+ARM GAS  /tmp/ccxXlOCr.s 			page 21
 
 
  276:./Src/hd44780.c **** 	cmd = cmd | handle->B;
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  287:./Src/hd44780.c **** 
  288:./Src/hd44780.c **** 	int i = 0;
  289:./Src/hd44780.c **** 	for (i = 0; i < steps; i++) {
-ARM GAS  /tmp/cc2AMnh8.s 			page 22
+ARM GAS  /tmp/ccxXlOCr.s 			page 22
 
 
  923              		.loc 1 289 0
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  967              		.cfi_startproc
  968              		@ args = 0, pretend = 0, frame = 0
  969              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 23
+ARM GAS  /tmp/ccxXlOCr.s 			page 23
 
 
  970              	.LVL105:
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1011              		.loc 1 308 0 discriminator 2
  1012 002c 0134     		adds	r4, r4, #1
  1013              	.LVL112:
-ARM GAS  /tmp/cc2AMnh8.s 			page 24
+ARM GAS  /tmp/ccxXlOCr.s 			page 24
 
 
  1014              	.L57:
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1054 000e 00D8     		bhi	.L63
  327:./Src/hd44780.c **** 		base = 10;
  1055              		.loc 1 327 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 25
+ARM GAS  /tmp/ccxXlOCr.s 			page 25
 
 
  1056 0010 0A22     		movs	r2, #10
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1101              	.LVL128:
  336:./Src/hd44780.c **** }
  1102              		.loc 1 336 0
-ARM GAS  /tmp/cc2AMnh8.s 			page 26
+ARM GAS  /tmp/ccxXlOCr.s 			page 26
 
 
  1103 003a 0AB0     		add	sp, sp, #40
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1154              	.LVL132:
  1155 001a 28B1     		cbz	r0, .L70
  342:./Src/hd44780.c **** 		LCD_WriteString(handle,"-");
-ARM GAS  /tmp/cc2AMnh8.s 			page 27
+ARM GAS  /tmp/ccxXlOCr.s 			page 27
 
 
  1156              		.loc 1 342 0
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1198 0048 FFF7FEFF 		bl	__aeabi_dadd
  1199              	.LVL140:
  1200 004c 0646     		mov	r6, r0
-ARM GAS  /tmp/cc2AMnh8.s 			page 28
+ARM GAS  /tmp/ccxXlOCr.s 			page 28
 
 
  1201              	.LVL141:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1241 0082 134B     		ldr	r3, .L79+8
  1242 0084 3046     		mov	r0, r6
  1243 0086 3946     		mov	r1, r7
-ARM GAS  /tmp/cc2AMnh8.s 			page 29
+ARM GAS  /tmp/ccxXlOCr.s 			page 29
 
 
  1244 0088 FFF7FEFF 		bl	__aeabi_dmul
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1291 00c6 00BF     		.align	2
  1292              	.L79:
  1293 00c8 00000000 		.word	.LC0
-ARM GAS  /tmp/cc2AMnh8.s 			page 30
+ARM GAS  /tmp/ccxXlOCr.s 			page 30
 
 
  1294 00cc 0000E03F 		.word	1071644672
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1339              		.thumb_func
  1341              	LCD_Init:
  1342              	.LFB68:
-ARM GAS  /tmp/cc2AMnh8.s 			page 31
+ARM GAS  /tmp/ccxXlOCr.s 			page 31
 
 
   44:./Src/hd44780.c **** 	handle->D = 1;
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
   55:./Src/hd44780.c **** 		return LCD_ERROR;
  1388              		.loc 1 55 0
  1389 002e D4F88830 		ldr	r3, [r4, #136]
-ARM GAS  /tmp/cc2AMnh8.s 			page 32
+ARM GAS  /tmp/ccxXlOCr.s 			page 32
 
 
  1390 0032 0120     		movs	r0, #1
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1435              		.loc 1 68 0
  1436 0076 0622     		movs	r2, #6
  1437 0078 0021     		movs	r1, #0
-ARM GAS  /tmp/cc2AMnh8.s 			page 33
+ARM GAS  /tmp/ccxXlOCr.s 			page 33
 
 
  1438 007a 2046     		mov	r0, r4
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1483 00c2 FFF7FEFF 		bl	HAL_Delay
  1484              	.LVL197:
   82:./Src/hd44780.c **** 	HAL_Delay(1);
-ARM GAS  /tmp/cc2AMnh8.s 			page 34
+ARM GAS  /tmp/ccxXlOCr.s 			page 34
 
 
  1485              		.loc 1 82 0
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  100:./Src/hd44780.c **** 	cmd = cmd | handle->B;
  1531              		.loc 1 100 0
  1532 010e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
-ARM GAS  /tmp/cc2AMnh8.s 			page 35
+ARM GAS  /tmp/ccxXlOCr.s 			page 35
 
 
  1533 0110 5B00     		lsls	r3, r3, #1
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1580              		.thumb
  1581              		.thumb_func
  1583              	LCD_CustomChar:
-ARM GAS  /tmp/cc2AMnh8.s 			page 36
+ARM GAS  /tmp/ccxXlOCr.s 			page 36
 
 
  1584              	.LFB85:
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  393:./Src/hd44780.c **** 	}
  394:./Src/hd44780.c **** 	return LCD_OK;
  395:./Src/hd44780.c **** }
-ARM GAS  /tmp/cc2AMnh8.s 			page 37
+ARM GAS  /tmp/ccxXlOCr.s 			page 37
 
 
  1627              		.loc 1 395 0 is_stmt 1
@@ -2198,67 +2198,67 @@ ARM GAS  /tmp/cc2AMnh8.s 			page 1
  1664              		.file 9 "./Inc/hd44780.h"
  1665              		.file 10 "./Drivers/CMSIS/Include/core_cm3.h"
  1666              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  /tmp/cc2AMnh8.s 			page 38
+ARM GAS  /tmp/ccxXlOCr.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 hd44780.c
-     /tmp/cc2AMnh8.s:20     .text.LCD_I2C_WriteOut:00000000 $t
-     /tmp/cc2AMnh8.s:25     .text.LCD_I2C_WriteOut:00000000 LCD_I2C_WriteOut
-     /tmp/cc2AMnh8.s:64     .text.LCD_StateWriteBit:00000000 $t
-     /tmp/cc2AMnh8.s:69     .text.LCD_StateWriteBit:00000000 LCD_StateWriteBit
-     /tmp/cc2AMnh8.s:114    .text.LCD_StateLEDControl:00000000 $t
-     /tmp/cc2AMnh8.s:119    .text.LCD_StateLEDControl:00000000 LCD_StateLEDControl
-     /tmp/cc2AMnh8.s:143    .text.LCD_WriteToDataBus:00000000 $t
-     /tmp/cc2AMnh8.s:148    .text.LCD_WriteToDataBus:00000000 LCD_WriteToDataBus
-     /tmp/cc2AMnh8.s:257    .text.LCD_GetBusyFlag:00000000 $t
-     /tmp/cc2AMnh8.s:262    .text.LCD_GetBusyFlag:00000000 LCD_GetBusyFlag
-     /tmp/cc2AMnh8.s:365    .text.LCD_WaitForBusyFlag:00000000 $t
-     /tmp/cc2AMnh8.s:370    .text.LCD_WaitForBusyFlag:00000000 LCD_WaitForBusyFlag
-     /tmp/cc2AMnh8.s:428    .text.LCD_WriteCMD:00000000 $t
-     /tmp/cc2AMnh8.s:433    .text.LCD_WriteCMD:00000000 LCD_WriteCMD
-     /tmp/cc2AMnh8.s:506    .text.LCD_WriteDATA:00000000 $t
-     /tmp/cc2AMnh8.s:511    .text.LCD_WriteDATA:00000000 LCD_WriteDATA
-     /tmp/cc2AMnh8.s:584    .text.LCD_SetLocation:00000000 $t
-     /tmp/cc2AMnh8.s:589    .text.LCD_SetLocation:00000000 LCD_SetLocation
-     /tmp/cc2AMnh8.s:617    .text.LCD_WriteString:00000000 $t
-     /tmp/cc2AMnh8.s:622    .text.LCD_WriteString:00000000 LCD_WriteString
-     /tmp/cc2AMnh8.s:692    .text.LCD_ClearDisplay:00000000 $t
-     /tmp/cc2AMnh8.s:697    .text.LCD_ClearDisplay:00000000 LCD_ClearDisplay
-     /tmp/cc2AMnh8.s:719    .text.LCD_DisplayON:00000000 $t
-     /tmp/cc2AMnh8.s:724    .text.LCD_DisplayON:00000000 LCD_DisplayON
-     /tmp/cc2AMnh8.s:760    .text.LCD_DisplayOFF:00000000 $t
-     /tmp/cc2AMnh8.s:765    .text.LCD_DisplayOFF:00000000 LCD_DisplayOFF
-     /tmp/cc2AMnh8.s:801    .text.LCD_CursorON:00000000 $t
-     /tmp/cc2AMnh8.s:806    .text.LCD_CursorON:00000000 LCD_CursorON
-     /tmp/cc2AMnh8.s:849    .text.LCD_CursorOFF:00000000 $t
-     /tmp/cc2AMnh8.s:854    .text.LCD_CursorOFF:00000000 LCD_CursorOFF
-     /tmp/cc2AMnh8.s:892    .text.LCD_ShiftCursor:00000000 $t
-     /tmp/cc2AMnh8.s:897    .text.LCD_ShiftCursor:00000000 LCD_ShiftCursor
-     /tmp/cc2AMnh8.s:959    .text.LCD_ShiftDisplay:00000000 $t
-     /tmp/cc2AMnh8.s:964    .text.LCD_ShiftDisplay:00000000 LCD_ShiftDisplay
-     /tmp/cc2AMnh8.s:1026   .text.LCD_WriteNumber:00000000 $t
-     /tmp/cc2AMnh8.s:1031   .text.LCD_WriteNumber:00000000 LCD_WriteNumber
-     /tmp/cc2AMnh8.s:1121   .text.LCD_WriteFloat:00000000 $t
-     /tmp/cc2AMnh8.s:1126   .text.LCD_WriteFloat:00000000 LCD_WriteFloat
-     /tmp/cc2AMnh8.s:1293   .text.LCD_WriteFloat:000000c8 $d
-     /tmp/cc2AMnh8.s:1301   .text.LCD_EntryModeSet:00000000 $t
-     /tmp/cc2AMnh8.s:1306   .text.LCD_EntryModeSet:00000000 LCD_EntryModeSet
-     /tmp/cc2AMnh8.s:1336   .text.LCD_Init:00000000 $t
-     /tmp/cc2AMnh8.s:1341   .text.LCD_Init:00000000 LCD_Init
-     /tmp/cc2AMnh8.s:1573   .text.LCD_Init:00000144 $d
-     /tmp/cc2AMnh8.s:1578   .text.LCD_CustomChar:00000000 $t
-     /tmp/cc2AMnh8.s:1583   .text.LCD_CustomChar:00000000 LCD_CustomChar
-     /tmp/cc2AMnh8.s:1646   .data.PCF8574_Type0Pins:00000000 PCF8574_Type0Pins
-     /tmp/cc2AMnh8.s:1635   .rodata.str1.4:00000000 $d
-     /tmp/cc2AMnh8.s:1642   .data.PCF8574_Type0Pins:00000000 $d
+     /tmp/ccxXlOCr.s:20     .text.LCD_I2C_WriteOut:00000000 $t
+     /tmp/ccxXlOCr.s:25     .text.LCD_I2C_WriteOut:00000000 LCD_I2C_WriteOut
+     /tmp/ccxXlOCr.s:64     .text.LCD_StateWriteBit:00000000 $t
+     /tmp/ccxXlOCr.s:69     .text.LCD_StateWriteBit:00000000 LCD_StateWriteBit
+     /tmp/ccxXlOCr.s:114    .text.LCD_StateLEDControl:00000000 $t
+     /tmp/ccxXlOCr.s:119    .text.LCD_StateLEDControl:00000000 LCD_StateLEDControl
+     /tmp/ccxXlOCr.s:143    .text.LCD_WriteToDataBus:00000000 $t
+     /tmp/ccxXlOCr.s:148    .text.LCD_WriteToDataBus:00000000 LCD_WriteToDataBus
+     /tmp/ccxXlOCr.s:257    .text.LCD_GetBusyFlag:00000000 $t
+     /tmp/ccxXlOCr.s:262    .text.LCD_GetBusyFlag:00000000 LCD_GetBusyFlag
+     /tmp/ccxXlOCr.s:365    .text.LCD_WaitForBusyFlag:00000000 $t
+     /tmp/ccxXlOCr.s:370    .text.LCD_WaitForBusyFlag:00000000 LCD_WaitForBusyFlag
+     /tmp/ccxXlOCr.s:428    .text.LCD_WriteCMD:00000000 $t
+     /tmp/ccxXlOCr.s:433    .text.LCD_WriteCMD:00000000 LCD_WriteCMD
+     /tmp/ccxXlOCr.s:506    .text.LCD_WriteDATA:00000000 $t
+     /tmp/ccxXlOCr.s:511    .text.LCD_WriteDATA:00000000 LCD_WriteDATA
+     /tmp/ccxXlOCr.s:584    .text.LCD_SetLocation:00000000 $t
+     /tmp/ccxXlOCr.s:589    .text.LCD_SetLocation:00000000 LCD_SetLocation
+     /tmp/ccxXlOCr.s:617    .text.LCD_WriteString:00000000 $t
+     /tmp/ccxXlOCr.s:622    .text.LCD_WriteString:00000000 LCD_WriteString
+     /tmp/ccxXlOCr.s:692    .text.LCD_ClearDisplay:00000000 $t
+     /tmp/ccxXlOCr.s:697    .text.LCD_ClearDisplay:00000000 LCD_ClearDisplay
+     /tmp/ccxXlOCr.s:719    .text.LCD_DisplayON:00000000 $t
+     /tmp/ccxXlOCr.s:724    .text.LCD_DisplayON:00000000 LCD_DisplayON
+     /tmp/ccxXlOCr.s:760    .text.LCD_DisplayOFF:00000000 $t
+     /tmp/ccxXlOCr.s:765    .text.LCD_DisplayOFF:00000000 LCD_DisplayOFF
+     /tmp/ccxXlOCr.s:801    .text.LCD_CursorON:00000000 $t
+     /tmp/ccxXlOCr.s:806    .text.LCD_CursorON:00000000 LCD_CursorON
+     /tmp/ccxXlOCr.s:849    .text.LCD_CursorOFF:00000000 $t
+     /tmp/ccxXlOCr.s:854    .text.LCD_CursorOFF:00000000 LCD_CursorOFF
+     /tmp/ccxXlOCr.s:892    .text.LCD_ShiftCursor:00000000 $t
+     /tmp/ccxXlOCr.s:897    .text.LCD_ShiftCursor:00000000 LCD_ShiftCursor
+     /tmp/ccxXlOCr.s:959    .text.LCD_ShiftDisplay:00000000 $t
+     /tmp/ccxXlOCr.s:964    .text.LCD_ShiftDisplay:00000000 LCD_ShiftDisplay
+     /tmp/ccxXlOCr.s:1026   .text.LCD_WriteNumber:00000000 $t
+     /tmp/ccxXlOCr.s:1031   .text.LCD_WriteNumber:00000000 LCD_WriteNumber
+     /tmp/ccxXlOCr.s:1121   .text.LCD_WriteFloat:00000000 $t
+     /tmp/ccxXlOCr.s:1126   .text.LCD_WriteFloat:00000000 LCD_WriteFloat
+     /tmp/ccxXlOCr.s:1293   .text.LCD_WriteFloat:000000c8 $d
+     /tmp/ccxXlOCr.s:1301   .text.LCD_EntryModeSet:00000000 $t
+     /tmp/ccxXlOCr.s:1306   .text.LCD_EntryModeSet:00000000 LCD_EntryModeSet
+     /tmp/ccxXlOCr.s:1336   .text.LCD_Init:00000000 $t
+     /tmp/ccxXlOCr.s:1341   .text.LCD_Init:00000000 LCD_Init
+     /tmp/ccxXlOCr.s:1573   .text.LCD_Init:00000144 $d
+     /tmp/ccxXlOCr.s:1578   .text.LCD_CustomChar:00000000 $t
+     /tmp/ccxXlOCr.s:1583   .text.LCD_CustomChar:00000000 LCD_CustomChar
+     /tmp/ccxXlOCr.s:1646   .data.PCF8574_Type0Pins:00000000 PCF8574_Type0Pins
+     /tmp/ccxXlOCr.s:1635   .rodata.str1.4:00000000 $d
+     /tmp/ccxXlOCr.s:1642   .data.PCF8574_Type0Pins:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
 PCF8574_Write
 PCF8574_Read
 HAL_GetTick
-ARM GAS  /tmp/cc2AMnh8.s 			page 39
+ARM GAS  /tmp/ccxXlOCr.s 			page 39
 
 
 __aeabi_dcmplt
