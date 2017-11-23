@@ -8,7 +8,7 @@
 
    #include "stm32f1xx_hal.h"
 
-   #define ADC_MOTOR_L_CENTER   1866
+   #define ADC_MOTOR_L_CENTER   1900
    #define MOTOR_L_AMP_CONV_AMP 0.02068965517241379310344827586207
 
    struct ADC_Ldati{

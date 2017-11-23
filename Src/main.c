@@ -237,8 +237,9 @@ int main(void)
 
   uint32_t sinValue = 1999;
 
-  int lastSpeedL = 0, lastSpeedR = 0, lastDistance = 0;
-  float setDistance = saveValue / 1000.0;
+  int lastSpeedL = 0, lastSpeedR = 0;
+  int32_t lastMotorposR = 0, lastMotorposL = 0;
+  float speedReading = 0.0;
   while(1){
     sinValue++;
     if ((sinValue) % (200) == 0) {
@@ -248,16 +249,16 @@ int main(void)
       char str[200];
       memset(&str[0], 0, sizeof(str));
       sprintf(str, "%i;%i;%i;%i;%i;%i\n\r", captured_value[0], captured_value[1], captured_value[2], captured_value[3], captured_value[4], captured_value[5]);
-      int readR = -(CLAMP((((captured_value[1]-500)-(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
-      int readL = -(CLAMP((((captured_value[1]-500)+(captured_value[0]-500))*(captured_value[2]/500.0)), -1000, 1000));
+      int readR = -(CLAMP((((captured_value[1]-500)-(captured_value[0]-500)/2.0)*(captured_value[2]/500.0)), -1000, 1000));
+      int readL = -(CLAMP((((captured_value[1]-500)+(captured_value[0]-500)/2.0)*(captured_value[2]/500.0)), -1000, 1000));
 
       int16_t tempL = speedL;
-      speedL -=  tempL / 2.0;
-      speedL += readL / 2.0;
+      speedL -=  tempL / 1.0;
+      speedL += readL / 1.0;
 
       int16_t tempR = speedR;
-      speedR -=  tempR / 2.0;
-      speedR += readR / 2.0;
+      speedR -=  tempR / 1.0;
+      speedR += readR / 1.0;
 
 
       if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50) && timeout < 1000) {
@@ -277,7 +278,13 @@ int main(void)
       MotorL_pwm(0);
     }
 
-    counterTemp = HAL_GetTick();
+
+    if (counterTemp + 500 < HAL_GetTick()) {
+      speedReading = ABS(MAX(((motorL.motorpos - lastMotorposL) / 90.0)*3.6, ((motorR.motorpos - lastMotorposR) / 90.0)*3.6));
+      counterTemp = HAL_GetTick();
+      lastMotorposL = motorL.motorpos;
+      lastMotorposR = motorR.motorpos;
+    }
 
     if(IS_Button()) {
       MotorL_pwm(0);
@@ -293,12 +300,27 @@ int main(void)
     if ((sinValue) % (2000) == 0) {
       //LCD_SetLocation(&lcd, 4, 0);
       //LCD_WriteFloat(&lcd,distance/1345.0,2);
-      LCD_SetLocation(&lcd, 8, 0);
-      LCD_WriteFloat(&lcd,0,2);
+      if (speedReading < 10.0) {
+        LCD_SetLocation(&lcd, 7, 0);
+        LCD_WriteString(&lcd, " ");
+        LCD_SetLocation(&lcd, 8, 0);
+      } else {
+        LCD_SetLocation(&lcd, 7, 0);
+      }
+      LCD_WriteFloat(&lcd,speedReading,2);
       LCD_SetLocation(&lcd, 4, 1);
       LCD_WriteFloat(&lcd,GET_BatteryAverage(),1);
-      LCD_SetLocation(&lcd, 11, 1);
-      LCD_WriteFloat(&lcd,MAX(ABS(getMotorCurrentR() * 0.02), ABS(getMotorCurrentL() * 0.02)),2);
+      float current = ABS(getMotorCurrentR() * 0.02) + ABS(getMotorCurrentL() * 0.02);
+      if (current < 10.0) {
+        LCD_SetLocation(&lcd, 10, 1);
+        LCD_WriteString(&lcd, " ");
+        LCD_SetLocation(&lcd, 11, 1);
+      } else {
+        LCD_SetLocation(&lcd, 10, 1);
+      }
+      LCD_WriteFloat(&lcd,ABS(current),2);
+      LCD_SetLocation(&lcd, 15, 1);
+      LCD_WriteString(&lcd, "A");
     }
 
 
@@ -313,7 +335,7 @@ int main(void)
 
     //Batteria Scarica?
 
-    if(ABS(getMotorCurrentR() * 0.02) > 45.0 || ABS(getMotorCurrentL() * 0.02) > 45.0){
+    if(ABS(getMotorCurrentR() * 0.02) > 47.0 || ABS(getMotorCurrentL() * 0.02) > 47.0){
       MotorL_pwm(0);
       MotorR_pwm(0);
       Buzzer_OneLongBeep();

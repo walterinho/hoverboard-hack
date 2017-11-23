@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc7NMNcg.s 			page 1
+ARM GAS  /tmp/ccoTvhMz.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
   34              		.cfi_def_cfa_offset 8
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
-ARM GAS  /tmp/cc7NMNcg.s 			page 2
+ARM GAS  /tmp/ccoTvhMz.s 			page 2
 
 
   37 0002 86B0     		sub	sp, sp, #24
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
   81 003c 00100240 		.word	1073876992
   82 0040 000C0140 		.word	1073810432
   83              		.cfi_endproc
-ARM GAS  /tmp/cc7NMNcg.s 			page 3
+ARM GAS  /tmp/ccoTvhMz.s 			page 3
 
 
   84              	.LFE65:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  130              		.loc 1 42 0
  131 002e 07B0     		add	sp, sp, #28
  132              	.LCFI5:
-ARM GAS  /tmp/cc7NMNcg.s 			page 4
+ARM GAS  /tmp/ccoTvhMz.s 			page 4
 
 
  133              		.cfi_def_cfa_offset 4
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  186              		.cfi_startproc
  187              		@ args = 0, pretend = 0, frame = 0
  188              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc7NMNcg.s 			page 5
+ARM GAS  /tmp/ccoTvhMz.s 			page 5
 
 
  189              	.LVL6:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  241              	.LFE69:
  243              		.section	.text.Buzzer_init,"ax",%progbits
  244              		.align	2
-ARM GAS  /tmp/cc7NMNcg.s 			page 6
+ARM GAS  /tmp/ccoTvhMz.s 			page 6
 
 
  245              		.global	Buzzer_init
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  293 0032 2846     		mov	r0, r5
  294 0034 FFF7FEFF 		bl	HAL_GPIO_Init
  295              	.LVL13:
-ARM GAS  /tmp/cc7NMNcg.s 			page 7
+ARM GAS  /tmp/ccoTvhMz.s 			page 7
 
 
   17:./Src/varie.c ****   Buzzer_Set(1);
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  345              	.L27:
   55:./Src/varie.c ****     Buzzer_Set(1);
  346              		.loc 1 55 0 discriminator 3
-ARM GAS  /tmp/cc7NMNcg.s 			page 8
+ARM GAS  /tmp/ccoTvhMz.s 			page 8
 
 
  347 0006 0120     		movs	r0, #1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
   62:./Src/varie.c **** }
   63:./Src/varie.c **** void Buzzer_TwoBeep(void){
  395              		.loc 1 63 0
-ARM GAS  /tmp/cc7NMNcg.s 			page 9
+ARM GAS  /tmp/ccoTvhMz.s 			page 9
 
 
  396              		.cfi_startproc
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  442              	.L34:
  443              	.LVL36:
  444              	.LBB8:
-ARM GAS  /tmp/cc7NMNcg.s 			page 10
+ARM GAS  /tmp/ccoTvhMz.s 			page 10
 
 
   65:./Src/varie.c ****       Buzzer_Set(1);
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  491              	.LCFI14:
  492              		.cfi_def_cfa_offset 8
  493              		.cfi_offset 4, -8
-ARM GAS  /tmp/cc7NMNcg.s 			page 11
+ARM GAS  /tmp/ccoTvhMz.s 			page 11
 
 
  494              		.cfi_offset 14, -4
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  538              	.L43:
  539 0034 00000000 		.word	hiwdg
  540              		.cfi_endproc
-ARM GAS  /tmp/cc7NMNcg.s 			page 12
+ARM GAS  /tmp/ccoTvhMz.s 			page 12
 
 
  541              	.LFE72:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  588 0024 0134     		adds	r4, r4, #1
  589              	.LVL59:
  590              	.L46:
-ARM GAS  /tmp/cc7NMNcg.s 			page 13
+ARM GAS  /tmp/ccoTvhMz.s 			page 13
 
 
   88:./Src/varie.c ****     Buzzer_Set(1);
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  640              		.align	2
  641              		.global	IS_Button
  642              		.thumb
-ARM GAS  /tmp/cc7NMNcg.s 			page 14
+ARM GAS  /tmp/ccoTvhMz.s 			page 14
 
 
  643              		.thumb_func
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  692 0004 144B     		ldr	r3, .L61
  693 0006 9A69     		ldr	r2, [r3, #24]
  694 0008 42F01002 		orr	r2, r2, #16
-ARM GAS  /tmp/cc7NMNcg.s 			page 15
+ARM GAS  /tmp/ccoTvhMz.s 			page 15
 
 
  695 000c 9A61     		str	r2, [r3, #24]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  119:./Src/varie.c **** 
  120:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_4 << 16;
  121:./Src/varie.c **** //  tu32 = (uint32_t)GPIO_PIN_5 << 16;
-ARM GAS  /tmp/cc7NMNcg.s 			page 16
+ARM GAS  /tmp/ccoTvhMz.s 			page 16
 
 
  122:./Src/varie.c **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  784              		.loc 1 132 0
  785 0014 6946     		mov	r1, sp
  786 0016 0848     		ldr	r0, .L65+4
-ARM GAS  /tmp/cc7NMNcg.s 			page 17
+ARM GAS  /tmp/ccoTvhMz.s 			page 17
 
 
  787 0018 FFF7FEFF 		bl	HAL_GPIO_Init
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  835              		.loc 1 140 0
  836 0004 0F4B     		ldr	r3, .L69
  837 0006 9A69     		ldr	r2, [r3, #24]
-ARM GAS  /tmp/cc7NMNcg.s 			page 18
+ARM GAS  /tmp/ccoTvhMz.s 			page 18
 
 
  838 0008 42F00402 		orr	r2, r2, #4
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  878              		@ sp needed
  879 0042 30BD     		pop	{r4, r5, pc}
  880              	.L70:
-ARM GAS  /tmp/cc7NMNcg.s 			page 19
+ARM GAS  /tmp/ccoTvhMz.s 			page 19
 
 
  881              		.align	2
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  933              	.L75:
  934 000c 00100140 		.word	1073811456
  935              		.cfi_endproc
-ARM GAS  /tmp/cc7NMNcg.s 			page 20
+ARM GAS  /tmp/ccoTvhMz.s 			page 20
 
 
  936              	.LFE80:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  989              	.Letext0:
  990              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
  991              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
-ARM GAS  /tmp/cc7NMNcg.s 			page 21
+ARM GAS  /tmp/ccoTvhMz.s 			page 21
 
 
  992              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
@@ -1209,71 +1209,71 @@ ARM GAS  /tmp/cc7NMNcg.s 			page 1
  997              		.file 9 "./Inc/delay.h"
  998              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  999              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
-ARM GAS  /tmp/cc7NMNcg.s 			page 22
+ARM GAS  /tmp/ccoTvhMz.s 			page 22
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 varie.c
-     /tmp/cc7NMNcg.s:20     .text.Led_init:00000000 $t
-     /tmp/cc7NMNcg.s:25     .text.Led_init:00000000 Led_init
-     /tmp/cc7NMNcg.s:81     .text.Led_init:0000003c $d
-     /tmp/cc7NMNcg.s:87     .text.IS_Charge_init:00000000 $t
-     /tmp/cc7NMNcg.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
-     /tmp/cc7NMNcg.s:139    .text.IS_Charge_init:00000034 $d
-     /tmp/cc7NMNcg.s:145    .text.Led_Set:00000000 $t
-     /tmp/cc7NMNcg.s:150    .text.Led_Set:00000000 Led_Set
-     /tmp/cc7NMNcg.s:173    .text.Led_Set:00000010 $d
-     /tmp/cc7NMNcg.s:178    .text.Power_Set:00000000 $t
-     /tmp/cc7NMNcg.s:183    .text.Power_Set:00000000 Power_Set
-     /tmp/cc7NMNcg.s:206    .text.Power_Set:00000010 $d
-     /tmp/cc7NMNcg.s:211    .text.Buzzer_Set:00000000 $t
-     /tmp/cc7NMNcg.s:216    .text.Buzzer_Set:00000000 Buzzer_Set
-     /tmp/cc7NMNcg.s:239    .text.Buzzer_Set:00000010 $d
-     /tmp/cc7NMNcg.s:244    .text.Buzzer_init:00000000 $t
-     /tmp/cc7NMNcg.s:249    .text.Buzzer_init:00000000 Buzzer_init
-     /tmp/cc7NMNcg.s:317    .text.Buzzer_init:00000050 $d
-     /tmp/cc7NMNcg.s:323    .text.Buzzer_OneBeep:00000000 $t
-     /tmp/cc7NMNcg.s:328    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
-     /tmp/cc7NMNcg.s:383    .text.Buzzer_OneBeep:00000034 $d
-     /tmp/cc7NMNcg.s:388    .text.Buzzer_TwoBeep:00000000 $t
-     /tmp/cc7NMNcg.s:393    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
-     /tmp/cc7NMNcg.s:474    .text.Buzzer_TwoBeep:00000048 $d
-     /tmp/cc7NMNcg.s:479    .text.Buzzer_OneShortBeep:00000000 $t
-     /tmp/cc7NMNcg.s:484    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
-     /tmp/cc7NMNcg.s:539    .text.Buzzer_OneShortBeep:00000034 $d
-     /tmp/cc7NMNcg.s:544    .text.Buzzer_OneLongBeep:00000000 $t
-     /tmp/cc7NMNcg.s:549    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
-     /tmp/cc7NMNcg.s:604    .text.Buzzer_OneLongBeep:00000034 $d
-     /tmp/cc7NMNcg.s:609    .text.IS_Charge:00000000 $t
-     /tmp/cc7NMNcg.s:614    .text.IS_Charge:00000000 IS_Charge
-     /tmp/cc7NMNcg.s:635    .text.IS_Charge:00000010 $d
-     /tmp/cc7NMNcg.s:640    .text.IS_Button:00000000 $t
-     /tmp/cc7NMNcg.s:645    .text.IS_Button:00000000 IS_Button
-     /tmp/cc7NMNcg.s:666    .text.IS_Button:0000000c $d
-     /tmp/cc7NMNcg.s:671    .text.DebugPin_init:00000000 $t
-     /tmp/cc7NMNcg.s:676    .text.DebugPin_init:00000000 DebugPin_init
-     /tmp/cc7NMNcg.s:748    .text.DebugPin_init:00000058 $d
-     /tmp/cc7NMNcg.s:754    .text.Timer_init:00000000 $t
-     /tmp/cc7NMNcg.s:759    .text.Timer_init:00000000 Timer_init
-     /tmp/cc7NMNcg.s:808    .text.Timer_init:00000034 $d
-     /tmp/cc7NMNcg.s:814    .text.Button_init:00000000 $t
-     /tmp/cc7NMNcg.s:819    .text.Button_init:00000000 Button_init
-     /tmp/cc7NMNcg.s:883    .text.Button_init:00000044 $d
-     /tmp/cc7NMNcg.s:889    .text.DebugPin4_ON:00000000 $t
-     /tmp/cc7NMNcg.s:894    .text.DebugPin4_ON:00000000 DebugPin4_ON
-     /tmp/cc7NMNcg.s:909    .text.DebugPin4_ON:00000008 $d
-     /tmp/cc7NMNcg.s:914    .text.DebugPin4_OFF:00000000 $t
-     /tmp/cc7NMNcg.s:919    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
-     /tmp/cc7NMNcg.s:934    .text.DebugPin4_OFF:0000000c $d
-     /tmp/cc7NMNcg.s:939    .text.DebugPin5_ON:00000000 $t
-     /tmp/cc7NMNcg.s:944    .text.DebugPin5_ON:00000000 DebugPin5_ON
-     /tmp/cc7NMNcg.s:959    .text.DebugPin5_ON:00000008 $d
-     /tmp/cc7NMNcg.s:964    .text.DebugPin5_OFF:00000000 $t
-ARM GAS  /tmp/cc7NMNcg.s 			page 23
+     /tmp/ccoTvhMz.s:20     .text.Led_init:00000000 $t
+     /tmp/ccoTvhMz.s:25     .text.Led_init:00000000 Led_init
+     /tmp/ccoTvhMz.s:81     .text.Led_init:0000003c $d
+     /tmp/ccoTvhMz.s:87     .text.IS_Charge_init:00000000 $t
+     /tmp/ccoTvhMz.s:92     .text.IS_Charge_init:00000000 IS_Charge_init
+     /tmp/ccoTvhMz.s:139    .text.IS_Charge_init:00000034 $d
+     /tmp/ccoTvhMz.s:145    .text.Led_Set:00000000 $t
+     /tmp/ccoTvhMz.s:150    .text.Led_Set:00000000 Led_Set
+     /tmp/ccoTvhMz.s:173    .text.Led_Set:00000010 $d
+     /tmp/ccoTvhMz.s:178    .text.Power_Set:00000000 $t
+     /tmp/ccoTvhMz.s:183    .text.Power_Set:00000000 Power_Set
+     /tmp/ccoTvhMz.s:206    .text.Power_Set:00000010 $d
+     /tmp/ccoTvhMz.s:211    .text.Buzzer_Set:00000000 $t
+     /tmp/ccoTvhMz.s:216    .text.Buzzer_Set:00000000 Buzzer_Set
+     /tmp/ccoTvhMz.s:239    .text.Buzzer_Set:00000010 $d
+     /tmp/ccoTvhMz.s:244    .text.Buzzer_init:00000000 $t
+     /tmp/ccoTvhMz.s:249    .text.Buzzer_init:00000000 Buzzer_init
+     /tmp/ccoTvhMz.s:317    .text.Buzzer_init:00000050 $d
+     /tmp/ccoTvhMz.s:323    .text.Buzzer_OneBeep:00000000 $t
+     /tmp/ccoTvhMz.s:328    .text.Buzzer_OneBeep:00000000 Buzzer_OneBeep
+     /tmp/ccoTvhMz.s:383    .text.Buzzer_OneBeep:00000034 $d
+     /tmp/ccoTvhMz.s:388    .text.Buzzer_TwoBeep:00000000 $t
+     /tmp/ccoTvhMz.s:393    .text.Buzzer_TwoBeep:00000000 Buzzer_TwoBeep
+     /tmp/ccoTvhMz.s:474    .text.Buzzer_TwoBeep:00000048 $d
+     /tmp/ccoTvhMz.s:479    .text.Buzzer_OneShortBeep:00000000 $t
+     /tmp/ccoTvhMz.s:484    .text.Buzzer_OneShortBeep:00000000 Buzzer_OneShortBeep
+     /tmp/ccoTvhMz.s:539    .text.Buzzer_OneShortBeep:00000034 $d
+     /tmp/ccoTvhMz.s:544    .text.Buzzer_OneLongBeep:00000000 $t
+     /tmp/ccoTvhMz.s:549    .text.Buzzer_OneLongBeep:00000000 Buzzer_OneLongBeep
+     /tmp/ccoTvhMz.s:604    .text.Buzzer_OneLongBeep:00000034 $d
+     /tmp/ccoTvhMz.s:609    .text.IS_Charge:00000000 $t
+     /tmp/ccoTvhMz.s:614    .text.IS_Charge:00000000 IS_Charge
+     /tmp/ccoTvhMz.s:635    .text.IS_Charge:00000010 $d
+     /tmp/ccoTvhMz.s:640    .text.IS_Button:00000000 $t
+     /tmp/ccoTvhMz.s:645    .text.IS_Button:00000000 IS_Button
+     /tmp/ccoTvhMz.s:666    .text.IS_Button:0000000c $d
+     /tmp/ccoTvhMz.s:671    .text.DebugPin_init:00000000 $t
+     /tmp/ccoTvhMz.s:676    .text.DebugPin_init:00000000 DebugPin_init
+     /tmp/ccoTvhMz.s:748    .text.DebugPin_init:00000058 $d
+     /tmp/ccoTvhMz.s:754    .text.Timer_init:00000000 $t
+     /tmp/ccoTvhMz.s:759    .text.Timer_init:00000000 Timer_init
+     /tmp/ccoTvhMz.s:808    .text.Timer_init:00000034 $d
+     /tmp/ccoTvhMz.s:814    .text.Button_init:00000000 $t
+     /tmp/ccoTvhMz.s:819    .text.Button_init:00000000 Button_init
+     /tmp/ccoTvhMz.s:883    .text.Button_init:00000044 $d
+     /tmp/ccoTvhMz.s:889    .text.DebugPin4_ON:00000000 $t
+     /tmp/ccoTvhMz.s:894    .text.DebugPin4_ON:00000000 DebugPin4_ON
+     /tmp/ccoTvhMz.s:909    .text.DebugPin4_ON:00000008 $d
+     /tmp/ccoTvhMz.s:914    .text.DebugPin4_OFF:00000000 $t
+     /tmp/ccoTvhMz.s:919    .text.DebugPin4_OFF:00000000 DebugPin4_OFF
+     /tmp/ccoTvhMz.s:934    .text.DebugPin4_OFF:0000000c $d
+     /tmp/ccoTvhMz.s:939    .text.DebugPin5_ON:00000000 $t
+     /tmp/ccoTvhMz.s:944    .text.DebugPin5_ON:00000000 DebugPin5_ON
+     /tmp/ccoTvhMz.s:959    .text.DebugPin5_ON:00000008 $d
+     /tmp/ccoTvhMz.s:964    .text.DebugPin5_OFF:00000000 $t
+ARM GAS  /tmp/ccoTvhMz.s 			page 23
 
 
-     /tmp/cc7NMNcg.s:969    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
-     /tmp/cc7NMNcg.s:984    .text.DebugPin5_OFF:0000000c $d
+     /tmp/ccoTvhMz.s:969    .text.DebugPin5_OFF:00000000 DebugPin5_OFF
+     /tmp/ccoTvhMz.s:984    .text.DebugPin5_OFF:0000000c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

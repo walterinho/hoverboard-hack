@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccGyLHIp.s 			page 1
+ARM GAS  /tmp/ccOQxStP.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
   36              		.loc 1 20 0
   37 0004 7047     		bx	lr
   38              	.L3:
-ARM GAS  /tmp/ccGyLHIp.s 			page 2
+ARM GAS  /tmp/ccOQxStP.s 			page 2
 
 
   39 0006 00BF     		.align	2
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
   91              		.global	applcation_init
   92              		.thumb
   93              		.thumb_func
-ARM GAS  /tmp/ccGyLHIp.s 			page 3
+ARM GAS  /tmp/ccOQxStP.s 			page 3
 
 
   95              	applcation_init:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  115              		.loc 1 59 0
  116 000c FFF7FEFF 		bl	MotorL_stop
  117              	.LVL4:
-ARM GAS  /tmp/ccGyLHIp.s 			page 4
+ARM GAS  /tmp/ccOQxStP.s 			page 4
 
 
   60:./Src/application.c ****   battery_dati.time_batt = HAL_GetTick();
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
   73:./Src/application.c **** 
   74:./Src/application.c ****   switch(app.stato){
   75:./Src/application.c ****     case app_init:
-ARM GAS  /tmp/ccGyLHIp.s 			page 5
+ARM GAS  /tmp/ccOQxStP.s 			page 5
 
 
   76:./Src/application.c ****       MotorR_stop();
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  130:./Src/application.c ****       app.axn = normalize_x(wii_JOYdati.ax);
  131:./Src/application.c **** 
  132:./Src/application.c ****       //scala x soft run
-ARM GAS  /tmp/ccGyLHIp.s 			page 6
+ARM GAS  /tmp/ccOQxStP.s 			page 6
 
 
  133:./Src/application.c ****       tempf1 = app.ayn;
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  187:./Src/application.c ****       app.axn = tempf2;
  188:./Src/application.c **** 
  189:./Src/application.c ****       app.ayn = accellerationYHARD(app.ayn);
-ARM GAS  /tmp/ccGyLHIp.s 			page 7
+ARM GAS  /tmp/ccOQxStP.s 			page 7
 
 
  190:./Src/application.c ****       app.axn = accellerationXHARD(app.axn);
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  244:./Src/application.c ****         go_motor(0, 0, battery_dati.VBatt,0);
  245:./Src/application.c ****         MotorR_stop();
  246:./Src/application.c ****         MotorL_stop();
-ARM GAS  /tmp/ccGyLHIp.s 			page 8
+ARM GAS  /tmp/ccOQxStP.s 			page 8
 
 
  247:./Src/application.c ****         accelleration_XY_Reset();
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  301:./Src/application.c ****       tempf1 = app.ayn;
  302:./Src/application.c ****       tempf2 = battery_dati.VBatt;
  303:./Src/application.c ****       app.ayn = scale_y(tempf1, tempf2);
-ARM GAS  /tmp/ccGyLHIp.s 			page 9
+ARM GAS  /tmp/ccOQxStP.s 			page 9
 
 
  304:./Src/application.c ****       tempf1 = app.axn;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  173 0002 FFF7FEFF 		bl	__aeabi_ui2f
  174              	.LVL9:
  175 0006 0D4B     		ldr	r3, .L22
-ARM GAS  /tmp/ccGyLHIp.s 			page 10
+ARM GAS  /tmp/ccOQxStP.s 			page 10
 
 
  176 0008 196A     		ldr	r1, [r3, #32]	@ float
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  215              	.LVL18:
  216              	.L23:
  217 003a 00BF     		.align	2
-ARM GAS  /tmp/ccGyLHIp.s 			page 11
+ARM GAS  /tmp/ccOQxStP.s 			page 11
 
 
  218              	.L22:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  264 0022 08E0     		b	.L27
  265              	.L31:
  370:./Src/application.c ****           axn = 100.0;
-ARM GAS  /tmp/ccGyLHIp.s 			page 12
+ARM GAS  /tmp/ccOQxStP.s 			page 12
 
 
  371:./Src/application.c ****         }
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  387:./Src/application.c **** 
  388:./Src/application.c **** float scale_x(float x, float Vbatt){
  389:./Src/application.c ****   float axn;
-ARM GAS  /tmp/ccGyLHIp.s 			page 13
+ARM GAS  /tmp/ccOQxStP.s 			page 13
 
 
  390:./Src/application.c ****   axn = 0.0;
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  336 0024 FFF7FEFF 		bl	__aeabi_fcmpge
  337              	.LVL35:
  338 0028 88B9     		cbnz	r0, .L41
-ARM GAS  /tmp/ccGyLHIp.s 			page 14
+ARM GAS  /tmp/ccOQxStP.s 			page 14
 
 
  413:./Src/application.c ****     return Battery_power[3][1];
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  381              		.loc 1 419 0
  382 0056 0B48     		ldr	r0, .L47+40
  420:./Src/application.c ****   }else if(Vbattery >= Battery_power[7][0]){
-ARM GAS  /tmp/ccGyLHIp.s 			page 15
+ARM GAS  /tmp/ccOQxStP.s 			page 15
 
 
  421:./Src/application.c ****     return Battery_power[7][1];
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  428              	.LVL48:
  429 000a 2146     		mov	r1, r4
  430 000c FFF7FEFF 		bl	__aeabi_fmul
-ARM GAS  /tmp/ccGyLHIp.s 			page 16
+ARM GAS  /tmp/ccOQxStP.s 			page 16
 
 
  431              	.LVL49:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  432:./Src/application.c ****   app.faccY = 0.0;
  483              		.loc 1 432 0
  484 0000 024B     		ldr	r3, .L54
-ARM GAS  /tmp/ccGyLHIp.s 			page 17
+ARM GAS  /tmp/ccOQxStP.s 			page 17
 
 
  485 0002 0022     		movs	r2, #0
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  530 000c FFF7FEFF 		bl	__aeabi_fcmplt
  531              	.LVL58:
  532 0010 88B1     		cbz	r0, .L57
-ARM GAS  /tmp/ccGyLHIp.s 			page 18
+ARM GAS  /tmp/ccOQxStP.s 			page 18
 
 
  444:./Src/application.c ****     app.faccY = app.faccY + ACCELLERATION_CONSTANT;
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  577              	.LVL68:
  578 0060 00B1     		cbz	r0, .L60
  454:./Src/application.c ****       app.faccY = (float)value;
-ARM GAS  /tmp/ccGyLHIp.s 			page 19
+ARM GAS  /tmp/ccOQxStP.s 			page 19
 
 
  579              		.loc 1 454 0
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  587 0068 70BD     		pop	{r4, r5, r6, pc}
  588              	.LVL70:
  589              	.L69:
-ARM GAS  /tmp/ccGyLHIp.s 			page 20
+ARM GAS  /tmp/ccOQxStP.s 			page 20
 
 
  590 006a 00BFAFF3 		.align	3
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  635 001a 15A3     		adr	r3, .L82
  636 001c D3E90023 		ldrd	r2, [r3]
  637 0020 FFF7FEFF 		bl	__aeabi_dadd
-ARM GAS  /tmp/ccGyLHIp.s 			page 21
+ARM GAS  /tmp/ccOQxStP.s 			page 21
 
 
  638              	.LVL76:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  524:./Src/application.c ****   if(value > 0){
  525:./Src/application.c ****     if(value > tval){
  526:./Src/application.c ****       //Accelleration
-ARM GAS  /tmp/ccGyLHIp.s 			page 22
+ARM GAS  /tmp/ccOQxStP.s 			page 22
 
 
  527:./Src/application.c ****       if(tval < 0.0){
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  693              	.LFE76:
  695              		.section	.text.accellerationYHARD,"ax",%progbits
  696              		.align	2
-ARM GAS  /tmp/ccGyLHIp.s 			page 23
+ARM GAS  /tmp/ccOQxStP.s 			page 23
 
 
  697              		.global	accellerationYHARD
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  740 002a 716A     		ldr	r1, [r6, #36]	@ float
  741 002c 2046     		mov	r0, r4
  742 002e FFF7FEFF 		bl	__aeabi_fcmplt
-ARM GAS  /tmp/ccGyLHIp.s 			page 24
+ARM GAS  /tmp/ccOQxStP.s 			page 24
 
 
  743              	.LVL94:
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  784 006a 00BFAFF3 		.align	3
  784      0080
  785              	.L96:
-ARM GAS  /tmp/ccGyLHIp.s 			page 25
+ARM GAS  /tmp/ccOQxStP.s 			page 25
 
 
  786 0070 B81E85EB 		.word	-343597384
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  833 0024 FFF7FEFF 		bl	__aeabi_d2f
  834              	.LVL109:
  835 0028 B062     		str	r0, [r6, #40]	@ float
-ARM GAS  /tmp/ccGyLHIp.s 			page 26
+ARM GAS  /tmp/ccOQxStP.s 			page 26
 
 
  600:./Src/application.c ****     //limit
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  613:./Src/application.c **** 
  614:./Src/application.c ****   return tval;
  615:./Src/application.c **** }
-ARM GAS  /tmp/ccGyLHIp.s 			page 27
+ARM GAS  /tmp/ccOQxStP.s 			page 27
 
 
  877              		.loc 1 615 0
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  905              		@ frame_needed = 0, uses_anonymous_args = 0
  906 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
  907              	.LCFI11:
-ARM GAS  /tmp/ccGyLHIp.s 			page 28
+ARM GAS  /tmp/ccOQxStP.s 			page 28
 
 
  908              		.cfi_def_cfa_offset 24
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  955              	.LVL128:
  956 0048 0022     		movs	r2, #0
  957 004a 104B     		ldr	r3, .L115+12
-ARM GAS  /tmp/ccGyLHIp.s 			page 29
+ARM GAS  /tmp/ccOQxStP.s 			page 29
 
 
  958 004c FFF7FEFF 		bl	__aeabi_ddiv
@@ -1714,8 +1714,8 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  985              	.L116:
  986              		.align	3
  987              	.L115:
- 988 0080 F5E4E827 		.word	669574389
- 989 0084 181C9B3F 		.word	1067129880
+ 988 0080 BC051214 		.word	336725436
+ 989 0084 3FC69C3F 		.word	1067238975
  990 0088 00000000 		.word	battery_dati
  991 008c 00002440 		.word	1076101120
  992              		.cfi_endproc
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1010              		.cfi_offset 4, -8
  1011              		.cfi_offset 14, -4
   31:./Src/application.c ****   MotorR_stop();
-ARM GAS  /tmp/ccGyLHIp.s 			page 30
+ARM GAS  /tmp/ccOQxStP.s 			page 30
 
 
  1012              		.loc 1 31 0
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1055 003a FFF7FEFF 		bl	Battery_TASK
  1056              	.LVL148:
   44:./Src/application.c ****       timerBatteryC = HAL_GetTick();
-ARM GAS  /tmp/ccGyLHIp.s 			page 31
+ARM GAS  /tmp/ccOQxStP.s 			page 31
 
 
  1057              		.loc 1 44 0
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1104              		.cfi_endproc
  1105              	.LFE66:
  1107              		.section	.text.Current_Motor_TASK,"ax",%progbits
-ARM GAS  /tmp/ccGyLHIp.s 			page 32
+ARM GAS  /tmp/ccOQxStP.s 			page 32
 
 
  1108              		.align	2
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1120              	.LCFI13:
  1121              		.cfi_def_cfa_offset 24
  1122              		.cfi_offset 3, -24
-ARM GAS  /tmp/ccGyLHIp.s 			page 33
+ARM GAS  /tmp/ccOQxStP.s 			page 33
 
 
  1123              		.cfi_offset 4, -20
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1168              		.loc 1 704 0
  1169 0046 FFF7FEFF 		bl	ADC_MOTOR_LEFT
  1170              	.LVL168:
-ARM GAS  /tmp/ccGyLHIp.s 			page 34
+ARM GAS  /tmp/ccOQxStP.s 			page 34
 
 
  1171 004a FFF7FEFF 		bl	__aeabi_i2d
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1221 00a6 0646     		mov	r6, r0
  1222 00a8 0F46     		mov	r7, r1
  1223 00aa A06B     		ldr	r0, [r4, #56]
-ARM GAS  /tmp/ccGyLHIp.s 			page 35
+ARM GAS  /tmp/ccOQxStP.s 			page 35
 
 
  1224 00ac FFF7FEFF 		bl	__aeabi_ui2d
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1267              	.LVL192:
  1268 00fa 6064     		str	r0, [r4, #68]	@ float
  1269              	.L131:
-ARM GAS  /tmp/ccGyLHIp.s 			page 36
+ARM GAS  /tmp/ccOQxStP.s 			page 36
 
 
  720:./Src/application.c ****     }
@@ -2145,7 +2145,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1306 013c AB2F953F 		.word	1066741675
  1307 0140 00000000 		.word	app
  1308 0144 00001440 		.word	1075052544
- 1309 0148 0040E944 		.word	1156136960
+ 1309 0148 0080ED44 		.word	1156415488
  1310              		.cfi_endproc
  1311              	.LFE80:
  1313              		.section	.text.getMotorCurrentR,"ax",%progbits
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  725:./Src/application.c ****     }
  726:./Src/application.c **** 
  727:./Src/application.c **** 
-ARM GAS  /tmp/ccGyLHIp.s 			page 37
+ARM GAS  /tmp/ccOQxStP.s 			page 37
 
 
  728:./Src/application.c ****   }
@@ -2178,7 +2178,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1330              		.loc 1 732 0
  1331 0002 FFF7FEFF 		bl	ADC_MOTOR_RIGHT
  1332              	.LVL198:
- 1333 0006 A0F24A70 		subw	r0, r0, #1866
+ 1333 0006 A0F26C70 		subw	r0, r0, #1900
  733:./Src/application.c **** }
  1334              		.loc 1 733 0
  1335 000a 00B2     		sxth	r0, r0
@@ -2206,7 +2206,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1357              		.loc 1 735 0
  1358 0002 FFF7FEFF 		bl	ADC_MOTOR_LEFT
  1359              	.LVL199:
- 1360 0006 A0F24A70 		subw	r0, r0, #1866
+ 1360 0006 A0F26C70 		subw	r0, r0, #1900
  736:./Src/application.c **** }
  1361              		.loc 1 736 0
  1362 000a 00B2     		sxth	r0, r0
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1369              		.global	__aeabi_fadd
  1370              		.global	__aeabi_fdiv
  1371              		.global	__aeabi_d2iz
-ARM GAS  /tmp/ccGyLHIp.s 			page 38
+ARM GAS  /tmp/ccOQxStP.s 			page 38
 
 
  1372 000e 00BF     		.section	.text.go_motor,"ax",%progbits
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  784:./Src/application.c ****       if(app.motBTS >= 0){
  785:./Src/application.c ****         //0 ~ 100
  786:./Src/application.c ****         if(app.motBTS > limitSup){
-ARM GAS  /tmp/ccGyLHIp.s 			page 39
+ARM GAS  /tmp/ccOQxStP.s 			page 39
 
 
  787:./Src/application.c ****           app.motBTS = (int16_t)limitSup;
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1413              	.LVL204:
  808:./Src/application.c ****     limitInf = limitSup * -1;
  1414              		.loc 1 808 0
-ARM GAS  /tmp/ccGyLHIp.s 			page 40
+ARM GAS  /tmp/ccOQxStP.s 			page 40
 
 
  1415 001a 00F1004A 		add	r10, r0, #-2147483648
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1438              	.LVL212:
  839:./Src/application.c **** 
  840:./Src/application.c **** 
-ARM GAS  /tmp/ccGyLHIp.s 			page 41
+ARM GAS  /tmp/ccOQxStP.s 			page 41
 
 
  841:./Src/application.c **** 
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1484              	.LVL221:
  1485 0076 8146     		mov	r9, r0
  1486 0078 00E0     		b	.L150
-ARM GAS  /tmp/ccGyLHIp.s 			page 42
+ARM GAS  /tmp/ccOQxStP.s 			page 42
 
 
  1487              	.LVL222:
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1534              	.LVL232:
  1535 00b8 6349     		ldr	r1, .L175+4
  1536 00ba FFF7FEFF 		bl	__aeabi_fdiv
-ARM GAS  /tmp/ccGyLHIp.s 			page 43
+ARM GAS  /tmp/ccOQxStP.s 			page 43
 
 
  1537              	.LVL233:
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1582 0104 0B46     		mov	r3, r1
  1583 0106 0020     		movs	r0, #0
  1584 0108 5149     		ldr	r1, .L175+12
-ARM GAS  /tmp/ccGyLHIp.s 			page 44
+ARM GAS  /tmp/ccOQxStP.s 			page 44
 
 
  1585 010a FFF7FEFF 		bl	__aeabi_dsub
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  867:./Src/application.c **** 
  868:./Src/application.c **** 
  869:./Src/application.c **** /*
-ARM GAS  /tmp/ccGyLHIp.s 			page 45
+ARM GAS  /tmp/ccOQxStP.s 			page 45
 
 
  870:./Src/application.c **** if((nMotMixL>0)&&(nMotMixR>0)){
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1664              	.LVL267:
  1665 01a0 00B2     		sxth	r0, r0
  1666 01a2 2C4B     		ldr	r3, .L175+16
-ARM GAS  /tmp/ccGyLHIp.s 			page 46
+ARM GAS  /tmp/ccOQxStP.s 			page 46
 
 
  1667 01a4 9885     		strh	r0, [r3, #44]	@ movhi
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  910:./Src/application.c ****         if(app.motBTS > limitSup){
  1708              		.loc 1 910 0
  1709 01e6 1B4B     		ldr	r3, .L175+16
-ARM GAS  /tmp/ccGyLHIp.s 			page 47
+ARM GAS  /tmp/ccOQxStP.s 			page 47
 
 
  1710 01e8 D88D     		ldrh	r0, [r3, #46]
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1754              		.loc 1 920 0
  1755 0232 084B     		ldr	r3, .L175+16
  1756 0234 D88D     		ldrh	r0, [r3, #46]
-ARM GAS  /tmp/ccGyLHIp.s 			page 48
+ARM GAS  /tmp/ccOQxStP.s 			page 48
 
 
  1757 0236 00B2     		sxth	r0, r0
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1809 0012 0500     		.2byte	(.L179-.L180)/2
  1810 0014 8300     		.2byte	(.L181-.L180)/2
  1811 0016 FD00     		.2byte	(.L182-.L180)/2
-ARM GAS  /tmp/ccGyLHIp.s 			page 49
+ARM GAS  /tmp/ccOQxStP.s 			page 49
 
 
  1812 0018 4F01     		.2byte	(.L183-.L180)/2
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1855              		.loc 1 88 0
  1856 004e 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  1857 0050 DBB2     		uxtb	r3, r3
-ARM GAS  /tmp/ccGyLHIp.s 			page 50
+ARM GAS  /tmp/ccOQxStP.s 			page 50
 
 
  1858 0052 802B     		cmp	r3, #128
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1904 008e FFF7FEFF 		bl	__aeabi_fdiv
  1905              	.LVL296:
  1906 0092 2062     		str	r0, [r4, #32]	@ float
-ARM GAS  /tmp/ccGyLHIp.s 			page 51
+ARM GAS  /tmp/ccOQxStP.s 			page 51
 
 
  1907              	.LVL297:
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  1951 00cc 734B     		ldr	r3, .L236+12
  1952 00ce 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
  1953              	.LVL303:
-ARM GAS  /tmp/ccGyLHIp.s 			page 52
+ARM GAS  /tmp/ccOQxStP.s 			page 52
 
 
  108:./Src/application.c ****         }else{
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  121:./Src/application.c **** 
  1999              		.loc 1 121 0
  2000 010e FFF7FEFF 		bl	MotorL_start
-ARM GAS  /tmp/ccGyLHIp.s 			page 53
+ARM GAS  /tmp/ccOQxStP.s 			page 53
 
 
  2001              	.LVL313:
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2044              	.LVL323:
  2045 0148 A060     		str	r0, [r4, #8]	@ float
  141:./Src/application.c **** 
-ARM GAS  /tmp/ccGyLHIp.s 			page 54
+ARM GAS  /tmp/ccOQxStP.s 			page 54
 
 
  2046              		.loc 1 141 0
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  152:./Src/application.c ****             app.stato = app_soft_run_nohand;
  2092              		.loc 1 152 0
  2093 0196 0023     		movs	r3, #0
-ARM GAS  /tmp/ccGyLHIp.s 			page 55
+ARM GAS  /tmp/ccOQxStP.s 			page 55
 
 
  2094 0198 A361     		str	r3, [r4, #24]	@ float
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2138              	.L200:
  168:./Src/application.c ****       }
  2139              		.loc 1 168 0
-ARM GAS  /tmp/ccGyLHIp.s 			page 56
+ARM GAS  /tmp/ccOQxStP.s 			page 56
 
 
  2140 01da 0022     		movs	r2, #0
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2187              	.LVL342:
  184:./Src/application.c ****       tempf2 = app.axn * 0.90;
  2188              		.loc 1 184 0
-ARM GAS  /tmp/ccGyLHIp.s 			page 57
+ARM GAS  /tmp/ccOQxStP.s 			page 57
 
 
  2189 0234 A060     		str	r0, [r4, #8]	@ float
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2234 0272 2146     		mov	r1, r4
  2235 0274 2846     		mov	r0, r5
  2236 0276 FFF7FEFF 		bl	go_motor
-ARM GAS  /tmp/ccGyLHIp.s 			page 58
+ARM GAS  /tmp/ccOQxStP.s 			page 58
 
 
  2237              	.LVL354:
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2284 02ce A060     		str	r0, [r4, #8]	@ float
  216:./Src/application.c ****       tempf2 = battery_dati.VBatt;
  2285              		.loc 1 216 0
-ARM GAS  /tmp/ccGyLHIp.s 			page 59
+ARM GAS  /tmp/ccOQxStP.s 			page 59
 
 
  2286 02d0 E068     		ldr	r0, [r4, #12]	@ float
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2333 031a 28B1     		cbz	r0, .L202
  227:./Src/application.c ****         }
  2334              		.loc 1 227 0
-ARM GAS  /tmp/ccGyLHIp.s 			page 60
+ARM GAS  /tmp/ccOQxStP.s 			page 60
 
 
  2335 031c 704C     		ldr	r4, .L238+4
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2382              		.loc 1 237 0
  2383 036a 0022     		movs	r2, #0
  2384 036c A261     		str	r2, [r4, #24]	@ float
-ARM GAS  /tmp/ccGyLHIp.s 			page 61
+ARM GAS  /tmp/ccOQxStP.s 			page 61
 
 
  2385              	.L208:
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2429              	.LVL386:
  253:./Src/application.c ****       go_motor(tempf1, tempf2, battery_dati.VBatt,0);
  2430              		.loc 1 253 0
-ARM GAS  /tmp/ccGyLHIp.s 			page 62
+ARM GAS  /tmp/ccOQxStP.s 			page 62
 
 
  2431 03ac D968     		ldr	r1, [r3, #12]	@ float
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2474              		.loc 1 267 0
  2475 03ec 0023     		movs	r3, #0
  2476 03ee 1370     		strb	r3, [r2]
-ARM GAS  /tmp/ccGyLHIp.s 			page 63
+ARM GAS  /tmp/ccOQxStP.s 			page 63
 
 
  268:./Src/application.c ****           break;
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2521 0432 A060     		str	r0, [r4, #8]	@ float
  283:./Src/application.c ****       if(app.ayn > 300.0){
  2522              		.loc 1 283 0
-ARM GAS  /tmp/ccGyLHIp.s 			page 64
+ARM GAS  /tmp/ccOQxStP.s 			page 64
 
 
  2523 0434 288B     		ldrh	r0, [r5, #24]
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2569              		.loc 1 294 0
  2570 047c 0022     		movs	r2, #0
  2571 047e 184B     		ldr	r3, .L238+4
-ARM GAS  /tmp/ccGyLHIp.s 			page 65
+ARM GAS  /tmp/ccOQxStP.s 			page 65
 
 
  2572 0480 DA60     		str	r2, [r3, #12]	@ float
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2616              	.LVL412:
  2617 04bc E060     		str	r0, [r4, #12]	@ float
  310:./Src/application.c ****       tempf2 = app.axn;
-ARM GAS  /tmp/ccGyLHIp.s 			page 66
+ARM GAS  /tmp/ccOQxStP.s 			page 66
 
 
  2618              		.loc 1 310 0
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2669 0000 00002042 		.word	1109393408
  2670 0004 9A99193F 		.word	1058642330
  2671 0008 00000000 		.space	32
-ARM GAS  /tmp/ccGyLHIp.s 			page 67
+ARM GAS  /tmp/ccOQxStP.s 			page 67
 
 
  2671      00000000 
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2694 0144 1F852B3F 		.word	1059816735
  2695 0148 00000000 		.space	32
  2695      00000000 
-ARM GAS  /tmp/ccGyLHIp.s 			page 68
+ARM GAS  /tmp/ccOQxStP.s 			page 68
 
 
  2695      00000000 
@@ -4048,78 +4048,78 @@ ARM GAS  /tmp/ccGyLHIp.s 			page 1
  2713              		.file 14 "./Inc/motor_L.h"
  2714              		.file 15 "./Inc/ADC_R.h"
  2715              		.file 16 "./Inc/ADC_L.h"
-ARM GAS  /tmp/ccGyLHIp.s 			page 69
+ARM GAS  /tmp/ccOQxStP.s 			page 69
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 application.c
-     /tmp/ccGyLHIp.s:20     .text.GET_BatteryAverage:00000000 $t
-     /tmp/ccGyLHIp.s:25     .text.GET_BatteryAverage:00000000 GET_BatteryAverage
-     /tmp/ccGyLHIp.s:41     .text.GET_BatteryAverage:00000008 $d
+     /tmp/ccOQxStP.s:20     .text.GET_BatteryAverage:00000000 $t
+     /tmp/ccOQxStP.s:25     .text.GET_BatteryAverage:00000000 GET_BatteryAverage
+     /tmp/ccOQxStP.s:41     .text.GET_BatteryAverage:00000008 $d
                             *COM*:00000014 battery_dati
-     /tmp/ccGyLHIp.s:46     .text.TASK_BATTERY_LOW_VOLTAGE:00000000 $t
-     /tmp/ccGyLHIp.s:51     .text.TASK_BATTERY_LOW_VOLTAGE:00000000 TASK_BATTERY_LOW_VOLTAGE
-     /tmp/ccGyLHIp.s:84     .text.TASK_BATTERY_LOW_VOLTAGE:00000020 $d
-     /tmp/ccGyLHIp.s:90     .text.applcation_init:00000000 $t
-     /tmp/ccGyLHIp.s:95     .text.applcation_init:00000000 applcation_init
-     /tmp/ccGyLHIp.s:143    .text.applcation_init:00000030 $d
+     /tmp/ccOQxStP.s:46     .text.TASK_BATTERY_LOW_VOLTAGE:00000000 $t
+     /tmp/ccOQxStP.s:51     .text.TASK_BATTERY_LOW_VOLTAGE:00000000 TASK_BATTERY_LOW_VOLTAGE
+     /tmp/ccOQxStP.s:84     .text.TASK_BATTERY_LOW_VOLTAGE:00000020 $d
+     /tmp/ccOQxStP.s:90     .text.applcation_init:00000000 $t
+     /tmp/ccOQxStP.s:95     .text.applcation_init:00000000 applcation_init
+     /tmp/ccOQxStP.s:143    .text.applcation_init:00000030 $d
                             *COM*:00000048 app
-     /tmp/ccGyLHIp.s:154    .text.normalize_y:00000000 $t
-     /tmp/ccGyLHIp.s:159    .text.normalize_y:00000000 normalize_y
-     /tmp/ccGyLHIp.s:219    .text.normalize_y:0000003c $d
-     /tmp/ccGyLHIp.s:226    .text.normalize_x:00000000 $t
-     /tmp/ccGyLHIp.s:231    .text.normalize_x:00000000 normalize_x
-     /tmp/ccGyLHIp.s:291    .text.normalize_x:0000003c $d
-     /tmp/ccGyLHIp.s:298    .text.get_powerMax:00000000 $t
-     /tmp/ccGyLHIp.s:303    .text.get_powerMax:00000000 get_powerMax
-     /tmp/ccGyLHIp.s:389    .text.get_powerMax:0000005c $d
-     /tmp/ccGyLHIp.s:405    .text.scale_y:00000000 $t
-     /tmp/ccGyLHIp.s:410    .text.scale_y:00000000 scale_y
-     /tmp/ccGyLHIp.s:438    .text.scale_x:00000000 $t
-     /tmp/ccGyLHIp.s:443    .text.scale_x:00000000 scale_x
-     /tmp/ccGyLHIp.s:471    .text.accelleration_XY_Reset:00000000 $t
-     /tmp/ccGyLHIp.s:476    .text.accelleration_XY_Reset:00000000 accelleration_XY_Reset
-     /tmp/ccGyLHIp.s:493    .text.accelleration_XY_Reset:0000000c $d
-     /tmp/ccGyLHIp.s:502    .text.accellerationY:00000000 $t
-     /tmp/ccGyLHIp.s:507    .text.accellerationY:00000000 accellerationY
-     /tmp/ccGyLHIp.s:592    .text.accellerationY:00000070 $d
-     /tmp/ccGyLHIp.s:599    .text.accellerationX:00000000 $t
-     /tmp/ccGyLHIp.s:604    .text.accellerationX:00000000 accellerationX
-     /tmp/ccGyLHIp.s:689    .text.accellerationX:00000070 $d
-     /tmp/ccGyLHIp.s:696    .text.accellerationYHARD:00000000 $t
-     /tmp/ccGyLHIp.s:701    .text.accellerationYHARD:00000000 accellerationYHARD
-     /tmp/ccGyLHIp.s:786    .text.accellerationYHARD:00000070 $d
-     /tmp/ccGyLHIp.s:793    .text.accellerationXHARD:00000000 $t
-     /tmp/ccGyLHIp.s:798    .text.accellerationXHARD:00000000 accellerationXHARD
-     /tmp/ccGyLHIp.s:883    .text.accellerationXHARD:00000070 $d
-     /tmp/ccGyLHIp.s:895    .text.Battery_TASK:00000000 $t
-     /tmp/ccGyLHIp.s:900    .text.Battery_TASK:00000000 Battery_TASK
-     /tmp/ccGyLHIp.s:988    .text.Battery_TASK:00000080 $d
-     /tmp/ccGyLHIp.s:996    .text.WAIT_CHARGE_FINISH:00000000 $t
-     /tmp/ccGyLHIp.s:1001   .text.WAIT_CHARGE_FINISH:00000000 WAIT_CHARGE_FINISH
-     /tmp/ccGyLHIp.s:1102   .text.WAIT_CHARGE_FINISH:0000007c $d
-     /tmp/ccGyLHIp.s:1108   .text.Current_Motor_TASK:00000000 $t
-     /tmp/ccGyLHIp.s:1113   .text.Current_Motor_TASK:00000000 Current_Motor_TASK
-     /tmp/ccGyLHIp.s:1303   .text.Current_Motor_TASK:00000130 $d
-     /tmp/ccGyLHIp.s:1314   .text.getMotorCurrentR:00000000 $t
-     /tmp/ccGyLHIp.s:1319   .text.getMotorCurrentR:00000000 getMotorCurrentR
-     /tmp/ccGyLHIp.s:1341   .text.getMotorCurrentL:00000000 $t
-     /tmp/ccGyLHIp.s:1346   .text.getMotorCurrentL:00000000 getMotorCurrentL
-     /tmp/ccGyLHIp.s:1373   .text.go_motor:00000000 $t
-     /tmp/ccGyLHIp.s:1378   .text.go_motor:00000000 go_motor
-     /tmp/ccGyLHIp.s:1771   .text.go_motor:00000244 $d
-ARM GAS  /tmp/ccGyLHIp.s 			page 70
+     /tmp/ccOQxStP.s:154    .text.normalize_y:00000000 $t
+     /tmp/ccOQxStP.s:159    .text.normalize_y:00000000 normalize_y
+     /tmp/ccOQxStP.s:219    .text.normalize_y:0000003c $d
+     /tmp/ccOQxStP.s:226    .text.normalize_x:00000000 $t
+     /tmp/ccOQxStP.s:231    .text.normalize_x:00000000 normalize_x
+     /tmp/ccOQxStP.s:291    .text.normalize_x:0000003c $d
+     /tmp/ccOQxStP.s:298    .text.get_powerMax:00000000 $t
+     /tmp/ccOQxStP.s:303    .text.get_powerMax:00000000 get_powerMax
+     /tmp/ccOQxStP.s:389    .text.get_powerMax:0000005c $d
+     /tmp/ccOQxStP.s:405    .text.scale_y:00000000 $t
+     /tmp/ccOQxStP.s:410    .text.scale_y:00000000 scale_y
+     /tmp/ccOQxStP.s:438    .text.scale_x:00000000 $t
+     /tmp/ccOQxStP.s:443    .text.scale_x:00000000 scale_x
+     /tmp/ccOQxStP.s:471    .text.accelleration_XY_Reset:00000000 $t
+     /tmp/ccOQxStP.s:476    .text.accelleration_XY_Reset:00000000 accelleration_XY_Reset
+     /tmp/ccOQxStP.s:493    .text.accelleration_XY_Reset:0000000c $d
+     /tmp/ccOQxStP.s:502    .text.accellerationY:00000000 $t
+     /tmp/ccOQxStP.s:507    .text.accellerationY:00000000 accellerationY
+     /tmp/ccOQxStP.s:592    .text.accellerationY:00000070 $d
+     /tmp/ccOQxStP.s:599    .text.accellerationX:00000000 $t
+     /tmp/ccOQxStP.s:604    .text.accellerationX:00000000 accellerationX
+     /tmp/ccOQxStP.s:689    .text.accellerationX:00000070 $d
+     /tmp/ccOQxStP.s:696    .text.accellerationYHARD:00000000 $t
+     /tmp/ccOQxStP.s:701    .text.accellerationYHARD:00000000 accellerationYHARD
+     /tmp/ccOQxStP.s:786    .text.accellerationYHARD:00000070 $d
+     /tmp/ccOQxStP.s:793    .text.accellerationXHARD:00000000 $t
+     /tmp/ccOQxStP.s:798    .text.accellerationXHARD:00000000 accellerationXHARD
+     /tmp/ccOQxStP.s:883    .text.accellerationXHARD:00000070 $d
+     /tmp/ccOQxStP.s:895    .text.Battery_TASK:00000000 $t
+     /tmp/ccOQxStP.s:900    .text.Battery_TASK:00000000 Battery_TASK
+     /tmp/ccOQxStP.s:988    .text.Battery_TASK:00000080 $d
+     /tmp/ccOQxStP.s:996    .text.WAIT_CHARGE_FINISH:00000000 $t
+     /tmp/ccOQxStP.s:1001   .text.WAIT_CHARGE_FINISH:00000000 WAIT_CHARGE_FINISH
+     /tmp/ccOQxStP.s:1102   .text.WAIT_CHARGE_FINISH:0000007c $d
+     /tmp/ccOQxStP.s:1108   .text.Current_Motor_TASK:00000000 $t
+     /tmp/ccOQxStP.s:1113   .text.Current_Motor_TASK:00000000 Current_Motor_TASK
+     /tmp/ccOQxStP.s:1303   .text.Current_Motor_TASK:00000130 $d
+     /tmp/ccOQxStP.s:1314   .text.getMotorCurrentR:00000000 $t
+     /tmp/ccOQxStP.s:1319   .text.getMotorCurrentR:00000000 getMotorCurrentR
+     /tmp/ccOQxStP.s:1341   .text.getMotorCurrentL:00000000 $t
+     /tmp/ccOQxStP.s:1346   .text.getMotorCurrentL:00000000 getMotorCurrentL
+     /tmp/ccOQxStP.s:1373   .text.go_motor:00000000 $t
+     /tmp/ccOQxStP.s:1378   .text.go_motor:00000000 go_motor
+     /tmp/ccOQxStP.s:1771   .text.go_motor:00000244 $d
+ARM GAS  /tmp/ccOQxStP.s 			page 70
 
 
-     /tmp/ccGyLHIp.s:1783   .text.applcation_TASK:00000000 $t
-     /tmp/ccGyLHIp.s:1788   .text.applcation_TASK:00000000 applcation_TASK
-     /tmp/ccGyLHIp.s:1809   .text.applcation_TASK:00000012 $d
-     /tmp/ccGyLHIp.s:1814   .text.applcation_TASK:0000001c $t
-     /tmp/ccGyLHIp.s:2253   .text.applcation_TASK:00000290 $d
-     /tmp/ccGyLHIp.s:2263   .text.applcation_TASK:000002b0 $t
-     /tmp/ccGyLHIp.s:2647   .text.applcation_TASK:000004dc $d
-     /tmp/ccGyLHIp.s:2668   .rodata.Battery_power:00000000 Battery_power
-     /tmp/ccGyLHIp.s:2665   .rodata.Battery_power:00000000 $d
+     /tmp/ccOQxStP.s:1783   .text.applcation_TASK:00000000 $t
+     /tmp/ccOQxStP.s:1788   .text.applcation_TASK:00000000 applcation_TASK
+     /tmp/ccOQxStP.s:1809   .text.applcation_TASK:00000012 $d
+     /tmp/ccOQxStP.s:1814   .text.applcation_TASK:0000001c $t
+     /tmp/ccOQxStP.s:2253   .text.applcation_TASK:00000290 $d
+     /tmp/ccOQxStP.s:2263   .text.applcation_TASK:000002b0 $t
+     /tmp/ccOQxStP.s:2647   .text.applcation_TASK:000004dc $d
+     /tmp/ccOQxStP.s:2668   .rodata.Battery_power:00000000 Battery_power
+     /tmp/ccOQxStP.s:2665   .rodata.Battery_power:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
