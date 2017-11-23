@@ -37,6 +37,14 @@ PCF8574_RESULT PCF8574_Write(PCF8574_HandleTypeDef* handle, uint8_t val) {
 		handle->errorCallback(PCF8574_ERROR);
 		return PCF8574_ERROR;
 	}
+
+	/*if (HAL_I2C_Master_Transmit_DMA(&handle->i2c,
+			(handle->PCF_I2C_ADDRESS << 1) | PCF8574_I2C_ADDRESS_MASK, &val, 1) != HAL_OK) {
+		handle->errorCallback(PCF8574_ERROR);
+		//<return PCF8574_ERROR;
+	}*/
+
+	//HAL_I2C_Master_Transmit_DMA(&hi2c2, 0xA4, (uint8_t*)ai2cBuffer, 2);
 	return PCF8574_OK;
 }
 

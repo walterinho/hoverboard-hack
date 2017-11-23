@@ -81,6 +81,7 @@ C_SOURCES =  \
 ./Src/main.c \
 ./Src/stm32f1xx_hal_msp.c \
 ./Src/hd44780.c \
+./Src/eeprom.c \
 ./Src/pcf8574.c
 
 # ASM sources

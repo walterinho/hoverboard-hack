@@ -13,6 +13,7 @@ void MX_I2C2_Init(void)
   __HAL_RCC_I2C2_CLK_ENABLE();
   __HAL_RCC_DMA1_CLK_ENABLE();
 
+
   /* DMA1_Channel4_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel4_IRQn, 1, 4);
   HAL_NVIC_EnableIRQ(DMA1_Channel4_IRQn);
