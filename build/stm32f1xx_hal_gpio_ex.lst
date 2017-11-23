@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-ARM GAS  /tmp/ccaYtgqA.s 			page 1
-=======
-ARM GAS  /tmp/cchRFGCd.s 			page 1
->>>>>>> GameTrak
+ARM GAS  /tmp/ccTGUKzz.s 			page 1
 
 
    1              		.syntax unified
@@ -62,11 +58,7 @@ ARM GAS  /tmp/cchRFGCd.s 			page 1
   29:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   *
   30:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   31:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   *
-<<<<<<< HEAD
-ARM GAS  /tmp/ccaYtgqA.s 			page 2
-=======
-ARM GAS  /tmp/cchRFGCd.s 			page 2
->>>>>>> GameTrak
+ARM GAS  /tmp/ccTGUKzz.s 			page 2
 
 
   32:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * Redistribution and use in source and binary forms, with or without modification,
@@ -126,11 +118,7 @@ ARM GAS  /tmp/cchRFGCd.s 			page 1
   86:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****                      
   87:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c **** @endverbatim
   88:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   * @{
-<<<<<<< HEAD
-ARM GAS  /tmp/ccaYtgqA.s 			page 3
-=======
-ARM GAS  /tmp/cchRFGCd.s 			page 3
->>>>>>> GameTrak
+ARM GAS  /tmp/ccTGUKzz.s 			page 3
 
 
   89:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c ****   */
@@ -190,11 +178,7 @@ ARM GAS  /tmp/cchRFGCd.s 			page 1
   58              		.loc 1 114 0
   59              		.cfi_startproc
   60              		@ args = 0, pretend = 0, frame = 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccaYtgqA.s 			page 4
-=======
-ARM GAS  /tmp/cchRFGCd.s 			page 4
->>>>>>> GameTrak
+ARM GAS  /tmp/ccTGUKzz.s 			page 4
 
 
   61              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -251,36 +235,20 @@ ARM GAS  /tmp/cchRFGCd.s 			page 1
  105              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
  106              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
  107              		.file 5 "./Drivers/CMSIS/Include/core_cm3.h"
-<<<<<<< HEAD
-ARM GAS  /tmp/ccaYtgqA.s 			page 5
-=======
-ARM GAS  /tmp/cchRFGCd.s 			page 5
->>>>>>> GameTrak
+ARM GAS  /tmp/ccTGUKzz.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_gpio_ex.c
-<<<<<<< HEAD
-     /tmp/ccaYtgqA.s:20     .text.HAL_GPIOEx_ConfigEventout:00000000 $t
-     /tmp/ccaYtgqA.s:25     .text.HAL_GPIOEx_ConfigEventout:00000000 HAL_GPIOEx_ConfigEventout
-     /tmp/ccaYtgqA.s:46     .text.HAL_GPIOEx_ConfigEventout:00000010 $d
-     /tmp/ccaYtgqA.s:51     .text.HAL_GPIOEx_EnableEventout:00000000 $t
-     /tmp/ccaYtgqA.s:56     .text.HAL_GPIOEx_EnableEventout:00000000 HAL_GPIOEx_EnableEventout
-     /tmp/ccaYtgqA.s:72     .text.HAL_GPIOEx_EnableEventout:0000000c $d
-     /tmp/ccaYtgqA.s:77     .text.HAL_GPIOEx_DisableEventout:00000000 $t
-     /tmp/ccaYtgqA.s:82     .text.HAL_GPIOEx_DisableEventout:00000000 HAL_GPIOEx_DisableEventout
-     /tmp/ccaYtgqA.s:98     .text.HAL_GPIOEx_DisableEventout:0000000c $d
-=======
-     /tmp/cchRFGCd.s:20     .text.HAL_GPIOEx_ConfigEventout:00000000 $t
-     /tmp/cchRFGCd.s:25     .text.HAL_GPIOEx_ConfigEventout:00000000 HAL_GPIOEx_ConfigEventout
-     /tmp/cchRFGCd.s:46     .text.HAL_GPIOEx_ConfigEventout:00000010 $d
-     /tmp/cchRFGCd.s:51     .text.HAL_GPIOEx_EnableEventout:00000000 $t
-     /tmp/cchRFGCd.s:56     .text.HAL_GPIOEx_EnableEventout:00000000 HAL_GPIOEx_EnableEventout
-     /tmp/cchRFGCd.s:72     .text.HAL_GPIOEx_EnableEventout:0000000c $d
-     /tmp/cchRFGCd.s:77     .text.HAL_GPIOEx_DisableEventout:00000000 $t
-     /tmp/cchRFGCd.s:82     .text.HAL_GPIOEx_DisableEventout:00000000 HAL_GPIOEx_DisableEventout
-     /tmp/cchRFGCd.s:98     .text.HAL_GPIOEx_DisableEventout:0000000c $d
->>>>>>> GameTrak
+     /tmp/ccTGUKzz.s:20     .text.HAL_GPIOEx_ConfigEventout:00000000 $t
+     /tmp/ccTGUKzz.s:25     .text.HAL_GPIOEx_ConfigEventout:00000000 HAL_GPIOEx_ConfigEventout
+     /tmp/ccTGUKzz.s:46     .text.HAL_GPIOEx_ConfigEventout:00000010 $d
+     /tmp/ccTGUKzz.s:51     .text.HAL_GPIOEx_EnableEventout:00000000 $t
+     /tmp/ccTGUKzz.s:56     .text.HAL_GPIOEx_EnableEventout:00000000 HAL_GPIOEx_EnableEventout
+     /tmp/ccTGUKzz.s:72     .text.HAL_GPIOEx_EnableEventout:0000000c $d
+     /tmp/ccTGUKzz.s:77     .text.HAL_GPIOEx_DisableEventout:00000000 $t
+     /tmp/ccTGUKzz.s:82     .text.HAL_GPIOEx_DisableEventout:00000000 HAL_GPIOEx_DisableEventout
+     /tmp/ccTGUKzz.s:98     .text.HAL_GPIOEx_DisableEventout:0000000c $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

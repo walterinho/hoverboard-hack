@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 1
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 1
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 1
 
 
    1              		.syntax unified
@@ -62,11 +58,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
   16:./Src/ADC_R.c ****   __HAL_RCC_DMA1_CLK_ENABLE();
   41              		.loc 1 16 0
   42 0004 2E4B     		ldr	r3, .L8
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 2
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 2
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 2
 
 
   43 0006 5A69     		ldr	r2, [r3, #20]
@@ -126,11 +118,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
   84 004a 08B1     		cbz	r0, .L2
   30:./Src/ADC_R.c ****   {
   31:./Src/ADC_R.c ****     Error_Handler();
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 3
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 3
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 3
 
 
   85              		.loc 1 31 0
@@ -190,11 +178,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  114 0072 FFF7FEFF 		bl	HAL_ADC_ConfigChannel
  115              	.LVL6:
  116 0076 08B1     		cbz	r0, .L4
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 4
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 4
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 4
 
 
   57:./Src/ADC_R.c ****   {
@@ -254,11 +238,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
   75:./Src/ADC_R.c ****   HAL_ADC_Start(&hadc1);
  153              		.loc 1 75 0
  154 00aa 064C     		ldr	r4, .L8+4
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 5
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 5
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 5
 
 
  155 00ac 2046     		mov	r0, r4
@@ -318,11 +298,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  202 0002 0B20     		movs	r0, #11
  203 0004 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
  204              	.LVL14:
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 6
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 6
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 6
 
 
   85:./Src/ADC_R.c ****   uint16_t data = adc_Rdati.data[0];
@@ -382,11 +358,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
   90:./Src/ADC_R.c ****   HAL_NVIC_DisableIRQ(DMA1_Channel1_IRQn);
  256              		.loc 1 90 0
  257 0002 0B20     		movs	r0, #11
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 7
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 7
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 7
 
 
  258 0004 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
@@ -446,11 +418,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  306              	ADC_MOTOR_RIGHT_IS_CONV:
  307              	.LFB67:
   98:./Src/ADC_R.c **** // ------------RAW----------------
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 8
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 8
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 8
 
 
   99:./Src/ADC_R.c **** uint8_t ADC_MOTOR_RIGHT_IS_CONV(void){
@@ -510,11 +478,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  355              	.LCFI6:
  356              		.cfi_def_cfa_offset 8
  357              		.cfi_offset 4, -8
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 9
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 9
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 9
 
 
  358              		.cfi_offset 14, -4
@@ -574,11 +538,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  405              	.LVL41:
  117:./Src/ADC_R.c ****   data = adc_Rdati.data[0];
  406              		.loc 1 117 0
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 10
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 10
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 10
 
 
  407 0008 034B     		ldr	r3, .L30
@@ -638,11 +598,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  454 000e 0B20     		movs	r0, #11
  455 0010 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
  456              	.LVL48:
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 11
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 11
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 11
 
 
  127:./Src/ADC_R.c ****   return data;
@@ -702,11 +658,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  502              	.LVL54:
  503              	.L39:
  504              		.align	2
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 12
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 12
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 12
 
 
  505              	.L38:
@@ -766,11 +718,7 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  146:./Src/ADC_R.c **** }
  147:./Src/ADC_R.c **** 
  148:./Src/ADC_R.c **** // ----------------------PRIVATE----------------------
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 13
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 13
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 13
 
 
  149:./Src/ADC_R.c **** 
@@ -810,82 +758,43 @@ ARM GAS  /tmp/ccljodEx.s 			page 1
  585              		.file 9 "./Inc/ADC_R.h"
  586              		.file 10 "./Drivers/CMSIS/Include/core_cm3.h"
  587              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
-<<<<<<< HEAD
-ARM GAS  /tmp/cckQNj3V.s 			page 14
-=======
-ARM GAS  /tmp/ccljodEx.s 			page 14
->>>>>>> GameTrak
+ARM GAS  /tmp/ccVnVQ0S.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ADC_R.c
-<<<<<<< HEAD
-     /tmp/cckQNj3V.s:20     .text.ADC_R_init:00000000 $t
-     /tmp/cckQNj3V.s:25     .text.ADC_R_init:00000000 ADC_R_init
-     /tmp/cckQNj3V.s:173    .text.ADC_R_init:000000c0 $d
+     /tmp/ccVnVQ0S.s:20     .text.ADC_R_init:00000000 $t
+     /tmp/ccVnVQ0S.s:25     .text.ADC_R_init:00000000 ADC_R_init
+     /tmp/ccVnVQ0S.s:173    .text.ADC_R_init:000000c0 $d
                             *COM*:00000030 hadc1
                             *COM*:0000000c adc_Rdati
-     /tmp/cckQNj3V.s:185    .text.GET_BATTERY_VOLT:00000000 $t
-     /tmp/cckQNj3V.s:190    .text.GET_BATTERY_VOLT:00000000 GET_BATTERY_VOLT
-     /tmp/cckQNj3V.s:232    .text.GET_BATTERY_VOLT:00000030 $d
-     /tmp/cckQNj3V.s:240    .text.GET_MOTOR_R_AMP:00000000 $t
-     /tmp/cckQNj3V.s:245    .text.GET_MOTOR_R_AMP:00000000 GET_MOTOR_R_AMP
-     /tmp/cckQNj3V.s:294    .text.GET_MOTOR_R_AMP:00000038 $d
-     /tmp/cckQNj3V.s:301    .text.ADC_MOTOR_RIGHT_IS_CONV:00000000 $t
-     /tmp/cckQNj3V.s:306    .text.ADC_MOTOR_RIGHT_IS_CONV:00000000 ADC_MOTOR_RIGHT_IS_CONV
-     /tmp/cckQNj3V.s:338    .text.ADC_MOTOR_RIGHT_IS_CONV:00000018 $d
-     /tmp/cckQNj3V.s:343    .text.ADC_MOTOR_RIGHT:00000000 $t
-     /tmp/cckQNj3V.s:348    .text.ADC_MOTOR_RIGHT:00000000 ADC_MOTOR_RIGHT
-     /tmp/cckQNj3V.s:380    .text.ADC_MOTOR_RIGHT:00000018 $d
-     /tmp/cckQNj3V.s:385    .text.ADC_BATTERY:00000000 $t
-     /tmp/cckQNj3V.s:390    .text.ADC_BATTERY:00000000 ADC_BATTERY
-     /tmp/cckQNj3V.s:422    .text.ADC_BATTERY:00000018 $d
-     /tmp/cckQNj3V.s:427    .text.ADC_PA2:00000000 $t
-     /tmp/cckQNj3V.s:432    .text.ADC_PA2:00000000 ADC_PA2
-     /tmp/cckQNj3V.s:464    .text.ADC_PA2:00000018 $d
-     /tmp/cckQNj3V.s:469    .text.ADC_PA3:00000000 $t
-     /tmp/cckQNj3V.s:474    .text.ADC_PA3:00000000 ADC_PA3
-     /tmp/cckQNj3V.s:506    .text.ADC_PA3:00000018 $d
-     /tmp/cckQNj3V.s:511    .text.ADC_R_ResetFlag:00000000 $t
-     /tmp/cckQNj3V.s:516    .text.ADC_R_ResetFlag:00000000 ADC_R_ResetFlag
-     /tmp/cckQNj3V.s:543    .text.ADC_R_ResetFlag:00000018 $d
-     /tmp/cckQNj3V.s:548    .text.ADC_R_callback:00000000 $t
-     /tmp/cckQNj3V.s:553    .text.ADC_R_callback:00000000 ADC_R_callback
-     /tmp/cckQNj3V.s:568    .text.ADC_R_callback:00000008 $d
-=======
-     /tmp/ccljodEx.s:20     .text.ADC_R_init:00000000 $t
-     /tmp/ccljodEx.s:25     .text.ADC_R_init:00000000 ADC_R_init
-     /tmp/ccljodEx.s:173    .text.ADC_R_init:000000c0 $d
-                            *COM*:00000030 hadc1
-                            *COM*:0000000c adc_Rdati
-     /tmp/ccljodEx.s:185    .text.GET_BATTERY_VOLT:00000000 $t
-     /tmp/ccljodEx.s:190    .text.GET_BATTERY_VOLT:00000000 GET_BATTERY_VOLT
-     /tmp/ccljodEx.s:232    .text.GET_BATTERY_VOLT:00000030 $d
-     /tmp/ccljodEx.s:240    .text.GET_MOTOR_R_AMP:00000000 $t
-     /tmp/ccljodEx.s:245    .text.GET_MOTOR_R_AMP:00000000 GET_MOTOR_R_AMP
-     /tmp/ccljodEx.s:294    .text.GET_MOTOR_R_AMP:00000038 $d
-     /tmp/ccljodEx.s:301    .text.ADC_MOTOR_RIGHT_IS_CONV:00000000 $t
-     /tmp/ccljodEx.s:306    .text.ADC_MOTOR_RIGHT_IS_CONV:00000000 ADC_MOTOR_RIGHT_IS_CONV
-     /tmp/ccljodEx.s:338    .text.ADC_MOTOR_RIGHT_IS_CONV:00000018 $d
-     /tmp/ccljodEx.s:343    .text.ADC_MOTOR_RIGHT:00000000 $t
-     /tmp/ccljodEx.s:348    .text.ADC_MOTOR_RIGHT:00000000 ADC_MOTOR_RIGHT
-     /tmp/ccljodEx.s:380    .text.ADC_MOTOR_RIGHT:00000018 $d
-     /tmp/ccljodEx.s:385    .text.ADC_BATTERY:00000000 $t
-     /tmp/ccljodEx.s:390    .text.ADC_BATTERY:00000000 ADC_BATTERY
-     /tmp/ccljodEx.s:422    .text.ADC_BATTERY:00000018 $d
-     /tmp/ccljodEx.s:427    .text.ADC_PA2:00000000 $t
-     /tmp/ccljodEx.s:432    .text.ADC_PA2:00000000 ADC_PA2
-     /tmp/ccljodEx.s:464    .text.ADC_PA2:00000018 $d
-     /tmp/ccljodEx.s:469    .text.ADC_PA3:00000000 $t
-     /tmp/ccljodEx.s:474    .text.ADC_PA3:00000000 ADC_PA3
-     /tmp/ccljodEx.s:506    .text.ADC_PA3:00000018 $d
-     /tmp/ccljodEx.s:511    .text.ADC_R_ResetFlag:00000000 $t
-     /tmp/ccljodEx.s:516    .text.ADC_R_ResetFlag:00000000 ADC_R_ResetFlag
-     /tmp/ccljodEx.s:543    .text.ADC_R_ResetFlag:00000018 $d
-     /tmp/ccljodEx.s:548    .text.ADC_R_callback:00000000 $t
-     /tmp/ccljodEx.s:553    .text.ADC_R_callback:00000000 ADC_R_callback
-     /tmp/ccljodEx.s:568    .text.ADC_R_callback:00000008 $d
->>>>>>> GameTrak
+     /tmp/ccVnVQ0S.s:185    .text.GET_BATTERY_VOLT:00000000 $t
+     /tmp/ccVnVQ0S.s:190    .text.GET_BATTERY_VOLT:00000000 GET_BATTERY_VOLT
+     /tmp/ccVnVQ0S.s:232    .text.GET_BATTERY_VOLT:00000030 $d
+     /tmp/ccVnVQ0S.s:240    .text.GET_MOTOR_R_AMP:00000000 $t
+     /tmp/ccVnVQ0S.s:245    .text.GET_MOTOR_R_AMP:00000000 GET_MOTOR_R_AMP
+     /tmp/ccVnVQ0S.s:294    .text.GET_MOTOR_R_AMP:00000038 $d
+     /tmp/ccVnVQ0S.s:301    .text.ADC_MOTOR_RIGHT_IS_CONV:00000000 $t
+     /tmp/ccVnVQ0S.s:306    .text.ADC_MOTOR_RIGHT_IS_CONV:00000000 ADC_MOTOR_RIGHT_IS_CONV
+     /tmp/ccVnVQ0S.s:338    .text.ADC_MOTOR_RIGHT_IS_CONV:00000018 $d
+     /tmp/ccVnVQ0S.s:343    .text.ADC_MOTOR_RIGHT:00000000 $t
+     /tmp/ccVnVQ0S.s:348    .text.ADC_MOTOR_RIGHT:00000000 ADC_MOTOR_RIGHT
+     /tmp/ccVnVQ0S.s:380    .text.ADC_MOTOR_RIGHT:00000018 $d
+     /tmp/ccVnVQ0S.s:385    .text.ADC_BATTERY:00000000 $t
+     /tmp/ccVnVQ0S.s:390    .text.ADC_BATTERY:00000000 ADC_BATTERY
+     /tmp/ccVnVQ0S.s:422    .text.ADC_BATTERY:00000018 $d
+     /tmp/ccVnVQ0S.s:427    .text.ADC_PA2:00000000 $t
+     /tmp/ccVnVQ0S.s:432    .text.ADC_PA2:00000000 ADC_PA2
+     /tmp/ccVnVQ0S.s:464    .text.ADC_PA2:00000018 $d
+     /tmp/ccVnVQ0S.s:469    .text.ADC_PA3:00000000 $t
+     /tmp/ccVnVQ0S.s:474    .text.ADC_PA3:00000000 ADC_PA3
+     /tmp/ccVnVQ0S.s:506    .text.ADC_PA3:00000018 $d
+     /tmp/ccVnVQ0S.s:511    .text.ADC_R_ResetFlag:00000000 $t
+     /tmp/ccVnVQ0S.s:516    .text.ADC_R_ResetFlag:00000000 ADC_R_ResetFlag
+     /tmp/ccVnVQ0S.s:543    .text.ADC_R_ResetFlag:00000018 $d
+     /tmp/ccVnVQ0S.s:548    .text.ADC_R_callback:00000000 $t
+     /tmp/ccVnVQ0S.s:553    .text.ADC_R_callback:00000000 ADC_R_callback
+     /tmp/ccVnVQ0S.s:568    .text.ADC_R_callback:00000008 $d
                             *COM*:00000006 buffer
                             *COM*:00000038 hdma_adc1
                      .debug_frame:00000010 $d

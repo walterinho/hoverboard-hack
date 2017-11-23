@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 1
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 1
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 1
 
 
    1              		.syntax unified
@@ -62,11 +58,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
   29:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   lines are not active and the I/O ports are configured in input floating mode.
   30:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   
   31:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   [..]   
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 2
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 2
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 2
 
 
   32:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   All GPIO pins have weak internal pull-up and pull-down resistors, which can be 
@@ -126,11 +118,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
   86:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   
   87:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****    (#) The HSE oscillator pins OSC_IN/OSC_OUT can be used as 
   88:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****        general purpose PD0 and PD1, respectively, when the HSE oscillator is off. 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 3
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 3
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 3
 
 
   89:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****        The HSE has priority over the GPIO function.
@@ -190,11 +178,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  143:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** #define EXTI_MODE             ((uint32_t)0x10000000)
  144:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** #define GPIO_MODE_IT          ((uint32_t)0x00010000)
  145:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** #define GPIO_MODE_EVT         ((uint32_t)0x00020000)
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 4
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 4
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 4
 
 
  146:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** #define RISING_EDGE           ((uint32_t)0x00100000) 
@@ -254,11 +238,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
   30              		@ args = 0, pretend = 0, frame = 8
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              	.LVL0:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 5
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 5
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 5
 
 
   33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
@@ -318,11 +298,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  222:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****       /* Check the Alternate function parameters */
  223:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****       assert_param(IS_GPIO_AF_INSTANCE(GPIOx));
  224:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 6
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 6
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 6
 
 
  225:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****       /* Based on the required mode, filling config variable with MODEy[1:0] and CNFy[3:2] correspo
@@ -382,11 +358,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  108              		.loc 1 233 0
  109 006c 15E0     		b	.L11
  110              	.L12:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 7
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 7
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 7
 
 
  234:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****           
@@ -446,11 +418,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  264:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****           /* Check the GPIO pull parameter */
  265:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****           assert_param(IS_GPIO_PULL(GPIO_Init->Pull));
  266:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****           if(GPIO_Init->Pull == GPIO_NOPULL)
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 8
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 8
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 8
 
 
  135              		.loc 1 266 0
@@ -510,11 +478,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  164              	.LVL17:
  165              	.L11:
  289:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****           break;
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 9
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 9
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 9
 
 
  290:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****         
@@ -574,11 +538,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  203 00cc 12F0805F 		tst	r2, #268435456
  204 00d0 7AD0     		beq	.L3
  205              	.LBB2:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 10
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 10
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 10
 
 
  307:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****       {
@@ -638,11 +598,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  254 012c 0525     		movs	r5, #5
  255 012e 0AE0     		b	.L19
  256              	.L30:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 11
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 11
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 11
 
 
  257 0130 0025     		movs	r5, #0
@@ -702,11 +658,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  300 016a 1F4D     		ldr	r5, .L37+20
  301              	.LVL33:
  302 016c 2A68     		ldr	r2, [r5]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 12
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 12
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 12
 
 
  303 016e 22EA0302 		bic	r2, r2, r3
@@ -766,11 +718,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  337 01a4 AA68     		ldr	r2, [r5, #8]
  338 01a6 22EA0302 		bic	r2, r2, r3
  339 01aa AA60     		str	r2, [r5, #8]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 13
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 13
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 13
 
 
  340              	.L25:
@@ -830,11 +778,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  377              	.L37:
  378 01d4 00002110 		.word	270598144
  379 01d8 00003110 		.word	271646720
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 14
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 14
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 14
 
 
  380 01dc 00100240 		.word	1073876992
@@ -894,11 +838,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  414              	.L47:
  381:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   {
  382:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****     /* Get current io position */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 15
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 15
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 15
 
 
  383:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****     iocurrent = (GPIO_Pin) & ((uint32_t)1 << position);
@@ -958,11 +898,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  396:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****       /* ODR default value is 0 */
  397:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****       CLEAR_BIT(GPIOx->ODR, iocurrent);
  456              		.loc 1 397 0 discriminator 4
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 16
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 16
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 16
 
 
  457 0042 C468     		ldr	r4, [r0, #12]
@@ -1022,11 +958,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  504 0096 08E0     		b	.L46
  505              	.L49:
  506 0098 0127     		movs	r7, #1
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 17
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 17
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 17
 
 
  507 009a 06E0     		b	.L46
@@ -1086,11 +1018,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  550              	.LVL55:
  551              	.L41:
  416:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****       }
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 18
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 18
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 18
 
 
  417:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****     }
@@ -1150,11 +1078,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  446:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   */
  447:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  448:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** {
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 19
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 19
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 19
 
 
  578              		.loc 1 448 0
@@ -1214,11 +1138,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  473:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   * @param  GPIO_Pin: specifies the port bit to be written.
  474:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   *          This parameter can be one of GPIO_PIN_x where x can be (0..15).
  475:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   * @param  PinState: specifies the value to be written to the selected bit.
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 20
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 20
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 20
 
 
  476:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   *          This parameter can be one of the GPIO_PinState enum values:
@@ -1278,11 +1198,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  504:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** {
  638              		.loc 1 504 0
  639              		.cfi_startproc
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 21
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 21
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 21
 
 
  640              		@ args = 0, pretend = 0, frame = 0
@@ -1342,11 +1258,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  528:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c **** 
  529:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   /* Apply lock key write sequence */
  530:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   SET_BIT(tmp, GPIO_Pin);
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 22
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 22
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 22
 
 
  673              		.loc 1 530 0
@@ -1406,11 +1318,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  709              	.LFE69:
  711 002e 00BF     		.section	.text.HAL_GPIO_EXTI_Callback,"ax",%progbits
  712              		.align	2
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 23
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 23
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 23
 
 
  713              		.weak	HAL_GPIO_EXTI_Callback
@@ -1470,11 +1378,7 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  745              		.cfi_def_cfa_offset 8
  746              		.cfi_offset 3, -8
  747              		.cfi_offset 14, -4
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 24
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 24
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 24
 
 
  558:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c ****   { 
@@ -1508,56 +1412,30 @@ ARM GAS  /tmp/ccNhhPDt.s 			page 1
  774              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
  775              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  776              		.file 8 "./Drivers/CMSIS/Include/core_cm3.h"
-<<<<<<< HEAD
-ARM GAS  /tmp/ccqZ1tEP.s 			page 25
-=======
-ARM GAS  /tmp/ccNhhPDt.s 			page 25
->>>>>>> GameTrak
+ARM GAS  /tmp/ccbwSiWO.s 			page 25
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_gpio.c
-<<<<<<< HEAD
-     /tmp/ccqZ1tEP.s:20     .text.HAL_GPIO_Init:00000000 $t
-     /tmp/ccqZ1tEP.s:25     .text.HAL_GPIO_Init:00000000 HAL_GPIO_Init
-     /tmp/ccqZ1tEP.s:378    .text.HAL_GPIO_Init:000001d4 $d
-     /tmp/ccqZ1tEP.s:388    .text.HAL_GPIO_DeInit:00000000 $t
-     /tmp/ccqZ1tEP.s:393    .text.HAL_GPIO_DeInit:00000000 HAL_GPIO_DeInit
-     /tmp/ccqZ1tEP.s:564    .text.HAL_GPIO_DeInit:000000e8 $d
-     /tmp/ccqZ1tEP.s:571    .text.HAL_GPIO_ReadPin:00000000 $t
-     /tmp/ccqZ1tEP.s:576    .text.HAL_GPIO_ReadPin:00000000 HAL_GPIO_ReadPin
-     /tmp/ccqZ1tEP.s:603    .text.HAL_GPIO_WritePin:00000000 $t
-     /tmp/ccqZ1tEP.s:608    .text.HAL_GPIO_WritePin:00000000 HAL_GPIO_WritePin
-     /tmp/ccqZ1tEP.s:631    .text.HAL_GPIO_TogglePin:00000000 $t
-     /tmp/ccqZ1tEP.s:636    .text.HAL_GPIO_TogglePin:00000000 HAL_GPIO_TogglePin
-     /tmp/ccqZ1tEP.s:654    .text.HAL_GPIO_LockPin:00000000 $t
-     /tmp/ccqZ1tEP.s:659    .text.HAL_GPIO_LockPin:00000000 HAL_GPIO_LockPin
-     /tmp/ccqZ1tEP.s:712    .text.HAL_GPIO_EXTI_Callback:00000000 $t
-     /tmp/ccqZ1tEP.s:717    .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
-     /tmp/ccqZ1tEP.s:730    .text.HAL_GPIO_EXTI_IRQHandler:00000000 $t
-     /tmp/ccqZ1tEP.s:735    .text.HAL_GPIO_EXTI_IRQHandler:00000000 HAL_GPIO_EXTI_IRQHandler
-     /tmp/ccqZ1tEP.s:764    .text.HAL_GPIO_EXTI_IRQHandler:00000014 $d
-=======
-     /tmp/ccNhhPDt.s:20     .text.HAL_GPIO_Init:00000000 $t
-     /tmp/ccNhhPDt.s:25     .text.HAL_GPIO_Init:00000000 HAL_GPIO_Init
-     /tmp/ccNhhPDt.s:378    .text.HAL_GPIO_Init:000001d4 $d
-     /tmp/ccNhhPDt.s:388    .text.HAL_GPIO_DeInit:00000000 $t
-     /tmp/ccNhhPDt.s:393    .text.HAL_GPIO_DeInit:00000000 HAL_GPIO_DeInit
-     /tmp/ccNhhPDt.s:564    .text.HAL_GPIO_DeInit:000000e8 $d
-     /tmp/ccNhhPDt.s:571    .text.HAL_GPIO_ReadPin:00000000 $t
-     /tmp/ccNhhPDt.s:576    .text.HAL_GPIO_ReadPin:00000000 HAL_GPIO_ReadPin
-     /tmp/ccNhhPDt.s:603    .text.HAL_GPIO_WritePin:00000000 $t
-     /tmp/ccNhhPDt.s:608    .text.HAL_GPIO_WritePin:00000000 HAL_GPIO_WritePin
-     /tmp/ccNhhPDt.s:631    .text.HAL_GPIO_TogglePin:00000000 $t
-     /tmp/ccNhhPDt.s:636    .text.HAL_GPIO_TogglePin:00000000 HAL_GPIO_TogglePin
-     /tmp/ccNhhPDt.s:654    .text.HAL_GPIO_LockPin:00000000 $t
-     /tmp/ccNhhPDt.s:659    .text.HAL_GPIO_LockPin:00000000 HAL_GPIO_LockPin
-     /tmp/ccNhhPDt.s:712    .text.HAL_GPIO_EXTI_Callback:00000000 $t
-     /tmp/ccNhhPDt.s:717    .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
-     /tmp/ccNhhPDt.s:730    .text.HAL_GPIO_EXTI_IRQHandler:00000000 $t
-     /tmp/ccNhhPDt.s:735    .text.HAL_GPIO_EXTI_IRQHandler:00000000 HAL_GPIO_EXTI_IRQHandler
-     /tmp/ccNhhPDt.s:764    .text.HAL_GPIO_EXTI_IRQHandler:00000014 $d
->>>>>>> GameTrak
+     /tmp/ccbwSiWO.s:20     .text.HAL_GPIO_Init:00000000 $t
+     /tmp/ccbwSiWO.s:25     .text.HAL_GPIO_Init:00000000 HAL_GPIO_Init
+     /tmp/ccbwSiWO.s:378    .text.HAL_GPIO_Init:000001d4 $d
+     /tmp/ccbwSiWO.s:388    .text.HAL_GPIO_DeInit:00000000 $t
+     /tmp/ccbwSiWO.s:393    .text.HAL_GPIO_DeInit:00000000 HAL_GPIO_DeInit
+     /tmp/ccbwSiWO.s:564    .text.HAL_GPIO_DeInit:000000e8 $d
+     /tmp/ccbwSiWO.s:571    .text.HAL_GPIO_ReadPin:00000000 $t
+     /tmp/ccbwSiWO.s:576    .text.HAL_GPIO_ReadPin:00000000 HAL_GPIO_ReadPin
+     /tmp/ccbwSiWO.s:603    .text.HAL_GPIO_WritePin:00000000 $t
+     /tmp/ccbwSiWO.s:608    .text.HAL_GPIO_WritePin:00000000 HAL_GPIO_WritePin
+     /tmp/ccbwSiWO.s:631    .text.HAL_GPIO_TogglePin:00000000 $t
+     /tmp/ccbwSiWO.s:636    .text.HAL_GPIO_TogglePin:00000000 HAL_GPIO_TogglePin
+     /tmp/ccbwSiWO.s:654    .text.HAL_GPIO_LockPin:00000000 $t
+     /tmp/ccbwSiWO.s:659    .text.HAL_GPIO_LockPin:00000000 HAL_GPIO_LockPin
+     /tmp/ccbwSiWO.s:712    .text.HAL_GPIO_EXTI_Callback:00000000 $t
+     /tmp/ccbwSiWO.s:717    .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
+     /tmp/ccbwSiWO.s:730    .text.HAL_GPIO_EXTI_IRQHandler:00000000 $t
+     /tmp/ccbwSiWO.s:735    .text.HAL_GPIO_EXTI_IRQHandler:00000000 HAL_GPIO_EXTI_IRQHandler
+     /tmp/ccbwSiWO.s:764    .text.HAL_GPIO_EXTI_IRQHandler:00000014 $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

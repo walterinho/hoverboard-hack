@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 1
-=======
-ARM GAS  /tmp/ccWElble.s 			page 1
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 1
 
 
    1              		.syntax unified
@@ -62,11 +58,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
   29:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   [..]
   30:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   (+) 12-bit resolution
   31:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 2
-=======
-ARM GAS  /tmp/ccWElble.s 			page 2
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 2
 
 
   32:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   (+) Interrupt generation at the end of regular conversion, end of injected
@@ -126,11 +118,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
   86:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                    other device clock parameters configuration:
   87:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                (+++) RCC_PeriphCLKInitTypeDef  PeriphClkInit;
   88:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                (+++) __ADC1_CLK_ENABLE();
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 3
-=======
-ARM GAS  /tmp/ccWElble.s 			page 3
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 3
 
 
   89:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                (+++) PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
@@ -190,11 +178,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  143:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****      [..]
  144:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
  145:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     (#) Optionally, perform an automatic ADC calibration to improve the
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 4
-=======
-ARM GAS  /tmp/ccWElble.s 			page 4
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 4
 
 
  146:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****         conversion accuracy
@@ -254,11 +238,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  200:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                 using function HAL_ADCEx_MultiModeStop_DMA()
  201:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****           (+++) Stop conversion and disable the ADC peripheral (slave)
  202:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                 using function HAL_ADC_Stop_IT()
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 5
-=======
-ARM GAS  /tmp/ccWElble.s 			page 5
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 5
 
 
  203:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
@@ -318,11 +298,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  257:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *      this list of conditions and the following disclaimer in the documentation
  258:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *      and/or other materials provided with the distribution.
  259:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 6
-=======
-ARM GAS  /tmp/ccWElble.s 			page 6
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 6
 
 
  260:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *      may be used to endorse or promote products derived from this software
@@ -382,11 +358,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  314:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   #define ADC_TEMPSENSOR_DELAY_US         ((uint32_t) 10)
  315:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
  316:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** /**
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 7
-=======
-ARM GAS  /tmp/ccWElble.s 			page 7
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 7
 
 
  317:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   * @}
@@ -446,11 +418,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  371:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   * @param  hadc: ADC handle
  372:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   * @retval HAL status
  373:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 8
-=======
-ARM GAS  /tmp/ccWElble.s 			page 8
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 8
 
 
  374:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** HAL_StatusTypeDef HAL_ADC_Init(ADC_HandleTypeDef* hadc)
@@ -510,11 +478,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  428:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   tmp_hal_status = ADC_ConversionStop_Disable(hadc);
  429:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   
  430:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 9
-=======
-ARM GAS  /tmp/ccWElble.s 			page 9
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 9
 
 
  431:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   /* Configuration of ADC parameters if previous preliminary actions are      */ 
@@ -574,11 +538,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  485:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       }
  486:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     }
  487:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 10
-=======
-ARM GAS  /tmp/ccWElble.s 			page 10
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 10
 
 
  488:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Update ADC configuration register CR1 with previous settings */
@@ -638,11 +598,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  542:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
  543:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       /* Update ADC state machine to error */
  544:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       ADC_STATE_CLR_SET(hadc->State,
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 11
-=======
-ARM GAS  /tmp/ccWElble.s 			page 11
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 11
 
 
  545:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                         HAL_ADC_STATE_BUSY_INTERNAL,
@@ -702,11 +658,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  599:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   {
  600:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* ========== Reset ADC registers ========== */
  601:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 12
-=======
-ARM GAS  /tmp/ccWElble.s 			page 12
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 12
 
 
  602:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
@@ -766,11 +718,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  656:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     
  657:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Reset register SQR2 */
  658:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     CLEAR_BIT(hadc->Instance->SQR2, ADC_SQR2_SQ12 | ADC_SQR2_SQ11 | ADC_SQR2_SQ10 | 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 13
-=======
-ARM GAS  /tmp/ccWElble.s 			page 13
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 13
 
 
  659:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                                     ADC_SQR2_SQ9  | ADC_SQR2_SQ8  | ADC_SQR2_SQ7   );
@@ -830,11 +778,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  713:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** __weak void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
  714:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** {
   28              		.loc 1 714 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 14
-=======
-ARM GAS  /tmp/ccWElble.s 			page 14
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 14
 
 
   29              		.cfi_startproc
@@ -894,11 +838,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  738:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   */
  739:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
  740:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** /** @defgroup ADC_Exported_Functions_Group2 IO operation functions
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 15
-=======
-ARM GAS  /tmp/ccWElble.s 			page 15
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 15
 
 
  741:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****  *  @brief    Input and Output operation functions
@@ -958,11 +898,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  795:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
  796:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       /* Set ADC state (ADC independent or master) */
  797:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       CLEAR_BIT(hadc->State, HAL_ADC_STATE_MULTIMODE_SLAVE);
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 16
-=======
-ARM GAS  /tmp/ccWElble.s 			page 16
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 16
 
 
  798:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       
@@ -1022,11 +958,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  852:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
  853:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       /* Start ADC conversion on regular group with SW start */
  854:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       SET_BIT(hadc->Instance->CR2, (ADC_CR2_SWSTART | ADC_CR2_EXTTRIG));
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 17
-=======
-ARM GAS  /tmp/ccWElble.s 			page 17
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 17
 
 
  855:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     }
@@ -1086,11 +1018,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  909:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** }
  910:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
  911:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** /**
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 18
-=======
-ARM GAS  /tmp/ccWElble.s 			page 18
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 18
 
 
  912:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   * @brief  Wait for regular group conversion to be completed.
@@ -1150,11 +1078,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  939:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   
  940:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   /* Verification that ADC configuration is compliant with polling for        */
  941:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   /* each conversion:                                                         */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 19
-=======
-ARM GAS  /tmp/ccWElble.s 			page 19
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 19
 
 
  942:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   /* Particular case is ADC configured in DMA mode                            */
@@ -1214,11 +1138,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  116              		.loc 1 968 0 discriminator 1
  117 0038 13F4700F 		tst	r3, #15728640
  118 003c 12D0     		beq	.L8
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 20
-=======
-ARM GAS  /tmp/ccWElble.s 			page 20
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 20
 
 
  119 003e 17E0     		b	.L6
@@ -1278,11 +1198,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  989:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   }
  990:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   else
  991:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   {
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 21
-=======
-ARM GAS  /tmp/ccWElble.s 			page 21
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 21
 
 
  992:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Replace polling by wait for maximum conversion time */
@@ -1342,11 +1258,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  200 00bc 0A40     		ands	r2, r2, r1
  201 00be 5AB9     		cbnz	r2, .L22
  202              		.loc 1 998 0 discriminator 15
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 22
-=======
-ARM GAS  /tmp/ccWElble.s 			page 22
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 22
 
 
  203 00c0 DA68     		ldr	r2, [r3, #12]
@@ -1406,11 +1318,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  246 00fc AB62     		str	r3, [r5, #40]
 1009:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****           
 1010:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****           /* Process unlocked */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 23
-=======
-ARM GAS  /tmp/ccWElble.s 			page 23
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 23
 
 
 1011:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****           __HAL_UNLOCK(hadc);
@@ -1470,11 +1378,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1032:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****      (hadc->Init.ContinuousConvMode == DISABLE)   )
  279              		.loc 1 1032 0 discriminator 1
  280 0132 EB68     		ldr	r3, [r5, #12]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 24
-=======
-ARM GAS  /tmp/ccWElble.s 			page 24
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 24
 
 
 1031:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****      (hadc->Init.ContinuousConvMode == DISABLE)   )
@@ -1534,11 +1438,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  321 016c 92244900 		.word	4793490
  322 0170 49922400 		.word	2396745
  323              		.cfi_endproc
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 25
-=======
-ARM GAS  /tmp/ccWElble.s 			page 25
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 25
 
 
  324              	.LFE70:
@@ -1598,11 +1498,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  357              		.loc 1 1068 0
  358 000e 11E0     		b	.L32
  359              	.LVL22:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 26
-=======
-ARM GAS  /tmp/ccWElble.s 			page 26
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 26
 
 
  360              	.L35:
@@ -1662,11 +1558,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  393 0044 A262     		str	r2, [r4, #40]
 1089:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     
 1090:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   /* Clear ADC analog watchdog flag */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 27
-=======
-ARM GAS  /tmp/ccWElble.s 			page 27
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 27
 
 
 1091:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   __HAL_ADC_CLEAR_FLAG(hadc, ADC_FLAG_AWD);
@@ -1726,11 +1618,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1129:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* for all cases of multimode: independent mode, multimode ADC master     */
 1130:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* or multimode ADC slave (for devices with several ADCs):                */
 1131:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     if (ADC_NONMULTIMODE_OR_MULTIMODEMASTER(hadc))
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 28
-=======
-ARM GAS  /tmp/ccWElble.s 			page 28
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 28
 
 
 1132:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
@@ -1790,11 +1678,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1186:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /*  - if ADC is master, ADC is enabled and conversion is started.         */
 1187:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     if (ADC_IS_SOFTWARE_START_REGULAR(hadc)      &&
 1188:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****         ADC_NONMULTIMODE_OR_MULTIMODEMASTER(hadc)  )
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 29
-=======
-ARM GAS  /tmp/ccWElble.s 			page 29
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 29
 
 
 1189:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
@@ -1854,11 +1738,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1243:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   __HAL_UNLOCK(hadc);
 1244:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   
 1245:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   /* Return function status */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 30
-=======
-ARM GAS  /tmp/ccWElble.s 			page 30
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 30
 
 
 1246:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   return tmp_hal_status;
@@ -1918,11 +1798,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1300:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     
 1301:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Set group injected state (from auto-injection) and multimode state     */
 1302:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* for all cases of multimode: independent mode, multimode ADC master     */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 31
-=======
-ARM GAS  /tmp/ccWElble.s 			page 31
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 31
 
 
 1303:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* or multimode ADC slave (for devices with several ADCs):                */
@@ -1982,11 +1858,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1357:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       /* start (in case of SW start):                                         */
 1358:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       
 1359:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       /* Clear regular group conversion flag and overrun flag */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 32
-=======
-ARM GAS  /tmp/ccWElble.s 			page 32
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 32
 
 
 1360:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       /* (To ensure of no unknown state from potential previous ADC           */
@@ -2046,11 +1918,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1414:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** HAL_StatusTypeDef HAL_ADC_Stop_DMA(ADC_HandleTypeDef* hadc)
 1415:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** {
 1416:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   HAL_StatusTypeDef tmp_hal_status = HAL_OK;
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 33
-=======
-ARM GAS  /tmp/ccWElble.s 			page 33
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 33
 
 
 1417:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   
@@ -2110,11 +1978,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1471:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *            both flags EOC and EOS are raised.
 1472:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *         To clear this flag, either use function: 
 1473:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *         in programming model IT: @ref HAL_ADC_IRQHandler(), in programming
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 34
-=======
-ARM GAS  /tmp/ccWElble.s 			page 34
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 34
 
 
 1474:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   *         model polling: @ref HAL_ADC_PollForConversion() 
@@ -2174,11 +2038,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1507:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     if(__HAL_ADC_GET_FLAG(hadc, ADC_FLAG_EOC) )
 1508:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
 1509:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       /* Update state machine on conversion status if not in error state */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 35
-=======
-ARM GAS  /tmp/ccWElble.s 			page 35
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 35
 
 
 1510:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       if (HAL_IS_BIT_CLR(hadc->State, HAL_ADC_STATE_ERROR_INTERNAL))
@@ -2238,11 +2098,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1564:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****          (HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO) &&     
 1565:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****          (ADC_IS_SOFTWARE_START_REGULAR(hadc)        &&
 1566:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****           (hadc->Init.ContinuousConvMode == DISABLE)   )        )   )
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 36
-=======
-ARM GAS  /tmp/ccWElble.s 			page 36
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 36
 
 
 1567:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       {
@@ -2302,11 +2158,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  443              	.LFE78:
  445 0002 00BF     		.section	.text.ADC_DMAConvCplt,"ax",%progbits
  446              		.align	2
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 37
-=======
-ARM GAS  /tmp/ccWElble.s 			page 37
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 37
 
 
  447              		.global	ADC_DMAConvCplt
@@ -2366,11 +2218,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1662:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
 1663:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
 1664:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** /**
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 38
-=======
-ARM GAS  /tmp/ccWElble.s 			page 38
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 38
 
 
 1665:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   * @}
@@ -2430,11 +2278,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1719:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   if (sConfig->Rank < 7)
 1720:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   {
 1721:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     MODIFY_REG(hadc->Instance->SQR3                        ,
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 39
-=======
-ARM GAS  /tmp/ccWElble.s 			page 39
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 39
 
 
 1722:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                ADC_SQR3_RK(ADC_SQR3_SQ1, sConfig->Rank)    ,
@@ -2494,11 +2338,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1776:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****           {
 1777:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****             wait_loop_index--;
 1778:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****           }
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 40
-=======
-ARM GAS  /tmp/ccWElble.s 			page 40
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 40
 
 
 1779:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****         }
@@ -2558,11 +2398,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1833:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   /* Configure ADC Analog watchdog interrupt */
 1834:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   if(AnalogWDGConfig->ITMode == ENABLE)
 1835:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   {
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 41
-=======
-ARM GAS  /tmp/ccWElble.s 			page 41
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 41
 
 
 1836:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Enable the ADC Analog watchdog interrupt */
@@ -2622,11 +2458,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1890:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** @endverbatim
 1891:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   * @{
 1892:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 42
-=======
-ARM GAS  /tmp/ccWElble.s 			page 42
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 42
 
 
 1893:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** 
@@ -2686,11 +2518,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1947:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     
 1948:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Delay for ADC stabilization time */
 1949:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Compute number of CPU cycles to wait for */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 43
-=======
-ARM GAS  /tmp/ccWElble.s 			page 43
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 43
 
 
 1950:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     wait_loop_index = (ADC_STAB_DELAY_US * (SystemCoreClock / 1000000));
@@ -2750,11 +2578,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 2004:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
 2005:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       if((HAL_GetTick() - tickstart) > ADC_DISABLE_TIMEOUT)
 2006:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       {
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 44
-=======
-ARM GAS  /tmp/ccWElble.s 			page 44
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 44
 
 
 2007:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****         /* Update ADC state machine to error */
@@ -2814,11 +2638,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 2039:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* by external trigger, continuous mode or scan sequence on going.        */
 2040:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Note: On STM32F1 devices, in case of sequencer enabled                 */
 2041:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /*       (several ranks selected), end of conversion flag is raised       */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 45
-=======
-ARM GAS  /tmp/ccWElble.s 			page 45
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 45
 
 
 2042:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /*       at the end of the sequence.                                      */
@@ -2878,11 +2698,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  508              	.LVL33:
  509 0048 1B6B     		ldr	r3, [r3, #48]
  510 004a 9847     		blx	r3
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 46
-=======
-ARM GAS  /tmp/ccWElble.s 			page 46
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 46
 
 
  511              	.LVL34:
@@ -2942,11 +2758,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 2076:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   HAL_ADC_ConvHalfCpltCallback(hadc); 
  554              		.loc 1 2076 0
  555 0002 406A     		ldr	r0, [r0, #36]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 47
-=======
-ARM GAS  /tmp/ccWElble.s 			page 47
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 47
 
 
  556              	.LVL38:
@@ -3006,11 +2818,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  609 0014 26D0     		beq	.L49
 1510:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       {
  610              		.loc 1 1510 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 48
-=======
-ARM GAS  /tmp/ccWElble.s 			page 48
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 48
 
 
  611 0016 826A     		ldr	r2, [r0, #40]
@@ -3070,11 +2878,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1545:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   {
  655              		.loc 1 1545 0
  656 0064 2368     		ldr	r3, [r4]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 49
-=======
-ARM GAS  /tmp/ccWElble.s 			page 49
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 49
 
 
  657 0066 5A68     		ldr	r2, [r3, #4]
@@ -3134,11 +2938,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  699 00b2 A36A     		ldr	r3, [r4, #40]
  700 00b4 23F48053 		bic	r3, r3, #4096
  701 00b8 A362     		str	r3, [r4, #40]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 50
-=======
-ARM GAS  /tmp/ccWElble.s 			page 50
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 50
 
 
 1574:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****         { 
@@ -3198,11 +2998,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  748              		.weak	HAL_ADC_ErrorCallback
  749              		.thumb
  750              		.thumb_func
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 51
-=======
-ARM GAS  /tmp/ccWElble.s 			page 51
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 51
 
 
  752              	HAL_ADC_ErrorCallback:
@@ -3262,11 +3058,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  790              		.loc 1 2093 0
  791 000c C36A     		ldr	r3, [r0, #44]
  792 000e 43F00403 		orr	r3, r3, #4
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 52
-=======
-ARM GAS  /tmp/ccWElble.s 			page 52
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 52
 
 
  793 0012 C362     		str	r3, [r0, #44]
@@ -3326,11 +3118,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  840              		.loc 1 1721 0
  841 001e 0668     		ldr	r6, [r0]
  842 0020 756B     		ldr	r5, [r6, #52]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 53
-=======
-ARM GAS  /tmp/ccWElble.s 			page 53
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 53
 
 
  843              	.LVL52:
@@ -3390,11 +3178,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
   51:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
   52:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
   53:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 54
-=======
-ARM GAS  /tmp/ccWElble.s 			page 54
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 54
 
 
   54:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
@@ -3454,11 +3238,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  108:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  109:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
  110:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 55
-=======
-ARM GAS  /tmp/ccWElble.s 			page 55
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 55
 
 
  111:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -3518,11 +3298,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  165:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
  166:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  167:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 56
-=======
-ARM GAS  /tmp/ccWElble.s 			page 56
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 56
 
 
  168:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
@@ -3582,11 +3358,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  222:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable FIQ
  223:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
  224:./Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 57
-=======
-ARM GAS  /tmp/ccWElble.s 			page 57
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 57
 
 
  225:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -3646,11 +3418,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  279:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  280:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  281:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Fault Mask
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 58
-=======
-ARM GAS  /tmp/ccWElble.s 			page 58
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 58
 
 
  282:./Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Fault Mask register.
@@ -3710,11 +3478,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  336:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
  337:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if (__FPU_PRESENT == 1U) && (__FPU_USED == 1U)
  338:./Drivers/CMSIS/Include/cmsis_gcc.h ****   /* Empty asm statement works as a scheduling barrier */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 59
-=======
-ARM GAS  /tmp/ccWElble.s 			page 59
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 59
 
 
  339:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("");
@@ -3774,11 +3538,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  393:./Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  394:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE void __WFE(void)
  395:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 60
-=======
-ARM GAS  /tmp/ccWElble.s 			page 60
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 60
 
 
  396:./Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("wfe");
@@ -3838,11 +3598,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  450:./Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE uint32_t __REV(uint32_t value)
  451:./Drivers/CMSIS/Include/cmsis_gcc.h **** {
  452:./Drivers/CMSIS/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5)
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 61
-=======
-ARM GAS  /tmp/ccWElble.s 			page 61
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 61
 
 
  453:./Drivers/CMSIS/Include/cmsis_gcc.h ****   return __builtin_bswap32(value);
@@ -3902,11 +3658,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  507:./Drivers/CMSIS/Include/cmsis_gcc.h **** }
  508:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
  509:./Drivers/CMSIS/Include/cmsis_gcc.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 62
-=======
-ARM GAS  /tmp/ccWElble.s 			page 62
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 62
 
 
  510:./Drivers/CMSIS/Include/cmsis_gcc.h **** /**
@@ -3966,11 +3718,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  878              	.LBE30:
 1721:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                ADC_SQR3_RK(ADC_SQR3_SQ1, sConfig->Rank)    ,
  879              		.loc 1 1721 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 63
-=======
-ARM GAS  /tmp/ccWElble.s 			page 63
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 63
 
 
  880 0044 B2FA82F2 		clz	r2, r2
@@ -4030,11 +3778,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  930 0084 03FB02F3 		mul	r3, r3, r2
  931 0088 9C40     		lsls	r4, r4, r3
  932 008a 2C43     		orrs	r4, r4, r5
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 64
-=======
-ARM GAS  /tmp/ccWElble.s 			page 64
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 64
 
 
  933 008c 3463     		str	r4, [r6, #48]
@@ -4094,11 +3838,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  983 00c8 092D     		cmp	r5, #9
  984 00ca 1BD9     		bls	.L66
 1745:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                ADC_SMPR1(ADC_SMPR1_SMP10, sConfig->Channel)      ,
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 65
-=======
-ARM GAS  /tmp/ccWElble.s 			page 65
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 65
 
 
  985              		.loc 1 1745 0
@@ -4158,11 +3898,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1036              	.LBB45:
  1037              		.loc 2 531 0
  1038 0108 3822     		movs	r2, #56
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 66
-=======
-ARM GAS  /tmp/ccWElble.s 			page 66
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 66
 
 
  1039              		.syntax unified
@@ -4222,11 +3958,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1088 014c 20D1     		bne	.L74
 1768:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****         
  1089              		.loc 1 1768 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 67
-=======
-ARM GAS  /tmp/ccWElble.s 			page 67
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 67
 
 
  1090 014e 9A68     		ldr	r2, [r3, #8]
@@ -4286,11 +4018,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1136              	.L75:
  1137 0194 0023     		movs	r3, #0
  1138              	.LVL74:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 68
-=======
-ARM GAS  /tmp/ccWElble.s 			page 68
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 68
 
 
  1139              	.L68:
@@ -4350,11 +4078,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1189              		.loc 1 1829 0
  1190 0000 90F82430 		ldrb	r3, [r0, #36]	@ zero_extendqisi2
  1191 0004 012B     		cmp	r3, #1
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 69
-=======
-ARM GAS  /tmp/ccWElble.s 			page 69
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 69
 
 
  1192 0006 25D0     		beq	.L83
@@ -4414,11 +4138,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1237              		.loc 1 1865 0
  1238 004a 0023     		movs	r3, #0
  1239 004c 80F82430 		strb	r3, [r0, #36]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 70
-=======
-ARM GAS  /tmp/ccWElble.s 			page 70
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 70
 
 
 1868:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c **** }
@@ -4478,11 +4198,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1290              		.loc 1 1903 0
  1291 0002 7047     		bx	lr
  1292              		.cfi_endproc
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 71
-=======
-ARM GAS  /tmp/ccWElble.s 			page 71
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 71
 
 
  1293              	.LFE84:
@@ -4542,11 +4258,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1345 000a 9A68     		ldr	r2, [r3, #8]
  1346 000c 12F0010F 		tst	r2, #1
  1347 0010 2FD1     		bne	.L96
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 72
-=======
-ARM GAS  /tmp/ccWElble.s 			page 72
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 72
 
 
 1946:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     
@@ -4606,11 +4318,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1392 0052 E36A     		ldr	r3, [r4, #44]
  1393 0054 43F00103 		orr	r3, r3, #1
  1394 0058 E362     		str	r3, [r4, #44]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 73
-=======
-ARM GAS  /tmp/ccWElble.s 			page 73
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 73
 
 
 1971:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       
@@ -4670,11 +4378,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1444 0004 012B     		cmp	r3, #1
  1445 0006 71D0     		beq	.L111
  769:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   HAL_StatusTypeDef tmp_hal_status = HAL_OK;
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 74
-=======
-ARM GAS  /tmp/ccWElble.s 			page 74
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 74
 
 
  1446              		.loc 1 769 0 discriminator 2
@@ -4734,11 +4438,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1491 0056 41F48051 		orr	r1, r1, #4096
  1492 005a A162     		str	r1, [r4, #40]
  1493 005c 15E0     		b	.L105
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 75
-=======
-ARM GAS  /tmp/ccWElble.s 			page 75
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 75
 
 
  1494              	.L104:
@@ -4798,11 +4498,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1538 00aa 1160     		str	r1, [r2]
  850:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****         ADC_NONMULTIMODE_OR_MULTIMODEMASTER(hadc)  )
  1539              		.loc 1 850 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 76
-=======
-ARM GAS  /tmp/ccWElble.s 			page 76
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 76
 
 
  1540 00ac 2268     		ldr	r2, [r4]
@@ -4862,11 +4558,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1585              		.cfi_restore 4
  1586              		.cfi_restore 14
  776:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****    
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 77
-=======
-ARM GAS  /tmp/ccWElble.s 			page 77
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 77
 
 
  1587              		.loc 1 776 0
@@ -4926,11 +4618,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1636 0022 22F00102 		bic	r2, r2, #1
  1637 0026 42F48072 		orr	r2, r2, #256
  1638 002a A262     		str	r2, [r4, #40]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 78
-=======
-ARM GAS  /tmp/ccWElble.s 			page 78
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 78
 
 
 1131:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
@@ -4990,11 +4678,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1683              		.loc 1 1152 0 is_stmt 1
  1684 007e A16A     		ldr	r1, [r4, #40]
  1685 0080 21F44051 		bic	r1, r1, #12288
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 79
-=======
-ARM GAS  /tmp/ccWElble.s 			page 79
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 79
 
 
  1686 0084 41F48051 		orr	r1, r1, #4096
@@ -5054,11 +4738,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1730              	.L126:
 1191:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     }
  1731              		.loc 1 1191 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 80
-=======
-ARM GAS  /tmp/ccWElble.s 			page 80
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 80
 
 
  1732 00d6 9168     		ldr	r1, [r2, #8]
@@ -5118,11 +4798,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
 1274:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   HAL_StatusTypeDef tmp_hal_status = HAL_OK;
  1782              		.loc 1 1274 0
  1783              		.cfi_startproc
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 81
-=======
-ARM GAS  /tmp/ccWElble.s 			page 81
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 81
 
 
  1784              		@ args = 0, pretend = 0, frame = 0
@@ -5182,11 +4858,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1830              		.loc 1 1297 0
  1831 003e A36A     		ldr	r3, [r4, #40]
  1832 0040 23F47063 		bic	r3, r3, #3840
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 82
-=======
-ARM GAS  /tmp/ccWElble.s 			page 82
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 82
 
 
  1833 0044 23F00103 		bic	r3, r3, #1
@@ -5246,11 +4918,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1878 009a 13F4806F 		tst	r3, #1024
  1879 009e 05D0     		beq	.L139
 1325:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****       }
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 83
-=======
-ARM GAS  /tmp/ccWElble.s 			page 83
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 83
 
 
  1880              		.loc 1 1325 0 is_stmt 1
@@ -5310,11 +4978,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1924              		.loc 1 1368 0
  1925 00ec 2168     		ldr	r1, [r4]
  1926 00ee 3B46     		mov	r3, r7
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 84
-=======
-ARM GAS  /tmp/ccWElble.s 			page 84
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 84
 
 
  1927 00f0 3246     		mov	r2, r6
@@ -5374,11 +5038,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  1972              		.loc 1 1398 0
  1973 012e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  1974              	.L148:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 85
-=======
-ARM GAS  /tmp/ccWElble.s 			page 85
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 85
 
 
  1975              		.align	2
@@ -5438,11 +5098,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2025              		.loc 1 2005 0
  2026 001e FFF7FEFF 		bl	HAL_GetTick
  2027              	.LVL126:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 86
-=======
-ARM GAS  /tmp/ccWElble.s 			page 86
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 86
 
 
  2028 0022 401B     		subs	r0, r0, r5
@@ -5502,11 +5158,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2076 0002 00F09D80 		beq	.L167
  375:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   HAL_StatusTypeDef tmp_hal_status = HAL_OK;
  2077              		.loc 1 375 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 87
-=======
-ARM GAS  /tmp/ccWElble.s 			page 87
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 87
 
 
  2078 0006 70B5     		push	{r4, r5, r6, lr}
@@ -5566,11 +5218,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2121              		.loc 1 454 0 is_stmt 0 discriminator 1
  2122 0048 E269     		ldr	r2, [r4, #28]
  2123 004a B2F5402F 		cmp	r2, #786432
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 88
-=======
-ARM GAS  /tmp/ccWElble.s 			page 88
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 88
 
 
  2124 004e 03D1     		bne	.L160
@@ -5630,11 +5278,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2169              	.L169:
  2170 0084 0026     		movs	r6, #0
  2171              	.L161:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 89
-=======
-ARM GAS  /tmp/ccWElble.s 			page 89
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 89
 
 
  2172              	.LVL136:
@@ -5694,11 +5338,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2218              		.loc 1 496 0
  2219 00c2 2168     		ldr	r1, [r4]
  2220 00c4 8D68     		ldr	r5, [r1, #8]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 90
-=======
-ARM GAS  /tmp/ccWElble.s 			page 90
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 90
 
 
  2221 00c6 204A     		ldr	r2, .L173+4
@@ -5758,11 +5398,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2268 00fe 2268     		ldr	r2, [r4]
  2269 0100 9168     		ldr	r1, [r2, #8]
  2270              	.LVL145:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 91
-=======
-ARM GAS  /tmp/ccWElble.s 			page 91
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 91
 
 
  2271 0102 124A     		ldr	r2, .L173+8
@@ -5822,11 +5458,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2318              		.cfi_restore 14
  384:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   }
  2319              		.loc 1 384 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 92
-=======
-ARM GAS  /tmp/ccWElble.s 			page 92
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 92
 
 
  2320 0140 0120     		movs	r0, #1
@@ -5886,11 +5518,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2369 001a 2368     		ldr	r3, [r4]
  2370 001c 6FF01F02 		mvn	r2, #31
  2371 0020 1A60     		str	r2, [r3]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 93
-=======
-ARM GAS  /tmp/ccWElble.s 			page 93
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 93
 
 
  610:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****                                     ADC_CR1_JDISCEN | ADC_CR1_DISCEN | ADC_CR1_JAUTO   | 
@@ -5950,11 +5578,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  643:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     /* Reset register LTR */
  2418              		.loc 1 643 0
  2419 0082 2268     		ldr	r2, [r4]
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 94
-=======
-ARM GAS  /tmp/ccWElble.s 			page 94
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 94
 
 
  2420 0084 536A     		ldr	r3, [r2, #36]
@@ -6014,11 +5638,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2466              	.LVL157:
  694:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     
  2467              		.loc 1 694 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 95
-=======
-ARM GAS  /tmp/ccWElble.s 			page 95
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 95
 
 
  2468 00e0 0023     		movs	r3, #0
@@ -6078,11 +5698,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2517 0008 10B5     		push	{r4, lr}
  2518              	.LCFI29:
  2519              		.cfi_def_cfa_offset 8
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 96
-=======
-ARM GAS  /tmp/ccWElble.s 			page 96
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 96
 
 
  2520              		.cfi_offset 4, -8
@@ -6142,11 +5758,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2568              		.cfi_startproc
  2569              		@ args = 0, pretend = 0, frame = 0
  2570              		@ frame_needed = 0, uses_anonymous_args = 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 97
-=======
-ARM GAS  /tmp/ccWElble.s 			page 97
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 97
 
 
  2571              	.LVL165:
@@ -6206,11 +5818,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2616              		.cfi_restore 14
 1224:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****   
  2617              		.loc 1 1224 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 98
-=======
-ARM GAS  /tmp/ccWElble.s 			page 98
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 98
 
 
  2618 003e 0220     		movs	r0, #2
@@ -6270,11 +5878,7 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2666              	.LVL173:
 1439:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c ****     {
  2667              		.loc 1 1439 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 99
-=======
-ARM GAS  /tmp/ccWElble.s 			page 99
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 99
 
 
  2668 002a 0346     		mov	r3, r0
@@ -6330,150 +5934,77 @@ ARM GAS  /tmp/ccWElble.s 			page 1
  2714              		.file 12 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  2715              		.file 13 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
  2716              		.file 14 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h"
-<<<<<<< HEAD
-ARM GAS  /tmp/ccs5kO1h.s 			page 100
-=======
-ARM GAS  /tmp/ccWElble.s 			page 100
->>>>>>> GameTrak
+ARM GAS  /tmp/ccRRbFjq.s 			page 100
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f1xx_hal_adc.c
-<<<<<<< HEAD
-     /tmp/ccs5kO1h.s:20     .text.HAL_ADC_MspInit:00000000 $t
-     /tmp/ccs5kO1h.s:25     .text.HAL_ADC_MspInit:00000000 HAL_ADC_MspInit
-     /tmp/ccs5kO1h.s:39     .text.HAL_ADC_MspDeInit:00000000 $t
-     /tmp/ccs5kO1h.s:44     .text.HAL_ADC_MspDeInit:00000000 HAL_ADC_MspDeInit
-     /tmp/ccs5kO1h.s:57     .text.HAL_ADC_PollForConversion:00000000 $t
-     /tmp/ccs5kO1h.s:62     .text.HAL_ADC_PollForConversion:00000000 HAL_ADC_PollForConversion
-     /tmp/ccs5kO1h.s:318    .text.HAL_ADC_PollForConversion:00000160 $d
-     /tmp/ccs5kO1h.s:327    .text.HAL_ADC_PollForEvent:00000000 $t
-     /tmp/ccs5kO1h.s:332    .text.HAL_ADC_PollForEvent:00000000 HAL_ADC_PollForEvent
-     /tmp/ccs5kO1h.s:405    .text.HAL_ADC_GetValue:00000000 $t
-     /tmp/ccs5kO1h.s:410    .text.HAL_ADC_GetValue:00000000 HAL_ADC_GetValue
-     /tmp/ccs5kO1h.s:428    .text.HAL_ADC_ConvCpltCallback:00000000 $t
-     /tmp/ccs5kO1h.s:433    .text.HAL_ADC_ConvCpltCallback:00000000 HAL_ADC_ConvCpltCallback
-     /tmp/ccs5kO1h.s:446    .text.ADC_DMAConvCplt:00000000 $t
-     /tmp/ccs5kO1h.s:451    .text.ADC_DMAConvCplt:00000000 ADC_DMAConvCplt
-     /tmp/ccs5kO1h.s:517    .text.HAL_ADC_ConvHalfCpltCallback:00000000 $t
-     /tmp/ccs5kO1h.s:522    .text.HAL_ADC_ConvHalfCpltCallback:00000000 HAL_ADC_ConvHalfCpltCallback
-     /tmp/ccs5kO1h.s:535    .text.ADC_DMAHalfConvCplt:00000000 $t
-     /tmp/ccs5kO1h.s:540    .text.ADC_DMAHalfConvCplt:00000000 ADC_DMAHalfConvCplt
-     /tmp/ccs5kO1h.s:564    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 $t
-     /tmp/ccs5kO1h.s:569    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 HAL_ADC_LevelOutOfWindowCallback
-     /tmp/ccs5kO1h.s:582    .text.HAL_ADC_IRQHandler:00000000 $t
-     /tmp/ccs5kO1h.s:587    .text.HAL_ADC_IRQHandler:00000000 HAL_ADC_IRQHandler
-     /tmp/ccs5kO1h.s:747    .text.HAL_ADC_ErrorCallback:00000000 $t
-     /tmp/ccs5kO1h.s:752    .text.HAL_ADC_ErrorCallback:00000000 HAL_ADC_ErrorCallback
-     /tmp/ccs5kO1h.s:765    .text.ADC_DMAError:00000000 $t
-     /tmp/ccs5kO1h.s:770    .text.ADC_DMAError:00000000 ADC_DMAError
-     /tmp/ccs5kO1h.s:802    .text.HAL_ADC_ConfigChannel:00000000 $t
-     /tmp/ccs5kO1h.s:807    .text.HAL_ADC_ConfigChannel:00000000 HAL_ADC_ConfigChannel
-     /tmp/ccs5kO1h.s:1169   .text.HAL_ADC_ConfigChannel:000001a8 $d
-     /tmp/ccs5kO1h.s:1176   .text.HAL_ADC_AnalogWDGConfig:00000000 $t
-     /tmp/ccs5kO1h.s:1181   .text.HAL_ADC_AnalogWDGConfig:00000000 HAL_ADC_AnalogWDGConfig
-     /tmp/ccs5kO1h.s:1269   .text.HAL_ADC_AnalogWDGConfig:0000005c $d
-     /tmp/ccs5kO1h.s:1274   .text.HAL_ADC_GetState:00000000 $t
-     /tmp/ccs5kO1h.s:1279   .text.HAL_ADC_GetState:00000000 HAL_ADC_GetState
-     /tmp/ccs5kO1h.s:1296   .text.HAL_ADC_GetError:00000000 $t
-     /tmp/ccs5kO1h.s:1301   .text.HAL_ADC_GetError:00000000 HAL_ADC_GetError
-     /tmp/ccs5kO1h.s:1318   .text.ADC_Enable:00000000 $t
-     /tmp/ccs5kO1h.s:1323   .text.ADC_Enable:00000000 ADC_Enable
-     /tmp/ccs5kO1h.s:1424   .text.ADC_Enable:00000078 $d
-     /tmp/ccs5kO1h.s:1430   .text.HAL_ADC_Start:00000000 $t
-     /tmp/ccs5kO1h.s:1435   .text.HAL_ADC_Start:00000000 HAL_ADC_Start
-     /tmp/ccs5kO1h.s:1594   .text.HAL_ADC_Start:000000f0 $d
-     /tmp/ccs5kO1h.s:1600   .text.HAL_ADC_Start_IT:00000000 $t
-     /tmp/ccs5kO1h.s:1605   .text.HAL_ADC_Start_IT:00000000 HAL_ADC_Start_IT
-     /tmp/ccs5kO1h.s:1769   .text.HAL_ADC_Start_IT:000000fc $d
-     /tmp/ccs5kO1h.s:1775   .text.HAL_ADC_Start_DMA:00000000 $t
-     /tmp/ccs5kO1h.s:1780   .text.HAL_ADC_Start_DMA:00000000 HAL_ADC_Start_DMA
-     /tmp/ccs5kO1h.s:1977   .text.HAL_ADC_Start_DMA:00000130 $d
-     /tmp/ccs5kO1h.s:1986   .text.ADC_ConversionStop_Disable:00000000 $t
-     /tmp/ccs5kO1h.s:1991   .text.ADC_ConversionStop_Disable:00000000 ADC_ConversionStop_Disable
-     /tmp/ccs5kO1h.s:2062   .text.HAL_ADC_Init:00000000 $t
-     /tmp/ccs5kO1h.s:2067   .text.HAL_ADC_Init:00000000 HAL_ADC_Init
-     /tmp/ccs5kO1h.s:2326   .text.HAL_ADC_Init:00000144 $d
-     /tmp/ccs5kO1h.s:2333   .text.HAL_ADC_DeInit:00000000 $t
-ARM GAS  /tmp/ccs5kO1h.s 			page 101
+     /tmp/ccRRbFjq.s:20     .text.HAL_ADC_MspInit:00000000 $t
+     /tmp/ccRRbFjq.s:25     .text.HAL_ADC_MspInit:00000000 HAL_ADC_MspInit
+     /tmp/ccRRbFjq.s:39     .text.HAL_ADC_MspDeInit:00000000 $t
+     /tmp/ccRRbFjq.s:44     .text.HAL_ADC_MspDeInit:00000000 HAL_ADC_MspDeInit
+     /tmp/ccRRbFjq.s:57     .text.HAL_ADC_PollForConversion:00000000 $t
+     /tmp/ccRRbFjq.s:62     .text.HAL_ADC_PollForConversion:00000000 HAL_ADC_PollForConversion
+     /tmp/ccRRbFjq.s:318    .text.HAL_ADC_PollForConversion:00000160 $d
+     /tmp/ccRRbFjq.s:327    .text.HAL_ADC_PollForEvent:00000000 $t
+     /tmp/ccRRbFjq.s:332    .text.HAL_ADC_PollForEvent:00000000 HAL_ADC_PollForEvent
+     /tmp/ccRRbFjq.s:405    .text.HAL_ADC_GetValue:00000000 $t
+     /tmp/ccRRbFjq.s:410    .text.HAL_ADC_GetValue:00000000 HAL_ADC_GetValue
+     /tmp/ccRRbFjq.s:428    .text.HAL_ADC_ConvCpltCallback:00000000 $t
+     /tmp/ccRRbFjq.s:433    .text.HAL_ADC_ConvCpltCallback:00000000 HAL_ADC_ConvCpltCallback
+     /tmp/ccRRbFjq.s:446    .text.ADC_DMAConvCplt:00000000 $t
+     /tmp/ccRRbFjq.s:451    .text.ADC_DMAConvCplt:00000000 ADC_DMAConvCplt
+     /tmp/ccRRbFjq.s:517    .text.HAL_ADC_ConvHalfCpltCallback:00000000 $t
+     /tmp/ccRRbFjq.s:522    .text.HAL_ADC_ConvHalfCpltCallback:00000000 HAL_ADC_ConvHalfCpltCallback
+     /tmp/ccRRbFjq.s:535    .text.ADC_DMAHalfConvCplt:00000000 $t
+     /tmp/ccRRbFjq.s:540    .text.ADC_DMAHalfConvCplt:00000000 ADC_DMAHalfConvCplt
+     /tmp/ccRRbFjq.s:564    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 $t
+     /tmp/ccRRbFjq.s:569    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 HAL_ADC_LevelOutOfWindowCallback
+     /tmp/ccRRbFjq.s:582    .text.HAL_ADC_IRQHandler:00000000 $t
+     /tmp/ccRRbFjq.s:587    .text.HAL_ADC_IRQHandler:00000000 HAL_ADC_IRQHandler
+     /tmp/ccRRbFjq.s:747    .text.HAL_ADC_ErrorCallback:00000000 $t
+     /tmp/ccRRbFjq.s:752    .text.HAL_ADC_ErrorCallback:00000000 HAL_ADC_ErrorCallback
+     /tmp/ccRRbFjq.s:765    .text.ADC_DMAError:00000000 $t
+     /tmp/ccRRbFjq.s:770    .text.ADC_DMAError:00000000 ADC_DMAError
+     /tmp/ccRRbFjq.s:802    .text.HAL_ADC_ConfigChannel:00000000 $t
+     /tmp/ccRRbFjq.s:807    .text.HAL_ADC_ConfigChannel:00000000 HAL_ADC_ConfigChannel
+     /tmp/ccRRbFjq.s:1169   .text.HAL_ADC_ConfigChannel:000001a8 $d
+     /tmp/ccRRbFjq.s:1176   .text.HAL_ADC_AnalogWDGConfig:00000000 $t
+     /tmp/ccRRbFjq.s:1181   .text.HAL_ADC_AnalogWDGConfig:00000000 HAL_ADC_AnalogWDGConfig
+     /tmp/ccRRbFjq.s:1269   .text.HAL_ADC_AnalogWDGConfig:0000005c $d
+     /tmp/ccRRbFjq.s:1274   .text.HAL_ADC_GetState:00000000 $t
+     /tmp/ccRRbFjq.s:1279   .text.HAL_ADC_GetState:00000000 HAL_ADC_GetState
+     /tmp/ccRRbFjq.s:1296   .text.HAL_ADC_GetError:00000000 $t
+     /tmp/ccRRbFjq.s:1301   .text.HAL_ADC_GetError:00000000 HAL_ADC_GetError
+     /tmp/ccRRbFjq.s:1318   .text.ADC_Enable:00000000 $t
+     /tmp/ccRRbFjq.s:1323   .text.ADC_Enable:00000000 ADC_Enable
+     /tmp/ccRRbFjq.s:1424   .text.ADC_Enable:00000078 $d
+     /tmp/ccRRbFjq.s:1430   .text.HAL_ADC_Start:00000000 $t
+     /tmp/ccRRbFjq.s:1435   .text.HAL_ADC_Start:00000000 HAL_ADC_Start
+     /tmp/ccRRbFjq.s:1594   .text.HAL_ADC_Start:000000f0 $d
+     /tmp/ccRRbFjq.s:1600   .text.HAL_ADC_Start_IT:00000000 $t
+     /tmp/ccRRbFjq.s:1605   .text.HAL_ADC_Start_IT:00000000 HAL_ADC_Start_IT
+     /tmp/ccRRbFjq.s:1769   .text.HAL_ADC_Start_IT:000000fc $d
+     /tmp/ccRRbFjq.s:1775   .text.HAL_ADC_Start_DMA:00000000 $t
+     /tmp/ccRRbFjq.s:1780   .text.HAL_ADC_Start_DMA:00000000 HAL_ADC_Start_DMA
+     /tmp/ccRRbFjq.s:1977   .text.HAL_ADC_Start_DMA:00000130 $d
+     /tmp/ccRRbFjq.s:1986   .text.ADC_ConversionStop_Disable:00000000 $t
+     /tmp/ccRRbFjq.s:1991   .text.ADC_ConversionStop_Disable:00000000 ADC_ConversionStop_Disable
+     /tmp/ccRRbFjq.s:2062   .text.HAL_ADC_Init:00000000 $t
+     /tmp/ccRRbFjq.s:2067   .text.HAL_ADC_Init:00000000 HAL_ADC_Init
+     /tmp/ccRRbFjq.s:2326   .text.HAL_ADC_Init:00000144 $d
+     /tmp/ccRRbFjq.s:2333   .text.HAL_ADC_DeInit:00000000 $t
+ARM GAS  /tmp/ccRRbFjq.s 			page 101
 
 
-     /tmp/ccs5kO1h.s:2338   .text.HAL_ADC_DeInit:00000000 HAL_ADC_DeInit
-     /tmp/ccs5kO1h.s:2494   .text.HAL_ADC_DeInit:000000f4 $d
-     /tmp/ccs5kO1h.s:2500   .text.HAL_ADC_Stop:00000000 $t
-     /tmp/ccs5kO1h.s:2505   .text.HAL_ADC_Stop:00000000 HAL_ADC_Stop
-     /tmp/ccs5kO1h.s:2560   .text.HAL_ADC_Stop_IT:00000000 $t
-     /tmp/ccs5kO1h.s:2565   .text.HAL_ADC_Stop_IT:00000000 HAL_ADC_Stop_IT
-     /tmp/ccs5kO1h.s:2625   .text.HAL_ADC_Stop_DMA:00000000 $t
-     /tmp/ccs5kO1h.s:2630   .text.HAL_ADC_Stop_DMA:00000000 HAL_ADC_Stop_DMA
-=======
-     /tmp/ccWElble.s:20     .text.HAL_ADC_MspInit:00000000 $t
-     /tmp/ccWElble.s:25     .text.HAL_ADC_MspInit:00000000 HAL_ADC_MspInit
-     /tmp/ccWElble.s:39     .text.HAL_ADC_MspDeInit:00000000 $t
-     /tmp/ccWElble.s:44     .text.HAL_ADC_MspDeInit:00000000 HAL_ADC_MspDeInit
-     /tmp/ccWElble.s:57     .text.HAL_ADC_PollForConversion:00000000 $t
-     /tmp/ccWElble.s:62     .text.HAL_ADC_PollForConversion:00000000 HAL_ADC_PollForConversion
-     /tmp/ccWElble.s:318    .text.HAL_ADC_PollForConversion:00000160 $d
-     /tmp/ccWElble.s:327    .text.HAL_ADC_PollForEvent:00000000 $t
-     /tmp/ccWElble.s:332    .text.HAL_ADC_PollForEvent:00000000 HAL_ADC_PollForEvent
-     /tmp/ccWElble.s:405    .text.HAL_ADC_GetValue:00000000 $t
-     /tmp/ccWElble.s:410    .text.HAL_ADC_GetValue:00000000 HAL_ADC_GetValue
-     /tmp/ccWElble.s:428    .text.HAL_ADC_ConvCpltCallback:00000000 $t
-     /tmp/ccWElble.s:433    .text.HAL_ADC_ConvCpltCallback:00000000 HAL_ADC_ConvCpltCallback
-     /tmp/ccWElble.s:446    .text.ADC_DMAConvCplt:00000000 $t
-     /tmp/ccWElble.s:451    .text.ADC_DMAConvCplt:00000000 ADC_DMAConvCplt
-     /tmp/ccWElble.s:517    .text.HAL_ADC_ConvHalfCpltCallback:00000000 $t
-     /tmp/ccWElble.s:522    .text.HAL_ADC_ConvHalfCpltCallback:00000000 HAL_ADC_ConvHalfCpltCallback
-     /tmp/ccWElble.s:535    .text.ADC_DMAHalfConvCplt:00000000 $t
-     /tmp/ccWElble.s:540    .text.ADC_DMAHalfConvCplt:00000000 ADC_DMAHalfConvCplt
-     /tmp/ccWElble.s:564    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 $t
-     /tmp/ccWElble.s:569    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 HAL_ADC_LevelOutOfWindowCallback
-     /tmp/ccWElble.s:582    .text.HAL_ADC_IRQHandler:00000000 $t
-     /tmp/ccWElble.s:587    .text.HAL_ADC_IRQHandler:00000000 HAL_ADC_IRQHandler
-     /tmp/ccWElble.s:747    .text.HAL_ADC_ErrorCallback:00000000 $t
-     /tmp/ccWElble.s:752    .text.HAL_ADC_ErrorCallback:00000000 HAL_ADC_ErrorCallback
-     /tmp/ccWElble.s:765    .text.ADC_DMAError:00000000 $t
-     /tmp/ccWElble.s:770    .text.ADC_DMAError:00000000 ADC_DMAError
-     /tmp/ccWElble.s:802    .text.HAL_ADC_ConfigChannel:00000000 $t
-     /tmp/ccWElble.s:807    .text.HAL_ADC_ConfigChannel:00000000 HAL_ADC_ConfigChannel
-     /tmp/ccWElble.s:1169   .text.HAL_ADC_ConfigChannel:000001a8 $d
-     /tmp/ccWElble.s:1176   .text.HAL_ADC_AnalogWDGConfig:00000000 $t
-     /tmp/ccWElble.s:1181   .text.HAL_ADC_AnalogWDGConfig:00000000 HAL_ADC_AnalogWDGConfig
-     /tmp/ccWElble.s:1269   .text.HAL_ADC_AnalogWDGConfig:0000005c $d
-     /tmp/ccWElble.s:1274   .text.HAL_ADC_GetState:00000000 $t
-     /tmp/ccWElble.s:1279   .text.HAL_ADC_GetState:00000000 HAL_ADC_GetState
-     /tmp/ccWElble.s:1296   .text.HAL_ADC_GetError:00000000 $t
-     /tmp/ccWElble.s:1301   .text.HAL_ADC_GetError:00000000 HAL_ADC_GetError
-     /tmp/ccWElble.s:1318   .text.ADC_Enable:00000000 $t
-     /tmp/ccWElble.s:1323   .text.ADC_Enable:00000000 ADC_Enable
-     /tmp/ccWElble.s:1424   .text.ADC_Enable:00000078 $d
-     /tmp/ccWElble.s:1430   .text.HAL_ADC_Start:00000000 $t
-     /tmp/ccWElble.s:1435   .text.HAL_ADC_Start:00000000 HAL_ADC_Start
-     /tmp/ccWElble.s:1594   .text.HAL_ADC_Start:000000f0 $d
-     /tmp/ccWElble.s:1600   .text.HAL_ADC_Start_IT:00000000 $t
-     /tmp/ccWElble.s:1605   .text.HAL_ADC_Start_IT:00000000 HAL_ADC_Start_IT
-     /tmp/ccWElble.s:1769   .text.HAL_ADC_Start_IT:000000fc $d
-     /tmp/ccWElble.s:1775   .text.HAL_ADC_Start_DMA:00000000 $t
-     /tmp/ccWElble.s:1780   .text.HAL_ADC_Start_DMA:00000000 HAL_ADC_Start_DMA
-     /tmp/ccWElble.s:1977   .text.HAL_ADC_Start_DMA:00000130 $d
-     /tmp/ccWElble.s:1986   .text.ADC_ConversionStop_Disable:00000000 $t
-     /tmp/ccWElble.s:1991   .text.ADC_ConversionStop_Disable:00000000 ADC_ConversionStop_Disable
-     /tmp/ccWElble.s:2062   .text.HAL_ADC_Init:00000000 $t
-     /tmp/ccWElble.s:2067   .text.HAL_ADC_Init:00000000 HAL_ADC_Init
-     /tmp/ccWElble.s:2326   .text.HAL_ADC_Init:00000144 $d
-     /tmp/ccWElble.s:2333   .text.HAL_ADC_DeInit:00000000 $t
-ARM GAS  /tmp/ccWElble.s 			page 101
-
-
-     /tmp/ccWElble.s:2338   .text.HAL_ADC_DeInit:00000000 HAL_ADC_DeInit
-     /tmp/ccWElble.s:2494   .text.HAL_ADC_DeInit:000000f4 $d
-     /tmp/ccWElble.s:2500   .text.HAL_ADC_Stop:00000000 $t
-     /tmp/ccWElble.s:2505   .text.HAL_ADC_Stop:00000000 HAL_ADC_Stop
-     /tmp/ccWElble.s:2560   .text.HAL_ADC_Stop_IT:00000000 $t
-     /tmp/ccWElble.s:2565   .text.HAL_ADC_Stop_IT:00000000 HAL_ADC_Stop_IT
-     /tmp/ccWElble.s:2625   .text.HAL_ADC_Stop_DMA:00000000 $t
-     /tmp/ccWElble.s:2630   .text.HAL_ADC_Stop_DMA:00000000 HAL_ADC_Stop_DMA
->>>>>>> GameTrak
+     /tmp/ccRRbFjq.s:2338   .text.HAL_ADC_DeInit:00000000 HAL_ADC_DeInit
+     /tmp/ccRRbFjq.s:2494   .text.HAL_ADC_DeInit:000000f4 $d
+     /tmp/ccRRbFjq.s:2500   .text.HAL_ADC_Stop:00000000 $t
+     /tmp/ccRRbFjq.s:2505   .text.HAL_ADC_Stop:00000000 HAL_ADC_Stop
+     /tmp/ccRRbFjq.s:2560   .text.HAL_ADC_Stop_IT:00000000 $t
+     /tmp/ccRRbFjq.s:2565   .text.HAL_ADC_Stop_IT:00000000 HAL_ADC_Stop_IT
+     /tmp/ccRRbFjq.s:2625   .text.HAL_ADC_Stop_DMA:00000000 $t
+     /tmp/ccRRbFjq.s:2630   .text.HAL_ADC_Stop_DMA:00000000 HAL_ADC_Stop_DMA
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
