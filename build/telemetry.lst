@@ -1,0 +1,183 @@
+ARM GAS  /tmp/ccu4nWBg.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"telemetry.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Telemetry_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	Telemetry_init
+  22              		.thumb
+  23              		.thumb_func
+  25              	Telemetry_init:
+  26              	.LFB64:
+  27              		.file 1 "./Src/telemetry.c"
+   1:./Src/telemetry.c **** #include "telemetry.h"
+   2:./Src/telemetry.c **** #include "uart.h"
+   3:./Src/telemetry.c **** #include "application.h"
+   4:./Src/telemetry.c **** #include <stdio.h>
+   5:./Src/telemetry.c **** #include <stdlib.h>
+   6:./Src/telemetry.c **** #include <string.h>
+   7:./Src/telemetry.c **** 
+   8:./Src/telemetry.c **** extern UART_HandleTypeDef huart3;
+   9:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart3_rx;
+  10:./Src/telemetry.c **** extern DMA_HandleTypeDef hdma_usart3_tx;
+  11:./Src/telemetry.c **** extern volatile __IO struct UART_dati uartData;
+  12:./Src/telemetry.c **** extern volatile __IO struct APPLICATION_dati app;
+  13:./Src/telemetry.c **** extern volatile __IO struct BATTERY_dati battery_dati;
+  14:./Src/telemetry.c **** volatile __IO struct TELEMETRY_dati telemetry;
+  15:./Src/telemetry.c **** volatile COMMAND_data commandsequence;
+  16:./Src/telemetry.c **** 
+  17:./Src/telemetry.c **** volatile __IO uint32_t leftToTransfer;
+  18:./Src/telemetry.c **** 
+  19:./Src/telemetry.c **** 
+  20:./Src/telemetry.c **** void Telemetry_init(void){
+  28              		.loc 1 20 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  21:./Src/telemetry.c ****   MX_USART3_UART_Init();
+  37              		.loc 1 21 0
+ARM GAS  /tmp/ccu4nWBg.s 			page 2
+
+
+  38 0002 FFF7FEFF 		bl	MX_USART3_UART_Init
+  39              	.LVL0:
+  40 0006 08BD     		pop	{r3, pc}
+  41              		.cfi_endproc
+  42              	.LFE64:
+  44              		.global	__aeabi_fmul
+  45              		.global	__aeabi_f2iz
+  46              		.section	.text.getMotorL,"ax",%progbits
+  47              		.align	2
+  48              		.global	getMotorL
+  49              		.thumb
+  50              		.thumb_func
+  52              	getMotorL:
+  53              	.LFB65:
+  22:./Src/telemetry.c ****   //HAL_UART_Receive_DMA(&huart3, (uint8_t *)&commandsequence, 8);
+  23:./Src/telemetry.c **** }
+  24:./Src/telemetry.c **** 
+  25:./Src/telemetry.c **** int16_t getMotorL() {
+  54              		.loc 1 25 0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58 0000 08B5     		push	{r3, lr}
+  59              	.LCFI1:
+  60              		.cfi_def_cfa_offset 8
+  61              		.cfi_offset 3, -8
+  62              		.cfi_offset 14, -4
+  26:./Src/telemetry.c ****   return commandsequence.motorRxL * 1000;
+  63              		.loc 1 26 0
+  64 0002 044B     		ldr	r3, .L5
+  65 0004 5868     		ldr	r0, [r3, #4]	@ float
+  66 0006 0449     		ldr	r1, .L5+4
+  67 0008 FFF7FEFF 		bl	__aeabi_fmul
+  68              	.LVL1:
+  69 000c FFF7FEFF 		bl	__aeabi_f2iz
+  70              	.LVL2:
+  27:./Src/telemetry.c **** }
+  71              		.loc 1 27 0
+  72 0010 00B2     		sxth	r0, r0
+  73 0012 08BD     		pop	{r3, pc}
+  74              	.L6:
+  75              		.align	2
+  76              	.L5:
+  77 0014 00000000 		.word	commandsequence
+  78 0018 00007A44 		.word	1148846080
+  79              		.cfi_endproc
+  80              	.LFE65:
+  82              		.section	.text.getMotorR,"ax",%progbits
+  83              		.align	2
+  84              		.global	getMotorR
+  85              		.thumb
+  86              		.thumb_func
+  88              	getMotorR:
+  89              	.LFB66:
+  28:./Src/telemetry.c **** 
+  29:./Src/telemetry.c **** int16_t getMotorR() {
+  90              		.loc 1 29 0
+ARM GAS  /tmp/ccu4nWBg.s 			page 3
+
+
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94 0000 08B5     		push	{r3, lr}
+  95              	.LCFI2:
+  96              		.cfi_def_cfa_offset 8
+  97              		.cfi_offset 3, -8
+  98              		.cfi_offset 14, -4
+  30:./Src/telemetry.c ****   return commandsequence.motorRxR * 1000;
+  99              		.loc 1 30 0
+ 100 0002 044B     		ldr	r3, .L9
+ 101 0004 1868     		ldr	r0, [r3]	@ float
+ 102 0006 0449     		ldr	r1, .L9+4
+ 103 0008 FFF7FEFF 		bl	__aeabi_fmul
+ 104              	.LVL3:
+ 105 000c FFF7FEFF 		bl	__aeabi_f2iz
+ 106              	.LVL4:
+  31:./Src/telemetry.c **** }
+ 107              		.loc 1 31 0
+ 108 0010 00B2     		sxth	r0, r0
+ 109 0012 08BD     		pop	{r3, pc}
+ 110              	.L10:
+ 111              		.align	2
+ 112              	.L9:
+ 113 0014 00000000 		.word	commandsequence
+ 114 0018 00007A44 		.word	1148846080
+ 115              		.cfi_endproc
+ 116              	.LFE66:
+ 118              		.comm	leftToTransfer,4,4
+ 119              		.comm	commandsequence,8,4
+ 120              		.comm	telemetry,28,4
+ 121              		.text
+ 122              	.Letext0:
+ 123              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 124              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 125              		.file 4 "./Inc/telemetry.h"
+ 126              		.file 5 "./Drivers/CMSIS/Include/core_cm3.h"
+ 127              		.file 6 "./Inc/uart.h"
+ARM GAS  /tmp/ccu4nWBg.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 telemetry.c
+     /tmp/ccu4nWBg.s:20     .text.Telemetry_init:00000000 $t
+     /tmp/ccu4nWBg.s:25     .text.Telemetry_init:00000000 Telemetry_init
+     /tmp/ccu4nWBg.s:47     .text.getMotorL:00000000 $t
+     /tmp/ccu4nWBg.s:52     .text.getMotorL:00000000 getMotorL
+     /tmp/ccu4nWBg.s:77     .text.getMotorL:00000014 $d
+                            *COM*:00000008 commandsequence
+     /tmp/ccu4nWBg.s:83     .text.getMotorR:00000000 $t
+     /tmp/ccu4nWBg.s:88     .text.getMotorR:00000000 getMotorR
+     /tmp/ccu4nWBg.s:113    .text.getMotorR:00000014 $d
+                            *COM*:00000004 leftToTransfer
+                            *COM*:0000001c telemetry
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+MX_USART3_UART_Init
+__aeabi_fmul
+__aeabi_f2iz
