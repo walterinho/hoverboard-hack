@@ -22,7 +22,7 @@ void MX_I2C2_Init(void)
   HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
 
   hi2c2.Instance = I2C2;
-  hi2c2.Init.ClockSpeed = 200000;
+  hi2c2.Init.ClockSpeed = 100000;
   hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -219,7 +219,7 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c){
 }
 void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
 {
-  if(hi2c->Instance == I2C2){
+  /*if(hi2c->Instance == I2C2){
     wii_JOYdati.I2CERROR = 1;
-  }
+  }*/
 }

@@ -8,6 +8,7 @@
 #include "hd44780.h"
 
 uint32_t PCF8574_Type0Pins[8] = { 4, 5, 6, 7, 0, 1, 2, 3 };
+uint8_t LCDerrorFlag = 0;
 
 void LCD_WaitForBusyFlag(LCD_PCF8574_HandleTypeDef* handle) {
 	uint8_t flag;
@@ -19,11 +20,15 @@ void LCD_WaitForBusyFlag(LCD_PCF8574_HandleTypeDef* handle) {
 }
 
 LCD_RESULT LCD_I2C_WriteOut(LCD_PCF8574_HandleTypeDef* handle) {
-	if (PCF8574_Write(&handle->pcf8574, handle->state) != PCF8574_OK) {
-		handle->errorCallback(LCD_ERROR);
-		return LCD_ERROR;
+	if (!LCDerrorFlag) {
+		if (PCF8574_Write(&handle->pcf8574, handle->state) != PCF8574_OK) {
+			//handle->errorCallback(LCD_ERROR);
+			LCDerrorFlag = 1;
+			return LCD_ERROR;
+		}
+		return LCD_OK;
 	}
-	return LCD_OK;
+	return LCD_ERROR;
 }
 
 LCD_RESULT LCD_StateLEDControl(LCD_PCF8574_HandleTypeDef* handle, uint8_t on) {
@@ -48,11 +53,11 @@ LCD_RESULT LCD_Init(LCD_PCF8574_HandleTypeDef* handle) {
 	if (handle->type == TYPE0) {
 		handle->pins = PCF8574_Type0Pins;
 	} else {
-		handle->errorCallback(LCD_ERROR);
+		//handle->errorCallback(LCD_ERROR);
 		return LCD_ERROR;	// no type of subinterface was specified
 	}
 	if (PCF8574_Init(&handle->pcf8574) != PCF8574_OK) {
-		handle->errorCallback(LCD_ERROR);
+		//handle->errorCallback(LCD_ERROR);
 		return LCD_ERROR;
 	}
 
@@ -170,21 +175,22 @@ LCD_RESULT LCD_GetBusyFlag(LCD_PCF8574_HandleTypeDef* handle, uint8_t* flag) {
 }
 
 LCD_RESULT LCD_WriteCMD(LCD_PCF8574_HandleTypeDef* handle, uint8_t cmd) {
+	if (!LCDerrorFlag) {
+		LCD_StateWriteBit(handle, 0, LCD_PIN_E);
+		LCD_StateWriteBit(handle, 0, LCD_PIN_RS);
 
-	LCD_StateWriteBit(handle, 0, LCD_PIN_E);
-	LCD_StateWriteBit(handle, 0, LCD_PIN_RS);
+		LCD_WriteToDataBus(handle, cmd >> 4);
+		LCD_StateWriteBit(handle, 1, LCD_PIN_E);
+		LCD_StateWriteBit(handle, 0, LCD_PIN_E);
 
-	LCD_WriteToDataBus(handle, cmd >> 4);
-	LCD_StateWriteBit(handle, 1, LCD_PIN_E);
-	LCD_StateWriteBit(handle, 0, LCD_PIN_E);
+		LCD_WriteToDataBus(handle, cmd);
+		LCD_StateWriteBit(handle, 1, LCD_PIN_E);
+		LCD_StateWriteBit(handle, 0, LCD_PIN_E);
 
-	LCD_WriteToDataBus(handle, cmd);
-	LCD_StateWriteBit(handle, 1, LCD_PIN_E);
-	LCD_StateWriteBit(handle, 0, LCD_PIN_E);
+		LCD_WaitForBusyFlag(handle);
 
-	LCD_WaitForBusyFlag(handle);
-
-	return LCD_OK;
+		return LCD_OK;
+	} return LCD_ERROR;
 
 }
 
@@ -288,7 +294,7 @@ LCD_RESULT LCD_ShiftCursor(LCD_PCF8574_HandleTypeDef* handle, uint8_t direction,
 	int i = 0;
 	for (i = 0; i < steps; i++) {
 		if (LCD_WriteCMD(handle, cmd) != LCD_OK) {
-			handle->errorCallback(LCD_ERROR);
+			//handle->errorCallback(LCD_ERROR);
 			return LCD_ERROR;
 		}
 	}
@@ -307,7 +313,7 @@ LCD_RESULT LCD_ShiftDisplay(LCD_PCF8574_HandleTypeDef* handle,
 	int i = 0;
 	for (i = 0; i < steps; i++) {
 		if (LCD_WriteCMD(handle, cmd) != LCD_OK) {
-			handle->errorCallback(LCD_ERROR);
+			//handle->errorCallback(LCD_ERROR);
 			return LCD_ERROR;
 		}
 	}

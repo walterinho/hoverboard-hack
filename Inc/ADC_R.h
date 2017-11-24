@@ -8,7 +8,7 @@
 
    #include "stm32f1xx_hal.h"
 
-   #define ADC_BATTERY_VOLT     0.0281
+   #define ADC_BATTERY_VOLT     0.0276
    #define MOTOR_R_AMP_CONV_AMP 0.01935483870967741935483870967742
    #define ADC_MOTOR_R_CENTER   1900
 
