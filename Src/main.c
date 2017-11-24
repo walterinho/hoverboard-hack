@@ -42,6 +42,7 @@ VARIE
 */
 #include "main.h"
 #include "stm32f1xx_hal.h"
+#include "eeprom.h"
 #include "motor_L.h"
 #include "motor_R.h"
 #include "varie.h"
@@ -51,6 +52,7 @@ VARIE
 #include "pid.h"
 #include "application.h"
 #include "telemetry.h"
+#include "hd44780.h"
 #include <math.h>
 
 // copied from STMBL
@@ -73,6 +75,11 @@ VARIE
 
 #define PI 3.14159265
 
+/* Virtual address defined by the user: 0xFFFF value is prohibited */
+uint16_t VirtAddVarTab[NB_OF_VAR] = {0x1337};
+uint16_t VarDataTab[NB_OF_VAR] = {0};
+uint16_t VarValue = 0;
+
 /* Private variables ---------------------------------------------------------*/
 
 /* Private function prototypes -----------------------------------------------*/
@@ -84,17 +91,42 @@ IWDG_HandleTypeDef hiwdg;
 
 volatile __IO int16_t speed = 0;
 extern struct TELEMETRY_dati telemetry;
+extern struct MOTOR_Ldati motorL;
+extern struct MOTOR_Rdati motorR;
+
+extern uint8_t LCDerrorFlag;
 //extern struct COMMAND_data commandsequence;
 
-//TEMP
-/*
-extern volatile __IO struct MOTOR_Rdati motorR;
-volatile __IO uint8_t temp8,temp8case,temp_MOTOR_R_START;
-volatile __IO int32_t temp_SET_SPPED;
-volatile __IO uint8_t bufferTX[100],ai2cBuffer[10];
-int32_t speed;
-*/
 volatile __IO uint32_t counterTemp,counterTempTT;
+LCD_PCF8574_HandleTypeDef lcd;
+extern I2C_HandleTypeDef hi2c2;
+uint16_t saveValue = 0;
+
+TIM_HandleTypeDef htim2;
+
+uint16_t captured_value[8] = {0};
+uint16_t rc_data[5] = {0};
+uint8_t pointer = 0;
+uint8_t data_ready = 0;
+/* USER CODE END PV */
+uint8_t rx_count = 0;
+uint32_t timeout = 0;
+
+void PPM_ISR_Callback() {
+  // Dummy loop with 16 bit count wrap around
+  uint16_t rc_delay = TIM2->CNT;
+  _stop_timer();
+
+  if (rc_delay > 3000) {
+    rx_count = 0;
+  }
+  else if (rx_count < 6){
+    timeout = 0;
+    captured_value[rx_count] = CLAMP(rc_delay, 1000, 2000) - 1000;
+    rx_count++;
+  }
+  _init_us();
+}
 
 int main(void)
 {
@@ -104,99 +136,256 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-  MX_IWDG_Init();
+  Button_init();
 
-  _init_us();
+  Power_Set(1);
 
-  //MX_I2C2_Init();
-  Telemetry_init();
+  HAL_Delay(10);
 
- /*
-  while(1){
+  ADC_L_init();
+  ADC_R_init();
 
-      Telemetry_TASK();
-      if(telemetry.dataREADY_JOYSTICK){
-          telemetry.dataREADY_JOYSTICK = 0;
-      }
 
-  }
-  */
+  //Telemetry_init();
+  MX_I2C2_Init();
+
+  /* Unlock the Flash Program Erase controller */
+  //HAL_FLASH_Unlock();
+
+  /* EEPROM Init */
+  //EE_Init();
+
+
+  lcd.pcf8574.PCF_I2C_ADDRESS = 0x27;
+	lcd.pcf8574.PCF_I2C_TIMEOUT = 5;
+	lcd.pcf8574.i2c = hi2c2;
+	lcd.NUMBER_OF_LINES = NUMBER_OF_LINES_2;
+	lcd.type = TYPE0;
+
+	if(LCD_Init(&lcd)!=LCD_OK){
+		// error occured
+		//TODO while(1);
+	}
+
+	LCD_ClearDisplay(&lcd);
+  LCD_SetLocation(&lcd, 0, 0);
+	LCD_WriteString(&lcd, "SesselOtter V5.2");
+  LCD_SetLocation(&lcd, 0, 1);
+	LCD_WriteString(&lcd, "Initializing...");
 
   Buzzer_init();
   Led_init();
   IS_Charge_init();
 
-  ADC_L_init();
-  ADC_R_init();
-  MotorL_init();
-  MotorR_init();
+//  Timer_init();
+  //Timer_init();
+  //MX_TIM2_Init();
+
 
   //PID_init(0,900); //pwm limit
   //PID_set_L_costant(0.05,0.01,0.0);
   //PID_set_R_costant(2.0,0.5,0.0);
 
 //DebugPin_init();
+  //HAL_Delay(350);
+  while(IS_Button()) {
+    Led_Set(0);
+  }
 
-  Led_Set(1);
-  Buzzer_OneBeep();
-  HAL_Delay(350);
-  Led_Set(0);
+
+  MotorL_init();
+  MotorR_init();
 
   applcation_init();
+  Battery_TASK();
+
+  MX_IWDG_Init();
+
+  Led_Set(1);
+  Buzzer_TwoBeep();
+  HAL_Delay(250);
+
   MotorR_start();
   MotorL_start();
+  //MotorR_pwm(80);
+  //MotorL_pwm(-200);
 
-  uint32_t sinValue = 45 * 50;
+  Timer_init();
+
+  //MotorR_pwm(200);
+  //MotorL_pwm(-150);
+
+  //MotorR_pwm(-50);
+  //MotorL_pwm(50);
+  int16_t speedR = 0;
+  int16_t speedL = 0;
+
   uint8_t state = 0;
+
+  if(!LCDerrorFlag) {
+
+    LCD_ClearDisplay(&lcd);
+    HAL_Delay(5);
+    LCD_SetLocation(&lcd, 0, 1);
+  	LCD_WriteString(&lcd, "Bat:");
+    LCD_SetLocation(&lcd, 8, 1);
+    LCD_WriteString(&lcd, "V");
+
+    LCD_SetLocation(&lcd, 15, 1);
+    LCD_WriteString(&lcd, "A");
+
+    LCD_SetLocation(&lcd, 0, 0);
+  	LCD_WriteString(&lcd, "Speed:");
+    LCD_SetLocation(&lcd, 12, 0);
+    LCD_WriteString(&lcd, "km/h");
+  }
+
+  uint32_t sinValue = 1999;
+
+  int lastSpeedL = 0, lastSpeedR = 0;
+  int32_t lastMotorposR = 0, lastMotorposL = 0;
+  float speedReading = 0.0;
   while(1){
     sinValue++;
-    int speedL = -CLAMP(getMotorR(), -200, 200);
-    int speedR = -CLAMP(getMotorL(), -200, 200);
-    MotorL_pwm(speedL*10);
-    MotorR_pwm(speedR*10);
-    counterTemp = HAL_GetTick();
-    if ((sinValue) % (180 * 50) == 0) {
-      state = !state;
-      Led_Set(state);
+    if ((sinValue) % (100) == 0) {
+      //state = !state;
+      //Led_Set(state);
       //Console_Log("otter!\n\r");
-      //Buzzer_OneBeep();
-      /*char str[50];
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "MR = %i\n\r", speedR);
+      //char str[200];
+      //memset(&str[0], 0, sizeof(str));
+      //sprintf(str, "%i;%i;%i;%i;%i;%i\n\r", captured_value[0], captured_value[1], captured_value[2], captured_value[3], captured_value[4], captured_value[5]);
+      int readR = -(CLAMP((((captured_value[1]-500)-(captured_value[0]-500)/2.0)*(captured_value[2]/500.0)), -1000, 1000));
+      int readL = -(CLAMP((((captured_value[1]-500)+(captured_value[0]-500)/2.0)*(captured_value[2]/500.0)), -1000, 1000));
 
-      Console_Log(str);
+      int16_t tempL = speedL;
+      speedL -=  tempL / 1.0;
+      speedL += readL / 1.0;
 
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "ML = %i\n\r", speedL);
+      int16_t tempR = speedR;
+      speedR -=  tempR / 1.0;
+      speedR += readR / 1.0;
 
-      Console_Log(str);*/
+
+      if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50) && timeout < 1000) {
+        float scale = get_powerMax(GET_BatteryAverage());
+        MotorR_pwm((int)(speedR * scale));
+        MotorL_pwm((int)(speedL * scale));
+      }
+      lastSpeedL = speedL;
+      lastSpeedR = speedR;
+      //MotorR_pwm(-250);
+      //MotorL_pwm(250);
+      //Console_Log(str);
+    }
+    timeout++;
+
+    if (timeout > 1000) {
+      MotorR_pwm(0);
+      MotorL_pwm(0);
+    }
+
+
+    if (counterTemp + 500 < HAL_GetTick()) {
+      speedReading = MAX(ABS(((motorL.motorpos - lastMotorposL) / 90.0)*3.6), ABS(((motorR.motorpos - lastMotorposR) / 90.0)*3.6));
+      counterTemp = HAL_GetTick();
+      lastMotorposL = motorL.motorpos;
+      lastMotorposR = motorR.motorpos;
+    }
+
+    if(IS_Button()) {
+      MotorL_pwm(0);
+      MotorR_pwm(0);
+      while(IS_Button()) {
+        HAL_IWDG_Refresh(&hiwdg);
+      }
+      Buzzer_OneLongBeep();
+      HAL_Delay(350);
+      Power_Set(0);
+    }
+
+    if ((sinValue) % (1500) == 0 && !LCDerrorFlag) {
+      //LCD_SetLocation(&lcd, 4, 0);
+      //LCD_WriteFloat(&lcd,distance/1345.0,2);
+      if (speedReading < 10.0) {
+        LCD_SetLocation(&lcd, 7, 0);
+        LCD_WriteString(&lcd, " ");
+        LCD_SetLocation(&lcd, 8, 0);
+      } else {
+        LCD_SetLocation(&lcd, 7, 0);
+      }
+      LCD_WriteFloat(&lcd,speedReading,2);
+      LCD_SetLocation(&lcd, 4, 1);
+      LCD_WriteFloat(&lcd,GET_BatteryAverage(),1);
+      float current = ABS(getMotorCurrentR() * 0.02) + ABS(getMotorCurrentL() * 0.02);
+      if (current < 10.0) {
+        LCD_SetLocation(&lcd, 10, 1);
+        LCD_WriteString(&lcd, " ");
+        LCD_SetLocation(&lcd, 11, 1);
+      } else {
+        LCD_SetLocation(&lcd, 10, 1);
+      }
+      LCD_WriteFloat(&lcd,ABS(current),2);
+      LCD_SetLocation(&lcd, 15, 1);
+      LCD_WriteString(&lcd, "A");
     }
 
 
 
-    //Battery_TASK();
+
+
+    Battery_TASK();
     //Current_Motor_TASK();
     //sWiiNunchuck_TASK();
     //applcation_TASK();
     //Telemetry_TASK();
 
     //Batteria Scarica?
-    /*if(GET_BatteryAverage() < 31.0){
-      TASK_BATTERY_LOW_VOLTAGE();
-    }*/
-    //In Carica?
-    /*if(IS_Charge()==0){
-      WAIT_CHARGE_FINISH();
-    }*/
+
+    if(ABS(getMotorCurrentR() * 0.02) > 47.0 || ABS(getMotorCurrentL() * 0.02) > 47.0){
+      MotorL_pwm(0);
+      MotorR_pwm(0);
+      Buzzer_OneLongBeep();
+      LCD_ClearDisplay(&lcd);
+      HAL_Delay(5);
+      LCD_SetLocation(&lcd, 0, 0);
+      LCD_WriteString(&lcd, "Emergency Off!");
+      LCD_SetLocation(&lcd, 0, 1);
+      LCD_WriteString(&lcd, "Overcurrent.");
+      HAL_Delay(500);
+      HAL_IWDG_Refresh(&hiwdg);
+      HAL_Delay(500);
+      Power_Set(0);
+    }
+
+    if(GET_BatteryAverage() < 31.0){
+      MotorL_pwm(0);
+      MotorR_pwm(0);
+      Buzzer_OneLongBeep();
+      LCD_ClearDisplay(&lcd);
+      HAL_Delay(5);
+      LCD_SetLocation(&lcd, 0, 0);
+      LCD_WriteString(&lcd, "Emergency Off!");
+      LCD_SetLocation(&lcd, 0, 1);
+      LCD_WriteString(&lcd, "Battery low.");
+      HAL_Delay(500);
+      HAL_IWDG_Refresh(&hiwdg);
+      HAL_Delay(500);
+      Power_Set(0);
+    }
+
 
     HAL_IWDG_Refresh(&hiwdg);   //819mS
 
-    counterTempTT = HAL_GetTick() - counterTemp;
+    //counterTempTT = HAL_GetTick() - counterTemp;
 
 
 
   }
 
+}
+
+void saveConfig() {
+  EE_WriteVariable(VirtAddVarTab[0], saveValue);
 }
 
 /** System Clock Configuration

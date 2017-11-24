@@ -12,19 +12,19 @@ void MotorR_init(void){
   MX_TIM1_Init();
   mR_HallSensor_init();
   motorR.BLDCMotorL_count= 0;
-  motorR.BLDCMotorL_flag = 0; 
+  motorR.BLDCMotorL_flag = 0;
   motorR.BLDCMotorL_velRAW = 0;
   motorR.BLDCMotorL_deltavel = 0;
-  
+
   MotorR_stop();
 }
 
 void MotorR_start(void){
-  mR_PWM_Set_ChALL(0); 
+  mR_PWM_Set_ChALL(0);
   motorR.BLDCMotorL_deltavel = 0;
   motorR.BLDCMotorL_velRAW = 0;
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);  
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
   mR_PWM_Set_ChALL(0);
   motorR.stop = 0;
   mR_BLDCMotor();
@@ -33,7 +33,7 @@ void MotorR_start(void){
 void MotorR_pwm(int16_t value_percent){
   static uint8_t last_motorR=0;
   static uint8_t last_motorRStop=0;
-  
+
   if(value_percent > 1000){
     value_percent = 1000;
   }
@@ -55,19 +55,19 @@ void MotorR_pwm(int16_t value_percent){
      motorR.reverse = 0;
      last_motorR = 0;
   }
-  
-  if((value_percent >= -5)&&(value_percent <= 5)){ //da fare > e < soglie !!
+
+  if((value_percent >= -20)&&(value_percent <= 20)){ //da fare > e < soglie !!
     motorR.stop = 1;    //ferma motore
-    last_motorRStop = 1;    
+    last_motorRStop = 1;
   }else{
     motorR.stop = 0;
     if(last_motorRStop){
         //riattiva
         mR_BLDCMotor();
     }
-    last_motorRStop = 0;    
+    last_motorRStop = 0;
   }
-  
+
   mR_PWM_Set_ChALL(value_percent);
 }
 
@@ -85,11 +85,11 @@ void MotorR_stop(void){
   HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_12);
   __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_11);
-  __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_10);  
+  __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_10);
     motorR.BLDCMotorL_count= 0;
     motorR.BLDCMotorL_flag = 0;
 }
-    
+
 // PRIVATE
 /* TIM1 init function */
 void MX_TIM1_Init(void)
@@ -101,8 +101,8 @@ void MX_TIM1_Init(void)
 
    __HAL_RCC_TIM1_CLK_ENABLE();
 
-  motorR.uwPeriodValue = (uint32_t) ((SystemCoreClock  / PWL_MOTOR_RIGHT) - 1); 
-/*  
+  motorR.uwPeriodValue = (uint32_t) ((SystemCoreClock  / PWL_MOTOR_RIGHT) - 1);
+/*
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 0;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP; //TIM_COUNTERMODE_CENTERALIGNED1
@@ -142,12 +142,12 @@ void MX_TIM1_Init(void)
   {
     Error_Handler();
   }
-  
+
   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
   {
     Error_Handler();
   }
-  
+
   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_ENABLE;
   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_ENABLE;
   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
@@ -159,23 +159,23 @@ void MX_TIM1_Init(void)
   {
     Error_Handler();
   }
-  
+
   //CH1
   htim1.Instance->CCER = htim1.Instance->CCER | 0x0008; //CC1NP = 1;
   htim1.Instance->CCER = htim1.Instance->CCER & 0xFFFD; //cc1p = 0
-  //CH2   
+  //CH2
   htim1.Instance->CCER = htim1.Instance->CCER | 0x0080; //CC2NP = 1;
   htim1.Instance->CCER = htim1.Instance->CCER & 0xFFDF; //cc2p = 0
-  //CH3     
+  //CH3
   htim1.Instance->CCER = htim1.Instance->CCER | 0x0800; //CC3NP = 1;
   htim1.Instance->CCER = htim1.Instance->CCER & 0xFDFF; //cc3p = 0
-  
- 
+
+
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();  
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;  
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
   GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10;
@@ -183,7 +183,7 @@ void MX_TIM1_Init(void)
 
   //Start PWM signals
   //HAL_TIM_PWM_Start_IT(&htim1, TIM_CHANNEL_1);      //CH1
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);      //CH1 
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);      //CH1
   HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);      //CH1N
   mR_A__OFF();
 
@@ -193,15 +193,15 @@ void MX_TIM1_Init(void)
 
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);         //CH3
   HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_3);      //CH3N
-  mR_C__OFF();  
+  mR_C__OFF();
 
   HAL_TIM_PWM_Start_IT(&htim1, TIM_CHANNEL_4);    //for interrupt
 
   */
-  
-  
+
+
   //Test
-  
+
 
   __HAL_RCC_TIM1_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -220,7 +220,7 @@ void MX_TIM1_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
   GPIO_InitStruct.Pin = GPIO_PIN_15;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-  
+
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
@@ -238,30 +238,30 @@ void MX_TIM1_Init(void)
   htim1.Init.ClockDivision     = 0;
   htim1.Init.CounterMode       = TIM_COUNTERMODE_UP;
   htim1.Init.RepetitionCounter = 0;
-  HAL_TIM_PWM_Init(&htim1); 
-  
+  HAL_TIM_PWM_Init(&htim1);
+
   sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE; //TIM_AUTOMATICOUTPUT_ENABLE; //
   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_LOW; // TIM_BREAKPOLARITY_HIGH; //
   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_ENABLE; //TIM_OSSI_DISABLE;
-  sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_ENABLE; //TIM_OSSR_DISABLE;  
-  sBreakDeadTimeConfig.DeadTime = 40;   //10;  
+  sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_ENABLE; //TIM_OSSR_DISABLE;
+  sBreakDeadTimeConfig.DeadTime = 40;   //10;
   HAL_TIMEx_ConfigBreakDeadTime(&htim1,&sBreakDeadTimeConfig);
-  
-                                
+
+
   //##-2- Configure the PWM channels #########################################
-  // Common configuration for all channels 
+  // Common configuration for all channels
   sConfigOC.OCMode      = TIM_OCMODE_PWM1; // TIM_OCMODE_PWM2;
   sConfigOC.OCFastMode  = TIM_OCFAST_DISABLE; // TIM_OCFAST_DISABLE;
   sConfigOC.OCPolarity  = TIM_OCPOLARITY_HIGH; //TIM_OCPOLARITY_LOW;//TIM_OCPOLARITY_HIGH; //TIM_OCPOLARITY_LOW;
   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_LOW; //TIM_OCNPOLARITY_HIGH; //TIM_OCNPOLARITY_HIGH;
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET; //TIM_OCIDLESTATE_SET; //TIM_OCNIDLESTATE_RESET; //TIM_OCIDLESTATE_SET;
   sConfigOC.OCNIdleState= TIM_OCNIDLESTATE_RESET; //TIM_OCNIDLESTATE_SET ; //TIM_OCIDLESTATE_SET; //TIM_OCNIDLESTATE_RESET;
-  
+
   //Set the pulse value
   sConfigOC.Pulse = 0;
-  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1); 
+  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1);
   sConfigOC.Pulse = 0;
   HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2);
   sConfigOC.Pulse = 0;
@@ -271,42 +271,42 @@ void MX_TIM1_Init(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);         //CH1
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);         //CH2
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);         //CH3
-  HAL_TIM_PWM_Start_IT(&htim1, TIM_CHANNEL_4);         //CH4  
-  
+  HAL_TIM_PWM_Start_IT(&htim1, TIM_CHANNEL_4);         //CH4
+
   mR_PWM_Set_ChALL(0);
-  
+
   mR_Low_CH1_OFF();
   mR_Low_CH2_OFF();
   mR_Low_CH3_OFF();
   mR_AHigh__OFF();
   mR_BHigh__OFF();
   mR_CHigh__OFF();
-  
+
    motorR.stop = 1;
   /* Peripheral interrupt init */
   HAL_NVIC_SetPriority(TIM1_CC_IRQn, 0, 1);
   HAL_NVIC_EnableIRQ(TIM1_CC_IRQn);
-  
+
 }
 
 
-void mR_Low_CH1_ON(void){  
+void mR_Low_CH1_ON(void){
   //Negato
   GPIOB->BSRR = 0x20000000;
 }
 void mR_Low_CH1_OFF(void){
   GPIOB->BSRR = GPIO_PIN_13;
 }
-void mR_Low_CH2_ON(void){  
+void mR_Low_CH2_ON(void){
   //Negato
   GPIOB->BSRR = 0x40000000;
 }
 void mR_Low_CH2_OFF(void){
   GPIOB->BSRR = GPIO_PIN_14;
 }
-void mR_Low_CH3_ON(void){  
+void mR_Low_CH3_ON(void){
   //Negato
-  GPIOB->BSRR = 0x80000000;  
+  GPIOB->BSRR = 0x80000000;
 }
 void mR_Low_CH3_OFF(void){
   GPIOB->BSRR = GPIO_PIN_15;
@@ -321,7 +321,7 @@ void mR_HallSensor_init(void){
   /*Configure GPIO pins : HALL_RIGHT_A_Pin HALL_RIGHT_B_Pin HALL_RIGHT_C_Pin */
   GPIO_InitStruct.Pin = HALL_RIGHT_A_Pin|HALL_RIGHT_B_Pin|HALL_RIGHT_C_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;  
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
@@ -370,12 +370,12 @@ void mR_PWM_Set_ChALL(uint16_t value){
   vpwm = (uint32_t)(motorR.uwPeriodValue*value/1000);
   __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,vpwm);
   __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_2,vpwm);
-  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_3,vpwm);  
+  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_3,vpwm);
 }
 
 void mR_BLDCMotor(void){
   motorR.newhallpos = (GPIOC->IDR & 0x1C00);
-  
+
   mR_Low_CH1_OFF();
   mR_Low_CH2_OFF();
   mR_Low_CH3_OFF();
@@ -386,68 +386,90 @@ void mR_BLDCMotor(void){
   if(motorR.stop){
     return;
   }
-  
+
   if(motorR.reverse!=0){
     switch (motorR.newhallpos){
       case (0x400):               //1
+        motorR.hallpos = 0;
         mR_Low_CH1_ON();
         mR_BHigh__ON();
       break;
       case (0x800):               //2
+        motorR.hallpos = 2;
         mR_Low_CH2_ON();
-        mR_CHigh__ON();        
+        mR_CHigh__ON();
       break;
       case (0xC00):               //3
-        mR_Low_CH1_ON();        
+        motorR.hallpos = 1;
+        mR_Low_CH1_ON();
         mR_CHigh__ON();
       break;
       case (0x1000):              //4
+        motorR.hallpos = 4;
         mR_AHigh__ON();
-        mR_Low_CH3_ON();        
+        mR_Low_CH3_ON();
       break;
       case (0x1400):              //5
+        motorR.hallpos = 5;
         mR_BHigh__ON();
-        mR_Low_CH3_ON();        
+        mR_Low_CH3_ON();
       break;
       case (0x1800):              //6
+        motorR.hallpos = 3;
         mR_AHigh__ON();
-        mR_Low_CH2_ON();        
-      break;  
+        mR_Low_CH2_ON();
+      break;
       default:
         __NOP();
       break;
-    }   
+    }
   }else{
     switch (motorR.newhallpos){
       case (0x400):               //1
+        motorR.hallpos = 0;
         mR_AHigh__ON();
         mR_Low_CH2_ON();
       break;
       case (0x800):               //2
+        motorR.hallpos = 2;
         mR_BHigh__ON();
-        mR_Low_CH3_ON();    
+        mR_Low_CH3_ON();
       break;
       case (0xC00):               //3
+        motorR.hallpos = 1;
         mR_AHigh__ON();
-        mR_Low_CH3_ON();    
+        mR_Low_CH3_ON();
       break;
       case (0x1000):              //4
-        mR_Low_CH1_ON();    
+        motorR.hallpos = 4;
+        mR_Low_CH1_ON();
         mR_CHigh__ON();
       break;
       case (0x1400):              //5
-        mR_Low_CH2_ON();    
+        motorR.hallpos = 5;
+        mR_Low_CH2_ON();
         mR_CHigh__ON();
       break;
       case (0x1800):              //6
-        mR_Low_CH1_ON();    
+        motorR.hallpos = 3;
+        mR_Low_CH1_ON();
         mR_BHigh__ON();
-      break;  
+      break;
       default:
         __NOP();
-      break;      
-    }     
+      break;
+    }
   }
+  if (motorR.hallpos == 0 && motorR.lasthallpos == 5) {
+    motorR.motorpos++;
+  } else if (motorR.hallpos == 5 && motorR.lasthallpos == 0) {
+    motorR.motorpos--;
+  } else if (motorR.hallpos > motorR.lasthallpos) {
+    motorR.motorpos++;
+  } else {
+    motorR.motorpos--;
+  }
+  motorR.lasthallpos = motorR.hallpos;
 }
 
 void HALL_R_ISR_Callback(void){
@@ -459,11 +481,11 @@ void HALL_R_ISR_Callback(void){
 void PWM_R_ISR_Callback(void){
    if((motorR.BLDCMotorL_flag)&&(motorR.BLDCMotorL_count==0)){
       mR_BLDCMotor();        //5uS
-      motorR.BLDCMotorL_flag = 0;      
+      motorR.BLDCMotorL_flag = 0;
       //---
       motorR.BLDCMotorL_velRAW = motorR.BLDCMotorL_deltavel;
-      motorR.BLDCMotorL_deltavel = 0;      
-      
+      motorR.BLDCMotorL_deltavel = 0;
+
    }else if((motorR.BLDCMotorL_flag)&&(motorR.BLDCMotorL_count!=0)){
       motorR.BLDCMotorL_count--;
    }

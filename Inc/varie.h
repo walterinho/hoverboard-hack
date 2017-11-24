@@ -3,18 +3,22 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
-   
+#endif
+
    #include "stm32f1xx_hal.h"
-   
-   
+
+
   #define BUZZER_Pin GPIO_PIN_4
   #define BUZZER_GPIO_Port GPIOA
   #define LED_Pin GPIO_PIN_2
   #define LED_GPIO_Port GPIOB
+  #define Power_Pin GPIO_PIN_5
+  #define Power_GPIO_PORT GPIOA
+  #define Button_Pin GPIO_PIN_1
+  #define Button_GPIO_Port GPIOA
   #define IS_CHARGE_Pin GPIO_PIN_12
   #define IS_CHARGE_GPIO_Port GPIOA
-   
+
    void Buzzer_init(void);
    void Buzzer_Set(uint8_t stato);
    void Buzzer_OneBeep(void);
@@ -24,21 +28,20 @@
 
    void Led_init(void);
    void Led_Set(uint8_t stato);
-   
+
    void IS_Charge_init(void);
    uint8_t IS_Charge(void);
-   
+
    void DebugPin_init(void);
    void DebugPin4_ON(void);
    void DebugPin4_OFF(void);
    void DebugPin5_ON(void);
-   void DebugPin5_OFF(void);  
+   void DebugPin5_OFF(void);
    extern void Error_Handler(void);
-   
+
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM32F1xx_IT_H */
-   

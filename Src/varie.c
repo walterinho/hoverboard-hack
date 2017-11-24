@@ -16,14 +16,14 @@ void Buzzer_init(void){
   HAL_GPIO_Init(BUZZER_GPIO_Port, &GPIO_InitStruct);
   Buzzer_Set(0);
   Buzzer_Set(1);
-  Buzzer_Set(0); 
+  Buzzer_Set(0);
 }
 
 void Led_init(void){
   GPIO_InitTypeDef GPIO_InitStruct;
   __HAL_RCC_GPIOB_CLK_ENABLE();
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);  
+  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
   /*Configure GPIO pin : LED_Pin */
   GPIO_InitStruct.Pin = LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -44,6 +44,9 @@ void IS_Charge_init(void){
 void Led_Set(uint8_t stato){
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, (GPIO_PinState)stato);
 }
+void Power_Set(uint8_t stato){
+  HAL_GPIO_WritePin(Power_GPIO_PORT, Power_Pin, (GPIO_PinState)stato);
+}
 void Buzzer_Set(uint8_t stato){
   HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, (GPIO_PinState)stato);
 }
@@ -53,18 +56,18 @@ void Buzzer_OneBeep(void){
     Delay_us(160);
     Buzzer_Set(0);
     Delay_us(160);
-    HAL_IWDG_Refresh(&hiwdg);   //819mS    
+    HAL_IWDG_Refresh(&hiwdg);   //819mS
   }
-  Buzzer_Set(0); 
+  Buzzer_Set(0);
 }
 void Buzzer_TwoBeep(void){
-  for(int j=0;j<2;j++){  
+  for(int j=0;j<2;j++){
     for(int i=0;i<150;i++){
       Buzzer_Set(1);
-      Delay_us(160);     
+      Delay_us(160);
       Buzzer_Set(0);
-      Delay_us(160);      
-      HAL_IWDG_Refresh(&hiwdg);   //819mS     
+      Delay_us(160);
+      HAL_IWDG_Refresh(&hiwdg);   //819mS
     }
     Buzzer_Set(0);
     HAL_Delay(200);
@@ -77,9 +80,9 @@ void Buzzer_OneShortBeep(void){
     Delay_us(160);
     Buzzer_Set(0);
     Delay_us(160);
-    HAL_IWDG_Refresh(&hiwdg);   //819mS    
+    HAL_IWDG_Refresh(&hiwdg);   //819mS
   }
-  Buzzer_Set(0); 
+  Buzzer_Set(0);
 }
 void Buzzer_OneLongBeep(void){
   for(int i=0;i<600;i++){
@@ -89,19 +92,23 @@ void Buzzer_OneLongBeep(void){
     Delay_us(160);
     HAL_IWDG_Refresh(&hiwdg);   //819mS
   }
-  Buzzer_Set(0); 
+  Buzzer_Set(0);
 }
 
 uint8_t IS_Charge(void){
   return (uint8_t)HAL_GPIO_ReadPin(IS_CHARGE_GPIO_Port, IS_CHARGE_Pin);
+}
+
+uint8_t IS_Button(void){
+  return (uint8_t)HAL_GPIO_ReadPin(Button_GPIO_Port, Button_Pin);
 }
 //volatile uint32_t tu32;
 void DebugPin_init(void){
   GPIO_InitTypeDef GPIO_InitStruct;
   __HAL_RCC_GPIOC_CLK_ENABLE();
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);  
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);  
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Pin = GPIO_PIN_4;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -112,17 +119,49 @@ void DebugPin_init(void){
 
 //  tu32 = (uint32_t)GPIO_PIN_4 << 16;
 //  tu32 = (uint32_t)GPIO_PIN_5 << 16;
-  
+
 }
+
+void Timer_init(void){
+  GPIO_InitTypeDef GPIO_InitStruct;
+  /*Configure GPIO pin : PA3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+}
+void Button_init(void){
+  GPIO_InitTypeDef GPIO_InitStruct;
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Pin = Power_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(Power_GPIO_PORT, &GPIO_InitStruct);
+
+  GPIO_InitStruct.Pin = Button_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(Button_GPIO_Port, &GPIO_InitStruct);
+//  tu32 = (uint32_t)GPIO_PIN_4 << 16;
+//  tu32 = (uint32_t)GPIO_PIN_5 << 16;
+
+}
+
 void DebugPin4_ON(void){
   GPIOC->BSRR = GPIO_PIN_4;
 }
-void DebugPin4_OFF(void){ 
+void DebugPin4_OFF(void){
   GPIOC->BSRR = 0x00100000;
 }
 void DebugPin5_ON(void){
   GPIOC->BSRR = GPIO_PIN_5;
 }
-void DebugPin5_OFF(void){ 
+void DebugPin5_OFF(void){
   GPIOC->BSRR = 0x00200000;
 }
