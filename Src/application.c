@@ -392,16 +392,27 @@ float scale_x(float x, float Vbatt){
   return axn;
 }
                                   //Vbatt,      Power max
-const float Battery_power[][10] = {{40.0,       60.0/100.0},    //30% max potenza
-                                  {38.0,        60.0/100.0},
-                                  {37.0,        61.0/100.0},
-                                  {36.0,        62.0/100.0},
-                                  {35.0,        65.0/100.0},
-                                  {34.0,        65.0/100.0},
-                                  {33.0,        67.0/100.0},
-                                  {32.0,        67.0/100.0},
-                                  {31.0,        67.0/100.0},
-                                  {30.0,        67.0/100.0}};
+const float Battery_power[][21] = {{50.0,       60.0/100.0},    //30% max potenza
+                                  {49.0,        63.0/100.0},
+                                  {48.0,        66.0/100.0},
+                                  {47.0,        69.0/100.0},
+                                  {46.0,        72.0/100.0},
+                                  {45.0,        75.0/100.0},
+                                  {44.0,        78.0/100.0},
+                                  {43.0,        81.0/100.0},
+                                  {42.0,        84.0/100.0},
+                                  {41.0,        87.0/100.0},
+                                  {40.0,        90.0/100.0},
+                                  {39.0,        93.0/100.0},
+                                  {38.0,        96.0/100.0},
+                                  {37.0,        100.0/100.0},
+                                  {36.0,        100.0/100.0},
+                                  {35.0,        100.0/100.0},
+                                  {34.0,        100.0/100.0},
+                                  {33.0,        100.0/100.0},
+                                  {32.0,        100.0/100.0},
+                                  {31.0,        100.0/100.0},
+                                  {30.0,        100.0/100.0}};
 float get_powerMax(float Vbattery){
   if(Vbattery >= Battery_power[0][0]){
     return Battery_power[0][1];
@@ -423,8 +434,31 @@ float get_powerMax(float Vbattery){
     return Battery_power[8][1];
   }else if(Vbattery >= Battery_power[9][0]){
     return Battery_power[9][1];
+
+  }else if(Vbattery >= Battery_power[10][0]){
+    return Battery_power[10][1];
+  }else if(Vbattery >= Battery_power[11][0]){
+    return Battery_power[11][1];
+  }else if(Vbattery >= Battery_power[12][0]){
+    return Battery_power[12][1];
+  }else if(Vbattery >= Battery_power[13][0]){
+    return Battery_power[13][1];
+  }else if(Vbattery >= Battery_power[14][0]){
+    return Battery_power[14][1];
+  }else if(Vbattery >= Battery_power[15][0]){
+    return Battery_power[15][1];
+  }else if(Vbattery >= Battery_power[16][0]){
+    return Battery_power[16][1];
+  }else if(Vbattery >= Battery_power[17][0]){
+    return Battery_power[17][1];
+  }else if(Vbattery >= Battery_power[18][0]){
+    return Battery_power[18][1];
+  }else if(Vbattery >= Battery_power[19][0]){
+    return Battery_power[19][1];
+  }else if(Vbattery >= Battery_power[20][0]){
+    return Battery_power[20][1];
   }else{
-    return Battery_power[9][1];
+    return Battery_power[20][1];
   }
 }
 

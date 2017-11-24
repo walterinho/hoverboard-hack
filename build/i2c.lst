@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc8woiPE.s 			page 1
+ARM GAS  /tmp/ccHyJ2gp.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
   43 0008 42F48002 		orr	r2, r2, #4194304
   44 000c DA61     		str	r2, [r3, #28]
   45 000e DA69     		ldr	r2, [r3, #28]
-ARM GAS  /tmp/cc8woiPE.s 			page 2
+ARM GAS  /tmp/ccHyJ2gp.s 			page 2
 
 
   46 0010 02F48002 		and	r2, r2, #4194304
@@ -110,7 +110,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
   81 004a 1148     		ldr	r0, .L4+4
   82 004c 114B     		ldr	r3, .L4+8
   83 004e 0360     		str	r3, [r0]
-  25:./Src/i2c.c   ****   hi2c2.Init.ClockSpeed = 200000;
+  25:./Src/i2c.c   ****   hi2c2.Init.ClockSpeed = 100000;
   84              		.loc 1 25 0
   85 0050 114B     		ldr	r3, .L4+12
   86 0052 4360     		str	r3, [r0, #4]
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
   87              		.loc 1 26 0
   88 0054 0023     		movs	r3, #0
   89 0056 8360     		str	r3, [r0, #8]
-ARM GAS  /tmp/cc8woiPE.s 			page 3
+ARM GAS  /tmp/ccHyJ2gp.s 			page 3
 
 
   27:./Src/i2c.c   ****   hi2c2.Init.OwnAddress1 = 0;
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  125              		.loc 1 45 0
  126 0084 03B0     		add	sp, sp, #12
  127              	.LCFI2:
-ARM GAS  /tmp/cc8woiPE.s 			page 4
+ARM GAS  /tmp/ccHyJ2gp.s 			page 4
 
 
  128              		.cfi_def_cfa_offset 4
@@ -190,7 +190,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  134 008c 00100240 		.word	1073876992
  135 0090 00000000 		.word	hi2c2
  136 0094 00580040 		.word	1073764352
- 137 0098 400D0300 		.word	200000
+ 137 0098 A0860100 		.word	100000
  138 009c 00000000 		.word	wii_JOYdati
  139              		.cfi_endproc
  140              	.LFE64:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  171 0012 01AA     		add	r2, sp, #4
  172 0014 A421     		movs	r1, #164
  173 0016 0848     		ldr	r0, .L9
-ARM GAS  /tmp/cc8woiPE.s 			page 5
+ARM GAS  /tmp/ccHyJ2gp.s 			page 5
 
 
  174 0018 FFF7FEFF 		bl	HAL_I2C_Master_Transmit_DMA
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
   75:./Src/i2c.c   ****       wii_JOYdati.stato = 12;
   76:./Src/i2c.c   ****       wii_JOYdati.mS = HAL_GetTick();
   77:./Src/i2c.c   ****     break;
-ARM GAS  /tmp/cc8woiPE.s 			page 6
+ARM GAS  /tmp/ccHyJ2gp.s 			page 6
 
 
   78:./Src/i2c.c   **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  132:./Src/i2c.c   ****       if(wii_JOYdati.I2CRxDone){
  133:./Src/i2c.c   ****         HAL_NVIC_DisableIRQ(DMA1_Channel5_IRQn);
  134:./Src/i2c.c   ****         wii_JOYdati.I2CRxDone = 0;
-ARM GAS  /tmp/cc8woiPE.s 			page 7
+ARM GAS  /tmp/ccHyJ2gp.s 			page 7
 
 
  135:./Src/i2c.c   ****         //Copia dati
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  189:./Src/i2c.c   **** 
  190:./Src/i2c.c   **** 
  191:./Src/i2c.c   **** 
-ARM GAS  /tmp/cc8woiPE.s 			page 8
+ARM GAS  /tmp/ccHyJ2gp.s 			page 8
 
 
  192:./Src/i2c.c   **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  259              	.L15:
  260 0014 0D00     		.2byte	(.L14-.L15)/2
  261 0016 1E00     		.2byte	(.L16-.L15)/2
-ARM GAS  /tmp/cc8woiPE.s 			page 9
+ARM GAS  /tmp/ccHyJ2gp.s 			page 9
 
 
  262 0018 4800     		.2byte	(.L17-.L15)/2
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  308 0060 0022     		movs	r2, #0
  309 0062 1A73     		strb	r2, [r3, #12]
   82:./Src/i2c.c   ****         wii_JOYdati.I2CERROR = 0;
-ARM GAS  /tmp/cc8woiPE.s 			page 10
+ARM GAS  /tmp/ccHyJ2gp.s 			page 10
 
 
  310              		.loc 1 82 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  352 00a0 1A70     		strb	r2, [r3]
  353 00a2 A2E0     		b	.L12
  354              	.L17:
-ARM GAS  /tmp/cc8woiPE.s 			page 11
+ARM GAS  /tmp/ccHyJ2gp.s 			page 11
 
 
  101:./Src/i2c.c   ****         wii_JOYdati.stato = 3;
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  399 00e6 C01A     		subs	r0, r0, r3
  400 00e8 3228     		cmp	r0, #50
  401 00ea 09D9     		bls	.L25
-ARM GAS  /tmp/cc8woiPE.s 			page 12
+ARM GAS  /tmp/ccHyJ2gp.s 			page 12
 
 
  117:./Src/i2c.c   ****         wii_JOYdati.I2CRxDone = 0;
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  442 011e 344B     		ldr	r3, .L29
  443 0120 5B7B     		ldrb	r3, [r3, #13]	@ zero_extendqisi2
  444 0122 13F0FF0F 		tst	r3, #255
-ARM GAS  /tmp/cc8woiPE.s 			page 13
+ARM GAS  /tmp/ccHyJ2gp.s 			page 13
 
 
  445 0126 60D0     		beq	.L12
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  488 016a 0F20     		movs	r0, #15
  489 016c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
  490              	.LVL25:
-ARM GAS  /tmp/cc8woiPE.s 			page 14
+ARM GAS  /tmp/ccHyJ2gp.s 			page 14
 
 
  147:./Src/i2c.c   ****         wii_JOYdati.I2CRxDone = 0;
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  532 01a4 124B     		ldr	r3, .L29
  533 01a6 0022     		movs	r2, #0
  534 01a8 1A73     		strb	r2, [r3, #12]
-ARM GAS  /tmp/cc8woiPE.s 			page 15
+ARM GAS  /tmp/ccHyJ2gp.s 			page 15
 
 
  167:./Src/i2c.c   ****         wii_JOYdati.I2CERROR = 0;
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  577              		.loc 1 183 0
  578 01e4 FFF7FEFF 		bl	HAL_GetTick
  579              	.LVL32:
-ARM GAS  /tmp/cc8woiPE.s 			page 16
+ARM GAS  /tmp/ccHyJ2gp.s 			page 16
 
 
  580 01e8 2061     		str	r0, [r4, #16]
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  623              	.L33:
  624 0010 00580040 		.word	1073764352
  625 0014 00000000 		.word	wii_JOYdati
-ARM GAS  /tmp/cc8woiPE.s 			page 17
+ARM GAS  /tmp/ccHyJ2gp.s 			page 17
 
 
  626              		.cfi_endproc
@@ -1016,74 +1016,56 @@ ARM GAS  /tmp/cc8woiPE.s 			page 1
  673              		@ frame_needed = 0, uses_anonymous_args = 0
  674              		@ link register save eliminated.
  675              	.LVL35:
- 222:./Src/i2c.c   ****   if(hi2c->Instance == I2C2){
- 676              		.loc 1 222 0
-ARM GAS  /tmp/cc8woiPE.s 			page 18
+ 676 0000 7047     		bx	lr
+ 677              		.cfi_endproc
+ARM GAS  /tmp/ccHyJ2gp.s 			page 18
 
 
- 677 0000 0268     		ldr	r2, [r0]
- 678 0002 034B     		ldr	r3, .L41
- 679 0004 9A42     		cmp	r2, r3
- 680 0006 02D1     		bne	.L39
- 223:./Src/i2c.c   ****     wii_JOYdati.I2CERROR = 1;
- 681              		.loc 1 223 0
- 682 0008 0122     		movs	r2, #1
- 683 000a 024B     		ldr	r3, .L41+4
- 684 000c 9A73     		strb	r2, [r3, #14]
- 685              	.L39:
- 686 000e 7047     		bx	lr
- 687              	.L42:
- 688              		.align	2
- 689              	.L41:
- 690 0010 00580040 		.word	1073764352
- 691 0014 00000000 		.word	wii_JOYdati
- 692              		.cfi_endproc
- 693              	.LFE70:
- 695              		.comm	wii_JOYdati,20,4
- 696              		.comm	hdma_i2c2_tx,56,4
- 697              		.comm	hdma_i2c2_rx,56,4
- 698              		.comm	hi2c2,60,4
- 699              		.text
- 700              	.Letext0:
- 701              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
- 702              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
- 703              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
- 704              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 705              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 706              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
- 707              		.file 8 "./Inc/i2c.h"
- 708              		.file 9 "./Drivers/CMSIS/Include/core_cm3.h"
- 709              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
- 710              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  /tmp/cc8woiPE.s 			page 19
+ 678              	.LFE70:
+ 680              		.comm	wii_JOYdati,20,4
+ 681              		.comm	hdma_i2c2_tx,56,4
+ 682              		.comm	hdma_i2c2_rx,56,4
+ 683              		.comm	hi2c2,60,4
+ 684 0002 00BF     		.text
+ 685              	.Letext0:
+ 686              		.file 2 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.h"
+ 687              		.file 3 "/home/niklas/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 688              		.file 4 "./Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 689              		.file 5 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 690              		.file 6 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 691              		.file 7 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
+ 692              		.file 8 "./Inc/i2c.h"
+ 693              		.file 9 "./Drivers/CMSIS/Include/core_cm3.h"
+ 694              		.file 10 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ 695              		.file 11 "./Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  /tmp/ccHyJ2gp.s 			page 19
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 i2c.c
-     /tmp/cc8woiPE.s:20     .text.MX_I2C2_Init:00000000 $t
-     /tmp/cc8woiPE.s:25     .text.MX_I2C2_Init:00000000 MX_I2C2_Init
-     /tmp/cc8woiPE.s:134    .text.MX_I2C2_Init:0000008c $d
+     /tmp/ccHyJ2gp.s:20     .text.MX_I2C2_Init:00000000 $t
+     /tmp/ccHyJ2gp.s:25     .text.MX_I2C2_Init:00000000 MX_I2C2_Init
+     /tmp/ccHyJ2gp.s:134    .text.MX_I2C2_Init:0000008c $d
                             *COM*:0000003c hi2c2
                             *COM*:00000014 wii_JOYdati
-     /tmp/cc8woiPE.s:143    .text.WiiNunchuck_INIT:00000000 $t
-     /tmp/cc8woiPE.s:148    .text.WiiNunchuck_INIT:00000000 WiiNunchuck_INIT
-     /tmp/cc8woiPE.s:201    .text.WiiNunchuck_INIT:00000038 $d
-     /tmp/cc8woiPE.s:207    .text.nunchuk_decode_byte:00000000 $t
-     /tmp/cc8woiPE.s:212    .text.nunchuk_decode_byte:00000000 nunchuk_decode_byte
-     /tmp/cc8woiPE.s:232    .text.WiiNunchuck_TASK:00000000 $t
-     /tmp/cc8woiPE.s:237    .text.WiiNunchuck_TASK:00000000 WiiNunchuck_TASK
-     /tmp/cc8woiPE.s:260    .text.WiiNunchuck_TASK:00000014 $d
-     /tmp/cc8woiPE.s:273    .text.WiiNunchuck_TASK:0000002e $t
-     /tmp/cc8woiPE.s:591    .text.WiiNunchuck_TASK:000001f0 $d
-     /tmp/cc8woiPE.s:597    .text.HAL_I2C_MasterTxCpltCallback:00000000 $t
-     /tmp/cc8woiPE.s:602    .text.HAL_I2C_MasterTxCpltCallback:00000000 HAL_I2C_MasterTxCpltCallback
-     /tmp/cc8woiPE.s:624    .text.HAL_I2C_MasterTxCpltCallback:00000010 $d
-     /tmp/cc8woiPE.s:630    .text.HAL_I2C_MasterRxCpltCallback:00000000 $t
-     /tmp/cc8woiPE.s:635    .text.HAL_I2C_MasterRxCpltCallback:00000000 HAL_I2C_MasterRxCpltCallback
-     /tmp/cc8woiPE.s:657    .text.HAL_I2C_MasterRxCpltCallback:00000010 $d
-     /tmp/cc8woiPE.s:663    .text.HAL_I2C_ErrorCallback:00000000 $t
-     /tmp/cc8woiPE.s:668    .text.HAL_I2C_ErrorCallback:00000000 HAL_I2C_ErrorCallback
-     /tmp/cc8woiPE.s:690    .text.HAL_I2C_ErrorCallback:00000010 $d
+     /tmp/ccHyJ2gp.s:143    .text.WiiNunchuck_INIT:00000000 $t
+     /tmp/ccHyJ2gp.s:148    .text.WiiNunchuck_INIT:00000000 WiiNunchuck_INIT
+     /tmp/ccHyJ2gp.s:201    .text.WiiNunchuck_INIT:00000038 $d
+     /tmp/ccHyJ2gp.s:207    .text.nunchuk_decode_byte:00000000 $t
+     /tmp/ccHyJ2gp.s:212    .text.nunchuk_decode_byte:00000000 nunchuk_decode_byte
+     /tmp/ccHyJ2gp.s:232    .text.WiiNunchuck_TASK:00000000 $t
+     /tmp/ccHyJ2gp.s:237    .text.WiiNunchuck_TASK:00000000 WiiNunchuck_TASK
+     /tmp/ccHyJ2gp.s:260    .text.WiiNunchuck_TASK:00000014 $d
+     /tmp/ccHyJ2gp.s:273    .text.WiiNunchuck_TASK:0000002e $t
+     /tmp/ccHyJ2gp.s:591    .text.WiiNunchuck_TASK:000001f0 $d
+     /tmp/ccHyJ2gp.s:597    .text.HAL_I2C_MasterTxCpltCallback:00000000 $t
+     /tmp/ccHyJ2gp.s:602    .text.HAL_I2C_MasterTxCpltCallback:00000000 HAL_I2C_MasterTxCpltCallback
+     /tmp/ccHyJ2gp.s:624    .text.HAL_I2C_MasterTxCpltCallback:00000010 $d
+     /tmp/ccHyJ2gp.s:630    .text.HAL_I2C_MasterRxCpltCallback:00000000 $t
+     /tmp/ccHyJ2gp.s:635    .text.HAL_I2C_MasterRxCpltCallback:00000000 HAL_I2C_MasterRxCpltCallback
+     /tmp/ccHyJ2gp.s:657    .text.HAL_I2C_MasterRxCpltCallback:00000010 $d
+     /tmp/ccHyJ2gp.s:663    .text.HAL_I2C_ErrorCallback:00000000 $t
+     /tmp/ccHyJ2gp.s:668    .text.HAL_I2C_ErrorCallback:00000000 HAL_I2C_ErrorCallback
                             *COM*:00000038 hdma_i2c2_tx
                             *COM*:00000038 hdma_i2c2_rx
                      .debug_frame:00000010 $d

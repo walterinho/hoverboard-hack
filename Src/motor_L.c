@@ -57,7 +57,7 @@ void MotorL_pwm(int16_t value_percent){
      last_motorL = 0;
   }
 
-if((value_percent >= -5)&&(value_percent <= 5)){ //da fare > e < soglie !!
+if((value_percent >= -20)&&(value_percent <= 20)){ //da fare > e < soglie !!
     motorL.stop = 1;    //ferma motore
     last_motorLStop = 1;
   }else{

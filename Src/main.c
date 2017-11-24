@@ -93,6 +93,8 @@ volatile __IO int16_t speed = 0;
 extern struct TELEMETRY_dati telemetry;
 extern struct MOTOR_Ldati motorL;
 extern struct MOTOR_Rdati motorR;
+
+extern uint8_t LCDerrorFlag;
 //extern struct COMMAND_data commandsequence;
 
 volatile __IO uint32_t counterTemp,counterTempTT;
@@ -155,14 +157,14 @@ int main(void)
 
 
   lcd.pcf8574.PCF_I2C_ADDRESS = 0x27;
-	lcd.pcf8574.PCF_I2C_TIMEOUT = 1000;
+	lcd.pcf8574.PCF_I2C_TIMEOUT = 5;
 	lcd.pcf8574.i2c = hi2c2;
 	lcd.NUMBER_OF_LINES = NUMBER_OF_LINES_2;
 	lcd.type = TYPE0;
 
 	if(LCD_Init(&lcd)!=LCD_OK){
 		// error occured
-		while(1);
+		//TODO while(1);
 	}
 
 	LCD_ClearDisplay(&lcd);
@@ -220,20 +222,23 @@ int main(void)
 
   uint8_t state = 0;
 
-  LCD_ClearDisplay(&lcd);
-  HAL_Delay(5);
-  LCD_SetLocation(&lcd, 0, 1);
-	LCD_WriteString(&lcd, "Bat:");
-  LCD_SetLocation(&lcd, 8, 1);
-  LCD_WriteString(&lcd, "V");
+  if(!LCDerrorFlag) {
 
-  LCD_SetLocation(&lcd, 15, 1);
-  LCD_WriteString(&lcd, "A");
+    LCD_ClearDisplay(&lcd);
+    HAL_Delay(5);
+    LCD_SetLocation(&lcd, 0, 1);
+  	LCD_WriteString(&lcd, "Bat:");
+    LCD_SetLocation(&lcd, 8, 1);
+    LCD_WriteString(&lcd, "V");
 
-  LCD_SetLocation(&lcd, 0, 0);
-	LCD_WriteString(&lcd, "Speed:");
-  LCD_SetLocation(&lcd, 12, 0);
-  LCD_WriteString(&lcd, "km/h");
+    LCD_SetLocation(&lcd, 15, 1);
+    LCD_WriteString(&lcd, "A");
+
+    LCD_SetLocation(&lcd, 0, 0);
+  	LCD_WriteString(&lcd, "Speed:");
+    LCD_SetLocation(&lcd, 12, 0);
+    LCD_WriteString(&lcd, "km/h");
+  }
 
   uint32_t sinValue = 1999;
 
@@ -242,13 +247,13 @@ int main(void)
   float speedReading = 0.0;
   while(1){
     sinValue++;
-    if ((sinValue) % (200) == 0) {
-      state = !state;
+    if ((sinValue) % (100) == 0) {
+      //state = !state;
       //Led_Set(state);
       //Console_Log("otter!\n\r");
-      char str[200];
-      memset(&str[0], 0, sizeof(str));
-      sprintf(str, "%i;%i;%i;%i;%i;%i\n\r", captured_value[0], captured_value[1], captured_value[2], captured_value[3], captured_value[4], captured_value[5]);
+      //char str[200];
+      //memset(&str[0], 0, sizeof(str));
+      //sprintf(str, "%i;%i;%i;%i;%i;%i\n\r", captured_value[0], captured_value[1], captured_value[2], captured_value[3], captured_value[4], captured_value[5]);
       int readR = -(CLAMP((((captured_value[1]-500)-(captured_value[0]-500)/2.0)*(captured_value[2]/500.0)), -1000, 1000));
       int readL = -(CLAMP((((captured_value[1]-500)+(captured_value[0]-500)/2.0)*(captured_value[2]/500.0)), -1000, 1000));
 
@@ -262,14 +267,15 @@ int main(void)
 
 
       if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50) && timeout < 1000) {
-        MotorR_pwm(speedR);
-        MotorL_pwm(speedL);
+        float scale = get_powerMax(GET_BatteryAverage());
+        MotorR_pwm((int)(speedR * scale));
+        MotorL_pwm((int)(speedL * scale));
       }
       lastSpeedL = speedL;
       lastSpeedR = speedR;
       //MotorR_pwm(-250);
       //MotorL_pwm(250);
-      Console_Log(str);
+      //Console_Log(str);
     }
     timeout++;
 
@@ -280,7 +286,7 @@ int main(void)
 
 
     if (counterTemp + 500 < HAL_GetTick()) {
-      speedReading = ABS(MAX(((motorL.motorpos - lastMotorposL) / 90.0)*3.6, ((motorR.motorpos - lastMotorposR) / 90.0)*3.6));
+      speedReading = MAX(ABS(((motorL.motorpos - lastMotorposL) / 90.0)*3.6), ABS(((motorR.motorpos - lastMotorposR) / 90.0)*3.6));
       counterTemp = HAL_GetTick();
       lastMotorposL = motorL.motorpos;
       lastMotorposR = motorR.motorpos;
@@ -297,7 +303,7 @@ int main(void)
       Power_Set(0);
     }
 
-    if ((sinValue) % (2000) == 0) {
+    if ((sinValue) % (1500) == 0 && !LCDerrorFlag) {
       //LCD_SetLocation(&lcd, 4, 0);
       //LCD_WriteFloat(&lcd,distance/1345.0,2);
       if (speedReading < 10.0) {
