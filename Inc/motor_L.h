@@ -3,8 +3,8 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
-
+#endif 
+   
    #include "stm32f1xx_hal.h"
 
 
@@ -18,18 +18,15 @@
    struct MOTOR_Ldati{
     volatile __IO uint32_t uwPeriodValue;
     volatile __IO uint8_t BLDCMotorL_count;
-    volatile __IO uint8_t BLDCMotorL_flag;
+    volatile __IO uint8_t BLDCMotorL_flag; 
     volatile __IO uint16_t BLDCMotorL_velRAW;
     volatile __IO uint16_t BLDCMotorL_deltavel;
     volatile __IO uint8_t reverse;
     volatile __IO uint16_t newhallpos;
-    volatile __IO uint8_t stop;
-    volatile __IO uint8_t hallpos;
-    volatile __IO uint8_t lasthallpos;
-    volatile __IO int32_t motorpos;
+    volatile __IO uint8_t stop;      
    };
-
-    // PUBLIC
+   
+    // PUBLIC  
     void MotorL_init(void);
     void MotorL_start(void);
     void MotorL_stop(void);
@@ -48,19 +45,19 @@
     void mL_PWM_Set_Ch3(uint16_t value);
     void mL_PWM_Set_ChALL(uint16_t value);
     void mL_BLDCMotor(void);
-    void mL_Low_CH1_ON(void);
+    void mL_Low_CH1_ON(void);  
     void mL_Low_CH1_OFF(void);
-    void mL_Low_CH2_ON(void);
+    void mL_Low_CH2_ON(void);  
     void mL_Low_CH2_OFF(void);
-    void mL_Low_CH3_ON(void);
-    void mL_Low_CH3_OFF(void);
+    void mL_Low_CH3_ON(void);  
+    void mL_Low_CH3_OFF(void); 
     void mL_HallSensor_init(void);
 
     void PWM_L_ISR_Callback(void);
     void HALL_L_ISR_Callback(void);
-
+  
     extern void Error_Handler(void);
-
+   
 
 #ifdef __cplusplus
 }
