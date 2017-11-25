@@ -155,17 +155,20 @@ int main(void)
       HAL_Delay(350);
       Power_Set(0);
     }
+    
     if ((sinValue) % (200) == 0) {
-      int speedL = -CLAMP(getMotorR(), -200, 200);
-      int speedR = -CLAMP(getMotorL(), -200, 200);
-      if ((speedL < lastSpeedL + 50 && speedL > lastSpeedL - 50) && (speedR < lastSpeedR + 50 && speedR > lastSpeedR - 50)) {
+      int speedL = -CLAMP(getMotorR(), -1000, 1000);
+      int speedR = -CLAMP(getMotorL(), -1000, 1000);
+      if (speedL != lastSpeedL || speedR != lastSpeedR) {
         MotorL_pwm(speedL);
         MotorR_pwm(speedR);
+        lastSpeedL = speedL;
+        lastSpeedR = speedR;
       }
 
       char str[100];
       memset(&str[0], 0, sizeof(str));
-      sprintf(str, "%i;%i\n\r", speedL, speedR);
+      snprintf(str, 100, "%i;%i\n\r", speedL, speedR);
       Console_Log(str);
     }
 
@@ -178,7 +181,16 @@ int main(void)
     //Telemetry_TASK();
 
     //Batteria Scarica?
-    if(GET_BatteryAverage() < 31.0 || ABS(getMotorCurrentR() * 0.02) > 20.0 || ABS(getMotorCurrentL() * 0.02) > 20.0){
+    if(ABS(getMotorCurrentR() * 0.02) > 20.0 || ABS(getMotorCurrentL() * 0.02) > 20.0){
+      Console_Log("overcurrent\r\n");
+      MotorL_pwm(0);
+      MotorR_pwm(0);
+      Buzzer_OneLongBeep();
+      HAL_Delay(350);
+      Power_Set(0);
+    }
+    if(GET_BatteryAverage() < 31.0){
+      Console_Log("undervoltage\r\n");
       MotorL_pwm(0);
       MotorR_pwm(0);
       Buzzer_OneLongBeep();
