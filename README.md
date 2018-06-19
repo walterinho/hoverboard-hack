@@ -6,7 +6,7 @@ the firmware you can find here allows you to use your Hoverboard Hardware (like 
 This project uses UART DMA to receive two floats on USART2 with 115200 baud, and uses these floats to control the motor current of each motor. It also counts the hall ticks and sends back the motor positions to use them for odometry data, for example combined with ROS.
 
 #### Hardware
-![otter](https://raw.githubusercontent.com/NiklasFauth/Hoverboard-Board-Hack/master/schema.jpg)
+![alt text](https://raw.githubusercontent.com/NiklasFauth/Hoverboard-Board-Hack/master/schema.jpg)
 
 The original Hardware supports two 4-pin cables that originally were connected to the two sensor boards. They break out GND, 12/15V and USART2&3 of the Hoverboard mainboard.
 Both USART2 & 3 can be used for UART and I2C, PA2&3 can be used as 12bit ADCs.
