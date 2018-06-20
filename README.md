@@ -24,17 +24,20 @@ http://www.st.com/en/embedded-software/stsw-stm32054.html
 https://github.com/texane/stlink
 
 4. Execute the following commands inside the root of the source directory:
-
+```
 $ make release
 $ make debug (for debug purposes)
 $ cd build/Release
 $ make install
 $ ldconfig (updates the dynamic library cache, fixes shared library bug)
+```
 
 5. Permissions with udev, The rules are located in the etc/udev/rules.d directory. You will need to copy it to /etc/udev/rules.d and run:
 
+```
 $ udevadm control –reload-rules
 $ udevadm trigger
+```
 
 6. Finally compile the code inside the project folder using the command make to get the .hex file
 
@@ -58,11 +61,31 @@ Then you should connect the debug pins to the pins in the ST-link according to t
 |  GND |  GND |
 | SWCLK  |  SWCLK |
 | 3.3V  | 3.3V  |
-| reset pin (optional)  |  RST |
 
+Once you connect your ST-Link programmer to your computer you should be able to execute the following command in a terminal:
+```
+$ st-info --probe
+```
+And you should get somthing similar to the following:
 
-To build the firmware, just type "make". Make sure you have specified your gcc-arm-none-eabi binary location in the Makefile. Right to the STM32, there is a debugging header with GND, 3V3, SWDIO and SWCLK. Connect these to your SWD programmer, like the ST-Link found on many STM devboards.
+```
+Found 1 stlink programmers
+ serial: 563f7206513f52504832153f
+openocd: "\x56\x3f\x72\x06\x51\x3f\x52\x50\x48\x32\x15\x3f"
+  flash: 262144 (pagesize: 2048)
+   sram: 65536
+ chipid: 0x0414
+  descr: F1 High-density device
+```
+To upload the hex file you will have to type:
 
-Make sure you hold the powerbutton or connect a jumper to the power button pins while flashing the firmware, as the STM might release the power latch and switches itself off during flashing.
+```
+$ st-flash write file.hex 0x8000000
+```
 
-Simply connect a USB-USART adapter to GND; PA2 and PA3 and give it a try.
+If everything is fine you should get the following lines at the end:
+
+```
+INFO src/common.c: Starting verification of write complete
+INFO src/common.c: Flash written and verified! jolly good!
+```
