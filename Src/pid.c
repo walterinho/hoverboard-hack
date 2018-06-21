@@ -44,17 +44,20 @@ void PID_init(uint16_t min, uint16_t max)
   pid_R_.mS = HAL_GetTick();
 }
 
-void PID_set_L_costant(float P,float I,float D){
+void PID_set_L_costant(float P,float I,float D)
+{
   pid_L_Dati.kp = P;
   pid_L_Dati.ki = I;
   pid_L_Dati.kd = D;
 }
-void PID_set_R_costant(float P,float I,float D){
+void PID_set_R_costant(float P,float I,float D)
+{
   pid_R_Dati.kp = P;
   pid_R_Dati.ki = I;
   pid_R_Dati.kd = D;
 }
-void PID_L_task(int32_t set_speed, int32_t speed){
+void PID_L_task(int32_t set_speed, int32_t speed)
+{
   uint32_t m_S;
   
   m_S = HAL_GetTick();
@@ -68,7 +71,8 @@ void PID_L_task(int32_t set_speed, int32_t speed){
 }
 
 extern volatile __IO int32_t testVelR;
-void PID_R_task(int32_t set_speed, int32_t speed){
+void PID_R_task(int32_t set_speed, int32_t speed)
+{
   uint32_t m_S;
   
   m_S = HAL_GetTick();
@@ -100,7 +104,8 @@ void PID_R_task(int32_t set_speed, int32_t speed){
 
 float pid_update_f(float sp /*! The set point */,
     float pv /*! The process variable */,
-    struct pid_f_t * ptr /*! A pointer to the PID constants */){
+    struct pid_f_t * ptr /*! A pointer to the PID constants */)
+{
       
   float e;
   float manp;
@@ -129,7 +134,8 @@ float pid_update_f(float sp /*! The set point */,
 
 int32_t pid_update_I32(int32_t sp /*! The set point */,
     int32_t pv /*! The process variable */,
-    struct pid_I32_t * ptr /*! A pointer to the PID constants */){
+    struct pid_I32_t * ptr /*! A pointer to the PID constants */)
+{
       
   int32_t e;
   float manp;
@@ -142,10 +148,12 @@ int32_t pid_update_I32(int32_t sp /*! The set point */,
   
   //integral
   tmpi = ptr->i + ptr->e;
-  if(ptr->i > 300){
+  if(ptr->i > 300)
+  {
     ptr->i = 300;
   }
-  if(ptr->i < -300){
+  if(ptr->i < -300)
+  {
     ptr->i = -300;
   }
   
@@ -154,11 +162,14 @@ int32_t pid_update_I32(int32_t sp /*! The set point */,
   manpI32 = (int32_t)manp;
   
   //Limit, max;min
-  if( (manpI32 < ptr->max) && (manpI32 > ptr->min) ){
+  if( (manpI32 < ptr->max) && (manpI32 > ptr->min) )
+  {
     ptr->i = tmpi;
-  } else if ( manpI32 > ptr->max ){
+  } else if ( manpI32 > ptr->max )
+  {
     manpI32 = ptr->max;
-  } else if ( manpI32 < ptr->min ){
+  } else if ( manpI32 < ptr->min )
+  {
     manpI32 = ptr->min;
   }
   return manpI32;

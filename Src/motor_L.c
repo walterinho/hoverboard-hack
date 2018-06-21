@@ -8,7 +8,8 @@ TIM_HandleTypeDef htim8;
 volatile __IO struct MOTOR_Ldati motorL;
 
 // PULBLIC
-void MotorL_init(void){
+void MotorL_init(void)
+{
   MX_TIM8_Init();
   mL_HallSensor_init();
   
@@ -20,7 +21,8 @@ void MotorL_init(void){
   MotorL_stop();
 }
 
-void MotorL_start(void){
+void MotorL_start(void)
+{
   mL_PWM_Set_ChALL(0);
   motorL.BLDCMotorL_deltavel = 0;
   motorL.BLDCMotorL_velRAW = 0;
@@ -31,26 +33,34 @@ void MotorL_start(void){
   mL_BLDCMotor();
 }
 
-void MotorL_pwm(int16_t value_percent){
+void MotorL_pwm(int16_t value_percent)
+{
   static uint8_t last_motorL=0;
   static uint8_t last_motorLStop=0;
  
-  if(value_percent > 1000){
+  if(value_percent > 1000)
+  {
     value_percent = 1000;
   }
-  if(value_percent < -1000){
+  if(value_percent < -1000)
+  {
     value_percent = -1000;
   }
-  if(value_percent < 0){
+  if(value_percent < 0)
+  {
     value_percent = value_percent * -1;
 
-    if(last_motorL==0){
+    if(last_motorL==0)
+    {
       mL_PWM_Set_ChALL(value_percent);
     }
     motorL.reverse = 1;
     last_motorL = 1;
-  }else{
-    if(last_motorL==1){
+  }
+  else
+  {
+    if(last_motorL==1)
+    {
       mL_PWM_Set_ChALL(value_percent);
     }
      motorL.reverse = 0;
@@ -60,9 +70,12 @@ void MotorL_pwm(int16_t value_percent){
 if((value_percent >= -5)&&(value_percent <= 5)){ //da fare > e < soglie !!
     motorL.stop = 1;    //ferma motore
     last_motorLStop = 1;    
-  }else{
+  }
+  else
+  {
     motorL.stop = 0;
-    if(last_motorLStop){
+    if(last_motorLStop)
+    {
         //riattiva
         mL_BLDCMotor();
     }
@@ -72,7 +85,8 @@ if((value_percent >= -5)&&(value_percent <= 5)){ //da fare > e < soglie !!
   mL_PWM_Set_ChALL(value_percent);
 }
 
-void MotorL_stop(void){
+void MotorL_stop(void)
+{
   mL_PWM_Set_ChALL(0);
   motorL.stop = 1;
   mL_Low_CH1_OFF();
@@ -309,64 +323,80 @@ void mL_HallSensor_init(void){
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
-void mL_Low_CH1_ON(void){  
+void mL_Low_CH1_ON(void)
+{  
   //Negato
   GPIOA->BSRR = 0x00800000;
 }
-void mL_Low_CH1_OFF(void){
+void mL_Low_CH1_OFF(void)
+{
   GPIOA->BSRR = GPIO_PIN_7;
 }
-void mL_Low_CH2_ON(void){  
+void mL_Low_CH2_ON(void)
+{  
   //Negato
   GPIOB->BSRR = 0x00010000;
 }
-void mL_Low_CH2_OFF(void){
+void mL_Low_CH2_OFF(void)
+{
   GPIOB->BSRR = GPIO_PIN_0;
 }
-void mL_Low_CH3_ON(void){  
+void mL_Low_CH3_ON(void)
+{  
   //Negato
   GPIOB->BSRR = 0x00020000;  
 }
-void mL_Low_CH3_OFF(void){
+void mL_Low_CH3_OFF(void)
+{
   GPIOB->BSRR = GPIO_PIN_1;
 }
 
-void mL_AHigh__ON(void){
+void mL_AHigh__ON(void)
+{
   htim8.Instance->CCER = htim8.Instance->CCER | 0x0001;  //mR_AHigh__ON(); --> CC1E = 1
 }
-void mL_AHigh__OFF(void){
+void mL_AHigh__OFF(void)
+{
   htim8.Instance->CCER = htim8.Instance->CCER & 0xFFFE;  //mR_AHigh__ON(); --> CC1E = 0
 }
-void mL_BHigh__ON(void){
+void mL_BHigh__ON(void)
+{
   htim8.Instance->CCER = htim8.Instance->CCER | 0x0010;  //--> CC2E = 1
 }
-void mL_BHigh__OFF(void){
+void mL_BHigh__OFF(void)
+{
   htim8.Instance->CCER = htim8.Instance->CCER & 0xFFEF;  //--> CC2E = 0
 }
-void mL_CHigh__ON(void){
+void mL_CHigh__ON(void)
+{
   htim8.Instance->CCER = htim8.Instance->CCER | 0x0100;  //--> CC3E = 1
 }
-void mL_CHigh__OFF(void){
+void mL_CHigh__OFF(void)
+{
   htim8.Instance->CCER = htim8.Instance->CCER & 0xFEFF;  //--> CC2E = 0
 }
 
 
-void mL_PWM_Set_Ch1(uint16_t value){
+void mL_PWM_Set_Ch1(uint16_t value)
+{
   uint32_t vpwm;
   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_1,vpwm);
 }
-void mL_PWM_Set_Ch2(uint16_t value){
+void mL_PWM_Set_Ch2(uint16_t value)
+{
   uint32_t vpwm;
   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_2,vpwm);
 }
-void mL_PWM_Set_Ch3(uint16_t value){
+void mL_PWM_Set_Ch3(uint16_t value)
+{
   uint32_t vpwm;
   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_3,vpwm);
 }
-void mL_PWM_Set_ChALL(uint16_t value){
+void mL_PWM_Set_ChALL(uint16_t value)
+{
   uint32_t vpwm;
   vpwm = (uint32_t)(motorL.uwPeriodValue*value/1000);
   __HAL_TIM_SET_COMPARE(&htim8,TIM_CHANNEL_1,vpwm);
@@ -377,7 +407,8 @@ void mL_PWM_Set_ChALL(uint16_t value){
 
 
 
-void mL_BLDCMotor(void){
+void mL_BLDCMotor(void)
+{
   motorL.newhallpos = (GPIOB->IDR & 0x00E0);    //b5,b6,b7
     
   mL_Low_CH1_OFF();
@@ -391,8 +422,10 @@ void mL_BLDCMotor(void){
     return;
   }
   
-  if(motorL.reverse!=0){
-    switch (motorL.newhallpos){
+  if(motorL.reverse!=0)
+  {
+    switch (motorL.newhallpos)
+    {
       case (0x0020):               //1
         mL_AHigh__ON();
         mL_Low_CH2_ON();
@@ -421,8 +454,11 @@ void mL_BLDCMotor(void){
         __NOP();
       break;      
     }    
-  }else{
-    switch (motorL.newhallpos){
+  }
+  else
+  {
+    switch (motorL.newhallpos)
+    {
       case (0x0020):               //1
         mL_Low_CH1_ON();
         mL_BHigh__ON();
@@ -458,20 +494,25 @@ void mL_BLDCMotor(void){
 
 
 
-void HALL_L_ISR_Callback(void){
+void HALL_L_ISR_Callback(void)
+{
     motorL.BLDCMotorL_count= 1;        //Delay x ritardo x debounce
     motorL.BLDCMotorL_flag = 1;        //Update motor
 }
 
 //40uS Interrupt -- 25Khz
-void PWM_L_ISR_Callback(void){
-   if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count==0)){
+void PWM_L_ISR_Callback(void)
+{
+   if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count==0))
+   {
       mL_BLDCMotor();        //5uS
       motorL.BLDCMotorL_flag = 0;      
       //---
       motorL.BLDCMotorL_velRAW = motorL.BLDCMotorL_deltavel;
       motorL.BLDCMotorL_deltavel = 0;      
-   }else if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count!=0)){
+   }
+   else if((motorL.BLDCMotorL_flag)&&(motorL.BLDCMotorL_count!=0))
+   {
       motorL.BLDCMotorL_count--;
    }
    motorL.BLDCMotorL_deltavel++;       //Calcolo velocita motore inc ogni 40uS

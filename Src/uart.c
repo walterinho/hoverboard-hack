@@ -51,24 +51,28 @@ void Uart2_TX(char *message)
     uartDati.UarttxReady = 0;    //occupato
     HAL_UART_Transmit_DMA(&huart2, (uint8_t *)message, strlen(message));
 }
-uint8_t Uart2_IS_TX_free(void){
+uint8_t Uart2_IS_TX_free(void)
+{
   return (uartDati.UarttxReady); //(huart2.State == HAL_UART_STATE_READY);
 }
 
-uint8_t Uart2_IS_RX_available(void){
+uint8_t Uart2_IS_RX_available(void)
+{
   return (uartDati.UartRxReady); //(huart2.State == HAL_UART_STATE_READY);
 }
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-     if (huart->Instance == USART2) {
+     if (huart->Instance == USART2) 
+     {
         uartDati.UartRxReady = 1;
      }
 }
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
-     if (huart->Instance == USART2) {
+     if (huart->Instance == USART2) 
+     {
        uartDati.UarttxReady = 1;
      }
 }

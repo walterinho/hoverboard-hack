@@ -4,7 +4,8 @@
 
 extern IWDG_HandleTypeDef hiwdg;
 
-void Buzzer_init(void){
+void Buzzer_init(void)
+{
   GPIO_InitTypeDef GPIO_InitStruct;
   __HAL_RCC_GPIOA_CLK_ENABLE();
   /*Configure GPIO pin Output Level */
@@ -19,7 +20,8 @@ void Buzzer_init(void){
   Buzzer_Set(0);
 }
 
-void Led_init(void){
+void Led_init(void)
+{
   GPIO_InitTypeDef GPIO_InitStruct;
   __HAL_RCC_GPIOB_CLK_ENABLE();
   /*Configure GPIO pin Output Level */
@@ -31,7 +33,8 @@ void Led_init(void){
   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
 }
 
-void IS_Charge_init(void){
+void IS_Charge_init(void)
+{
   GPIO_InitTypeDef GPIO_InitStruct;
   __HAL_RCC_GPIOA_CLK_ENABLE();
   /*Configure GPIO pin : IS_CHARGE_Pin */
@@ -41,17 +44,23 @@ void IS_Charge_init(void){
   HAL_GPIO_Init(IS_CHARGE_GPIO_Port, &GPIO_InitStruct);
 }
 
-void Led_Set(uint8_t stato){
+void Led_Set(uint8_t stato)
+{
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, (GPIO_PinState)stato);
 }
-void Power_Set(uint8_t stato){
+void Power_Set(uint8_t stato)
+{
   HAL_GPIO_WritePin(Power_GPIO_PORT, Power_Pin, (GPIO_PinState)stato);
 }
-void Buzzer_Set(uint8_t stato){
+void Buzzer_Set(uint8_t stato)
+{
   HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, (GPIO_PinState)stato);
 }
-void Buzzer_OneBeep(void){
-  for(int i=0;i<200;i++){
+void Buzzer_OneBeep(void)
+{
+  int i;
+  for(i=0;i<200;i++)
+  {
     Buzzer_Set(1);
     Delay_us(160);
     Buzzer_Set(0);
@@ -61,8 +70,12 @@ void Buzzer_OneBeep(void){
   Buzzer_Set(0);
 }
 void Buzzer_TwoBeep(void){
-  for(int j=0;j<2;j++){
-    for(int i=0;i<150;i++){
+  int i;
+  int j;
+  for(j=0;j<2;j++)
+  {
+    for(i=0;i<150;i++)
+    {
       Buzzer_Set(1);
       Delay_us(160);
       Buzzer_Set(0);
@@ -74,8 +87,11 @@ void Buzzer_TwoBeep(void){
   }
   Buzzer_Set(0);
 }
-void Buzzer_OneShortBeep(void){
-  for(int i=0;i<80;i++){
+void Buzzer_OneShortBeep(void)
+{
+  int i;
+  for(i=0;i<80;i++)
+  {
     Buzzer_Set(1);
     Delay_us(160);
     Buzzer_Set(0);
@@ -84,8 +100,10 @@ void Buzzer_OneShortBeep(void){
   }
   Buzzer_Set(0);
 }
-void Buzzer_OneLongBeep(void){
-  for(int i=0;i<600;i++){
+void Buzzer_OneLongBeep(void)
+{
+  int i;
+  for(i=0;i<600;i++){
     Buzzer_Set(1);
     Delay_us(160);
     Buzzer_Set(0);
@@ -95,11 +113,13 @@ void Buzzer_OneLongBeep(void){
   Buzzer_Set(0);
 }
 
-uint8_t IS_Charge(void){
+uint8_t IS_Charge(void)
+{
   return (uint8_t)HAL_GPIO_ReadPin(IS_CHARGE_GPIO_Port, IS_CHARGE_Pin);
 }
 
-uint8_t IS_Button(void){
+uint8_t IS_Button(void)
+{
   return (uint8_t)HAL_GPIO_ReadPin(Button_GPIO_Port, Button_Pin);
 }
 //volatile uint32_t tu32;
@@ -122,7 +142,8 @@ void DebugPin_init(void){
 
 }
 
-void Button_init(void){
+void Button_init(void)
+{
   GPIO_InitTypeDef GPIO_InitStruct;
   __HAL_RCC_GPIOA_CLK_ENABLE();
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
@@ -139,15 +160,19 @@ void Button_init(void){
 //  tu32 = (uint32_t)GPIO_PIN_5 << 16;
 
 }
-void DebugPin4_ON(void){
+void DebugPin4_ON(void)
+{
   GPIOC->BSRR = GPIO_PIN_4;
 }
-void DebugPin4_OFF(void){
+void DebugPin4_OFF(void)
+{
   GPIOC->BSRR = 0x00100000;
 }
-void DebugPin5_ON(void){
+void DebugPin5_ON(void)
+{
   GPIOC->BSRR = GPIO_PIN_5;
 }
-void DebugPin5_OFF(void){
+void DebugPin5_OFF(void)
+{
   GPIOC->BSRR = 0x00200000;
 }

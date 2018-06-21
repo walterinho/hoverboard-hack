@@ -17,16 +17,19 @@ volatile COMMAND_data commandsequence;
 volatile __IO uint32_t leftToTransfer;
 
 
-void Telemetry_init(void){
+void Telemetry_init(void)
+{
   MX_USART2_UART_Init();
   HAL_UART_Receive_DMA(&huart2, (uint8_t *)&commandsequence, 8);
 
 }
 
-int16_t getMotorL() {
+int16_t getMotorL() 
+{
   return commandsequence.motorRxL * 1000;
 }
 
-int16_t getMotorR() {
+int16_t getMotorR() 
+{
   return commandsequence.motorRxR * 1000;
 }

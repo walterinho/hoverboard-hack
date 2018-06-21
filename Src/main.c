@@ -127,7 +127,8 @@ int main(void)
 
 //DebugPin_init();
   HAL_Delay(350);
-  while(IS_Button()) {
+  while(IS_Button()) 
+  {
     Led_Set(0);
   }
 
@@ -145,10 +146,13 @@ int main(void)
 
   uint32_t sinValue = 0;
   int lastSpeedL = 0, lastSpeedR = 0;
-  while(1){
+  while(1)
+  {
     sinValue++;
-    if(IS_Button()) {
-      while(IS_Button()) {
+    if(IS_Button()) 
+    {
+      while(IS_Button()) 
+      {
         HAL_IWDG_Refresh(&hiwdg);
       }
       Buzzer_OneLongBeep();
@@ -156,10 +160,12 @@ int main(void)
       Power_Set(0);
     }
     
-    if ((sinValue) % (200) == 0) {
+    if ((sinValue) % (200) == 0) 
+    {
       int speedL = -CLAMP(getMotorR(), -1000, 1000);
       int speedR = -CLAMP(getMotorL(), -1000, 1000);
-      if (speedL != lastSpeedL || speedR != lastSpeedR) {
+      if (speedL != lastSpeedL || speedR != lastSpeedR) 
+      {
         MotorL_pwm(speedL);
         MotorR_pwm(speedR);
         lastSpeedL = speedL;
@@ -189,7 +195,8 @@ int main(void)
       HAL_Delay(350);
       Power_Set(0);
     }
-    if(GET_BatteryAverage() < 31.0){
+    if(GET_BatteryAverage() < 31.0)
+    {
       Console_Log("undervoltage\r\n");
       MotorL_pwm(0);
       MotorR_pwm(0);
